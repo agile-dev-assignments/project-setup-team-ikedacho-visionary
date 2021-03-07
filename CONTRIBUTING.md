@@ -1,9 +1,9 @@
 # Guide to Contributing
 *   Project's Values
-    *   Project value: O-zone’s value is to create an efficient social media management platform. Users could create, publish and analyze contents they and others post on various social media accounts. 
+    *   Project value: O-zone's value is to create an efficient social media management platform. Users could create, publish and analyze contents they and others post on various social media accounts. 
 *  Team Norms
     *   Members should all try their best to work cooperatively for the final workable product. 
-    *   Members must join team stand-ups three times a week on Monday, Wednesday, and Saturday at 10 PM EST. mandatorily. The team would clarify each member’s job for the week on Monday stand-ups and update the Task Board accordingly; Team would also check progress on Wednesday stand-ups and all works assigned on Monday should be expected to be done on Friday.
+    *   Members must join team stand-ups three times a week on Monday, Wednesday, and Saturday at 10 PM EST. mandatorily. The team would clarify each member's job for the week on Monday stand-ups and update the Task Board accordingly; Team would also check progress on Wednesday stand-ups and all works assigned on Monday should be expected to be done on Friday.
     *   Definition of Done:
         *   Work should be only considered done when it satisfies agreed user stories. 
         *   Each new feature added should be only considered done after getting peer reviewed and passed tests before merging. 
@@ -13,7 +13,7 @@
     *   After a new branch is created, checkout to the new branch.
     *   Before adding and committing new changes, `git pull origin master/main` again
     *   For each small part of progress completed, e.g. a big function implemented and passed local tests, a new commit should be issued for tracking the change history. 
-    *   Commit messages should be meaningful and in format of “Change type: change details”, where the types are Added for first time setup, Update, and Fix, e.g. “Update: login page half-way done”. 
+    *   Commit messages should be meaningful and in format of “Change type: change details”, where the types are Added for first time setup, Update, and Fix, e.g. "Update: login page half-way done". 
     *   Members should only send pull requests for the changes they push to the remote repository, but always ask for someone else to check the validity of the changes, and merge the pull request only if the changes pass the test. 
     *   Full commands flow:
         *   at main: `git pull`
