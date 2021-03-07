@@ -3,10 +3,10 @@
     *   O-zone is a cross-platform social media browsing web application. It should support popular platforms including but not limited to Facebook, Instagram, Twitter, and Tiktok. Our project makes it convenient to gather information from and push posts to multiple platforms at the same time. 
     *   Minimum Viable Product:
         *   Basic functionality
-            *   Access to user’s registered social media accounts; 
+            *   Access to user's registered social media accounts; 
             *   Display contents of popular posts from multiple social media platforms on the home page; 
             *   Allow users to send new posts to multiple social media platforms via O-zone;
-            *   set up user accounts on the platform
+            *   Set up user accounts on the platform. 
     *   Roles of team members:
         *   Product Manager: 
             *   Before the sprint planning phase, PM finishes writing a list of user stories.

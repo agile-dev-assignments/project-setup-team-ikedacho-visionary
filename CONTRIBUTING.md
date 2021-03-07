@@ -13,7 +13,7 @@
     *   After a new branch is created, checkout to the new branch.
     *   Before adding and committing new changes, `git pull origin master/main` again
     *   For each small part of progress completed, e.g. a big function implemented and passed local tests, a new commit should be issued for tracking the change history. 
-    *   Commit messages should be meaningful and in format of “Change type: change details”, where the types are Added for first time setup, Update, and Fix, e.g. “Update: login page half-way done”. 
+    *   Commit messages should be meaningful and in format of "Change type: change details", where the types are Added for first time setup, Update, and Fix, e.g. "Update: login page half-way done". 
     *   Members should only send pull requests for the changes they push to the remote repository, but always ask for someone else to check the validity of the changes, and merge the pull request only if the changes pass the test. 
     *   Full commands flow:
         *   at main: `git pull`
