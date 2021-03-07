@@ -16,17 +16,18 @@
     *   Commit messages should be meaningful and in format of “Change type: change details”, where the types are Added for first time setup, Update, and Fix, e.g. “Update: login page half-way done”. 
     *   Members should only send pull requests for the changes they push to the remote repository, but always ask for someone else to check the validity of the changes, and merge the pull request only if the changes pass the test. 
     *   Full commands flow:
-    *   at main: `git pull`
-    *   Create a new branch if needed: `git branch new_branch_name`
-    *   Checkout to the new branch: `git checkout new_branch_name`
-    *   In the new branch, download any change first: `git pull origin master/main` 
-    *   In the new branch, make changes and save changes: `git add —all` 
-    *   `git commit -m “message”`
-    *   `git push --set-upstream origin new_branch_name`
-    *   Then in the GitHub website, find the branch and check if the branch is committed behind or not. If the branch is not behind, make a pull request
-    *   Ask someone else to validate the changes and merge 
-*   a detailed description of the rules of contributing and any considerations or how and what to contribute 
-    *   
+        *   at main: `git pull`
+        *   Create a new branch if needed: `git branch new_branch_name`
+        *   Checkout to the new branch: `git checkout new_branch_name`
+        *   In the new branch, download any change first: `git pull origin master/main` 
+        *   In the new branch, make changes and save changes: `git add —all` 
+        *   `git commit -m “message”`
+        *   `git push --set-upstream origin new_branch_name`
+        *   Then in the GitHub website, find the branch and check if the branch is committed behind or not. If the branch is not behind, make a pull request
+*   Rule of Contributing
+    *   Any change must be committed and pushed to a branch first, and then the contributor must issue a pull request. 
+    *   Any pull request must be validated and merged by one of other members, unless time is urgent and the change is purely textual/graphical without any modification on the actual codes. 
+    *   Only changes that are merged into the main branch are considered as contributing. 
 *   Disagreements or Conflicts Resolving
     *   If any major disagreement or conflict arises, a debate/discussion session will be held with the rest of the team members auditing. 
     *   If team still cannot reach an agreement, a vote will be held in team Slack channel for tracking purposes where the product manager in duty has 1.5x weighting. 
