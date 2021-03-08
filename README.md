@@ -1,6 +1,6 @@
 # Project Repository
 *   Project Description, Product Vision Statement
-    *   O-zone is a cross-platform social media browsing and managing web application. It should support popular platforms including but not limited to Facebook, Instagram, Twitter, and TikTok. Our project makes it convenient to gather information from and push posts to multiple platforms different social media platform at the same time without switching to different social media apps. 
+    *   O-zone is a cross-platform social media browsing and managing web application. It should support popular platforms including but not limited to Facebook, Instagram, Twitter, and TikTok. Our project makes it convenient to gather information from and push posts to different social media platforms at the same time without switching to different social media apps. 
     *   Minimum Viable Product:
         *   Basic functionality
             *   Access to user's linked social media accounts; 
@@ -12,8 +12,8 @@
         *   Product Manager: 
             *   Before the sprint planning phase, PM finishes writing a list of user stories.
             *   In the sprint planning phase, PM explains every user story to developers.
-            *   In the sprint planning phase, PM collaborates with the developers to determine the Acceptance Criteria of User Stories which represents the minimum requirements for User Stories to be considered done, and PM adds the Acceptance Criteria to the description of the User Story issue.
-            *   In the sprint planning phase, PM collaborates with the developers to do the Estimation of Effort of each User Story to determine how much work the User Story will be. Planning Poker is used to determine the workload of the User Story, and PM adds the Estimation of Effort to the description of the User Story issue.
+            *   In the sprint planning phase, PM collaborates with the developers to determine the Acceptance Criteria of User Stories which represents the minimum requirements for User Stories to be considered done. Then PM adds the Acceptance Criteria to the description of the User Story issue.
+            *   In the sprint planning phase, PM collaborates with the developers to do the Estimation of Effort of each User Story to determine how much work the User Story will be. Planning Poker is used to determine the workload of the User Story. Then PM adds the Estimation of Effort to the description of the User Story issue.
             *   In the sprint planning phase, based on the Estimation of Effort of each User Story, PM collaborates with the developers to divide each user story to tasks. Each task should be done by one developer in 2 days, before the next Scrum Meeting/Daily Standup. Each task is assigned to one developer. 
             *   In the stakeholder demo phase, the PM collects stakeholder's suggestions, and adds new user stories to the list.
         *   Scrum Master:
