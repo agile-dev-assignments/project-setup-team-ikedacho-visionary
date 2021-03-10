@@ -3,7 +3,7 @@
     *   Project value: O-zone's value is to create an efficient social media management platform. Users could create, publish and analyze contents they and others post on various social media accounts. 
 *  ### Team Norms
     *   Members should all try their best to work cooperatively for the final workable product. 
-    *   Members must join team stand-ups three times a week on Monday, Wednesday, and Saturday at 10 AM EST. (11 PM China time) mandatorily on [Zoom](https://nyu.zoom.us/j/99111537533). The team would clarify each member's job for the week on Monday stand-ups and update the Task Board accordingly; Team would also check progress on Wednesday stand-ups and all works assigned on Monday should be expected to be done on Friday.
+    *   Members must join team stand-ups three times a week on Monday, Wednesday, and Saturday at 10 AM EST. (11 PM China time) mandatorily on [Zoom](https://nyu.zoom.us/j/99111537533). The team would clarify each member's tasks for the week on Monday stand-ups and update the Task Board accordingly; Team would also check progress on Wednesday stand-ups and all works assigned on Monday should be expected to be done on Friday.
     *   Definition of Done:
         *   Work should be only considered done when it satisfies agreed user stories and/or tasks. 
         *   Each new feature added should be only considered done after getting peer reviewed and passed tests before merging. 
@@ -13,17 +13,21 @@
     *   After a new branch is created, checkout to the new branch.
     *   Before adding and committing new changes, `git pull origin master/main` again
     *   For each small part of progress completed, e.g. a big function implemented and passed local tests, a new commit should be issued for tracking the change history. 
-    *   Commit messages should be meaningful and in format of “Change type: change details”, where the types are Added for first time setup, Update, and Fix, e.g. "Update: login page half-way done". 
+    *   Commit messages should be meaningful and in format of “Change type: change details”, where the types are "Added", "Update", and "Fix", e.g. "Update: login page half-way done". 
     *   Members should only send pull requests for the changes they push to the remote repository, but always ask for someone else to check the validity of the changes, and merge the pull request only if the changes pass the test. 
     *   Full commands flow:
         *   at main: `git pull`
         *   Create a new branch if needed: `git branch new_branch_name`
         *   Checkout to the new branch: `git checkout new_branch_name`
-        *   In the new branch, download any change first: `git pull origin master/main` 
-        *   In the new branch, make changes and save changes: `git add —all` 
-        *   `git commit -m “message”`
-        *   `git push --set-upstream origin new_branch_name`
-        *   Then in the GitHub website, find the branch and check if the branch is committed behind or not. If the branch is not behind, make a pull request
+        *   In the new branch, download any change first: `git pull origin master` 
+        *   In the new branch, make changes and save changes. 
+        *   For each changes: 
+            *   stage the change `git add changed_file_name` 
+            *   commit the change `git commit -m "message"`
+            *   changes must be separated into separated `add` & `commit`
+            *   never `add` & `commit` once for everything, because it will ruin the record
+        *   Finally. push all to Github: `git push --set-upstream origin new_branch_name`
+        *   Then in the GitHub website, find the branch and check if the branch has commit(s) behind or not. If the branch is not behind, make a pull request and ask for a review and merge. 
 *   ### Rule of Contributing
     *   Any change must be committed and pushed to a branch first, and then the contributor must issue a pull request. 
     *   Any pull request must be validated and merged by one of other members, unless time is urgent and the change is purely textual/graphical without any modification on the actual codes. 
