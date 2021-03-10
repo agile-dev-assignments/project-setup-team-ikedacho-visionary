@@ -3,7 +3,7 @@
     *   Project value: O-zone's value is to create an efficient social media management platform. Users could create, publish and analyze contents they and others post on various social media accounts. 
 *  ### Team Norms
     *   Members should all try their best to work cooperatively for the final workable product. 
-    *   Members must join team stand-ups three times a week on Monday, Wednesday, and Saturday at 10 AM EST. (11 PM China time) mandatorily on [Zoom](https://nyu.zoom.us/j/97802394508). The team would clarify each member's job for the week on Monday stand-ups and update the Task Board accordingly; Team would also check progress on Wednesday stand-ups and all works assigned on Monday should be expected to be done on Friday.
+    *   Members must join team stand-ups three times a week on Monday, Wednesday, and Saturday at 10 AM EST. (11 PM China time) mandatorily on [Zoom](https://nyu.zoom.us/j/99111537533). The team would clarify each member's job for the week on Monday stand-ups and update the Task Board accordingly; Team would also check progress on Wednesday stand-ups and all works assigned on Monday should be expected to be done on Friday.
     *   Definition of Done:
         *   Work should be only considered done when it satisfies agreed user stories and/or tasks. 
         *   Each new feature added should be only considered done after getting peer reviewed and passed tests before merging. 
