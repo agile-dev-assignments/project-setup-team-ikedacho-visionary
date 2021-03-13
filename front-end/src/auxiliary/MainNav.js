@@ -11,7 +11,7 @@ const MainNav = (props) => {
             <Link to="/search">Search</Link>
             <Link to="/">Home</Link>
             <Link to="/community">Community</Link>
-            <Link to="/Me">Me</Link>
+            <Link to="/me">Me</Link>
         </nav>
     )
 }
