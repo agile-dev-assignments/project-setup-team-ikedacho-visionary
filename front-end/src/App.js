@@ -1,12 +1,12 @@
 import './App.css';
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Login from './Login'
-import MainNav from './MainNav'
-import Home from './Home';
-import Community from './Community';
-import Me from './Me';
-import Search from './Search'
+import Login from './home/Login'
+import MainNav from './auxiliary/MainNav'
+import Home from './home/Home';
+import Community from './community/Community';
+import Me from './me/Me';
+import Search from './search/Search'
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
               <MainNav />
             </Route>
 
-            <Route path="/home">
+            <Route path="/me">
               <Me />
               <MainNav />
             </Route>
