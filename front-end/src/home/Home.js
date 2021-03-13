@@ -1,25 +1,34 @@
 import React from 'react';
 import './Home.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import HomeNav from './HomeNav';
+import HomeNav from '../auxiliary/HomeNav';
+import WhatsNew from './WhatsNew'
+import RecentlyVisited from './RecentlyVisited'
+import Recommended from './Recommended'
 
 const Home = (props) => {
-
     return (
-        <div className = "Home">
+        <>
             <Router>
                 <Switch>
-                    
+                    <Route path = "/recent">
+                        <HomeNav />
+                        <RecentlyVisited />
+                    </Route>
+
+                    <Route path = "/recommend">
+                        <HomeNav />
+                        <Recommended />
+                    </Route>
+
+                    <Route path = "/">
+                        <HomeNav />
+                        <WhatsNew />
+                    </Route>  
+
                 </Switch>
             </Router>
-            <h2>Home Page here</h2>
-            <section className = "main-content">
-                <p>
-                    That stolen figurine would scare any linguist away.
-                    A classical composition ever stuns the onlooker.
-                </p>
-            </section>
-        </div>
+        </>
     );
 }
 
