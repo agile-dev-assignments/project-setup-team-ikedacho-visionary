@@ -6,10 +6,10 @@ import './HomeNav.css'
 // It will not appear in the Navigation bar in finalized version 
 const HomeNav = (props) => {
     return (
-        <nav>
+        <nav className = "home">
             <Link to="/">What's New</Link>
             <Link to="/recent">Recently Visited</Link>
-            <Link to="/recommand">recommand</Link>
+            <Link to="/recommend">Recommend</Link>
         </nav>
     )
 }
