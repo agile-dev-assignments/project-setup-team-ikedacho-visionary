@@ -15,27 +15,27 @@ function App() {
         <Router>
           <Switch>
 
-            <Route path="/login">
+            <Route path = "/login">
               <Login />
               <MainNav />
               </Route>
 
-            <Route path="/search">
+            <Route path = "/search">
               <Search />
               <MainNav />
             </Route>
 
-            <Route path="/community">
+            <Route path = "/community">
               <Community />
               <MainNav />
             </Route>
 
-            <Route path="/me">
+            <Route path = "/me">
               <Me />
               <MainNav />
             </Route>
 
-            <Route path="/"> 
+            <Route path = "/"> 
               <Home />
               <MainNav />
             </Route>
