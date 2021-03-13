@@ -1,0 +1,13 @@
+div.Repost {
+    padding: 20px;
+    margin: 20px;
+    background-color: rgb(64, 199, 199);
+    border: 2px solid rgb(185, 149, 149);
+}
+
+div.Card {
+    padding: 5px;
+    margin: 5px;
+    background-color: pink;
+    border: 2px solid red;
+}
