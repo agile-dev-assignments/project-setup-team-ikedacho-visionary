@@ -5,7 +5,7 @@ const Comment = (props) => {
 
   return (
     <div class="Comment">
-        <img class="img" src={props.img} />
+        <img class="img" src={props.img} alt={props.UserName}/>
         <div class="Text">
         <strong class = "username">{props.UserName}</strong>
         <p class = "content">{props.content}</p>
