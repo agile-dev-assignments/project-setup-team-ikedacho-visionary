@@ -1,0 +1,46 @@
+
+.Comment{
+    padding: 20px;
+    margin: 20px;
+    background-color: white;
+    border: 2px solid lightgray;
+    display: flex;
+
+}
+.Comment img{
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 5px;
+    width: 50px;
+    height:50px;
+    position: relative;
+}
+.Text{
+    padding-left: 10px;
+    padding-top: 3px;
+
+}
+
+.actions{
+    position: relative;
+    float: right;
+}
+#datetime{
+    Font-size:10px;
+    position: relative;
+    float: left;
+}
+.Reply,.Like{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 8px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: #e7e7e7; 
+    color: black;
+}
