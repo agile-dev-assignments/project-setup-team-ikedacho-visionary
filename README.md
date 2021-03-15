@@ -36,7 +36,8 @@
     *   03-06-2021: Completed Project Prototype, first version. 
     *   03-08-2021: Polishing previous work and working on CONTRIBUTING.md. 
     *   03-10-2021: Sprint 1 planning finished. 
-    *   Next on Schedule: Front-end development based on prototype. 
+    *   03-15-2021: Front-end development: components. 
+    *   Next on Schedule: Front-end development: pages. 
 *   ### Instruction on Building and Testing 
     *   Complete function or module given assumed inputs and desired outputs. 
     *   Unit test on function or module upon completion if possible. 
