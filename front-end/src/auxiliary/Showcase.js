@@ -58,6 +58,7 @@ const Showcase = (props) => {
             bio = "A passionate evening brings both pleasure and pain. "
             action = "Following"
             />
+       
         </>
 
     );
