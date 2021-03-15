@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 // import logo from './logo.svg';
 import './Commented_List.css'
 import Commented from './Commented'
@@ -51,7 +52,10 @@ const Commented_List = (props) => {
 
   return (
     <div className="Commented_List">
+        <Link to={'/community'}> 
+        
         <h1 id="back" >Back</h1>
+        </Link>
         <h1>Comments</h1>
       
       <section className="commented_list">
