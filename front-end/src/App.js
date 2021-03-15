@@ -9,7 +9,7 @@ import Me from './me/Me';
 import Search from './search/Search'
 import Showcase from './auxiliary/Showcase'
 import Commented_List from './auxiliary/Commented_List'
-
+import Liked_List from './community/Liked_List'
 
 function App() {
   return (
@@ -41,6 +41,9 @@ function App() {
 
             <Route path = "/comments">
               <Commented_List />
+            </Route>
+            <Route path = "/likes">
+              <Liked_List />
             </Route>
 
            
