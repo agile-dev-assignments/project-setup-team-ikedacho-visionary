@@ -9,6 +9,10 @@ const PostContent = (props) => {
         showRepost: false,
         showComment: false
       })
+
+    const [like, setLike] = useState({
+        liked: false
+    })
  
 
   const _showRepost = () => {
@@ -23,7 +27,12 @@ const PostContent = (props) => {
       showComment: !cur
     });
   };
-
+  const _setLike = () => {
+    let cur = like.liked
+    setLike({
+      liked: !cur
+    });
+  };
 
   return (
     <div class="PostContent">
@@ -45,7 +54,7 @@ const PostContent = (props) => {
                 <ToComment />
               </>
             )}
-            <button class = "Likebutton"> Like</button>
+            <button class = "Likebutton" onClick = {_setLike.bind()}>{like.liked ? 'Liked' : 'Like'}</button>
             <button class = "Repostbutton" onClick = {_showRepost.bind()}> Repost</button>
             {state.showRepost && (
               <>
