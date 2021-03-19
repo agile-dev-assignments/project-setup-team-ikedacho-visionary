@@ -7,7 +7,7 @@ import Community from './community/Community';
 import Me from './me/Me';
 import Search from './search/Search'
 import Showcase from './auxiliary/Showcase'
-import Commented_List from './auxiliary/Commented_List'
+import Commented_List from './community/Commented_List'
 import Liked_List from './community/Liked_List'
 import SearchResult from './search/SearchResult';
 import Followings from './me/Followings'

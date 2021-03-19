@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 // import logo from './logo.svg';
 import './Commented_List.css'
-import Commented from './Commented'
+import Commented from '../auxiliary/Commented'
 
 const Commented_List = (props) => {
   // start a state variable with a blank array
