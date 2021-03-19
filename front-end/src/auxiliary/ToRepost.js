@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import './Repost.css'
+import './ToRepost.css'
 
 const Repost = (props) => {
     const [data, setData] = useState([])

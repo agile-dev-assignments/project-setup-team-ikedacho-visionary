@@ -7,26 +7,27 @@ import RecentlyVisited from './RecentlyVisited'
 import Recommended from './Recommended'
 
 const Home = (props) => {
+
     return (
         <>
             <Router>
-                <Switch>
-                    <Route path = "/recent">
-                        <HomeNav />
-                        <RecentlyVisited />
-                    </Route>
+                    <Switch>
+                        <Route path = "/recent">
+                            <HomeNav />
+                            <RecentlyVisited />
+                        </Route>
 
-                    <Route path = "/recommend">
-                        <HomeNav />
-                        <Recommended />
-                    </Route>
+                        <Route path = "/recommend">
+                            <HomeNav />
+                            <Recommended />
+                        </Route>
 
-                    <Route path = "/">
-                        <HomeNav />
-                        <WhatsNew />
-                    </Route>  
+                        <Route path = "/">
+                            <HomeNav />
+                            <WhatsNew />
+                        </Route>  
 
-                </Switch>
+                    </Switch>
             </Router>
         </>
     );

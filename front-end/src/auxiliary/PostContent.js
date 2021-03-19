@@ -1,5 +1,5 @@
 import './PostContent.css'
-import Repost from './Repost'
+import Repost from './ToRepost'
 import React, { useState, useEffect } from 'react'
 
 const PostContent = (props) => {
@@ -42,10 +42,9 @@ const PostContent = (props) => {
             <button class = "Likebutton"> Like</button>
             <button class = "Repostbutton" onClick={_showRepost.bind()}> Repost</button>
             {state.showRepost && (
-              <div>
+              <>
                 <Repost />
-                <button onClick={_showRepost.bind()}>hide</button>
-              </div>
+              </>
             )}
             </div>
 
