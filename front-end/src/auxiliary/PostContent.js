@@ -1,6 +1,7 @@
 import './PostContent.css'
 import Repost from './ToRepost'
 import React, { useState, useEffect } from 'react'
+import ToComment from './ToComment'
 
 const PostContent = (props) => {
 
@@ -19,7 +20,7 @@ const PostContent = (props) => {
   const _showComment = () => {
     let cur = state.showComment
     setState({
-      showRepost: !cur
+      showComment: !cur
     });
   };
 
@@ -38,9 +39,14 @@ const PostContent = (props) => {
         <p class = "postcontent">{props.content}</p>
         <img class="contentimg" src={props.contentimg} />
         <div class = "footer">
-            <button class = "Commentbutton"> Comment</button>
+            <button class = "Commentbutton" onClick = {_showComment.bind()}> Comment</button>
+            {state.showComment && (
+              <>
+                <ToComment />
+              </>
+            )}
             <button class = "Likebutton"> Like</button>
-            <button class = "Repostbutton" onClick={_showRepost.bind()}> Repost</button>
+            <button class = "Repostbutton" onClick = {_showRepost.bind()}> Repost</button>
             {state.showRepost && (
               <>
                 <Repost />

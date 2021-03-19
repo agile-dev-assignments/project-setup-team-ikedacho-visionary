@@ -1,9 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './ToRepost.css'
+import ToRepost_edit from './ToRepost_edit'
 
 const Repost = (props) => {
     const [data, setData] = useState([])
+
+    const [state, setState] = useState({
+        showRepostEdit: false,
+      })
+ 
+
+  const _showRepostEdit = () => {
+    let cur = state.showRepostEdit
+    setState({
+        showRepostEdit: !cur
+    });
+  };
 
     const Card = (props) => {
         return (
@@ -32,16 +45,7 @@ const Repost = (props) => {
                 setData(response.data)
             })
             .catch((err) => {
-                const backupData = [
-                    {"friends":
-                        {"pic":"https://robohash.org/evenietconsequaturmolestias.bmp?size=50x50\u0026set=set1",
-                        "name":"gyukhnini0"},
-                    "platforms":"Tempsoft"},
-
-                    {"friends":
-                        {"pic":"https://robohash.org/pariaturvoluptatumbeatae.jpg?size=50x50\u0026set=set1",
-                        "name":"blortzing1"},
-                    "platforms":"Toughjoyfax"}
+                const backupData = [{"friends_pic":"https://robohash.org/quiaofficiisdolorem.bmp?size=50x50\u0026set=set1","friends_name":"cbearcroft0","platforms":"Zamit"},{"friends_pic":"https://robohash.org/quosaliquamvoluptas.jpg?size=50x50\u0026set=set1","friends_name":"dbowskill1","platforms":"Holdlamis"},{"friends_pic":"https://robohash.org/suscipitestconsectetur.bmp?size=50x50\u0026set=set1","friends_name":"bwhiten2","platforms":"Flexidy"},{"friends_pic":"https://robohash.org/aliquametvoluptatum.jpg?size=50x50\u0026set=set1","friends_name":"bminmagh3","platforms":"Pannier"},{"friends_pic":"https://robohash.org/suscipitmodisunt.png?size=50x50\u0026set=set1","friends_name":"criccardo4","platforms":"Zoolab"},{"friends_pic":"https://robohash.org/isteinventoreenim.png?size=50x50\u0026set=set1","friends_name":"ysilversmid5","platforms":"Tin"},{"friends_pic":"https://robohash.org/deseruntquotenetur.jpg?size=50x50\u0026set=set1","friends_name":"mheak6","platforms":"Prodder"},{"friends_pic":"https://robohash.org/voluptateutest.png?size=50x50\u0026set=set1","friends_name":"tstilwell7","platforms":"Solarbreeze"},{"friends_pic":"https://robohash.org/iustonecessitatibuscumque.png?size=50x50\u0026set=set1","friends_name":"amaceveley8","platforms":"Viva"},{"friends_pic":"https://robohash.org/harumetconsectetur.png?size=50x50\u0026set=set1","friends_name":"ksancto9","platforms":"Konklux"}
                 ]
                 setData(backupData)
             })
@@ -53,8 +57,13 @@ const Repost = (props) => {
     return (
         <div className = "Repost">
 
-            <Card action = {() => {alert("Repost without caption")}} text = "Fast Repost"/>
-            <Card action = {() => {alert("Repost with caption")}} text = "Repost"/>
+            <button class = "Repost_fast">Fast Repost</button>
+            <button class = "Repost_edit_button" onClick = {_showRepostEdit.bind()}>Repost</button>
+            {state.showRepostEdit && (
+              <>
+                <ToRepost_edit data = {data}/>
+              </>
+            )}
 
             <p>Share to friends</p> 
                 <section className = "friends">
