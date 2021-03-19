@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import MainNav from './auxiliary/MainNav'
 import Home from './home/Home';
@@ -10,6 +9,7 @@ import Search from './search/Search'
 import Showcase from './auxiliary/Showcase'
 import Commented_List from './auxiliary/Commented_List'
 import Liked_List from './community/Liked_List'
+import SearchResult from './search/SearchResult';
 
 function App() {
   return (
@@ -46,7 +46,10 @@ function App() {
               <Liked_List />
             </Route>
 
-           
+            <Route path = "/searchResult">
+              <SearchResult />
+            </Route>
+
 
             <Route path = "/"> 
               <Home />
