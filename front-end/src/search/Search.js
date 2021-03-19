@@ -14,7 +14,7 @@ const Search = (props) => {
 
     return (
         <div className = "Search">
-            <h2>Search Page here</h2>
+            <h1>Search Page here</h1>
             <search className = "main-content">
                 <SearchBar 
                     searchQuery={searchQuery}
