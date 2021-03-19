@@ -10,7 +10,7 @@ const NameTag = (props) => {
 
   return (
     <div className = "NameTag">
-        <img className = "img" src = {props.img} alt = {props.name}/>
+        <img className = "img" src = {props.img} />
         <div className = "Text">
             <strong className = "username">{props.UserName}</strong>
             <p className = "content">{props.content}</p>
