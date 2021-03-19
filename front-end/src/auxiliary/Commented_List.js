@@ -6,7 +6,7 @@ import './Commented_List.css'
 import Commented from './Commented'
 
 const Commented_List = (props) => {
-  // start a state varaible with a blank array
+  // start a state variable with a blank array
   const [data, setData] = useState([])
 
   // the following side-effect will be called once upon initial render

@@ -1,5 +1,5 @@
 import React from 'react';
-import Repost from './Repost'
+import Repost from './ToRepost'
 import Comment from './Comment.js'
 import NameTag from './NameTag';
 import PostContent from './PostContent.js'

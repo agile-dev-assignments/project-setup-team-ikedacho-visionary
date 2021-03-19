@@ -1,7 +1,28 @@
-import React from 'react'
 import './PostContent.css'
+import Repost from './ToRepost'
+import React, { useState, useEffect } from 'react'
 
 const PostContent = (props) => {
+
+    const [state, setState] = useState({
+        showRepost: false,
+        showComment: false
+      })
+ 
+
+  const _showRepost = () => {
+    let cur = state.showRepost
+    setState({
+      showRepost: !cur
+    });
+  };
+  const _showComment = () => {
+    let cur = state.showComment
+    setState({
+      showRepost: !cur
+    });
+  };
+
 
   return (
     <div class="PostContent">
@@ -19,7 +40,12 @@ const PostContent = (props) => {
         <div class = "footer">
             <button class = "Commentbutton"> Comment</button>
             <button class = "Likebutton"> Like</button>
-            <button class = "Repostbutton"> Repost</button>
+            <button class = "Repostbutton" onClick={_showRepost.bind()}> Repost</button>
+            {state.showRepost && (
+              <>
+                <Repost />
+              </>
+            )}
             </div>
 
     </div>
