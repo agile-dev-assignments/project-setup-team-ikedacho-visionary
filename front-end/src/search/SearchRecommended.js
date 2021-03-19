@@ -16,7 +16,7 @@ const SearchRecommended = (props) => {
                 setData(response.data)
             })
             .catch((err) => {
-                const backupData = [
+                const backupData = [{"topic":"hot topic #6"},{"topic":"hot topic #35"},{"topic":"hot topic #33"},{"topic":"hot topic #25"},{"topic":"hot topic #876"},{"topic":"hot topic #4"},{"topic":"hot topic #72"},{"topic":"hot topic #535"},{"topic":"hot topic #153"},{"topic":"hot topic #336"}
                 ]
                 setData(backupData)
             })
