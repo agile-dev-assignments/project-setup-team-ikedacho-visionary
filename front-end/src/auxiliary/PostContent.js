@@ -17,7 +17,7 @@ const PostContent = (props) => {
         <p class = "postcontent">{props.content}</p>
         <img class="contentimg" src={props.contentimg} />
         <div class = "footer">
-            <button class = "Commentbutton"> Like</button>
+            <button class = "Commentbutton"> Comment</button>
             <button class = "Likebutton"> Like</button>
             <button class = "Repostbutton"> Repost</button>
             </div>

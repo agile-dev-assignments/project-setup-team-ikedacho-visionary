@@ -10,6 +10,8 @@ import Showcase from './auxiliary/Showcase'
 import Commented_List from './auxiliary/Commented_List'
 import Liked_List from './community/Liked_List'
 import SearchResult from './search/SearchResult';
+import Followings from './me/Followings'
+import Followers from './me/Followers'
 
 function App() {
   return (
@@ -50,6 +52,13 @@ function App() {
               <SearchResult />
             </Route>
 
+            <Route path = "/followings">
+              <Followings />
+            </Route>
+
+            <Route path = "/followers">
+              <Followers />
+            </Route>
 
             <Route path = "/"> 
               <Home />

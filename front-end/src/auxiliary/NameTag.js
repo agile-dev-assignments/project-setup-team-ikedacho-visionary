@@ -10,10 +10,9 @@ const NameTag = (props) => {
 
   return (
     <div className = "NameTag">
-        <img className = "img" src = {props.img} alt = {props.name}/>
+        <img className = "img" src = {props.img} />
         <div className = "Text">
             <strong className = "username">{props.UserName}</strong>
-            <p className = "content">{props.content}</p>
             <p className = "bio">Bio: {props.bio}</p>
             <button className = "follow" onClick = {login_button}>{props.action}</button>
         </div>
