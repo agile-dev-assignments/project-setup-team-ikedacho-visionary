@@ -14,7 +14,7 @@ const Trending = (props) => {
                 setData(response.data)
             })
             .catch((err) => {
-                const backupData = [
+                const backupData = [{"topic":"hot topic #699"},{"topic":"hot topic #0"},{"topic":"hot topic #3"},{"topic":"hot topic #422"},{"topic":"hot topic #78"},{"topic":"hot topic #34"},{"topic":"hot topic #2"},{"topic":"hot topic #435"},{"topic":"hot topic #3"},{"topic":"hot topic #94"}
                 ]
                 setData(backupData)
             })
