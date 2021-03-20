@@ -17,10 +17,12 @@ const ToRepost_edit = (props) => {
     };
     return (
         <>
-            <input type="text" name = "repost_edit_text" />
+            <textarea type = "text" id = "repost_edit_text"/>
+            <br></br>
             <button className = "enterPost_edit" onClick = {_showPlatforms.bind()}>Enter</button>
             {state.showPlatforms && (
               <>
+                <br></br>
                 {props.data.map((item) => (
                     <button>{item.platforms}</button>
                 ))}

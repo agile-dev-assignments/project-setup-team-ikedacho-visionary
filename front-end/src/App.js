@@ -33,34 +33,45 @@ function App() {
             </Route>
 
             <Route path = "/search">
-              <Search />
-              <MainNav />
+            <page>
+                <Search />
+              </page>
+              <navigator>
+                <MainNav />
+              </navigator>
             </Route>
 
             <Route path = "/community">
-              <Community />
-              <MainNav />
+            <page>
+                <Community />
+              </page>
+              <navigator>
+                <MainNav />
+              </navigator>
             </Route>
 
             <Route path = "/me">
-              <Me />
-              <MainNav />
+              <page>
+                <Me />
+              </page>
+              <navigator>
+                <MainNav />
+              </navigator>
             </Route>
 
             <Route path = "/my_comment_history">
               <My_Comment_History_List />
             </Route>
 
-
             <Route path = "/components_showcase">
               <Showcase />
               <MainNav />
             </Route>
           
-
             <Route path = "/comments">
               <Commented_List />
             </Route>
+
             <Route path = "/likes">
               <Liked_List />
             </Route>
@@ -82,13 +93,13 @@ function App() {
             </Route>
 
             <Route path = "/"> 
-              <Home />
-              <MainNav />
+              <page>
+                <Home />
+              </page>
+              <navigator>
+                <MainNav />
+              </navigator>
             </Route>
-
-            
-
-
 
           </Switch>
         </Router>
