@@ -23,7 +23,7 @@ const RecentlyVisited = (props) => {
 
 
     return (
-        <div className = "Recently Visited">
+        <div className = "Recently-Visited">
             <section className = "main-content">
                 {data.map((item) => (
                         <PostContent source = {item.source} 
