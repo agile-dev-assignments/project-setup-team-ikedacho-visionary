@@ -28,7 +28,7 @@
 
  
 
-   button {
+   .section sign-in button {
     margin-top: 2rem;
     border: 0;
     border-radius: 200px;
@@ -39,7 +39,7 @@
     background: blue;
    }
   
-   p {
+   .section sign-in p {
     margin: 0.25rem 0 0;
     text-align: center;
     color: rgb(70,70,70); 
