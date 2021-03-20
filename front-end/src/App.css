@@ -3,12 +3,3 @@
 .App {
   text-align: center;
 }
-
-navigator {
-  bottom: 0px;
-}
-
-page {
-  bottom: 50px;
-  position: relative;
-}

@@ -6,10 +6,10 @@ import './HomeNav.css'
 // It will not appear in the Navigation bar in finalized version 
 const HomeNav = (props) => {
     return (
-        <nav className = "home">
-            <NavLink to="/">What's New</NavLink>
-            <NavLink to="/recent">Recently Visited</NavLink>
-            <NavLink to="/recommend">Recommend</NavLink>
+        <nav className = "homenav">
+            <NavLink id='homenav_button' to="/">What's New</NavLink>
+            <NavLink id='homenav_button' to="/recent">Recently Visited</NavLink>
+            <NavLink id='homenav_button' to="/recommend">Recommend</NavLink>
         </nav>
     )
 }
