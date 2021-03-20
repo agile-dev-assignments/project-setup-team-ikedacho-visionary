@@ -49,16 +49,17 @@ const PostContent = (props) => {
         <img class="contentimg" src={props.contentimg} />
         <div class = "footer">
             <button class = "Commentbutton" onClick = {_showComment.bind()}> Comment</button>
-            {state.showComment && (
-              <>
-                <ToComment />
-              </>
-            )}
+
             <button class = "Likebutton" onClick = {_setLike.bind()}>{like.liked ? 'Liked' : 'Like'}</button>
             <button class = "Repostbutton" onClick = {_showRepost.bind()}> Repost</button>
             {state.showRepost && (
               <>
                 <Repost />
+              </>
+            )}
+            {state.showComment && (
+              <>
+                <ToComment />
               </>
             )}
             </div>

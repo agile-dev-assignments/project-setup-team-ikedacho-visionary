@@ -61,6 +61,7 @@ const Repost = (props) => {
             <button class = "Repost_edit_button" onClick = {_showRepostEdit.bind()}>Repost</button>
             {state.showRepostEdit && (
               <>
+                <br></br>
                 <ToRepost_edit data = {data}/>
               </>
             )}
