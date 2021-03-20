@@ -1,4 +1,7 @@
-
+article.commented * {
+    margin: 0;
+    padding: 0;
+}
 .commented{
     border: 0px solid #e0dfdf;
     padding:10px;
