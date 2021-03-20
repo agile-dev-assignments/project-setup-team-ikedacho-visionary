@@ -2,6 +2,7 @@ import './App.css';
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import MainNav from './auxiliary/NavBar/MainNav'
+import Loginpage from './login_signup/Loginpage'
 import Home from './home/Home';
 import Community from './community/Community';
 import Me from './me/Me';
@@ -13,14 +14,23 @@ import SearchResult from './search/SearchResult';
 import Followings from './me/Followings'
 import Followers from './me/Followers'
 import My_Comment_History_List from './me/My_Comment_History_List'
+import Signup from './login_signup/Signuppage'
 
 
 function App() {
   return (
     <>
       <div>
+
         <Router>
           <Switch>
+          <Route path = "/login"> 
+              <Loginpage />
+            </Route>
+
+            <Route path = "/signup"> 
+              <Signup />
+            </Route>
 
             <Route path = "/search">
               <Search />
@@ -71,6 +81,8 @@ function App() {
               <Home />
               <MainNav />
             </Route>
+
+            
 
 
 
