@@ -9,8 +9,8 @@ const Commented = (props) => {
     <article className="commented">
         <Link to={`/profile/${props.details.commented_by}`}>
             <div>
-                <img class='inline-block' src={props.details.commented_by_profile_image} />
-                <h1 class='inline-block' >{props.details.commented_by_username}</h1>
+                <img class='inline-block' id='avatar' src={props.details.commented_by_profile_image} />
+                <h1 class='inline-block' id='username1' >{props.details.commented_by_username}</h1>
                 <span id="commented_date">{props.details.commented_date}</span>
             </div>
         

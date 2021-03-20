@@ -54,7 +54,7 @@ const Commented_List = (props) => {
         
         <h1 id="back" >Back</h1>
         </Link>
-        <h1>Comments</h1>
+        <h1 id='title'>Comments</h1>
       
       <section className="commented_list">
         {data.map((item) => (
