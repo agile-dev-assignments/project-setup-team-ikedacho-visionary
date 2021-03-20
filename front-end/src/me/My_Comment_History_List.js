@@ -53,7 +53,7 @@ const My_Comment_History_List = (props) => {
         
         <h1 id="back" >Back</h1>
         </Link>
-        <h1>My Comment History</h1>
+        <h1 id='title'>My Comment History</h1>
       
       <section className="My_Comment_History_List">
         {data.map((item) => (

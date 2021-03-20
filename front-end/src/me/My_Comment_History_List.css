@@ -18,8 +18,12 @@ My_Comment_History_List *{
 div.My_Comment_History_List #back{
     position: absolute;
     left: 10px;
-    top: 2px;
+    top: -2px;
     z-index: 1;
     font-weight:600;
     font-size: 0.9em;
+}
+div.My_Comment_History_List #title{
+    position: relative;
+    bottom: 5px;
 }
