@@ -1,4 +1,4 @@
-* {
+article * {
     margin: 0;
     padding: 0;
 }
@@ -9,24 +9,36 @@
     border-bottom:solid #B1B1B1 1px;
 }
 
-.inline-block {
+article.liked .inline-block {
     display: inline-block;
 }
+article.liked #username1{
+    position: relative;
+    bottom:20px;
+}
+article.liked #avatar {
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 5px;
+    width: 50px;
+    height:50px;
+  
+}
 
-#commented_date {
+article.liked #commented_date {
     position: absolute;
     right: 10px;
     padding-top:10px ;
     font-size: 0.8em;
 }
 
-h1{
+article.liked h1{
     position: relative;
     left: 5px;
     line-height: 1.5em;
 }
 
-#post{
+article.liked #post{
     line-height: 1em;
     height:80px;
     background-color:#f1efef ;
@@ -35,16 +47,16 @@ h1{
     margin:0px;
 }
 
-#post_image{
+article.liked #post_image{
     float: left;
 }
 
-#username{
+article.liked #username{
     font-size:1em;
     padding-left:10px;
 }
 
-#post_text{
+article.liked #post_text{
     padding-left:10px;
     padding-right:10px;
     overflow: hidden;
@@ -52,7 +64,7 @@ h1{
     color:#747070;
 }
 
-#like{
+article.liked #like{
     padding-top:10px;
     line-height: 1.1em;
     margin-bottom:5px;
