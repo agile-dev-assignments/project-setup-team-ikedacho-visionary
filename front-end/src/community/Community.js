@@ -1,6 +1,6 @@
 import React from 'react';
 import './Community.css'
-
+import { Search } from 'react-bootstrap-icons';
 
 const Community = (props) => {
 
@@ -9,32 +9,29 @@ const Community = (props) => {
             <h1>Message</h1>
             <div className = "main-content">
                 <div> 
-            
                     <p id="mentions">
                         Mentions
                     </p>
-
                 </div>
                 <div> 
-            
                     <p id="comments">
                         Comments
                     </p>
-
                 </div>
 
                 <div> 
-            
                     <p id="likes">
                         Likes
                     </p>
-
                 </div>
             </div>
 
-            <section className = "search">
+            <div >
+                <input id="search">
+                </input>
+                <Search id='search_icon' color="grey" size={17} />
                 
-            </section>
+            </div>
 
             <section className = "message">
                 
