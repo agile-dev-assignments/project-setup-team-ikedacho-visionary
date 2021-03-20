@@ -1,0 +1,24 @@
+.mainnav {
+  border-width: 1px 0 1px 0px; /* no border on left or right */
+  font-family: georgia;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  background-color:rgb(70,70,70);
+  width: 90vw;
+  height:5vw;
+  z-index: 1;
+}
+  
+.mainnav a{
+  text-decoration: none;
+  color: white;
+  margin: 15px;
+  font-size:15px;
+}
+  
+nav a:hover {
+  text-decoration: underline;
+
+}

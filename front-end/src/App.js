@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import MainNav from './auxiliary/MainNav'
+import MainNav from './auxiliary/NavBar/MainNav'
 import Home from './home/Home';
 import Community from './community/Community';
 import Me from './me/Me';

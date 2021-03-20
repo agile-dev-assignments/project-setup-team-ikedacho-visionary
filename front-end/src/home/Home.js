@@ -1,7 +1,7 @@
 import React from 'react';
 import './Home.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import HomeNav from '../auxiliary/HomeNav';
+import HomeNav from '../auxiliary/NavBar/HomeNav';
 import WhatsNew from './WhatsNew'
 import RecentlyVisited from './RecentlyVisited'
 import Recommended from './Recommended'
