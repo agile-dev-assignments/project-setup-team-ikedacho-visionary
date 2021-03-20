@@ -29,7 +29,7 @@ const Followers = (props) => {
             <Link to = '/Me'>
                 <button>back</button>
             </Link>
-            <section className = "main-content">
+            <section className = "Followers_main-content">
                 <p>
                     {data.map((item) => (
                         <NameTag img = {item.img}

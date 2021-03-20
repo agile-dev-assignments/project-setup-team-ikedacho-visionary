@@ -4,8 +4,8 @@ import './NameTag.css'
 const NameTag = (props) => {
 
     // replace by API to follow/unfollow
-    const login_button = e => {
-        alert("Following is clicked! ")
+    const follow_button = e => {
+        alert("follow_button is clicked! ")
         }
 
   return (
@@ -13,13 +13,11 @@ const NameTag = (props) => {
         <img className = "img" src = {props.img} />
         <div className = "Text">
             <strong className = "username">{props.UserName}</strong>
+            <button className = "follow" onClick = {follow_button}>{props.action}</button>
             <p className = "bio">Bio: {props.bio}</p>
-            <button className = "follow" onClick = {login_button}>{props.action}</button>
         </div>
     </div>
   )
 }
-
-
 
 export default NameTag

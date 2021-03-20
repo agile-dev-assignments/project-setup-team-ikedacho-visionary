@@ -16,6 +16,7 @@ import Followers from './me/Followers'
 import My_Comment_History_List from './me/My_Comment_History_List'
 import Signup from './login_signup/Signuppage'
 import PostDetail from './home/PostDetail'
+import Settings from './me/Settings'
 
 function App() {
   return (
@@ -90,6 +91,10 @@ function App() {
 
             <Route path = "/detail"> 
               <PostDetail />
+            </Route>
+
+            <Route path = "/Settings">
+              <Settings />
             </Route>
 
             <Route path = "/"> 

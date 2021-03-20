@@ -8,6 +8,13 @@ const Me = (props) => {
     return (
         <div className = "Me">
             <h2>Me Page here</h2>
+            
+            <div className = "Me_Setting" id = "Settings">
+                <Link to = './Settings'>
+                    <p>Settings</p>
+                </Link>
+            </div>
+
             <Link to = './Followers'>
                 <p>Followers</p>
             </Link>
@@ -15,6 +22,7 @@ const Me = (props) => {
             <Link to = './Followings'>
                 <p>Followings</p>
             </Link>
+
             <br></br>
             <section className = "main-content">
                 <p>
