@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 import './Community.css'
 import { Search } from 'react-bootstrap-icons';
 import './Community.js'
@@ -44,23 +46,25 @@ const Community = (props) => {
     return (
         <div className = "Community">
             <h1>Message</h1>
-            <div className = "main-content">
-                <div> 
-                    <p id="mentions">
-                        Mentions
-                    </p>
-                </div>
-                <div> 
-                    <p id="comments">
-                        Comments
-                    </p>
-                </div>
 
-                <div> 
-                    <p id="likes">
-                        Likes
-                    </p>
-                </div>
+            <div className = "main-content">
+                
+                <Link class='icon' to={'/mentions'}> 
+                        <p id="mentions">
+                            Mentions
+                        </p>
+                </Link>
+                <Link class='icon' to={'/comments'}>
+                        <p id="comments">
+                            Comments
+                        </p>
+                </Link>
+
+                <Link class='icon' to={'/likes'}>
+                        <p id="likes">
+                            Likes
+                        </p>
+                </Link>
             </div>
 
             <div >
@@ -70,8 +74,10 @@ const Community = (props) => {
                 
             </div>
 
-            <section className = "message">
-                
+            <section className = "message_list">
+                {data.map((item) => (
+                    <Message_History key={item.id} details={item} />
+                ))}
             </section>
         </div>
 

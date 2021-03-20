@@ -25,7 +25,7 @@ div.Community .main-content{
 }
 
 
-div.Community .main-content >div{
+div.Community .main-content .icon{
     background-color: aliceblue;
     margin-left: 6%;
     margin-right: 6%;
