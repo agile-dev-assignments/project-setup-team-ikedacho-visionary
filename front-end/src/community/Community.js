@@ -72,7 +72,7 @@ const Community = (props) => {
             </div>
 
             <div >
-                <input id="search">
+                <input id="search" placeholder="  Search here">
                 </input>
                 <Search id='search_icon' color="grey" size={17} />
                 

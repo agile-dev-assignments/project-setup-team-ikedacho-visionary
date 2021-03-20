@@ -77,9 +77,19 @@ div.Community #search{
     margin-right:10%;
     background-color: #F3F3F3;
     width: 80%;
-    z-index: -1;
+    z-index: 1;
+    
+    
+    
 
 }
+
+div.Community #search:focus {
+
+    border:none;
+}
+
+
 div.Community #search_icon{
     z-index: 1;
     position: absolute;
