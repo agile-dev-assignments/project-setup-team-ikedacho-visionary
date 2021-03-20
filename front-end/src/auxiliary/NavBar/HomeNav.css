@@ -32,10 +32,10 @@
   
 #homenav_button:hover {
   text-decoration: none;
-  background-color: rgb(243, 243, 243);
+ 
 }
 
 #homenav_button:focus {
   text-decoration: underline;
-  background-color:rgb(228, 226, 226);
+
 }
