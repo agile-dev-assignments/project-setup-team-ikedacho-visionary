@@ -1,0 +1,25 @@
+.Loginpage{
+    padding-top:200px;
+}
+h1{
+    text-align:center;
+}
+
+.Loginform{
+    padding-top:20px;
+}
+p{
+    padding-bottom:30px;
+}
+
+#signin{
+    text-decoration: none;
+    color:rgb(70,70,70) ;
+    margin: 15px;
+    font-size:15px;
+    padding-left:95px;
+  }
+
+button{
+    margin-bottom:30px;
+}
