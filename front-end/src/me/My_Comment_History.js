@@ -1,20 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './Commented.css'
+import './My_Comment_History.css'
 
-const Commented = (props) => {
+const My_Comment_History = (props) => {
   // console.log(props);
 
   return (
-    <article className="commented">
-        <Link to={`/profile/${props.details.commented_by}`}>
+    <article className="My_Comment_History">
+        <Link to={`/profile`}>
             <div>
-                <img class='inline-block' id='avatar' src={props.details.commented_by_profile_image} />
-                <h1 class='inline-block' id='username1' >{props.details.commented_by_username}</h1>
+                <img class='inline-block' id="avatar" src="https://robohash.org/autplaceatatque.bmp?size=50x50" />
+                <h1 class='inline-block' id='username1' >Username</h1>
                 <span id="commented_date">{props.details.commented_date}</span>
             </div>
         
-        <p id='comment'>Commented @Username: {props.details.commented_content}</p>
+        <p id='comment'>Commented @{props.details.post_created_by}: {props.details.commented_content}</p>
        
         </Link>
 
@@ -25,7 +25,7 @@ const Commented = (props) => {
 
                 <img id="post_image" src={props.details.post_image} />
                 <br></br>
-                <span id='username'>@Username</span>
+                <span id='username'>{props.details.post_created_by}</span>
                 <br></br>
                 <br></br>
                 <div id='post_text'>{props.details.post_text}</div>
@@ -39,4 +39,4 @@ const Commented = (props) => {
 }
 
 // make this function available to be imported into another module
-export default Commented
+export default My_Comment_History
