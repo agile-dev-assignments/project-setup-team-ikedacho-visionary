@@ -5,9 +5,6 @@ import './Liked.css'
 const Liked = (props) => {
   // console.log(props);
 
-  // inject a random placeholder image from the Lorem Picsum API
-  // the mockaroo API we're using doesn't include this
-  // ultimately, this data would come from the API
 
   return (
     <article className="liked">
