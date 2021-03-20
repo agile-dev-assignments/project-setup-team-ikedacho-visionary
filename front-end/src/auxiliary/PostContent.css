@@ -1,21 +1,21 @@
 .PostContent{
     padding: 20px;
-    margin: 20px;
+    
     background-color: white;
     border: 2px solid lightgray;
     display: flex;
     flex-direction: column;
     
 }
-.block{
+div.PostContent .block{
     display: flex;
 }
 
-.postcontent{
+div.PostContent .postcontent{
     padding-left:60px;
     font-size: 15px;
 }
-.userimg{
+div.PostContent .userimg{
     border: 1px solid #ddd;
     border-radius: 50%;
     padding: 5px;
@@ -24,22 +24,22 @@
     position: relative;
 }
 
-.contentimg{
+div.PostContent .contentimg{
     padding-left:70px;
     width: 200px;
     float: left; 
 }
 
-.PlatformSource{
+div.PostContent .PlatformSource{
     align-self:flex-end;
 }
 
-.footer{
+div.PostContent .footer{
     padding-left:70px;
     flex-direction: row;
 }
 
-.Repostbutton,.Commentbutton,.Likebutton{
+div.PostContent .Repostbutton,.Commentbutton,.Likebutton{
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
