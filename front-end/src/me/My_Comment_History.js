@@ -9,8 +9,8 @@ const My_Comment_History = (props) => {
     <article className="My_Comment_History">
         <Link to={`/profile`}>
             <div>
-                <img class='inline-block' src="https://robohash.org/autplaceatatque.bmp?size=50x50" />
-                <h1 class='inline-block' >Username</h1>
+                <img class='inline-block' id="avatar" src="https://robohash.org/autplaceatatque.bmp?size=50x50" />
+                <h1 class='inline-block' id='username1' >Username</h1>
                 <span id="commented_date">{props.details.commented_date}</span>
             </div>
         

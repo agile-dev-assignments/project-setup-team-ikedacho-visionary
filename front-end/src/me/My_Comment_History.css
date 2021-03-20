@@ -10,6 +10,20 @@ article.My_Comment_History .inline-block {
     display: inline-block;
 }
 
+article.My_Comment_History #username1{
+    position: relative;
+    top: -25px;
+}
+
+article.My_Comment_History #avatar {
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 5px;
+    width: 50px;
+    height:50px;
+  
+}
+
 article.My_Comment_History #commented_date {
     position: absolute;
     right: 10px;
