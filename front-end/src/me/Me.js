@@ -8,6 +8,9 @@ const Me = (props) => {
     return (
         <div className = "Me">
             <h2>Me Page here</h2>
+            <Link to = './Settings'>
+                <p id = "Settings">Settings</p>
+            </Link>
             <Link to = './Followers'>
                 <p>Followers</p>
             </Link>
