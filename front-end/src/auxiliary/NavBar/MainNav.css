@@ -6,8 +6,8 @@
   position: fixed;
   bottom: 0;
   background-color:rgb(70,70,70);
-  width: 90vw;
-  height:5vw;
+  width: 100vw;
+  height:10vw;
   z-index: 1;
 }
   
