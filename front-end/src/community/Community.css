@@ -6,6 +6,14 @@ div.Community h1{
     text-align:center;
     padding-top:3px;
 }
+div.Community #chat{
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    z-index: 1;
+    font-weight:600;
+    font-size: 0.9em;
+}
 
 div.Community a{
     color:black;
@@ -69,9 +77,19 @@ div.Community #search{
     margin-right:10%;
     background-color: #F3F3F3;
     width: 80%;
-    z-index: -1;
+    z-index: 1;
+    
+    
+    
 
 }
+
+div.Community #search:focus {
+
+    border:none;
+}
+
+
 div.Community #search_icon{
     z-index: 1;
     position: absolute;

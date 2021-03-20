@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import './Community.css'
 import { Search } from 'react-bootstrap-icons';
+import { ChatLeftDotsFill } from 'react-bootstrap-icons';
 import './Community.js'
 import Message_History from './Message_History'
 
@@ -46,7 +47,10 @@ const Community = (props) => {
     return (
         <div className = "Community">
             <h1>Message</h1>
-
+            <Link to={'/chat'}> 
+                <ChatLeftDotsFill id="chat" size={17}/> 
+            
+            </Link>
             <div className = "main-content">
                 
                 <Link class='icon' to={'/mentions'}> 
@@ -68,7 +72,7 @@ const Community = (props) => {
             </div>
 
             <div >
-                <input id="search">
+                <input id="search" placeholder="  Search here">
                 </input>
                 <Search id='search_icon' color="grey" size={17} />
                 
