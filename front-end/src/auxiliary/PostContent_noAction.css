@@ -1,4 +1,4 @@
-.PostContent{
+.PostContent_noAction{
     padding: 20px;
     margin: 20px;
     background-color: white;
@@ -7,15 +7,18 @@
     flex-direction: column;
     
 }
-.block{
+.block_noAction{
     display: flex;
+    padding-bottom:0px;
+    margin-bottom:0px;
 }
 
-.postcontent{
+
+.postcontent_noAction{
     padding-left:60px;
-    font-size: 15px;
+    font-size: 12px;
 }
-.userimg{
+.userimg_noAction{
     border: 1px solid #ddd;
     border-radius: 50%;
     padding: 5px;
@@ -23,33 +26,21 @@
     height:50px;
     position: relative;
 }
-
-.contentimg{
+.Text{
+    padding-bottom:0;
+}
+.contentimg_noAction{
     padding-left:70px;
     width: 200px;
     float: left; 
 }
 
-.PlatformSource{
+.PlatformSource_noAction{
     align-self:flex-end;
 }
 
-.footer{
+.footer_noAction{
     padding-left:70px;
     flex-direction: row;
 }
 
-.Repostbutton,.Commentbutton,.Likebutton{
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 6px 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 8px;
-    margin: 4px 2px;
-    cursor: pointer;
-    background-color: #e7e7e7; 
-    color: black;
-}
