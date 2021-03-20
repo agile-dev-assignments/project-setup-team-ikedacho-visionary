@@ -25,10 +25,10 @@ const WhatsNew = (props) => {
 
     return (
         <div className = "WhatsNew">
-            <h2>WhatsNew Page here</h2>
             <section className = "main-content">
                 {data.map((item) => (
-                        <PostContent source = {item.source} 
+                        <PostContent 
+                                source = {item.source} 
                                 userimg = {item.userimg}
                                 UserName = {item.UserName}
                                 content = {item.content}

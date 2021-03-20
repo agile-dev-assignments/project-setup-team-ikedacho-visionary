@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import MainNav from './auxiliary/MainNav'
+import MainNav from './auxiliary/NavBar/MainNav'
 import Home from './home/Home';
 import Community from './community/Community';
 import Me from './me/Me';
@@ -9,7 +9,7 @@ import Search from './search/Search'
 import Showcase from './auxiliary/Showcase'
 import Commented_List from './community/Commented_List'
 import Liked_List from './community/Liked_List'
-import SearchResult from './search/SearchResult';
+import SearchResult from './search/SearchResult'
 import Followings from './me/Followings'
 import Followers from './me/Followers'
 import My_Comment_History_List from './me/My_Comment_History_List'
@@ -19,6 +19,7 @@ function App() {
   return (
     <>
       <div>
+        
         <Router>
           <Switch>
 

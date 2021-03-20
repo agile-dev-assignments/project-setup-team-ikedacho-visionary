@@ -1,21 +1,23 @@
-nav {
-  border: 2px solid black;
-  border-width: 2px 0 1px 19px; /* no border on left or right */
+.mainnav {
+  border-width: 2px 0 1px 0px; /* no border on left or right */
   font-family: georgia;
   padding: 20px;
   text-align: center;
   position: fixed;
   bottom: 0;
-  background-color: antiquewhite;
+  background-color:rgb(70,70,70);
+  width: 100vw;
+  height:15vw;
+  z-index: 1;
 }
   
-nav a {
+.mainnav a{
   text-decoration: none;
-  color: black;
+  color: white;
   margin: 20px;
 }
   
 nav a:hover {
   text-decoration: underline;
-  background-color: yellow;
+
 }
