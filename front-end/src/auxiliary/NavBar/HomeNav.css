@@ -1,0 +1,24 @@
+.home {
+  border-width: 1px 0px 1px 0px; /* no border on left or right */
+  font-family: georgia;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  background-color:rgb(70,70,70);
+  width: 90vw;
+  height:5vw;
+  z-index: 1;
+}
+  
+.home a {
+  text-decoration: none;
+  color: white;
+  margin: 13px;
+  font-size:10px;
+
+}
+  
+nav a:hover {
+  text-decoration: underline;
+}
