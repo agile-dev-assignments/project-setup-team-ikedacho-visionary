@@ -1,4 +1,4 @@
-article * {
+article.liked * {
     margin: 0;
     padding: 0;
 }
@@ -14,7 +14,7 @@ article.liked .inline-block {
 }
 article.liked #username1{
     position: relative;
-    bottom:20px;
+    top: -25px;
 }
 article.liked #avatar {
     border: 1px solid #ddd;
