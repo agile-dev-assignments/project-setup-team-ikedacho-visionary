@@ -26,19 +26,22 @@ const Commented_List = (props) => {
 
         // make some backup fake data of commented_history
         const backupData = [
+  
+
           {"id":1,"post_text":"Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus.",
-          "post_image":"https://robohash.org/dolorevoluptatemrecusandae.bmp?size=50x50\u0026set=set1",
+          "post_image":"http://dummyimage.com/50x50.bmp/dddddd/000000",
           "post_date":"7/17/2020",
           "commented_by_username":"droobottom0",
-          "commented_by_profile_image":"http://dummyimage.com/50x50.bmp/dddddd/000000",
+          "commented_by_profile_image":"https://robohash.org/dolorevoluptatemrecusandae.bmp?size=50x50\u0026set=set1",
           "commented_date":"1/2/2021",
           "commented_content":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
           },
+          
           {"id":2,"post_text":"Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue.",
-          "post_image":"https://robohash.org/remplaceatcommodi.png?size=50x50\u0026set=set1",
+          "post_image":"http://dummyimage.com/50x50.png/ff4444/ffffff",
           "post_date":"1/5/2020",
           "commented_by_username":"lfruen1",
-          "commented_by_profile_image":"http://dummyimage.com/50x50.png/ff4444/ffffff",
+          "commented_by_profile_image":"https://robohash.org/remplaceatcommodi.png?size=50x50\u0026set=set1",
           "commented_date":"7/20/2020",
           "commented_content":"Integer a nibh. In quis justo."
           },
