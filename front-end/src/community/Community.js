@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 import './Community.css'
 import { Search } from 'react-bootstrap-icons';
 import { ChatLeftDotsFill } from 'react-bootstrap-icons';
+import { At } from 'react-bootstrap-icons';
+import { TextParagraph } from 'react-bootstrap-icons';
+import { HeartFill } from 'react-bootstrap-icons';
 import './Community.js'
 import Message_History from './Message_History'
 
@@ -54,17 +57,20 @@ const Community = (props) => {
             <div className = "main-content">
                 
                 <Link class='icon' to={'/mentions'}> 
+                <At id='mention-icon' size={30} color="white"/>
                         <p id="mentions">
                             Mentions
                         </p>
                 </Link>
                 <Link class='icon' to={'/comments'}>
-                        <p id="comments">
+                    <TextParagraph id='comment-icon' size={30} color="white"/>
+                        <p id="comments" >
                             Comments
                         </p>
                 </Link>
 
                 <Link class='icon' to={'/likes'}>
+                    <HeartFill id='like-icon' size={30} color="white"/>
                         <p id="likes">
                             Likes
                         </p>
