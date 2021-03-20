@@ -27,15 +27,21 @@ div.Community .main-content{
 
 div.Community .main-content >div{
     background-color: aliceblue;
-    margin: 30px;
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-top: 30px;
+    margin-bottom: 30px;
     width:55px;
     height: 55px;
     border-radius: 50%;
     margin-top: 10px;
+    
+    
 
 }
 div.Community #mentions,#likes, #comments{
     position:relative;
+    
     top:45px;
     font-size: 0.9em;
     color: rgb(54, 54, 54);
@@ -59,8 +65,8 @@ div.Community #search{
     border-radius: 10px;
     
     position:relative;
-    left:35px;
-    
+    margin-left:10%;
+    margin-right:10%;
     background-color: #F3F3F3;
     width: 80%;
     z-index: -1;
@@ -68,8 +74,9 @@ div.Community #search{
 }
 div.Community #search_icon{
     z-index: 1;
-    position: relative;
-    top:3px;
+    position: absolute;
+    right:11%;
+    top:148px;
 }
 
 
