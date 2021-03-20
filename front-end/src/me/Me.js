@@ -15,6 +15,11 @@ const Me = (props) => {
             <Link to = './Followings'>
                 <p>Followings</p>
             </Link>
+
+            <Link to = './friend_suggestion'>
+                <p>Friend Suggestion</p>
+            </Link>
+
             <br></br>
             <section className = "main-content">
                 <p>
