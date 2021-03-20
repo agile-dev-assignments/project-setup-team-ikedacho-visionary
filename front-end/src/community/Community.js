@@ -6,12 +6,38 @@ const Community = (props) => {
 
     return (
         <div className = "Community">
-            <h2>Community Page here</h2>
-            <section className = "main-content">
-                <p>
-                    An enigma is not yet ready to die.
-                    A flailing monkey is belief in the interrelatedness of all things.
-                </p>
+            <h1>Message</h1>
+            <div className = "main-content">
+                <div> 
+            
+                    <p id="mentions">
+                        Mentions
+                    </p>
+
+                </div>
+                <div> 
+            
+                    <p id="comments">
+                        Comments
+                    </p>
+
+                </div>
+
+                <div> 
+            
+                    <p id="likes">
+                        Likes
+                    </p>
+
+                </div>
+            </div>
+
+            <section className = "search">
+                
+            </section>
+
+            <section className = "message">
+                
             </section>
         </div>
     );
