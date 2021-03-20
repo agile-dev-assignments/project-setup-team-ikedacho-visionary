@@ -1,40 +1,38 @@
-div.Repost {
+div.ToRepost {
     padding: 20px;
     padding-right: 10px;
     margin: 20px;
     background-color: rgb(64, 199, 199);
     border: 2px solid rgb(185, 149, 149);
 }
-
-div.Card {
-    padding: 5px;
-    margin: 5px;
-    background-color: pink;
-    border: 2px solid red;
-}
  
-button.platforms{
+button.repost_share_to_platforms{
     padding: 5px;
     margin-left: 5px;
     margin-right: 5px;
 }
 
-img.avatar {
+img.repost_avatar {
     border: 1px solid #ddd;
     border-radius: 50%;
     padding: 5px;
     width: 50px;
-    height:50px;
+    height: 50px;
     position: relative;
 }
 
-div.friends {
-    vertical-align: top;
-    display: inline-block;
-    text-align: center;
-    margin-right: 20px;
+section.repost_share_to_friends_list {
+    position: relative;
 }
 
-button.friends{
+section.repost_share_to_platforms{
+    position: relative;
+}
+
+button.repost_friends{
     display: block;
+}
+
+div.repost_friends_component{
+    position: relative;
 }

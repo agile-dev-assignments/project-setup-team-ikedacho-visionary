@@ -11,27 +11,19 @@ const Repost = (props) => {
       })
  
 
-  const _showRepostEdit = () => {
-    let cur = state.showRepostEdit
-    setState({
-        showRepostEdit: !cur
-    });
-  };
-
-    const Card = (props) => {
-        return (
-          <div className = "Card">
-            <p onClick = {props.action}>{props.text}</p>
-          </div>
-      )
-    }
+    const _showRepostEdit = () => {
+        let cur = state.showRepostEdit
+        setState({
+            showRepostEdit: !cur
+        });
+    };
 
     const Friends = (props) => {
         return (
-            <div className = "friends">
-                <img className = "avatar" src = {props.pic}/>
-                <button action = {() => {alert("a friends is clicked")}} 
-                        className = "friends">{props.name}</button>
+            <div className = "repost_friends_component">
+                <img className = "repost_avatar" src = {props.pic}/>
+                <button onClick = {() => {alert("A friends is clicked")}} 
+                        className = "repost_friends">{props.name}</button>
             </div>
         )
     }
@@ -55,19 +47,21 @@ const Repost = (props) => {
     // alert should be replaced by actual APIs
     // for some reasons the alert() for buttons in loop does not work
     return (
-        <div className = "Repost">
+        <div className = "ToRepost">
 
             <button class = "Repost_fast">Fast Repost</button>
             <button class = "Repost_edit_button" onClick = {_showRepostEdit.bind()}>Repost</button>
-            {state.showRepostEdit && (
-              <>
-                <br></br>
-                <ToRepost_edit data = {data}/>
-              </>
-            )}
+            <div className = "repost_edit_textarea">
+                {state.showRepostEdit && (
+                <>
+                    <br></br>
+                    <ToRepost_edit data = {data}/>
+                </>
+                )}
+            </div>
 
             <p>Share to friends</p> 
-                <section className = "friends">
+                <section className = "repost_share_to_friends_list">
                     {data.map(item => (
                         <Friends name = {item.friends_name} 
                                  pic = {item.friends_pic} />
@@ -75,10 +69,10 @@ const Repost = (props) => {
                 </section> 
 
             <p>Share to linked platform</p>
-                <section className = "platforms">
+                <section className = "repost_share_to_platforms">
                     {data.map(item => (
-                        <button action = {() => {alert("a friend is clicked")}} 
-                                className = "platforms">{item.platforms}</button>
+                        <button onClick = {() => {alert("a platform is clicked")}} 
+                                className = "repost_share_to_platforms">{item.platforms}</button>
                         ))}    
                 </section>  
 
