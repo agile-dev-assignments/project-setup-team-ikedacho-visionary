@@ -14,8 +14,12 @@ div.Liked_List a{
 div.Liked_List #back{
     position: absolute;
     left: 10px;
-    top: 2px;
+    top: -2px;
     z-index: 1;
     font-weight:600;
     font-size: 0.9em;
+}
+div.Liked_List #title{
+    position:relative;
+    top:-3px;
 }

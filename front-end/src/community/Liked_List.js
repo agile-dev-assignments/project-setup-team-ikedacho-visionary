@@ -52,7 +52,7 @@ const Liked_List = (props) => {
             <h1 id="back" >Back</h1>
         </Link>
 
-        <h1>Likes</h1>
+        <h1 id='title'>Likes</h1>
       
       <section className="liked_list">
         {data.map((item) => (
