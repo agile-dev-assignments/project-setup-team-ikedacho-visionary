@@ -31,7 +31,7 @@ const Me = (props) => {
     return (
         <div className = "Me">
             <section id='header'>
-                <Link to={'/addFriend'}> 
+                <Link to={'/friend_suggestion'}> 
                     <PersonPlus id="addFriend" color='black' size={17}/> 
                 
                 </Link>
