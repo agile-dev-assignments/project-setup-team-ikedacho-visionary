@@ -13,6 +13,9 @@ import { HeartFill } from 'react-bootstrap-icons';
 
 
 const Me = (props) => {
+    // start a state variable with a blank array
+    //const [data, setData] = useState([])
+    //setData()
 
     return (
         <div className = "Me">
@@ -71,7 +74,7 @@ const Me = (props) => {
                                 Liked
                             </p>
                 </Link>
-                <Link class='icon' to={'/commented'}>
+                <Link class='icon' to={'/my_comment_history'}>
                     <TextParagraph id='commented-icon' size={30} color="white"/>
                         <p id="commented" >
                                 Commented
@@ -87,8 +90,14 @@ const Me = (props) => {
             </section>
 
             <section id="main_container3">
-                
-                </section>
+                <p>Linked Social Medias</p>  
+
+
+
+
+
+
+            </section>
         </div>
     );
 }
