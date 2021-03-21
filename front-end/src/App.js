@@ -99,12 +99,10 @@ function App() {
               <Browse_History />
             </Route> 
 
-
-            
-
             <Route path = "/"> 
               <Home />
               <MainNav />
+            </Route>
             <Route path = "/detail"> 
               <PostDetail />
             </Route>
