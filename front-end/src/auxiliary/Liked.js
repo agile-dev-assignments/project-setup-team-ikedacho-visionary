@@ -8,18 +8,20 @@ const Liked = (props) => {
 
   return (
     <article className="liked">
-        <Link to={`/profile/${props.details.liked_by}`}>
+        
             <div>
+            <Link to={`/friend_profile`}>
                 <img class='inline-block' id='avatar' src={props.details.liked_by_profile_image} />
                 <h1 class='inline-block' id='username1' >{props.details.liked_by_username}</h1>
+                </Link>
                 <span id="commented_date">{props.details.liked_date}</span>
             </div>
         
         <p id='like'>Like the post</p>
        
-        </Link>
+      
 
-        <Link to={`/post_content/${props.details.post_text}`}>
+        <Link to={`/detailpost`}>
             
                 
                 <p id='post' >
