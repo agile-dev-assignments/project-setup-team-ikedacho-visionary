@@ -1,14 +1,15 @@
 .PostContent{
-    padding: 20px;
     
     background-color: white;
-    border: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
     display: flex;
     flex-direction: column;
     
 }
 div.PostContent .block{
     display: flex;
+    padding-left:10px;
+    padding-right:10px;
 }
 
 div.PostContent .postcontent{
@@ -35,21 +36,32 @@ div.PostContent .PlatformSource{
 }
 
 div.PostContent .footer{
-    padding-left:70px;
-    flex-direction: row;
+    text-decoration: none;
+    font-size:13px;
+    width: 100%;
+    padding:0px;
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid lightgrey;
 }
 
 div.PostContent .Repostbutton,.Commentbutton,.Likebutton{
     /* background-color: #4CAF50; Green */
-    border: none;
-
-    padding: 6px 12px;
+    flex-grow:1;
+    width: 25%;
+    text-align: center;
+    background-color: white;
+    border: 1px solid rgb(230, 215, 215);
+    color: black;
+    padding: 5px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 8px;
-    margin: 4px 2px;
+    font-size: 14px;
+    margin-top:5px;
     cursor: pointer;
-    background-color: #e7e7e7; 
-    color: black;
+    
 }

@@ -79,7 +79,7 @@ const PostContent = (props) => {
                 <ToComment />
               </>
             )}
-            </div>
+        </div>
       
     </div>
   )
