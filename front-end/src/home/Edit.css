@@ -1,0 +1,55 @@
+header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+}
+
+.edit-wrap{
+    position: relative;
+    width: 100%;
+    height: 500px;
+}
+
+.textarea{
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    padding: 1em;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    resize: none;
+}
+
+.post{
+    position: absolute;
+    top: 200px;
+    right: 10px;
+}
+
+.post span{
+    display: block;
+    text-align: right;
+}
+
+.post-checkbox{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    background-color: #494646;
+}
+
+.post-checkbox label{
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+
+}
+
+.checkbox{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
