@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import PostContentPrelogin from '../auxiliary/PostContent_prelogin'
 import './Prelogin.css'
-import { Fab } from '@material-ui/core';
+import Floatingbutton from "../auxiliary/FloatingButton"
 
 
 const Prelogin = (props) => {
@@ -25,8 +25,11 @@ const Prelogin = (props) => {
 
 
     return (
+        
         <div className = "Prelogin">
+           
             <section className = "main-content">
+
                 {data.map((item) => (
                         <PostContentPrelogin key = {item.index}
                         source = {item.source} 
@@ -37,6 +40,7 @@ const Prelogin = (props) => {
                                 contentimg = {item.contentimg} />
                     ))} 
             </section>
+        
         </div>
     );
 }

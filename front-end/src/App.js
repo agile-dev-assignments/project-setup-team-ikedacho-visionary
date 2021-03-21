@@ -24,7 +24,7 @@ import Prelogin from './Prelogin/Prelogin'
 import Prehomenav from './Prelogin/PreNav/Pre_HomeNav'
 import Pre_Recommended from './Prelogin/Pre_Recommended'
 import Pre_Recent  from './Prelogin/Pre_RecentlyVisited'
-
+import Floatingbutton from "./auxiliary/FloatingButton"
 
 function App() {
   return (
@@ -120,11 +120,12 @@ function App() {
             </Route>
 
             <Route path = "/prelogin">
-
+            <Floatingbutton/>
             <Prelogin />
 
                 <MainNav />
                 <Prehomenav />
+
 
 
             </Route>
