@@ -2,6 +2,7 @@ import './PostContent.css'
 import Repost from './ToRepost'
 import React, { useState, useEffect } from 'react'
 import ToComment from './ToComment'
+import { Link } from 'react-router-dom'
 
 const PostContent = (props) => {
 
@@ -48,7 +49,11 @@ const PostContent = (props) => {
     <div className="PostContent">
         <strong className="PlatformSource">{props.source}</strong>
         <div className = "block">
-    <img className="userimg" src={props.userimg} />
+        
+      <Link to = {'/friend_profile'}>
+      <img className="userimg" src={props.userimg} />
+      </Link>
+      
         <div className="Text">
         <strong className = "username">{props.UserName}</strong>
         <p className = "time">{props.Senttime}</p>

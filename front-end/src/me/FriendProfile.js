@@ -17,7 +17,10 @@ import PostContent from '../auxiliary/PostContent'
 
 const FriendProfile = (props) => {
   
-
+    let history=useHistory();
+    const goTOPreviousPath=()=>{
+        history.goBack()
+    }
     // start a state variable with a blank array
     const [friend_info, setFriend_info] = useState(
         {
@@ -49,7 +52,7 @@ const FriendProfile = (props) => {
     return (
         <div className = "FriendProfile">
             <section id='header'>
-                <Link to={'/me'}> 
+                <Link onClick={goTOPreviousPath}> 
                     <ChevronLeft id="back" color='black' size={17}/> 
                 
                 </Link>
