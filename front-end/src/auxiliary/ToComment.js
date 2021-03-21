@@ -6,10 +6,10 @@ const ToComment = (props) => {
 
     return (
         <>
-            <br></br>
-            <textarea type = "text" id = "repost_edit_text"/>
-            <br></br>
-            <button className = "enterPost_edit">Enter</button>
+      
+            <input placeholder="   write your comment here" type = "text" id = "repost_edit_text"/>
+        
+            <button id= "sendPost_edit">Send</button>
         </>
     )
 }

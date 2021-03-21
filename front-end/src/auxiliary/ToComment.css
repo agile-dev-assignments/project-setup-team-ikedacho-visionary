@@ -1,9 +1,17 @@
 #repost_edit_text {
-    height: 100px;
+    height: 25px;
     font-size: 14pt;
-    top: 5px;
-    position: relative;
+    width:80%;
+    background-color: white;
+    border: 0px solid rgb(230, 215, 215);
+    margin-bottom: 5px;
+    font-size: 1em;
 }
-.enterPost_edit{
-    margin-top:10px;
+
+#sendPost_edit{
+    width:20%;
+    height: 30px;
+    background-color: white;
+    border: 1px solid rgb(230, 215, 215);
+
 }
