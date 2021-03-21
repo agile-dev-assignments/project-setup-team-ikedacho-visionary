@@ -54,7 +54,7 @@ const MyProfile = (props) => {
                 <h1>Me</h1>
                
 
-                <Link to = {'/new_post'}>
+                <Link to = {'/edit_new_post'}>
                     <FileEarmarkPlus id="create_post" color='black' size={17}/> 
                 </Link>
                 

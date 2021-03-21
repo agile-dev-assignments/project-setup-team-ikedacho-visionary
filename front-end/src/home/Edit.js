@@ -3,9 +3,13 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 import PostContent from "../auxiliary/PostContent";
 import "./Edit.css";
+import { useHistory } from 'react-router-dom'
 
 const Edit = (props) => {
-
+    let history=useHistory();
+    const goTOPreviousPath=()=>{
+        history.goBack()
+    }
     const [show, setShow] = useState(false)
 
     const _setShow = () => {
@@ -15,12 +19,12 @@ const Edit = (props) => {
 
     return (
         <div className="edit">
-            <header>
-                <Link to="/">
+            <header> 
+                <Link onClick={goTOPreviousPath}>
                     <button>back</button>
                 </Link>
                 <h2>New Post</h2>
-                <button>send</button>
+                <button onClick={goTOPreviousPath}>send</button>
             </header>
 
             <section className="edit-wrap">
