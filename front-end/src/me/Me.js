@@ -20,6 +20,11 @@ const Me = (props) => {
                 <p>Friend Suggestion</p>
             </Link>
 
+            <Link to = './browse_history'>
+                <p>Browse History</p>
+            </Link>
+            
+
             <br></br>
             <section className = "main-content">
                 <p>

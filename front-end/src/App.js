@@ -13,6 +13,7 @@ import SearchResult from './search/SearchResult';
 import Followings from './me/Followings'
 import Followers from './me/Followers'
 import Friend_Suggestion from './me/Friend_Suggestion'
+import Browse_History from './me/Browse_History'
 import My_Comment_History_List from './me/My_Comment_History_List'
 
 
@@ -71,6 +72,13 @@ function App() {
             <Route path = "/friend_suggestion">
               <Friend_Suggestion />
             </Route>            
+
+            <Route path = "/browse_history">
+              <Browse_History />
+            </Route> 
+
+
+            
 
             <Route path = "/"> 
               <Home />

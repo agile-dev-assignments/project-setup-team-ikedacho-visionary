@@ -1,0 +1,46 @@
+.PostContent_noAction{
+    padding: 20px;
+    margin: 20px;
+    background-color: white;
+    border: 2px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    
+}
+.block_noAction{
+    display: flex;
+    padding-bottom:0px;
+    margin-bottom:0px;
+}
+
+
+.postcontent_noAction{
+    padding-left:60px;
+    font-size: 12px;
+}
+.userimg_noAction{
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 5px;
+    width: 50px;
+    height:50px;
+    position: relative;
+}
+.Text{
+    padding-bottom:0;
+}
+.contentimg_noAction{
+    padding-left:70px;
+    width: 200px;
+    float: left; 
+}
+
+.PlatformSource_noAction{
+    align-self:flex-end;
+}
+
+.footer_noAction{
+    padding-left:70px;
+    flex-direction: row;
+}
+

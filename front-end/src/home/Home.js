@@ -5,6 +5,7 @@ import HomeNav from '../auxiliary/HomeNav';
 import WhatsNew from './WhatsNew'
 import RecentlyVisited from './RecentlyVisited'
 import Recommended from './Recommended'
+import Edit from './Edit'
 
 const Home = (props) => {
 
@@ -12,6 +13,11 @@ const Home = (props) => {
         <>
             <Router>
                     <Switch>
+                        <Route path = "/edit">
+                            {/* <HomeNav /> */}
+                            <Edit />
+                        </Route>
+
                         <Route path = "/recent">
                             <HomeNav />
                             <RecentlyVisited />

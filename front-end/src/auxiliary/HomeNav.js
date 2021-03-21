@@ -7,6 +7,7 @@ import './HomeNav.css'
 const HomeNav = (props) => {
     return (
         <nav className = "home">
+            <Link to="/edit">New Post</Link>
             <Link to="/">What's New</Link>
             <Link to="/recent">Recently Visited</Link>
             <Link to="/recommend">Recommend</Link>
