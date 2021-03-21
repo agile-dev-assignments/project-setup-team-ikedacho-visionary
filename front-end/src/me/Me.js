@@ -9,14 +9,25 @@ import { Gear } from 'react-bootstrap-icons';
 import { ClockHistory } from 'react-bootstrap-icons';
 import { TextParagraph } from 'react-bootstrap-icons';
 import { HeartFill } from 'react-bootstrap-icons';
+import { Youtube } from 'react-bootstrap-icons';
+import { Linkedin } from 'react-bootstrap-icons';
 
 
 
 const Me = (props) => {
     // start a state variable with a blank array
-    //const [data, setData] = useState([])
-    //setData()
-
+    const [user_info, setUser_info] = useState(
+        {
+        "id": 1,
+        "user_name": "Joe",
+        "user_photo": "https://robohash.org/doloremqueofficiaet.jpg?size=50x50",
+        "post_number": "116",
+        "bio":"I love cat",
+        "follower_number": "500",
+        "following_number": "200",
+        "linked_social_media": ["Facebook","Twitter","Instagram","TikTok"]
+      })
+   
     return (
         <div className = "Me">
             <section id='header'>
@@ -37,26 +48,26 @@ const Me = (props) => {
             <section id='main_container1'>
                 <div>
                     <p id='message_text' > 
-                    <img class='inline-block' id='avatar' src="https://robohash.org/doloremqueofficiaet.jpg?size=50x50"/> 
-                    <span class='inline-block' id='username' >Username</span>
-                    <div id='bio'>Bio:</div>
+                    <img class='inline-block' id='avatar' src={user_info.user_photo}/> 
+                    <span class='inline-block' id='username'>{user_info.user_name}</span>
+                    <div id='bio'>{user_info.bio}</div>
                     </p>
                 </div >
 
                 <div id='post_follow'>
                     <Link id='button' to = '/profile'>
-                        23
+                    {user_info.post_number}
                         <br></br>
                         Posts
                     </Link>
                     <Link id='button' to = '/followers'>
-                        4
+                    {user_info.follower_number}
                         <br></br>
 
                         Followers
                     </Link>
                     <Link id='button' to = '/followings'>
-                        9
+                    {user_info.following_number}
                         <br></br>
                         Following
                     </Link>
@@ -89,15 +100,51 @@ const Me = (props) => {
                 </Link>
             </section>
 
-            <section id="main_container3">
-                <p>Linked Social Medias</p>  
+            
+            <section>
+               
+            <h1>Linked Social Medias</h1>  
+            <div  id="main_container3">
+                <div class='icon'> 
+                    <Facebook id='liked-icon' size={30} color="white"/>
+                            <button id="connected">
+                                Connected
+                            </button>
 
+                </div>
+                <div class='icon' >
+                    <Twitter id='commented-icon' size={30} color="white"/>
+                        <button id="connected" >
+                            Connected
+                        </button>
+                </div>
 
+                <div class='icon'>
+                    <Instagram id='browse_history_icon' size={30} color="white"/>
+                        <button id="connected">
+                        Connected
+                        </button>
+                </div>
+                <div class='icon'>
+                    <Youtube id='browse_history_icon' size={30} color="white"/>
+                        <button id="connect">
+                        Connect
+                        </button>
+                </div>
+                <div class='icon'>
+                    <Linkedin id='browse_history_icon' size={30} color="white"/>
+                        <button id="connect">
+                        Connect
+                        </button>
+                </div>
 
-
+                </div>
 
 
             </section>
+
+         
+
         </div>
     );
 }

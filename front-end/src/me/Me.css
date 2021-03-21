@@ -139,7 +139,60 @@ div.Me #browse_history_icon{
 }
 
 
+
+
 div.Me #main_container3{
-    padding-left:10px;
-    padding-right:10px;
+
+    display: flex;
+    
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: left;
+    
+    
 }
+
+div.Me #main_container3{
+    padding: 5px;
+}
+div.Me #main_container3 .icon{
+    background-color: rgba(195, 166, 197, 0.767);
+    margin-left: 10%;
+    margin-right: 6%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width:55px;
+    height: 55px;
+    border-radius: 50%;
+    margin-top: 10px;
+    
+}
+
+div.Me #connected{
+    position:relative;
+    top:30px;
+    left:-16px;
+    font-size: 0.9em;
+    color: rgb(54, 54, 54);
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+div.Me #connect{
+    position:relative;
+    top:30px;
+    left:-9px;
+    font-size: 0.9em;
+    color: rgb(54, 54, 54);
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+div.Me button{
+    background-color: rgb(231, 219, 219);
+    border:1px solid white;
+   
+}
+
+div.Community #mention-icon, #like-icon, #comment-icon{
+    position:relative;
+    left:13px;
+    top:15px;
+}
+
