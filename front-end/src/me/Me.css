@@ -190,9 +190,8 @@ div.Me button{
    
 }
 
-div.Community #mention-icon, #like-icon, #comment-icon{
+div.Me #mention-icon, #like-icon, #comment-icon{
     position:relative;
     left:13px;
     top:15px;
 }
-
