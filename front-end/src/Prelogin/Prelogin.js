@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import PostContentPrelogin from '../auxiliary/PostContent_prelogin'
 import './Prelogin.css'
+import { Fab } from '@material-ui/core';
 
 
 const Prelogin = (props) => {
@@ -27,7 +28,8 @@ const Prelogin = (props) => {
         <div className = "Prelogin">
             <section className = "main-content">
                 {data.map((item) => (
-                        <PostContentPrelogin source = {item.source} 
+                        <PostContentPrelogin key = {item.index}
+                        source = {item.source} 
                                 userimg = {item.userimg}
                                 UserName = {item.UserName}
                                 content = {item.content}

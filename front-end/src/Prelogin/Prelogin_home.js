@@ -7,7 +7,7 @@ import RecentlyVisited from '../home/RecentlyVisited'
 import Recommended from '../home/Recommended'
 import Edit from '../home/Edit'
 
-const Home = (props) => {
+const Prelogin_Home = (props) => {
 
     return (
         <>
@@ -35,4 +35,4 @@ const Home = (props) => {
     );
 }
 
-export default Home;
+export default Prelogin_Home;

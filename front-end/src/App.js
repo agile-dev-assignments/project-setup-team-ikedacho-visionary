@@ -120,36 +120,32 @@ function App() {
             </Route>
 
             <Route path = "/prelogin">
-            <page>
+
             <Prelogin />
-              </page>
-              <navigator>
+
                 <MainNav />
                 <Prehomenav />
-              </navigator>
+
 
             </Route>
 
             <Route path = "/prerecommend">
-            <page>
+           
             <Pre_Recommended />
-              </page>
-              <navigator>
+                      
                 <MainNav />
                 <Prehomenav />
-              </navigator>
+           
 
             </Route>
 
 
             <Route path = "/prerecent">
-            <page>
             <Pre_Recent />
-              </page>
-              <navigator>
+
                 <MainNav />
                 <Prehomenav />
-              </navigator>
+
 
             </Route>
 

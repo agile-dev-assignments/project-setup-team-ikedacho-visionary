@@ -3,7 +3,7 @@ import axios from 'axios'
 import PostContentPrelogin from '../auxiliary/PostContent_prelogin'
 import './Pre_RecentlyVisited.css'
 
-const RecentlyVisited = (props) => {
+const Pre_RecentlyVisited = (props) => {
     const [data, setData] = useState([])
 
     // the following side-effect will be called once upon initial render
@@ -26,7 +26,8 @@ const RecentlyVisited = (props) => {
         <div className = "Recently-Visited">
             <section className = "main-content">
                 {data.map((item) => (
-                        <PostContentPrelogin source = {item.source} 
+                        <PostContentPrelogin key = {item.id}
+                                source = {item.source} 
                                 userimg = {item.userimg}
                                 UserName = {item.UserName}
                                 content = {item.content}
@@ -38,4 +39,4 @@ const RecentlyVisited = (props) => {
     );
 }
 
-export default RecentlyVisited;
+export default Pre_RecentlyVisited;

@@ -4,7 +4,7 @@ import PostContentPrelogin from '../auxiliary/PostContent_prelogin'
 import './Pre_Recommended.css'
 
 
-const Recommended = (props) => {
+const Pre_Recommended = (props) => {
     const [data, setData] = useState([])
 
     // the following side-effect will be called once upon initial render
@@ -27,7 +27,8 @@ const Recommended = (props) => {
         <div className = "Recommended">
             <section className = "main-content">
                 {data.map((item) => (
-                        <PostContentPrelogin source = {item.source} 
+                        <PostContentPrelogin key = {item.id}
+                        source = {item.source} 
                                 userimg = {item.userimg}
                                 UserName = {item.UserName}
                                 content = {item.content}
@@ -39,4 +40,4 @@ const Recommended = (props) => {
     );
 }
 
-export default Recommended;
+export default Pre_Recommended;
