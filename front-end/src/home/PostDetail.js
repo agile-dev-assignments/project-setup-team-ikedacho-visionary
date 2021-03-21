@@ -4,10 +4,14 @@ import PostContent_noAction from '../auxiliary/PostContent_noAction'
 import './PostDetail.css'
 import { Link } from 'react-router-dom'
 import Comment from '../auxiliary/Comment'
+import { useHistory } from 'react-router-dom'
 
 
 const PostDetail = (props) => {
-
+        let history=useHistory();
+        const goTOPreviousPath=()=>{
+            history.goBack()
+        }
       const [PostData, setPostData] = useState([
             {"id":1,
             "username":"cgilligan0",
@@ -54,7 +58,9 @@ console.log(PostData[0].contentimgs[0]);
     return (
      <div className = "PostDetail" >
 
-        <Link to={'this.props.history.location.pathname'}> 
+        <Link onClick={goTOPreviousPath}> 
+
+
         <h1 id="back" >Back</h1>
         </Link>
         <h1 id='title'>Post Content</h1>

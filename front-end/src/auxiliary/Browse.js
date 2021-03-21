@@ -5,6 +5,7 @@ const Browse = (props) => {
     return (
         <div className="Browse">
             <div className="block">
+                
                 <img className="userimg" src={props.userimg}/>
                 <div className="Text">
                     <strong className="username">{props.UserName}</strong>
