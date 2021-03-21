@@ -6,7 +6,7 @@ div.MyProfile #main_container1{
     margin-top:10px;
     padding-left:10px;
     padding-right:10px;
-    height: 150px;
+    height: 160px;
     background-color: rgb(240, 233, 233);
 
 }
@@ -39,7 +39,11 @@ div.MyProfile #create_post{
 
 div.MyProfile #overview{
     padding-top:70px;
+    padding-bottom:0px;
+    height:50px;
 }
+
+
 
 div.MyProfile #avatar {
     border: 1px solid #ddd;
@@ -64,11 +68,36 @@ div.MyProfile #bio{
     height:20px;
     color:#747070;
     position: relative;
-    bottom: -10px;
+    bottom: 2px;
+    left:-6px;
+   
 }
+div.MyProfile #message_text{
+    height:50px;
 
-
-
+}
+div.MyProfile #post_follow{
+    text-decoration: none;
+    font-size:13px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    position:relative;
+    bottom: 10px;
+    left:40px;
+    
+}
+div.MyProfile #post_follow #button{
+   
+    text-align: center;
+    padding-left: 10px;
+    margin-right: 20px;
+}
+div.MyProfile a{
+    color:black;
+    text-decoration: none;
+}
 
 
 div.MyProfile #main_container3{
