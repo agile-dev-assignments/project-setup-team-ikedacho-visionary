@@ -1,9 +1,9 @@
 
 .NameTag{
-    padding: 20px;
-    margin: 20px;
+    padding: 10px;
+    margin: 10px;
     background-color: white;
-    border: 2px solid lightgray;
+    /*border: 2px solid lightgray;*/
     display: flex;
 
 }
@@ -17,6 +17,7 @@
 }
 
 .Text{
+    flex: 1;
     padding-left: 10px;
     padding-top: 3px;
     position: relative;
@@ -24,7 +25,11 @@
 
 button.follow {
     position: absolute;
-    right: 0%;
-    top: 3%;
-    background-color: antiquewhite;
+    right: 0px;
+    top: 5px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
 }
