@@ -8,7 +8,7 @@ const Signup = (props) => {
         }
         
     return (
-        <section class="section sign-in">  
+        <section class="sign-in">  
             <div className = "align-center">
         <form action="">
         <input type="text" name="name" placeholder="Name"/>

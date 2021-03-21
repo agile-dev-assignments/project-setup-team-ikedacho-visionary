@@ -20,6 +20,7 @@ import Signup from './login_signup/Signuppage'
 import PostDetail from './home/PostDetail'
 import Settings from './me/Settings'
 import MyProfile from './me/MyProfile'
+import Prelogin from './Prelogin/Prelogin'
 
 
 function App() {
@@ -113,6 +114,16 @@ function App() {
 
             <Route path = "/settings">
               <Settings />
+            </Route>
+
+            <Route path = "/prelogin">
+            <page>
+            <Prelogin />
+              </page>
+              <navigator>
+                <MainNav />
+              </navigator>
+
             </Route>
 
             <Route path = "/"> 
