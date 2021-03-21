@@ -12,7 +12,11 @@
     padding-bottom:0px;
     margin-bottom:0px;
 }
-
+.imageimport{
+        display: flex;
+        padding-left:60px;
+    
+}
 
 .postcontent_noAction{
     padding-left:60px;

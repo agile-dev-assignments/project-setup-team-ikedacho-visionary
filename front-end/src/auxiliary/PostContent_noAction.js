@@ -1,7 +1,9 @@
-import './PostContent_noAction.css'
 
+import './PostContent_noAction.css'
+import PostContent_img_na from '../auxiliary/PostContent_img_na'
 const PostContent_noAction = (props) => {
-   
+   let contentimgs=[];
+   contentimgs=props.contentimg;
   return (
     <div class="PostContent_noAction">
         <strong class="PlatformSource">{props.source}</strong>
@@ -14,7 +16,11 @@ const PostContent_noAction = (props) => {
 </div>
 
         <p class = "postcontent_noAction">{props.content}</p>
-        <img class="contentimg" src={props.contentimg} />
+        <div class="imageimport" >
+        {contentimgs.map((img)=>(
+                <PostContent_img_na key ={img.id} contentimg={img} />
+                ))}
+                </div>
 
     </div>
   )

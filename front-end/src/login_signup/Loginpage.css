@@ -1,15 +1,17 @@
 .Loginpage{
     padding-top:200px;
+    text-align: center;
 }
-Loginpage h1{
+.header__text h1{
     text-align:center;
 }
 
 .Loginform{
     padding-top:20px;
 }
-Loginpage p{
+.header__text p{
     padding-bottom:30px;
+    text-align: center;
 }
 
 #signin{
@@ -17,9 +19,9 @@ Loginpage p{
     color:rgb(70,70,70) ;
     margin: 15px;
     font-size:15px;
-    padding-left:95px;
   }
 
 .Loginpage button{
     margin-bottom:30px;
 }
+

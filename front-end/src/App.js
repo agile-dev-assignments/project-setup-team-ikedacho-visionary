@@ -20,7 +20,12 @@ import Signup from './login_signup/Signuppage'
 import PostDetail from './home/PostDetail'
 import Settings from './me/Settings'
 import MyProfile from './me/MyProfile'
-
+import Prelogin from './Prelogin/Prelogin'
+import Prehomenav from './Prelogin/PreNav/Pre_HomeNav'
+import PreMainNav from './Prelogin/PreNav/Pre_MainNav'
+import Pre_Recommended from './Prelogin/Pre_Recommended'
+import Pre_Recent  from './Prelogin/Pre_RecentlyVisited'
+import Floatingbutton from "./auxiliary/FloatingButton"
 
 function App() {
   return (
@@ -105,17 +110,53 @@ function App() {
               <MyProfile />
             </Route> 
 
-            <Route path = "/"> 
-              <Home />
-              <MainNav />
-            </Route>
-            <Route path = "/detail"> 
+
+
+            <Route path = "/detailpost"> 
               <PostDetail />
             </Route>
 
             <Route path = "/settings">
               <Settings />
             </Route>
+
+            <Route path = "/prelogin">
+            <Floatingbutton/>
+            <Prelogin />
+
+                <PreMainNav />
+                <Prehomenav />
+
+
+
+            </Route>
+            
+          
+
+            <Route path = "/prerecommend">
+            <Floatingbutton/>
+            <Pre_Recommended />
+                      
+                <PreMainNav />
+                <Prehomenav />
+           
+
+            </Route>
+
+
+            <Route path = "/prerecent">
+            <Floatingbutton/>
+            <Pre_Recent />
+
+                <MainNav />
+                <Prehomenav />
+
+
+            </Route>
+
+
+          
+
 
             <Route path = "/"> 
               <page>

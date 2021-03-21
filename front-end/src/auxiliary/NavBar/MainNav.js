@@ -6,7 +6,7 @@ import './MainNav.css'
 // It will not appear in the Navigation bar in finalized version 
 const MainNav = (props) => {
     return (
-        <nav class ="mainnav" id='sticky'>
+        <nav className ="mainnav" id='sticky'>
             <NavLink  id ="mainnav_button" to = "/search" >Search</NavLink>
             <NavLink  id ="mainnav_button" to = "/">Home</NavLink>
             <NavLink  id ="mainnav_button" to = "/community">Community</NavLink>
