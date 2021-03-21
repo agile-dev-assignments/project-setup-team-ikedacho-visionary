@@ -1,0 +1,46 @@
+div.Chat_from_others {
+    text-align: left;
+    left: 5vw;
+    position: relative;
+    width: 60vw;
+    word-wrap: break-word;
+}
+
+div.Chat_from_self {
+    text-align: right;
+    left: 35vw;
+    position: relative;
+    width: 60vw;
+    word-wrap: break-word;
+}
+
+img.Chat_avatar {
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 5px;
+    width: 60px;
+    height: 60px;
+    position: relative;
+}
+
+input.Chat_user_input {
+    padding: 4vw;
+    width: 80vw;
+    text-align: left;
+    bottom: 0vw;
+    position: fixed;
+}
+
+button.Chat_user_input {
+    padding: 4vw;
+    width: 20vw;
+    text-align: right;
+    bottom: 0vw;
+    right: 0vw;
+    position: fixed;
+}
+
+section.Chat_messages {
+    bottom: 10vw;
+    position: relative;
+}
