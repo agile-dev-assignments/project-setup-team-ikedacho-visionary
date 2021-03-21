@@ -45,20 +45,21 @@ const PostContent = (props) => {
     </div>
 </div>
 
-        <p className = "postcontent">{props.content}</p>
-        <img className="contentimg" src={props.contentimg} />
-        <div className = "footer">
-            <button className = "Commentbutton" onClick = {_showComment.bind()}> Comment</button>
-            {state.showComment && (
-              <>
-                <ToComment />
-              </>
-            )}
-            <button className = "Likebutton" onClick = {_setLike.bind()}>{like.liked ? 'Liked' : 'Like'}</button>
-            <button className = "Repostbutton" onClick = {_showRepost.bind()}> Repost</button>
+        <p class = "postcontent">{props.content}</p>
+        <img class="contentimg" src={props.contentimg} />
+        <div class = "footer">
+            <button class = "Commentbutton" onClick = {_showComment.bind()}> Comment</button>
+
+            <button class = "Likebutton" onClick = {_setLike.bind()}>{like.liked ? 'Liked' : 'Like'}</button>
+            <button class = "Repostbutton" onClick = {_showRepost.bind()}> Repost</button>
             {state.showRepost && (
               <>
                 <Repost />
+              </>
+            )}
+            {state.showComment && (
+              <>
+                <ToComment />
               </>
             )}
             </div>

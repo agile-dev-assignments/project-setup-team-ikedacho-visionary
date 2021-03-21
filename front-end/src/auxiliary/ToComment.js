@@ -6,7 +6,9 @@ const ToComment = (props) => {
 
     return (
         <>
-            <input type="text" name = "repost_edit_text" />
+            <br></br>
+            <textarea type = "text" id = "repost_edit_text"/>
+            <br></br>
             <button className = "enterPost_edit">Enter</button>
         </>
     )

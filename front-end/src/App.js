@@ -1,7 +1,8 @@
 import './App.css';
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import MainNav from './auxiliary/MainNav'
+import MainNav from './auxiliary/NavBar/MainNav'
+import Loginpage from './login_signup/Loginpage'
 import Home from './home/Home';
 import Community from './community/Community';
 import Me from './me/Me';
@@ -15,44 +16,65 @@ import Followers from './me/Followers'
 import Friend_Suggestion from './me/Friend_Suggestion'
 import Browse_History from './me/Browse_History'
 import My_Comment_History_List from './me/My_Comment_History_List'
-
+import Signup from './login_signup/Signuppage'
+import PostDetail from './home/PostDetail'
+import Settings from './me/Settings'
 
 function App() {
   return (
     <>
       <div>
+
         <Router>
           <Switch>
+          <Route path = "/login"> 
+              <Loginpage />
+            </Route>
+
+            <Route path = "/signup"> 
+              <Signup />
+            </Route>
 
             <Route path = "/search">
-              <Search />
-              <MainNav />
+            <page>
+                <Search />
+              </page>
+              <navigator>
+                <MainNav />
+              </navigator>
             </Route>
 
             <Route path = "/community">
-              <Community />
-              <MainNav />
+            <page>
+                <Community />
+              </page>
+              <navigator>
+                <MainNav />
+              </navigator>
             </Route>
 
             <Route path = "/me">
-              <Me />
-              <MainNav />
+              <page>
+                <Me />
+              </page>
+              <navigator>
+                <MainNav />
+              </navigator>
             </Route>
 
             <Route path = "/my_comment_history">
               <My_Comment_History_List />
             </Route>
 
-
             <Route path = "/components_showcase">
               <Showcase />
               <MainNav />
             </Route>
           
-
             <Route path = "/comments">
               <Commented_List />
             </Route>
+
             <Route path = "/likes">
               <Liked_List />
             </Route>
@@ -83,9 +105,22 @@ function App() {
             <Route path = "/"> 
               <Home />
               <MainNav />
+            <Route path = "/detail"> 
+              <PostDetail />
             </Route>
 
+            <Route path = "/Settings">
+              <Settings />
+            </Route>
 
+            <Route path = "/"> 
+              <page>
+                <Home />
+              </page>
+              <navigator>
+                <MainNav />
+              </navigator>
+            </Route>
 
           </Switch>
         </Router>

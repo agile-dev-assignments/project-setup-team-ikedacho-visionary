@@ -1,0 +1,29 @@
+#Settings {
+    top: 0px;
+    right: 0px;
+    position: relative;
+}
+
+h2.Settings_page_title{
+    position: relative;
+    text-align: center;
+}
+
+#Settings_back_to_Me {
+    left: 3%;
+    top: 3%;
+    position: relative;
+}
+
+
+div.option_list {
+    text-align: center;
+    width: 70%;
+    left: 15%;
+    position: relative;
+}
+
+p.option_list{
+    border: 1px black dotted;
+    padding: 3%;
+}
