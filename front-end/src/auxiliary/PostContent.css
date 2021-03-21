@@ -1,5 +1,5 @@
 .PostContent{
-    
+    padding-top:10px;
     background-color: white;
     border-bottom: 2px solid lightgray;
     display: flex;
@@ -32,7 +32,9 @@ div.PostContent .contentimg{
 }
 
 div.PostContent .PlatformSource{
-    align-self:flex-end;
+    position: absolute;
+    right:10px;
+  
 }
 
 div.PostContent .footer{

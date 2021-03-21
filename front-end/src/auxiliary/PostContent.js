@@ -46,8 +46,8 @@ const PostContent = (props) => {
   };
 
   return (
-    <div className="PostContent" onClick={() => window.location.href = '/detailpost'} to = {'/detailpost'}>
-     
+    <div className="PostContent" >
+      <div onClick={() => window.location.href = '/detailpost'} to = {'/detailpost'}>
       <strong className = "PlatformSource">{props.source}</strong>
     
       <div className = "block">
@@ -64,6 +64,9 @@ const PostContent = (props) => {
       
         <p className = "postcontent">{props.content}</p>
         <img className="contentimg" src={props.contentimg} />
+
+
+        </div>
         <div className = "footer">
             <button className = "Commentbutton" onClick = {_showComment.bind()}> Comment</button>
 
