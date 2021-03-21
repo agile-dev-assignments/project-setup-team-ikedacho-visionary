@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import MainNav from './auxiliary/NavBar/MainNav'
 import Loginpage from './login_signup/Loginpage'
 import Home from './home/Home';
+import Edit from './home/Edit';
 import Community from './community/Community';
 import Me from './me/Me';
 import Search from './search/Search'
@@ -127,6 +128,10 @@ function App() {
 
             <Route path = "/settings">
               <Settings />
+            </Route>
+
+            <Route path = "/edit_new_post">
+              <Edit />
             </Route>
 
             <Route path = "/prelogin">
