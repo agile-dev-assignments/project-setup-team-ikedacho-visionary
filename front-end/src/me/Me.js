@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './Me.css'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { PersonPlus } from 'react-bootstrap-icons';
 import { Facebook } from 'react-bootstrap-icons';
 import { Instagram } from 'react-bootstrap-icons';
@@ -46,16 +46,19 @@ const Me = (props) => {
             </section>
 
             <section id='main_container1'>
+                <Link to = '/my_profile'>
                 <div>
+                
                     <p id='message_text' > 
                     <img class='inline-block' id='avatar' src={user_info.user_photo}/> 
                     <span class='inline-block' id='username'>{user_info.user_name}</span>
                     <div id='bio'>{user_info.bio}</div>
                     </p>
                 </div >
+                </Link>
 
                 <div id='post_follow'>
-                    <Link id='button' to = '/profile'>
+                    <Link id='button' to = '/my_profile'>
                     {user_info.post_number}
                         <br></br>
                         Posts
