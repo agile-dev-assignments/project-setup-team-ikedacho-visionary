@@ -105,11 +105,9 @@ function App() {
               <MyProfile />
             </Route> 
 
-            <Route path = "/"> 
-              <Home />
-              <MainNav />
-            </Route>
-            <Route path = "/detail"> 
+
+
+            <Route path = "/detailpost"> 
               <PostDetail />
             </Route>
 

@@ -8,7 +8,28 @@ import Comment from '../auxiliary/Comment'
 
 const PostDetail = (props) => {
 
-        const [data, setData] = useState([])
+      const [PostData, setPostData] = useState([
+            {"id":1,
+            "username":"cgilligan0",
+            "user_photo":"https://robohash.org/doloremqueofficiaet.jpg?size=50x50\u0026set=set1",
+            "Content":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.",
+            "contentimgs":["https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2019/07/Man-Silhouette.jpg","https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2019/07/Man-Silhouette.jpg"],
+            "post_date":"4/19/2020"
+        
+        }
+
+        ])
+        const [data, setData] = useState([
+
+            {"id":1,
+            "username":"cgilligan0",
+            "user_photo":"https://robohash.org/doloremqueofficiaet.jpg?size=50x50\u0026set=set1",
+            "Content":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.",
+            "contentimg":["https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2019/07/Man-Silhouette.jpg"],
+            "post_date":"4/19/2020"
+        
+        }
+        ])
     
         // the following side-effect will be called once upon initial render
         useEffect(() => {
@@ -25,15 +46,9 @@ const PostDetail = (props) => {
                 })
             }, []) // only run it once!
   
-const Data = 
-    {"id":1,
-    "username":"cgilligan0",
-    "user_photo":"https://robohash.org/doloremqueofficiaet.jpg?size=50x50\u0026set=set1",
-    "Content":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.",
-    "contentimg":"https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2019/07/Man-Silhouette.jpg",
-    "post_date":"4/19/2020"
 
-}
+console.log("loadingpage");
+console.log(PostData[0].contentimgs[0]);
 
 
     return (
@@ -45,12 +60,18 @@ const Data =
         <h1 id='title'>Post Content</h1>
         <div className = "Postfield">
             <section className = "main-content">
-                 <PostContent_noAction source = {Data.source} 
-                                userimg = {Data.user_photo}
-                                UserName = {Data.username}
-                                content = {Data.Content}
-                                Senttime = {Data.post_date} 
-                                contentimg = {Data.contentimg} />
+                <PostContent_noAction 
+            source = {PostData[0].source} 
+            userimg = {PostData[0].user_photo}
+            UserName = {PostData[0].username}
+            content = {PostData[0].Content}
+            Senttime = {PostData[0].post_date}
+            contentimg = {PostData[0].contentimgs}
+            />
+
+
+
+                               
             </section>
         </div>
             <h1 id='title'>Comments</h1>
@@ -58,7 +79,7 @@ const Data =
 
             <section className="comment_list">
             {data.map((item) => (
-             <Comment key = {item.source}
+             <Comment key = {item.id}
                     img = {item.userimg}
                  UserName = {item.UserName}
                 content = {item.content}
