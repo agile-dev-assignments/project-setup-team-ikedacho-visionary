@@ -27,11 +27,21 @@ const PostContent = (props) => {
       showComment: !cur
     });
   };
-  const _setLike = () => {
+  const _setLike = (e) => {
     let cur = like.liked
     setLike({
       liked: !cur
+
     });
+    if(cur == false){
+
+     e.target.style.backgroundColor = '#e37568';
+    }
+    else if(cur == true){
+      console.log("unliked");
+      e.target.style.backgroundColor = '#e7e7e7';
+    }
+    
   };
 
   return (

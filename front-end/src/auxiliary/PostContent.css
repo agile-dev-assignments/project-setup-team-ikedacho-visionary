@@ -40,9 +40,9 @@ div.PostContent .footer{
 }
 
 div.PostContent .Repostbutton,.Commentbutton,.Likebutton{
-    background-color: #4CAF50; /* Green */
+    /* background-color: #4CAF50; Green */
     border: none;
-    color: white;
+
     padding: 6px 12px;
     text-align: center;
     text-decoration: none;
