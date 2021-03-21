@@ -7,7 +7,7 @@ const Message_History = (props) => {
 
   return (
     <article className="Message_History">
-        <Link to={`/chat}`}>
+        <Link to={`/chat`}>
             <div id='message'>
             <p id='message_text' >
                 <Link to = {'/friend_profile'}>
