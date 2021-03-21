@@ -20,7 +20,7 @@ const My_Comment_History = (props) => {
        
         
 
-        <Link to={`/post_content/${props.details.post_text}`}>
+        <Link to={`/detailpost`}>
             
                 
                 <p id='post' >
