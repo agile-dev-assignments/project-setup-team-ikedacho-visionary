@@ -83,13 +83,13 @@ const Me = (props) => {
         
             <section id="main_container2">
                 <Link class='icon' to={'/liked'}> 
-                    <HeartFill id='liked-icon' size={30} color="white"/>
+                    <HeartFill id='browse_history_icon' size={30} color="white"/>
                             <p id="liked">
                                 Liked
                             </p>
                 </Link>
                 <Link class='icon' to={'/my_comment_history'}>
-                    <TextParagraph id='commented-icon' size={30} color="white"/>
+                    <TextParagraph id='browse_history_icon' size={30} color="white"/>
                         <p id="commented" >
                                 Commented
                         </p>
@@ -109,14 +109,14 @@ const Me = (props) => {
             <h1>Linked Social Medias</h1>  
             <div  id="main_container3">
                 <div class='icon'> 
-                    <Facebook id='liked-icon' size={30} color="white"/>
+                    <Facebook id='browse_history_icon' size={30} color="white"/>
                             <button id="connected">
                                 Connected
                             </button>
 
                 </div>
                 <div class='icon' >
-                    <Twitter id='commented-icon' size={30} color="white"/>
+                    <Twitter id='browse_history_icon' size={30} color="white"/>
                         <button id="connected" >
                             Connected
                         </button>
