@@ -54,7 +54,7 @@ const MyProfile = (props) => {
                 <h1>Me</h1>
                
 
-                <Link to = {'/settings'}>
+                <Link to = {'/new_post'}>
                     <FileEarmarkPlus id="create_post" color='black' size={17}/> 
                 </Link>
                 
@@ -63,11 +63,40 @@ const MyProfile = (props) => {
             <section id='main_container1'>
                 <div id="overview">
                     <p id='message_text' > 
-                    <img class='inline-block' id='avatar' src={user_info.user_photo}/> 
-                    <span class='inline-block' id='username'>{user_info.user_name}</span>
-                    <div id='bio'>{user_info.bio}</div>
+                        <img class='inline-block' id='avatar' src={user_info.user_photo}/> 
+                        <span class='inline-block' id='username'>{user_info.user_name}</span>
+                        <br></br>
+                       
+
+                        <span id='post_follow'>
+                        <Link id='button' to = '/my_profile'>
+                        {user_info.post_number}
+                            <br></br>
+                            Posts
+                        </Link>
+
+                        <Link id='button' to = '/followers'>
+                        {user_info.follower_number}
+                            <br></br>
+
+                            Followers
+                        </Link>
+                        <Link id='button' to = '/followings'>
+                        {user_info.following_number}
+                            <br></br>
+                            Following
+                        </Link>
+                        </span>
+
+                        <span id='bio'>{user_info.bio}</span>
                     </p>
+
+                    
                 </div >
+
+
+                
+
 
             </section>
 
