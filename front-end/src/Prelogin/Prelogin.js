@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import PostContentPrelogin from '../auxiliary/PostContent_prelogin'
 import './Prelogin.css'
-import Floatingbutton from "../auxiliary/FloatingButton"
+
 
 
 const Prelogin = (props) => {

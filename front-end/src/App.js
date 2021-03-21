@@ -22,6 +22,7 @@ import Settings from './me/Settings'
 import MyProfile from './me/MyProfile'
 import Prelogin from './Prelogin/Prelogin'
 import Prehomenav from './Prelogin/PreNav/Pre_HomeNav'
+import PreMainNav from './Prelogin/PreNav/Pre_MainNav'
 import Pre_Recommended from './Prelogin/Pre_Recommended'
 import Pre_Recent  from './Prelogin/Pre_RecentlyVisited'
 import Floatingbutton from "./auxiliary/FloatingButton"
@@ -123,18 +124,20 @@ function App() {
             <Floatingbutton/>
             <Prelogin />
 
-                <MainNav />
+                <PreMainNav />
                 <Prehomenav />
 
 
 
             </Route>
+            
+          
 
             <Route path = "/prerecommend">
-           
+            <Floatingbutton/>
             <Pre_Recommended />
                       
-                <MainNav />
+                <PreMainNav />
                 <Prehomenav />
            
 
@@ -142,6 +145,7 @@ function App() {
 
 
             <Route path = "/prerecent">
+            <Floatingbutton/>
             <Pre_Recent />
 
                 <MainNav />
