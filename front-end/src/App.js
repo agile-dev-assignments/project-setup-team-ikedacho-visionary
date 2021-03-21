@@ -20,6 +20,7 @@ import Signup from './login_signup/Signuppage'
 import PostDetail from './home/PostDetail'
 import Settings from './me/Settings'
 import MyProfile from './me/MyProfile'
+import FriendProfile from './me/FriendProfile'
 import Prelogin from './Prelogin/Prelogin'
 import Prehomenav from './Prelogin/PreNav/Pre_HomeNav'
 import PreMainNav from './Prelogin/PreNav/Pre_MainNav'
@@ -110,6 +111,9 @@ function App() {
               <MyProfile />
             </Route> 
 
+            <Route path = "/friend_profile">
+              <FriendProfile />
+            </Route> 
 
 
             <Route path = "/detailpost"> 

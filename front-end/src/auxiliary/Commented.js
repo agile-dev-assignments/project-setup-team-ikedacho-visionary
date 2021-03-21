@@ -7,18 +7,20 @@ const Commented = (props) => {
   
   return (
     <article className="commented">
-        <Link to={`/profile/${props.details.commented_by}`}>
+
             <div>
+              <Link to={`/friend_profile`}>
                 <img class='inline-block' id='avatar' src={props.details.commented_by_profile_image} />
                 <h1 class='inline-block' id='username1' >{props.details.commented_by_username}</h1>
+              </Link>
                 <span id="commented_date">{props.details.commented_date}</span>
             </div>
         
         <p id='comment'>Commented @Username: {props.details.commented_content}</p>
        
-        </Link>
+        
 
-        <Link to={`/post_content/${props.details.post_text}`}>
+        <Link to={`/detailpost`}>
             
                 
                 <p id='post' >

@@ -10,7 +10,9 @@ const Message_History = (props) => {
         <Link to={`/chat}`}>
             <div id='message'>
             <p id='message_text' >
+                <Link to = {'/friend_profile'}>
                 <img class='inline-block' id='avatar' src={props.details.user_photo} />
+                </Link>
                 <span class='inline-block' id='username' >{props.details.username}</span>
                 <span id="newest_message_date">{props.details.newest_message_date}</span>
                 <br></br>
