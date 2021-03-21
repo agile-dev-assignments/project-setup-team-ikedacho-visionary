@@ -60,9 +60,6 @@ const FriendProfile = (props) => {
                 <h1>Profile</h1>
                
 
-                <Link to = {'/new_post'}>
-                    <FileEarmarkPlus id="create_post" color='black' size={17}/> 
-                </Link>
                 
             </section>
            
