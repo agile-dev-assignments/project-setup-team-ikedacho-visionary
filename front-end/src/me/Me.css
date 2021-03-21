@@ -75,3 +75,61 @@ div.Me a{
     color:black;
     text-decoration: none;
 }
+
+
+div.Me #main_container2{
+    margin-top: 0px;
+    padding-top: 0px;
+    
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+}
+
+div.Me #main_container2{
+    padding: 5px;
+}
+div.Me #main_container2 .icon{
+    background-color: rgba(195, 166, 197, 0.767);
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width:55px;
+    height: 55px;
+    border-radius: 50%;
+    margin-top: 10px;
+    
+}
+div.Me #browse_history,#commented, #liked{
+    position:relative;
+    top:10px;
+    font-size: 0.9em;
+    color: rgb(54, 54, 54);
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+div.Me #commented{
+    left:-13px;
+   
+}
+div.Me #liked{
+    left: 8px;
+}
+div.Me #browse_history{
+    font-size: 0.8em;;
+    left:6px;
+ 
+
+}
+
+div.Me #browse_history_icon,#commented-icon, #liked-icon{
+    position:relative;
+    left:13px;
+    top:15px;
+}
+div.Me #browse_history_icon{
+    top:13px;
+}

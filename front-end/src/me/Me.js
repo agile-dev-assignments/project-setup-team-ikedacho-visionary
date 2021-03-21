@@ -6,7 +6,9 @@ import { Facebook } from 'react-bootstrap-icons';
 import { Instagram } from 'react-bootstrap-icons';
 import { Twitter } from 'react-bootstrap-icons';
 import { Gear } from 'react-bootstrap-icons';
-
+import { ClockHistory } from 'react-bootstrap-icons';
+import { TextParagraph } from 'react-bootstrap-icons';
+import { HeartFill } from 'react-bootstrap-icons';
 
 
 
@@ -29,7 +31,7 @@ const Me = (props) => {
                 
             </section>
 
-            <section id='main_container'>
+            <section id='main_container1'>
                 <div>
                     <p id='message_text' > 
                     <img class='inline-block' id='avatar' src="https://robohash.org/doloremqueofficiaet.jpg?size=50x50"/> 
@@ -62,11 +64,31 @@ const Me = (props) => {
 
 
         
+            <section id="main_container2">
+                <Link class='icon' to={'/liked'}> 
+                    <HeartFill id='liked-icon' size={30} color="white"/>
+                            <p id="liked">
+                                Liked
+                            </p>
+                </Link>
+                <Link class='icon' to={'/commented'}>
+                    <TextParagraph id='commented-icon' size={30} color="white"/>
+                        <p id="commented" >
+                                Commented
+                        </p>
+                </Link>
 
-        
-            <section className = "main-content">
-                
+                <Link class='icon' to={'/browse_history'}>
+                    <ClockHistory id='browse_history_icon' size={30} color="white"/>
+                        <p id="browse_history">
+                            Browse History
+                        </p>
+                </Link>
             </section>
+
+            <section id="main_container3">
+                
+                </section>
         </div>
     );
 }
