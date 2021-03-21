@@ -107,7 +107,7 @@ function App() {
               <PostDetail />
             </Route>
 
-            <Route path = "/Settings">
+            <Route path = "/settings">
               <Settings />
             </Route>
 

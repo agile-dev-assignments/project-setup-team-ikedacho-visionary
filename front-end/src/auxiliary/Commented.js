@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+//import user_info from '../me/Me'
 import './Commented.css'
 
 const Commented = (props) => {
-  // console.log(props);
-
+  
   return (
     <article className="commented">
         <Link to={`/profile/${props.details.commented_by}`}>
