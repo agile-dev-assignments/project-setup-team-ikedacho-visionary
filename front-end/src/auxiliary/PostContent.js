@@ -35,13 +35,13 @@ const PostContent = (props) => {
   };
 
   return (
-    <div class="PostContent">
-        <strong class="PlatformSource">{props.source}</strong>
-        <div class = "block">
-    <img class="userimg" src={props.userimg} />
-        <div class="Text">
-        <strong class = "username">{props.UserName}</strong>
-        <p class = "time">{props.Senttime}</p>
+    <div className="PostContent">
+        <strong className="PlatformSource">{props.source}</strong>
+        <div className = "block">
+    <img className="userimg" src={props.userimg} />
+        <div className="Text">
+        <strong className = "username">{props.UserName}</strong>
+        <p className = "time">{props.Senttime}</p>
     </div>
 </div>
 
