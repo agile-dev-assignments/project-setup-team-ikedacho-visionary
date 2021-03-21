@@ -1,0 +1,35 @@
+.Browse {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.block {
+    display: flex;
+}
+
+.postcontent {
+    padding-left: 70px;
+}
+
+.userimg {
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 5px;
+    width: 50px;
+    height: 50px;
+    position: relative;
+}
+
+.imgs {
+    padding-left: 60px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.imgs .img {
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 60px;
+}
+
