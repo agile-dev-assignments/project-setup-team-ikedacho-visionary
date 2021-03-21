@@ -46,9 +46,10 @@ const PostContent = (props) => {
   };
 
   return (
-    <div className="PostContent">
+    <div className="PostContent" onClick={() => window.location.href = '/detailpost'} to = {'/detailpost'}>
+     
       <strong className = "PlatformSource">{props.source}</strong>
-
+    
       <div className = "block">
         <Link onClick={() => window.location.href = '/friend_profile'} to = {'/friend_profile'}>
           <img className = "userimg" src = {props.userimg} />
@@ -60,6 +61,7 @@ const PostContent = (props) => {
         </div>
       </div>
 
+      
         <p className = "postcontent">{props.content}</p>
         <img className="contentimg" src={props.contentimg} />
         <div className = "footer">
@@ -78,7 +80,7 @@ const PostContent = (props) => {
               </>
             )}
             </div>
-
+      
     </div>
   )
 }
