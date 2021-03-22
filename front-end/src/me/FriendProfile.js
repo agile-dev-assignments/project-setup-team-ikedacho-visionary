@@ -5,10 +5,7 @@ import { ChevronLeft } from 'react-bootstrap-icons';
 import { Facebook } from 'react-bootstrap-icons';
 import { Instagram } from 'react-bootstrap-icons';
 import { Twitter } from 'react-bootstrap-icons';
-import { FileEarmarkPlus } from 'react-bootstrap-icons';
-import { ClockHistory } from 'react-bootstrap-icons';
-import { TextParagraph } from 'react-bootstrap-icons';
-import { HeartFill } from 'react-bootstrap-icons';
+
 import { Youtube } from 'react-bootstrap-icons';
 import { Linkedin } from 'react-bootstrap-icons';
 import axios from 'axios'

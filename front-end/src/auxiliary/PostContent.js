@@ -2,7 +2,7 @@ import './PostContent.css'
 import Repost from './ToRepost'
 import React, { useState } from 'react'
 import ToComment from './ToComment'
-import PostDetail from "../home/PostDetail"
+
 
 const PostContent = (props) => {
 
@@ -29,10 +29,7 @@ const PostContent = (props) => {
     });
   };
 
-  const _showDetail=(e)=>{
-      <PostDetail />
 
-  };
 
   const _setLike = (e) => {
     let cur = like.liked
@@ -44,13 +41,13 @@ const PostContent = (props) => {
   };
 
   return (
-    <div className="PostContent" onClick = {_showDetail()}>
+    <div className="PostContent">
      
       <strong className = "PlatformSource">{props.source}</strong>
     
       <div className = "block">
      
-          <img className = "userimg" src = {props.userimg} onClick={() => window.location.href = '/friend_profile'}/>
+          <img className = "userimg" onClick={() => window.location.href = '/friend_profile'} src = {props.userimg} />
         
         
         <div className="Text">
