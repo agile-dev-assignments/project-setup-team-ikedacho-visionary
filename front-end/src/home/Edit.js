@@ -1,7 +1,5 @@
-import React, {useState, useEffect} from "react";
-import axios from "axios";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import PostContent from "../auxiliary/PostContent";
 import "./Edit.css";
 import { useHistory } from 'react-router-dom'
 
@@ -19,7 +17,7 @@ const Edit = (props) => {
 
     return (
         <div className="edit">
-            <header> 
+            <header>
                 <Link onClick={goTOPreviousPath}>
                     <button>back</button>
                 </Link>
