@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './SearchRecommended.css'
-import { Link } from 'react-router-dom'
-import PostContent from '../auxiliary/PostContent'
 
 const SearchRecommended = (props) => {
     const [data, setData] = useState([])
@@ -26,7 +24,7 @@ const SearchRecommended = (props) => {
         <div className = "SearchRecommended">
             <section>
                 {data.map((item) => (
-                    <p>{item.topic}</p>
+                    <p onClick={() => window.location.href = '/searchResult'}>{item.topic}</p>
                 ))}
             </section>
 

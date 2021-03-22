@@ -1,9 +1,6 @@
 import './Search.css'
-import React, { useState, useEffect } from 'react'
-// import searchResult from './SearchResult'
+import React, { useState } from 'react'
 import SearchBar from './SearchBar'
-import { Link } from 'react-router-dom'
-// import axios from 'axios'
 import SearchRecommended from './SearchRecommended'
 import Trending from './Trending'
 
@@ -20,9 +17,6 @@ const Search = (props) => {
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
                 />
-                <Link to={'/searchResult'}> 
-                    <button>Showcasing SearchResult</button>
-                </Link>
                     
             </search>
 
