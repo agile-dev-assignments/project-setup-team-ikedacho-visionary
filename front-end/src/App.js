@@ -29,6 +29,7 @@ import Pre_Recommended from './Prelogin/Pre_Recommended'
 import Pre_Recent  from './Prelogin/Pre_RecentlyVisited'
 import Floatingbutton from "./auxiliary/FloatingButton"
 import Chat from './community/Chat'
+import NewChat from './community/NewChat';
 
 function App() {
   return (
@@ -115,6 +116,10 @@ function App() {
 
             <Route path = "/chat">
               <Chat />
+            </Route> 
+
+            <Route path = "/create_new_chat">
+              <NewChat />
             </Route> 
 
             <Route path = "/friend_profile">

@@ -14,7 +14,8 @@ const Chat = (props) => {
             <>  
                 {props.fromSender && (
                     <div className = "Chat_from_others">
-                        <img className = "Chat_avatar" src = {props.userimg} />
+                        <img className = "Chat_avatar" src = {props.userimg} 
+                             onClick={() => window.location.href = '/friend_profile'}/>
                         <p>{props.username}</p>
                         <p>{props.time}</p>
                         <p className = "Chat_from_others">{props.content}</p>
@@ -23,7 +24,8 @@ const Chat = (props) => {
 
                 {!props.fromSender && (
                     <div className = "Chat_from_self">
-                        <img className = "Chat_avatar" src = {props.userimg} />
+                        <img className = "Chat_avatar" src = {props.userimg} 
+                             onClick={() => window.location.href = '/my_profile'} />
                         <p>{props.time}</p>
                         <p className = "Chat_from_self">{props.content}</p>
                     </div>
@@ -70,6 +72,13 @@ const Chat = (props) => {
                     "fromSender": false,
                     "content": "Bye... "
                 },
+                {
+                    "userimg": "https://gravatar.com/avatar/3ab0a552855dd378a994d72beeaf7ed6?s=200&d=robohash&r=x",
+                    "username": "Bob",
+                    "time": "03/22/2021 2:05 PM",
+                    "fromSender": true,
+                    "content": "Ok... "
+                }
             ]
             setData(backupData)
         })
@@ -77,11 +86,13 @@ const Chat = (props) => {
 
   return (
     <div className = "Chat">
-        <Link to = '/community'> 
-        <h1 id = "back">Back</h1>
-        </Link>
 
-        <section className = "Chat_messages">
+        <div className = "Chat_title">
+            <Link to = '/community'>Back</Link>
+            <h2 className = "Chat_title">Chat</h2>
+        </div>        
+
+        <div className = "Chat_messages">
             {data.map((item) => (
                 <ChatMessages userimg = {item.userimg}
                               username = {item.username}
@@ -89,12 +100,12 @@ const Chat = (props) => {
                               fromSender = {item.fromSender}
                               content = {item.content} />
             ))}
-        </section>
+        </div>
 
-        <section className = "Chat_user_input">
+        <div className = "Chat_user_input">
             <input className = "Chat_user_input" type = "text"></input>
             <button className = "Chat_user_input">Enter</button>
-        </section>
+        </div>
 
     </div>
   )
