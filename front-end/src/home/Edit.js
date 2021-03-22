@@ -29,7 +29,7 @@ const Edit = (props) => {
                 <textarea className="textarea" placeholder="what's on your mind?"/>
 
                 <div className="post">
-                    <span onClick={_setShow}>Post to ⬇️ </span>
+                    <span onClick={_setShow}>Post to ▼️ </span>
                     <div className="post-checkbox" style={{ opacity : show ? 1 : 0}}>
                         <label><input name="post" type="checkbox"/>Platform A </label>
                         <label><input name="post" type="checkbox"/>Platform B</label>
