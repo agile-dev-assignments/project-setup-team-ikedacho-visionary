@@ -46,24 +46,30 @@ const PostContent = (props) => {
   };
 
   return (
-    <div className="PostContent" onClick={() => window.location.href = '/detailpost'} to = {'/detailpost'}>
+    <div className="PostContent" >
      
       <strong className = "PlatformSource">{props.source}</strong>
     
-      <div className = "block">
-        <Link onClick={() => window.location.href = '/friend_profile'} to = {'/friend_profile'}>
+      <div className = "block"  onClick={() => window.location.href = '/friend_profile'} to = {'/friend_profile'}>
+     
           <img className = "userimg" src = {props.userimg} />
-        </Link>
+        
         
         <div className="Text">
           <strong className = "username">{props.UserName}</strong>
           <p className = "time">{props.Senttime}</p>
         </div>
+      
       </div>
 
+      <div onClick={() => window.location.href = '/detailpost'} to = {'/detailpost'}>
       
         <p className = "postcontent">{props.content}</p>
         <img className="contentimg" src={props.contentimg} />
+
+
+        </div>
+        
         <div className = "footer">
             <button className = "Commentbutton" onClick = {_showComment.bind()}> Comment</button>
 
@@ -79,7 +85,7 @@ const PostContent = (props) => {
                 <ToComment />
               </>
             )}
-            </div>
+        </div>
       
     </div>
   )

@@ -1,9 +1,49 @@
-#repost_edit_text {
-    height: 100px;
+input#repost_edit_text {
+    height: 25px;
     font-size: 14pt;
-    top: 5px;
-    position: relative;
+    width:80%;
+    background-color: white;
+    border: 0px solid rgb(230, 215, 215);
+    margin-bottom: 5px;
+    font-size: 1em;
 }
-.enterPost_edit{
-    margin-top:10px;
+
+button#sendPost_edit{
+    width:20%;
+    height: 30px;
+    background-color: white;
+    border: 1px solid rgb(230, 215, 215);
+
+}
+
+#mycomment{
+    height: 25px;
+    font-size: 14pt;
+    width:100%;
+    padding-top:5px ;
+    padding-left:15px ;
+    background-color: white;
+    border: 0px solid rgb(230, 215, 215);
+    margin-bottom: 0px;
+    font-size: 1em;
+
+}
+
+div#mycomment #username{
+    font-size: 15px;
+}
+
+div#date_send{
+    margin-bottom: 5px;
+    font-size: 14pt;
+    width:100%;
+    padding-left:16px ;
+    font-size: 1em;
+    font-size: 0.8em;
+    color: grey;
+
+}
+div#mycomment a{
+    color:black;
+    text-decoration: none;
 }
