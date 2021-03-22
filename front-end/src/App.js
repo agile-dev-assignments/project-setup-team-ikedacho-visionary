@@ -5,6 +5,7 @@ import MainNav from './auxiliary/NavBar/MainNav'
 import Loginpage from './login_signup/Loginpage'
 import Home from './home/Home';
 import Edit from './home/Edit';
+import Repost from "./home/Repost";
 import Community from './community/Community';
 import Me from './me/Me';
 import Search from './search/Search'
@@ -37,11 +38,11 @@ function App() {
 
         <Router>
           <Switch>
-          <Route path = "/login"> 
+          <Route path = "/login">
               <Loginpage />
             </Route>
 
-            <Route path = "/signup"> 
+            <Route path = "/signup">
               <Signup />
             </Route>
 
@@ -80,7 +81,7 @@ function App() {
               <Showcase />
               <MainNav />
             </Route>
-          
+
             <Route path = "/comments">
               <Commented_List />
             </Route>
@@ -103,26 +104,26 @@ function App() {
 
             <Route path = "/friend_suggestion">
               <Friend_Suggestion />
-            </Route>            
+            </Route>
 
             <Route path = "/browse_history">
               <Browse_History />
-            </Route> 
+            </Route>
 
             <Route path = "/my_profile">
               <MyProfile />
-            </Route> 
+            </Route>
 
             <Route path = "/chat">
               <Chat />
-            </Route> 
+            </Route>
 
             <Route path = "/friend_profile">
               <FriendProfile />
-            </Route> 
+            </Route>
 
 
-            <Route path = "/detailpost"> 
+            <Route path = "/detailpost">
               <PostDetail />
             </Route>
 
@@ -134,26 +135,29 @@ function App() {
               <Edit />
             </Route>
 
+            <Route path = "/repost">
+              <Repost />
+            </Route>
+
             <Route path = "/prelogin">
             <Floatingbutton/>
             <Prelogin />
-
                 <PreMainNav />
                 <Prehomenav />
 
 
 
             </Route>
-            
-          
+
+
 
             <Route path = "/prerecommend">
             <Floatingbutton/>
             <Pre_Recommended />
-                      
+
                 <PreMainNav />
                 <Prehomenav />
-           
+
 
             </Route>
 
@@ -169,10 +173,10 @@ function App() {
             </Route>
 
 
-          
 
 
-            <Route path = "/"> 
+
+            <Route path = "/">
               <page>
                 <Home />
               </page>
