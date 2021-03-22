@@ -29,7 +29,7 @@ const ToComment = (props) => {
             <div style={{ display: !show ? "block" : "none" }}>
            
                 <Link onClick={() => window.location.href = '/my_profile'} to = {'/my_profile'}>
-                    <span id='username' >Joe:</span>
+                   Joe:
                     
                 </Link>
                 my comments
