@@ -10,6 +10,7 @@ import Community from './community/Community';
 import Me from './me/Me';
 import Search from './search/Search'
 import Showcase from './auxiliary/Showcase'
+import Mentions_List from "./community/Mentions_List";
 import Commented_List from './community/Commented_List'
 import Liked_List from './community/Liked_List'
 import SearchResult from './search/SearchResult';
@@ -18,6 +19,7 @@ import Followers from './me/Followers'
 import Friend_Suggestion from './me/Friend_Suggestion'
 import Browse_History from './me/Browse_History'
 import My_Comment_History_List from './me/My_Comment_History_List'
+import My_Liked_List from './me/Liked_List'
 import Signup from './login_signup/Signuppage'
 import PostDetail from './home/PostDetail'
 import Settings from './me/Settings'
@@ -78,9 +80,18 @@ function App() {
               <My_Comment_History_List />
             </Route>
 
+            <Route path = "/liked">
+              <My_Liked_List />
+            </Route>
+
+
             <Route path = "/components_showcase">
               <Showcase />
               <MainNav />
+            </Route>
+
+            <Route path = "/mentions">
+              <Mentions_List />
             </Route>
 
             <Route path = "/comments">
@@ -121,7 +132,7 @@ function App() {
 
             <Route path = "/create_new_chat">
               <NewChat />
-            </Route> 
+            </Route>
 
             <Route path = "/friend_profile">
               <FriendProfile />

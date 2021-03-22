@@ -96,7 +96,7 @@ const Friend_Suggestion = (props) => {
           <button>back</button>
         </Link>
         <h2>Friend Suggestion</h2>
-        <button>setting</button>
+        <p></p>
       </header>
 
       <div className="input-wrap">

@@ -28,7 +28,7 @@ const HomeNav = (props) => {
             <NavLink id='homenav_button' to="/recent">Recently Visited</NavLink>
             <NavLink id='homenav_button' to="/recommend">Recommend</NavLink>
             <NavLink id='homenav_button' to="/edit_new_post">
-                <FileEarmarkPlus id="create_post" color='black' size={17}/>
+                <FileEarmarkPlus onClick={() => window.location.href = '/edit_new_post'} id="create_post" color='black' size={17}/>
             </NavLink>
         </nav>
     )

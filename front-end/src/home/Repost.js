@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
-import "./Edit.css";
+import "./Repost.css";
 import { useHistory } from 'react-router-dom'
 
 const Edit = (props) => {
@@ -16,12 +16,12 @@ const Edit = (props) => {
     };
 
     return (
-        <div className="edit">
+        <div className="repost">
             <header>
                 <Link onClick={goTOPreviousPath}>
                     <button>back</button>
                 </Link>
-                <h2>New Post</h2>
+                <h2>New Repost</h2>
                 <button onClick={goTOPreviousPath}>send</button>
             </header>
 
@@ -37,7 +37,7 @@ const Edit = (props) => {
                 </div>
 
                 <div className="post">
-                    <span onClick={_setShow}>Post to ⬇️ </span>
+                    <span onClick={_setShow}>Post to ▼ </span>
                     <div className="post-checkbox" style={{ opacity : show ? 1 : 0}}>
                         <label><input name="post" type="checkbox"/>Platform A </label>
                         <label><input name="post" type="checkbox"/>Platform B</label>

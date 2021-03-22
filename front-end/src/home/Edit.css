@@ -21,6 +21,7 @@ header {
     outline: none;
     border: none;
     resize: none;
+    font-family: sans-serif;
 }
 
 .edit .post{
@@ -29,12 +30,12 @@ header {
     right: 10px;
 }
 
-.post span{
+.edit .post span{
     display: block;
     text-align: right;
 }
 
-.post-checkbox{
+.edit .post-checkbox{
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -42,12 +43,12 @@ header {
     background-color: #494646;
 }
 
-.post-checkbox label{
+.edit .post-checkbox label{
     padding: 10px;
     border-bottom: 1px solid #ddd;
 }
 
-.checkbox{
+.edit .checkbox{
     position: absolute;
     right: 10px;
     bottom: 10px;
