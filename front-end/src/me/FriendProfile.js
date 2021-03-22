@@ -96,10 +96,11 @@ const FriendProfile = (props) => {
 
                         <span id='bio'>{friend_info.bio}</span>
                     </p>
-                    <button id='button2'>
+                    <button id='button2' onClick={() => alert("following is clicked (to unfollow)!")}>
                             Following
                     </button>
-                    <button id='button2'>
+                    
+                    <button id='button2' onClick={() => window.location.href = '/chat'}>
                             Chat
                     </button>
                     

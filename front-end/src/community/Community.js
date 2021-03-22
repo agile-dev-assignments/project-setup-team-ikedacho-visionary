@@ -50,7 +50,7 @@ const Community = (props) => {
     return (
         <div className = "Community">
             <h1>Message</h1>
-            <Link to={'/chat'}> 
+            <Link to={'/create_new_chat'}> 
                 <ChatLeftDotsFill id="chat" size={17}/> 
             
             </Link>

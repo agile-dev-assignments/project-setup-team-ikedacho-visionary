@@ -1,0 +1,44 @@
+div.NewChat_back{
+    left: 3vw;
+    position: relative;
+    font-size: 7vw;
+}
+
+div.NewChat_create {
+    right: 3vw;
+    position: absolute;
+    font-size: 7vw;
+}
+
+h3.NewChat_title {
+    top: 1%;
+    position: flex;
+    text-align: center;
+    padding-bottom: 5vw;
+}
+
+button.NewChatSelection_select_button {
+    left: 60vw;
+    position: relative;
+    width: 20vw;
+}
+
+div.NewChatSelection {
+    border: 0.5vw dotted;
+}
+
+img.NewChatSelection_userimg {
+    top: 5vw;
+    left: 5vw;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 5px;
+    width: 60px;
+    height: 60px;
+    position: relative;
+}
+
+p.NewChatSelection_username {
+    position: relative;
+    left: 5vw;
+}
