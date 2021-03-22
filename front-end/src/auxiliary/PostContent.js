@@ -2,6 +2,7 @@ import './PostContent.css'
 import Repost from './ToRepost'
 import React, { useState } from 'react'
 import ToComment from './ToComment'
+import PostDetail from "../home/PostDetail"
 
 const PostContent = (props) => {
 
@@ -27,17 +28,23 @@ const PostContent = (props) => {
       showComment: !cur
     });
   };
+
+  const _showDetail=(e)=>{
+      <PostDetail />
+
+  };
+
   const _setLike = (e) => {
     let cur = like.liked
     setLike({
       liked: !cur
     });
 
-    cur == true ? e.target.style.backgroundColor = '#e7e7e7' : e.target.style.backgroundColor = '#e37568'
+    cur == true ? e.target.style.backgroundColor = 'white' : e.target.style.backgroundColor = '#e37568'
   };
 
   return (
-    <div className="PostContent" >
+    <div className="PostContent" onClick = {_showDetail()}>
      
       <strong className = "PlatformSource">{props.source}</strong>
     
