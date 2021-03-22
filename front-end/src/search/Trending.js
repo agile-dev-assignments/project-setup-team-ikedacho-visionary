@@ -24,7 +24,7 @@ const Trending = (props) => {
         <div className = "Trending">
             <section>
                 {data.map((item) => (
-                    <p>{item.topic}</p>
+                    <p onClick={() => window.location.href = '/searchResult'}>{item.topic}</p>
                 ))}
             </section>
 

@@ -12,7 +12,8 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
     };
 
     return (
-        <form action="/" method="get">
+        /*
+        <form action = "/" method = "get">
             <input
                 type = "text"
                 id = "header-search"
@@ -20,8 +21,17 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
                 name = "s" 
             />
 
-            <button type = "submit" onSubmit={onSubmit}> Search </button>
+            <button type = "submit"  onSubmit={onSubmit}>Search</button>
         </form>
+        */
+        <>
+            <input
+            type = "text"
+            id = "header-search"
+            placeholder = "What do you want? "
+            name = "s" />
+            <button type = "submit" onClick={() => window.location.href = '/searchResult'}>Search</button>
+        </>
     );
 }    
 
