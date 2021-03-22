@@ -60,14 +60,14 @@ const Browse_History = (props) => {
         <div className="Browse_History">
             <header>
                 <Link to="/Me">
-                    <button>back</button>
+                    <h3>back</h3>
                 </Link>
-                <h2>Browse History</h2>
+                <h3>Browse History</h3>
                 <p></p>
             </header>
 
             <div className="Browse_List">
-                <h3>today</h3>
+                <h4>today</h4>
                 {todayData.map((item) => (
                     <Browse
                         UserName={item.UserName}
@@ -79,7 +79,7 @@ const Browse_History = (props) => {
             </div>
 
             <div className="Browse_List">
-                <h3>yesterday</h3>
+                <h4>yesterday</h4>
                 {yesterdayDate.map((item) => (
                     <Browse
                         UserName={item.UserName}
