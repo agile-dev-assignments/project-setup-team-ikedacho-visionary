@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import './Browse.css'
+import {Link} from "react-router-dom";
 
 const Browse = (props) => {
     return (
         <div className="Browse">
             <div className="block">
-                
-                <img className="userimg" src={props.userimg}/>
+                <Link to="/friend_profile">
+                    <img className="userimg" src={props.userimg}/>
+                </Link>
+
                 <div className="Text">
                     <strong className="username">{props.UserName}</strong>
                     <p className="content">{props.content}</p>
