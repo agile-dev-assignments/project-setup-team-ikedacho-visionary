@@ -2,8 +2,7 @@ div.ToRepost {
     padding: 20px;
     padding-right: 10px;
     margin: 20px;
-    background-color: rgb(64, 199, 199);
-    border: 2px solid rgb(185, 149, 149);
+    background-color: rgb(236, 236, 236);
 }
  
 button.repost_share_to_platforms{
