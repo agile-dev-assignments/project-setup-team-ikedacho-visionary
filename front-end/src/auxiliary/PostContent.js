@@ -1,8 +1,7 @@
 import './PostContent.css'
 import Repost from './ToRepost'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ToComment from './ToComment'
-import { Link } from 'react-router-dom'
 
 const PostContent = (props) => {
 
