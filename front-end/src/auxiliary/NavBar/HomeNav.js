@@ -15,15 +15,15 @@ const HomeNav = (props) => {
 
     return (
         <nav className="homenav">
-            <NavLink id='homenav_button' to="/" className="post">
+            <button id='homenav_button' >
                 <SortDown color='black' size={17} onClick={_setShow}/>
-                <div className="post-checkbox" style={{opacity: show ? 1 : 0}}>
+                <div className="post-checkbox" style={{display: show ? "block" : "none"}}>
                     <label><input name="post" type="checkbox"/><p>Platform A</p></label>
                     <label><input name="post" type="checkbox"/><p>Platform B</p></label>
                     <label><input name="post" type="checkbox"/><p>Platform C</p></label>
                     <label><input name="post" type="checkbox"/><p>Platform D</p></label>
                 </div>
-            </NavLink>
+            </button>
             <NavLink id='homenav_button' to="/">What's New</NavLink>
             <NavLink id='homenav_button' to="/recent">Recently Visited</NavLink>
             <NavLink id='homenav_button' to="/recommend">Recommend</NavLink>

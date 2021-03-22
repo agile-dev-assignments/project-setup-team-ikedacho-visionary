@@ -35,7 +35,10 @@
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
-
+#homenav_button{
+  background:white;
+  border:none;
+}
 .homenav .post-checkbox label p{
   width: 80px;
 }
