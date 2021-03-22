@@ -33,7 +33,7 @@ const PostContent = (props) => {
       liked: !cur
     });
 
-    cur == true ? e.target.style.backgroundColor = '#e7e7e7' : e.target.style.backgroundColor = '#e37568'
+    cur == true ? e.target.style.backgroundColor = 'white' : e.target.style.backgroundColor = '#e37568'
   };
 
   return (
