@@ -32,17 +32,9 @@ const PostContent = (props) => {
     let cur = like.liked
     setLike({
       liked: !cur
-
     });
-    if(cur == false){
 
-     e.target.style.backgroundColor = '#e37568';
-    }
-    else if(cur == true){
-      console.log("unliked");
-      e.target.style.backgroundColor = '#e7e7e7';
-    }
-    
+    cur == true ? e.target.style.backgroundColor = '#e7e7e7' : e.target.style.backgroundColor = '#e37568'
   };
 
   return (
@@ -50,19 +42,19 @@ const PostContent = (props) => {
      
       <strong className = "PlatformSource">{props.source}</strong>
     
-      <div className = "block"  onClick={() => window.location.href = '/friend_profile'} to = {'/friend_profile'}>
+      <div className = "block">
      
-          <img className = "userimg" src = {props.userimg} />
+          <img className = "userimg" src = {props.userimg} onClick={() => window.location.href = '/friend_profile'}/>
         
         
         <div className="Text">
-          <strong className = "username">{props.UserName}</strong>
+          <strong className = "username" onClick={() => window.location.href = '/friend_profile'}>{props.UserName}</strong>
           <p className = "time">{props.Senttime}</p>
         </div>
       
       </div>
 
-      <div onClick={() => window.location.href = '/detailpost'} to = {'/detailpost'}>
+      <div onClick={() => window.location.href = '/detailpost'}>
       
         <p className = "postcontent">{props.content}</p>
         <img className="contentimg" src={props.contentimg} />
