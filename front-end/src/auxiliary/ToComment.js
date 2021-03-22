@@ -11,7 +11,7 @@ const ToComment = (props) => {
         console.log('clicked!')
         setShow(!show);
     
-        setCurrentTime(Date());
+        setCurrentTime(new Date());
     }
 
 
