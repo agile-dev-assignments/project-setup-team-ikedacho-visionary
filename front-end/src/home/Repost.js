@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import "./Edit.css";
 import { useHistory } from 'react-router-dom'
@@ -27,6 +27,14 @@ const Edit = (props) => {
 
             <section className="edit-wrap">
                 <textarea className="textarea" placeholder="what's on your mind?"/>
+
+                <div className="card">
+                    <img className="img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU" alt=""/>
+                    <div className="text">
+                        <strong>@Jessica</strong>
+                        <p>Post Content Post Content </p>
+                    </div>
+                </div>
 
                 <div className="post">
                     <span onClick={_setShow}>Post to ⬇️ </span>

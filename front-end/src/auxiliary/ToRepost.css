@@ -2,10 +2,9 @@ div.ToRepost {
     padding: 20px;
     padding-right: 10px;
     margin: 20px;
-    background-color: rgb(64, 199, 199);
-    border: 2px solid rgb(185, 149, 149);
+    border: 2px solid #ccc;
 }
- 
+
 button.repost_share_to_platforms{
     padding: 5px;
     margin-left: 5px;
@@ -22,7 +21,8 @@ img.repost_avatar {
 }
 
 section.repost_share_to_friends_list {
-    position: relative;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 section.repost_share_to_platforms{
@@ -30,9 +30,19 @@ section.repost_share_to_platforms{
 }
 
 button.repost_friends{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
     display: block;
+    width: 100%;
 }
 
 div.repost_friends_component{
-    position: relative;
+    padding: 5px;
+    width: 50%;
+    text-align: center;
+}
+
+.Repost_fast{
+    margin-right: 10px;
 }
