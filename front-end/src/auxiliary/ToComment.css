@@ -20,11 +20,11 @@ button#sendPost_edit{
     height: 25px;
     font-size: 14pt;
     width:100%;
-    padding-top:8px ;
+    padding-top:5px ;
     padding-left:15px ;
     background-color: white;
     border: 0px solid rgb(230, 215, 215);
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     font-size: 1em;
 
 }
@@ -37,9 +37,10 @@ div#date_send{
     margin-bottom: 5px;
     font-size: 14pt;
     width:100%;
-    padding-left:15px ;
+    padding-left:16px ;
     font-size: 1em;
     font-size: 0.8em;
+    color: grey;
 
 }
 div#mycomment a{
