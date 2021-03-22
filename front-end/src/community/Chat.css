@@ -40,7 +40,21 @@ button.Chat_user_input {
     position: fixed;
 }
 
-section.Chat_messages {
-    bottom: 10vw;
+div.Chat_messages {
+    bottom: 20vw;
     position: relative;
+    top: 20vw;
+}
+
+
+div.Chat_title {
+    position: fixed;
+    top: 0vw;
+    background-color: antiquewhite;
+    width: 100vw;
+    z-index: 2;
+}
+
+h2.Chat_title {
+    text-align: center;
 }
