@@ -15,8 +15,40 @@
 
 }
 
+.homenav .post{
+  position: relative;
+}
 
-#homenav_button{
+.post-checkbox{
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  background-color: #494646;
+  z-index: 9;
+}
+
+.post-checkbox label{
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.post-checkbox label p{
+  width: 80px;
+}
+
+.checkbox{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+
+
+.homenav #homenav_button{
   flex-grow:1;
   width: auto!important;
   text-decoration: none;
