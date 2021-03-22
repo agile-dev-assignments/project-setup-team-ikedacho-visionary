@@ -13,8 +13,15 @@ import { Youtube } from 'react-bootstrap-icons';
 import { Linkedin } from 'react-bootstrap-icons';
 import axios from 'axios'
 import PostContent from '../auxiliary/PostContent'
+import { useHistory } from 'react-router-dom'
 
 const MyProfile = (props) => {
+
+    let history=useHistory();
+    const goTOPreviousPath=()=>{
+        history.goBack()
+    }
+
     // start a state variable with a blank array
     const [user_info, setUser_info] = useState(
         {
@@ -46,7 +53,7 @@ const MyProfile = (props) => {
     return (
         <div className = "MyProfile">
             <section id='header'>
-                <Link to={'/me'}> 
+                <Link onClick={goTOPreviousPath}> 
                     <ChevronLeft id="back" color='black' size={17}/> 
                 
                 </Link>
