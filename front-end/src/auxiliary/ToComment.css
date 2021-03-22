@@ -1,4 +1,4 @@
-#repost_edit_text {
+input#repost_edit_text {
     height: 25px;
     font-size: 14pt;
     width:80%;
@@ -8,10 +8,41 @@
     font-size: 1em;
 }
 
-#sendPost_edit{
+button#sendPost_edit{
     width:20%;
     height: 30px;
     background-color: white;
     border: 1px solid rgb(230, 215, 215);
 
+}
+
+#mycomment{
+    height: 25px;
+    font-size: 14pt;
+    width:100%;
+    padding-top:8px ;
+    padding-left:15px ;
+    background-color: white;
+    border: 0px solid rgb(230, 215, 215);
+    margin-bottom: 5px;
+    font-size: 1em;
+
+}
+
+div#mycomment #username{
+    font-size: 15px;
+}
+
+div#date_send{
+    margin-bottom: 5px;
+    font-size: 14pt;
+    width:100%;
+    padding-left:15px ;
+    font-size: 1em;
+    font-size: 0.8em;
+
+}
+div#mycomment a{
+    color:black;
+    text-decoration: none;
 }
