@@ -98,7 +98,7 @@ const Repost = (props) => {
         <div className="ToRepost">
 
             <button className="Repost_fast">Fast Repost</button>
-            <button className="Repost_edit_button" onClick={_toRepost}>Repost</button>
+            <button className="Repost_edit_button" onClick={() => window.location.href = '/repost'}>Repost</button>
             {/*<div className = "repost_edit_textarea">*/}
             {/*    {state.showRepostEdit &&  (*/}
             {/*    <>*/}
