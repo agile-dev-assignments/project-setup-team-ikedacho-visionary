@@ -99,6 +99,15 @@ const Repost = (props) => {
 
             <button className="Repost_fast">Fast Repost</button>
             <button className="Repost_edit_button" onClick={() => window.location.href = '/repost'}>Repost</button>
+            {/*<div className = "repost_edit_textarea">*/}
+            {/*    {state.showRepostEdit &&  (*/}
+            {/*    <>*/}
+            {/*        <br></br>*/}
+            {/*        <ToRepost_edit data = {data}/>*/}
+            {/*    </>*/}
+            {/*    )*/}
+            {/*    }*/}
+            {/*</div>*/}
 
             <p>Share to friends</p>
             <section className="repost_share_to_friends_list">
