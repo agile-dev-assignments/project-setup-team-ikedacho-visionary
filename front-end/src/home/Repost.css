@@ -21,6 +21,7 @@ header {
     outline: none;
     border: none;
     resize: none;
+    font-family: sans-serif;
 }
 
 .card {

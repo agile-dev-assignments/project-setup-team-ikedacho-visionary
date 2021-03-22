@@ -21,7 +21,7 @@ const Edit = (props) => {
                 <Link onClick={goTOPreviousPath}>
                     <button>back</button>
                 </Link>
-                <h2>New Post</h2>
+                <h2>New Repost</h2>
                 <button onClick={goTOPreviousPath}>send</button>
             </header>
 
