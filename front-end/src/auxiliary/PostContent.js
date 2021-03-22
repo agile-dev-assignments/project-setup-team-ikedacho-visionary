@@ -62,10 +62,10 @@ const PostContent = (props) => {
         </div>
         
         <div className = "footer">
-            <button className = "Commentbutton" onClick = {_showComment.bind()}> Comment</button>
+            <button className = "Commentbutton" onClick = {_showComment.bind()}>Comment</button>
 
             <button className = "Likebutton" onClick = {_setLike.bind()}>{like.liked ? 'Liked' : 'Like'}</button>
-            <button className = "Repostbutton" onClick = {_showRepost.bind()}> Repost</button>
+            <button className = "Repostbutton" onClick = {_showRepost.bind()}>Repost</button>
             {state.showRepost && (
               <>
                 <Repost />
