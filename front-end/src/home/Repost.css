@@ -6,13 +6,13 @@ header {
     border-bottom: 2px solid #ddd;
 }
 
-.edit-wrap{
+.edit-wrap {
     position: relative;
     width: 100%;
     height: 600px;
 }
 
-.textarea{
+.textarea {
     width: 100%;
     height: 100%;
     font-size: 16px;
@@ -23,7 +23,7 @@ header {
     resize: none;
 }
 
-.card{
+.card {
     position: absolute;
     top: 200px;
     left: 0;
@@ -36,24 +36,25 @@ header {
     align-items: center;
 }
 
-.card .img{
+.card .img {
     width: 80px;
     height: 80px;
     margin-right: 10px;
 }
 
-.edit .post{
+
+.repost .post {
     position: absolute;
     top: 300px;
     right: 10px;
 }
 
-.post span{
+.repost .post span {
     display: block;
     text-align: right;
 }
 
-.post-checkbox{
+.repost .post-checkbox {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -61,12 +62,12 @@ header {
     background-color: #494646;
 }
 
-.post-checkbox label{
+.repost .post-checkbox label {
     padding: 10px;
     border-bottom: 1px solid #ddd;
 }
 
-.checkbox{
+.repost .checkbox {
     position: absolute;
     right: 10px;
     bottom: 10px;
