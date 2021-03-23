@@ -1,4 +1,5 @@
 # Guide to Contributing
+
 *   ### Project's Values
     *   Project value: O-zone's value is to create an efficient social media management platform. Users could create, publish and analyze contents they and others post on various social media accounts. 
 *  ### Team Norms
@@ -43,5 +44,3 @@
     *   Unit test on function or module upon completion if possible. 
     *   Run entire program if big change on structure or new major feature is completed. 
     *   More testing measures to be updated in the future if needed. 
-
-
