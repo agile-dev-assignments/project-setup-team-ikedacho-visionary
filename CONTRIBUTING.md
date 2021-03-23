@@ -1,4 +1,5 @@
 # Guide to Contributing
+<<<<<<< HEAD
 *   ### Project's Values
     *   Project value: O-zone's value is to create an efficient social media management platform. Users could create, publish and analyze contents they and others post on various social media accounts. 
 *  ### Team Norms
@@ -45,3 +46,6 @@
     *   More testing measures to be updated in the future if needed. 
 
 
+=======
+Delete the contents of this file and replace with the contents of a proper guide to contributing to this project, as described in the [instructions](./instructions.md)
+>>>>>>> b7746db6109122309495ef310d2ea10523863689
