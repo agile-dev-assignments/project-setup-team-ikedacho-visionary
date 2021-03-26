@@ -16,6 +16,7 @@ const PostContent = (props) => {
     })
  
 
+
   const _showRepost = () => {
     let cur = state.showRepost
     setState({
@@ -32,15 +33,19 @@ const PostContent = (props) => {
 
 
   const _setLike = (e) => {
-    let cur = like.liked
+    let cur = like.liked;
     setLike({
       liked: !cur
+
     });
 
     cur == true ? e.target.style.backgroundColor = 'white' : e.target.style.backgroundColor = '#e37568'
   };
 
+  
+
   return (
+
     <div className="PostContent">
      
       <strong className = "PlatformSource">{props.source}</strong>
@@ -70,6 +75,7 @@ const PostContent = (props) => {
 
             <button className = "Likebutton" onClick = {_setLike.bind()}>{like.liked ? 'Liked' : 'Like'}</button>
             <button className = "Repostbutton" onClick = {_showRepost.bind()}>Repost</button>
+ 
             {state.showRepost && (
               <>
                 <Repost />
@@ -83,6 +89,7 @@ const PostContent = (props) => {
         </div>
       
     </div>
+
   )
 }
 
