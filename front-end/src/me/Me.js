@@ -14,7 +14,64 @@ import { Linkedin } from 'react-bootstrap-icons';
 
 
 
+
 const Me = (props) => {
+
+    const [facebook, setFacebook] = useState('connected')
+    const [twitter, setTwitter] = useState('connected')
+    const [instagram, setInstagram] = useState('connected')
+    const [youtube, setYoutube] = useState('connect')
+    const [linkedin, setLinkedin] = useState('connect')
+    
+    const handleClick1=()=>{
+        console.log('clicked')
+        if (facebook==='connect'){
+            setFacebook('connected');
+        }
+        else if (facebook==='connected'){
+            setFacebook('connect');
+        }
+    }
+   
+    const handleClick2=()=>{
+        console.log('clicked')
+        if (twitter==='connect'){
+            setTwitter('connected');
+        }
+        else if (twitter==='connected'){
+            setTwitter('connect');
+        }
+    }
+    const handleClick3=()=>{
+        console.log('clicked')
+        console.log(instagram)
+        if (instagram==='connect'){
+            setInstagram('connected');
+        }
+        else if (instagram==='connected'){
+            setInstagram('connect');
+        }
+        console.log(instagram)
+    }
+    const handleClick4=()=>{
+        console.log('clicked')
+        if (youtube==='connect'){
+            setYoutube('connected');
+        }
+        else if (youtube==='connected'){
+            setYoutube('connect');
+        }
+    }
+    const handleClick5=()=>{
+        console.log('clicked')
+        if (linkedin==='connect'){
+            setLinkedin('connected');
+        }
+        else if (linkedin==='connected'){
+            setLinkedin('connect');
+        }
+    }
+
     // start a state variable with a blank array
     const [user_info, setUser_info] = useState(
         {
@@ -110,34 +167,34 @@ const Me = (props) => {
             <div  id="main_container3">
                 <div class='icon'> 
                     <Facebook id='browse_history_icon' size={30} color="white"/>
-                            <button id="connected">
-                                Connected
-                            </button>
+                        <button id="button1" onClick={handleClick1}>
+                        {facebook}
+                        </button>
 
                 </div>
                 <div class='icon' >
                     <Twitter id='browse_history_icon' size={30} color="white"/>
-                        <button id="connected" >
-                            Connected
+                        <button id="button1" onClick={handleClick2}>
+                       {twitter}
                         </button>
                 </div>
 
                 <div class='icon'>
                     <Instagram id='browse_history_icon' size={30} color="white"/>
-                        <button id="connected">
-                        Connected
+                        <button id="button1" onClick={handleClick3} >
+                      {instagram}
                         </button>
                 </div>
                 <div class='icon'>
                     <Youtube id='browse_history_icon' size={30} color="white"/>
-                        <button id="connect">
-                        Connect
+                        <button id="button1" onClick={handleClick4}>
+                    {youtube}
                         </button>
                 </div>
                 <div class='icon'>
                     <Linkedin id='browse_history_icon' size={30} color="white"/>
-                        <button id="connect">
-                        Connect
+                        <button id="button1" onClick={handleClick5}>
+                   {linkedin}
                         </button>
                 </div>
 
