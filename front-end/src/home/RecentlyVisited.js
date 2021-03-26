@@ -9,7 +9,7 @@ const RecentlyVisited = (props) => {
     // the following side-effect will be called once upon initial render
     useEffect(() => {
 
-        axios('https://my.api.mockaroo.com/sr.json?key=2d6d6d60')
+        axios('http://localhost:3000/')
             .then((response) => {
                 // extract the data from the server response
                 setData(response.data)

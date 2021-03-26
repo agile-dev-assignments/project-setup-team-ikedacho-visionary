@@ -19,10 +19,18 @@ app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 
 // make 'public' directory publicly readable with static content
-app.use("/static", express.static("public"))
+app.use("/static", express.static("front-end/public"))
 
 
 //put routes here:
 
+// route for HTTP GET requests to the home document
+app.get("/", (req, res) => {
+    res.send("Hello!")
+})
+
+app.get("/comments", (req, res) => {
+    res.send("Hello!")
+})
 
 module.exports = app
