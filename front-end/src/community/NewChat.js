@@ -53,7 +53,7 @@ const NewChat = (props) => {
   return (
     <div className = "NewChat">
         <div className = "NewChat_back">
-            <Link to = '/community'>Back</Link>
+            <Link to = '/community' id="back">Back</Link>
         </div>
 
         <div className = "NewChat_create">
