@@ -44,7 +44,6 @@ const Me = (props) => {
     }
     const handleClick3=()=>{
         console.log('clicked')
-        console.log(instagram)
         if (instagram==='connect'){
             setInstagram('connected');
         }

@@ -134,12 +134,14 @@ const MyProfile = (props) => {
         <section>
         <section className = "main-content4">
                 {data.map((item) => (
-                        <PostContent source = {item.source} 
-                                userimg = {user_info.user_photo}
-                                UserName = {user_info.user_name}
-                                content = {item.content}
-                                Senttime = {item.Senttime} 
-                                contentimg = {item.contentimg} />
+                        <PostContent 
+                            key={item.id}
+                            source = {item.source} 
+                            userimg = {user_info.user_photo}
+                            UserName = {user_info.user_name}
+                            content = {item.content}
+                            Senttime = {item.Senttime} 
+                            contentimg = {item.contentimg} />
                     ))} 
             </section>
         </section>

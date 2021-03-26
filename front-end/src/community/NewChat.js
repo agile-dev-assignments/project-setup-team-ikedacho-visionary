@@ -65,8 +65,10 @@ const NewChat = (props) => {
         <section className = "NewChat">
             {data.map((item) => (
                 <>
-                    <NewChatSelection username = {item.username}
-                                      userimg = {item.userimg} />
+                    <NewChatSelection 
+                        key={item.id}
+                        username = {item.username}
+                        userimg = {item.userimg} />
                 </>
             ))}
         </section>

@@ -14,7 +14,7 @@ const Commented_List = (props) => {
     // fetch some mock data about animals for sale
     console.log('fetching commented_history')
 
-    axios('http://localhost:3000/')
+    axios('https://my.api.mockaroo.com/comment_history.json?key=a2ecc780')
       .then((response) => {
         // extract the data from the server response
         setData(response.data)

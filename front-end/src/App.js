@@ -50,30 +50,18 @@ function App() {
             </Route>
 
             <Route path = "/search">
-            <page>
                 <Search />
-              </page>
-              <navigator>
                 <MainNav />
-              </navigator>
             </Route>
 
             <Route path = "/community">
-            <page>
                 <Community />
-              </page>
-              <navigator>
                 <MainNav />
-              </navigator>
             </Route>
 
             <Route path = "/me">
-              <page>
                 <Me />
-              </page>
-              <navigator>
                 <MainNav />
-              </navigator>
             </Route>
 
             <Route path = "/my_comment_history">
@@ -160,12 +148,7 @@ function App() {
             <Prelogin />
                 <PreMainNav />
                 <Prehomenav />
-
-
-
             </Route>
-
-
 
             <Route path = "/prerecommend">
             <Floatingbutton/>
@@ -173,10 +156,7 @@ function App() {
 
                 <PreMainNav />
                 <Prehomenav />
-
-
             </Route>
-
 
             <Route path = "/prerecent">
             <Floatingbutton/>
@@ -189,16 +169,9 @@ function App() {
             </Route>
 
 
-
-
-
             <Route path = "/">
-              <page>
                 <Home />
-              </page>
-              <navigator>
                 <MainNav />
-              </navigator>
             </Route>
 
           </Switch>

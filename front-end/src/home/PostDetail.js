@@ -85,9 +85,10 @@ console.log(PostData[0].contentimgs[0]);
 
             <section className="comment_list">
             {data.map((item) => (
-             <Comment key = {item.id}
-                    img = {item.userimg}
-                 UserName = {item.UserName}
+             <Comment 
+                key = {item.id}
+                img = {item.userimg}
+                UserName = {item.UserName}
                 content = {item.content}
                 datetime = {item.Senttime}
               />

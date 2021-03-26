@@ -31,10 +31,12 @@ const Followings = (props) => {
             <section className = "main-content">
                 <p>
                     {data.map((item) => (
-                        <NameTag img = {item.img}
-                                 UserName = {item.UserName}
-                                 bio = {item.bio}
-                                 action = {item.action} />
+                        <NameTag 
+                            key={item.id}
+                            img = {item.img}
+                            UserName = {item.UserName}
+                            bio = {item.bio}
+                            action = {item.action} />
                     ))}
                 </p>
             </section>

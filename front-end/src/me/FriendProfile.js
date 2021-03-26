@@ -146,12 +146,14 @@ const FriendProfile = (props) => {
         <section>
         <section className = "main-content4">
                 {data.map((item) => (
-                        <PostContent source = {item.source} 
-                                userimg = {friend_info.user_photo}
-                                UserName = {friend_info.user_name}
-                                content = {item.content}
-                                Senttime = {item.Senttime} 
-                                contentimg = {item.contentimg} />
+                        <PostContent 
+                            key={item.id}
+                            source = {item.source} 
+                            userimg = {friend_info.user_photo}
+                            UserName = {friend_info.user_name}
+                            content = {item.content}
+                            Senttime = {item.Senttime} 
+                            contentimg = {item.contentimg} />
                     ))} 
             </section>
         </section>

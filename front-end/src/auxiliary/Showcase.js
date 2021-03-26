@@ -43,7 +43,9 @@ const Showcase = (props) => {
             <br></br>
 
             <div class = "postcom">
-                <PostContent UserName = "Jessica"
+                <PostContent 
+                
+                UserName = "Jessica"
                 source = "Instagram"
                 userimg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"
                 content = "Lebron James!"
@@ -53,7 +55,9 @@ const Showcase = (props) => {
             </div> 
 
 
-            <NameTag UserName = "Helen"
+            <NameTag 
+            
+            UserName = "Helen"
             img = "https://cdn.icon-icons.com/icons2/1368/PNG/512/-avatar_89781.png"
             bio = "A passionate evening brings both pleasure and pain. "
             action = "Following"

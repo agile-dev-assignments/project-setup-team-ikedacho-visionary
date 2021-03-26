@@ -11,7 +11,7 @@ const Mentions_List = (props) => {
     // the following side-effect will be called once upon initial render
     useEffect(() => {
         // fetch some mock data about animals for sale
-        console.log('fetching liked_history')
+        console.log('fetching mentions history')
 
         axios('https://my.api.mockaroo.com/mentioned_history.json?key=49286830')
             .then((response) => {
@@ -119,7 +119,9 @@ const Mentions_List = (props) => {
 
             <section className="Mentions_List">
                 {data.map((item) => (
-                    <Mentions key={item.id} details={item}/>
+                    <Mentions 
+                        key={item.id} 
+                        details={item}/>
                 ))}
 
             </section>
