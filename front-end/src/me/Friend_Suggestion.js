@@ -110,6 +110,7 @@ const Friend_Suggestion = (props) => {
         <p>
           {data.map((item) => (
             <NameTag
+              key={item.id}
               img={item.img}
               UserName={item.UserName}
               bio={item.bio}

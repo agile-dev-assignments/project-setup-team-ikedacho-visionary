@@ -33,13 +33,14 @@ componentDidMount = () =>{
             <section className = "main-content">             
 
             {this.state.data.map((item) =>
-            <PostContentPrelogin key = {item.index}
-                        source = {item.source} 
-                                userimg = {item.userimg}
-                                UserName = {item.UserName}
-                                content = {item.content}
-                                Senttime = {item.Senttime} 
-                                contentimg = {item.contentimg} />)}
+            <PostContentPrelogin 
+                key = {item.index}
+                source = {item.source} 
+                userimg = {item.userimg}
+                UserName = {item.UserName}
+                content = {item.content}
+                Senttime = {item.Senttime} 
+                contentimg = {item.contentimg} />)}
             
                     
             </section>

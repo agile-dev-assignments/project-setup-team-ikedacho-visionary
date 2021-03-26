@@ -10,7 +10,7 @@ const Recommended = (props) => {
     // the following side-effect will be called once upon initial render
     useEffect(() => {
 
-        axios('http://localhost:3000/')
+        axios('https://my.api.mockaroo.com/sr.json?key=2d6d6d60')
             .then((response) => {
                 // extract the data from the server response
                 setData(response.data)
@@ -27,7 +27,8 @@ const Recommended = (props) => {
         <div className = "Recommended">
             <section className = "main-content">
                 {data.map((item) => (
-                        <PostContent source = {item.source} 
+                        <PostContent key={item.id} 
+                                source = {item.source} 
                                 userimg = {item.userimg}
                                 UserName = {item.UserName}
                                 content = {item.content}

@@ -44,13 +44,14 @@ useEffect(() => {
         <section className = "liked-content">
             {data.map((item) => (
                     <PostContent  
-                    likeswitch = {true}
-                    source = {item.source} 
-                            userimg = {item.userimg}
-                            UserName = {item.UserName}
-                            content = {item.content}
-                            Senttime = {item.Senttime} 
-                            contentimg = {item.contentimg} />
+                        key={item.id}
+                        likeswitch = {true}
+                        source = {item.source} 
+                        userimg = {item.userimg}
+                        UserName = {item.UserName}
+                        content = {item.content}
+                        Senttime = {item.Senttime} 
+                        contentimg = {item.contentimg} />
                 ))} 
         </section>
 

@@ -18,7 +18,10 @@ const PostContent_noAction = (props) => {
         <p class = "postcontent_noAction">{props.content}</p>
         <div class="imageimport" >
         {contentimgs.map((img)=>(
-                <PostContent_img_na key ={img.id} contentimg={img} />
+                <PostContent_img_na 
+  
+                key ={img.id} 
+                contentimg={img} />
                 ))}
                 </div>
 

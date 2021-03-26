@@ -69,7 +69,8 @@ const Browse_History = (props) => {
             <div className="Browse_List">
                 <h4>today</h4>
                 {todayData.map((item) => (
-                    <Browse
+                    <Browse 
+                        key={item.id}
                         UserName={item.UserName}
                         userimg={item.userimg}
                         content={item.content}
@@ -82,6 +83,7 @@ const Browse_History = (props) => {
                 <h4>yesterday</h4>
                 {yesterdayDate.map((item) => (
                     <Browse
+                        key={item.id}
                         UserName={item.UserName}
                         userimg={item.userimg}
                         content={item.content}

@@ -94,11 +94,13 @@ const Chat = (props) => {
 
         <div className = "Chat_messages">
             {data.map((item) => (
-                <ChatMessages userimg = {item.userimg}
-                              username = {item.username}
-                              time = {item.time}
-                              fromSender = {item.fromSender}
-                              content = {item.content} />
+                <ChatMessages
+                    key={item.id}
+                    userimg = {item.userimg}
+                    username = {item.username}
+                    time = {item.time}
+                    fromSender = {item.fromSender}
+                    content = {item.content} />
             ))}
         </div>
 

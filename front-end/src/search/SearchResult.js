@@ -33,7 +33,8 @@ const SearchResult = (props) => {
       
             <section>
                 {data.map((item) => (
-                    <PostContent source = {item.source} 
+                    <PostContent key={item.id}
+                            source = {item.source} 
                              userimg = {item.userimg}
                              UserName = {item.UserName}
                              content = {item.content}

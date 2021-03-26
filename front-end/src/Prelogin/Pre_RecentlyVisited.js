@@ -26,13 +26,14 @@ const Pre_RecentlyVisited = (props) => {
         <div className = "Recently-Visited">
             <section className = "main-content">
                 {data.map((item) => (
-                        <PostContentPrelogin key = {item.id}
-                                source = {item.source} 
-                                userimg = {item.userimg}
-                                UserName = {item.UserName}
-                                content = {item.content}
-                                Senttime = {item.Senttime} 
-                                contentimg = {item.contentimg} />
+                        <PostContentPrelogin 
+                            key = {item.id}
+                            source = {item.source} 
+                            userimg = {item.userimg}
+                            UserName = {item.UserName}
+                            content = {item.content}
+                            Senttime = {item.Senttime} 
+                            contentimg = {item.contentimg} />
                     ))} 
             </section>
         </div>
