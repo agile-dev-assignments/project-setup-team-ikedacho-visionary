@@ -6,17 +6,17 @@ import ToComment from './ToComment'
 
 const PostContent = (props) => {
 
-    const [state, setState] = useState({
-        showRepost: false,
-        showComment: false
-      })
-
-    const [like, setLike] = useState({
-        liked: false
+  const [state, setState] = useState({
+      showRepost: false,
+      showComment: false
     })
+
+  const [like, setLike] = useState({
+      // check ../me/Liked.js
+      // like_switch default to be TRUE when component is called from Like History page
+      liked: props.like_switch
+  })
  
-
-
   const _showRepost = () => {
     let cur = state.showRepost
     setState({
@@ -30,19 +30,13 @@ const PostContent = (props) => {
     });
   };
 
-
-
   const _setLike = (e) => {
     let cur = like.liked;
     setLike({
       liked: !cur
-
     });
-
-    cur == true ? e.target.style.backgroundColor = 'white' : e.target.style.backgroundColor = '#e37568'
   };
 
-  
 
   return (
 
@@ -72,9 +66,9 @@ const PostContent = (props) => {
         
         <div className = "footer">
             <button className = "Commentbutton" onClick = {_showComment.bind()}>Comment</button>
-
-            <button className = "Likebutton" onClick = {_setLike.bind()}>{like.liked ? 'Liked' : 'Like'}</button>
-            <button className = "Repostbutton" onClick = {_showRepost.bind()}>Repost</button>
+            {/* inline style to show red Liked button when like_switch default to be TRUE*/}
+            <button className = "Likebutton" style = {{backgroundColor: like.liked ? '#e37568' : 'white'}} onClick = {_setLike.bind()}>{like.liked ? 'Liked' : 'Like'}</button>
+            <button className = "Repostbutton"  onClick = {_showRepost.bind()}>Repost</button>
  
             {state.showRepost && (
               <>
