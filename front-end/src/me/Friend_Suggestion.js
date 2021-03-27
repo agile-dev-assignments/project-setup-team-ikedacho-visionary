@@ -7,21 +7,37 @@ import "./Friend_Suggestion.css";
 
 const Friend_Suggestion = (props) => {
   const [data, setData] = useState([]);
+  const [title, setTitle] = useState(["People You Might Know"]);
+  const [search_name, setSearch_name] = useState([]);
 
   useEffect(() => {
     // previous developer used my mockaroo API...:
     // "https://my.api.mockaroo.com/followings.json?key=2d6d6d60"
-    axios('/friend_suggestion')
+    axios
+      .get('/friend_suggestion', {
+            params: {
+              type: title
+            }
+          })
       .then((response) => {
         // extract the data from the server response
-        setData(response.data);
+        setData(response.data.result);
+        setTitle(response.data.type)
       })
       .catch((err) => {
         /*
         const backupData = []
         setData(backupData);*/
       });
-  }, []); // only run it once!
+  }, [search_name]); // only run it once!
+
+  const _setTitle_Search_name = (val) => {
+    setSearch_name(val)
+    setTitle("Searched Result")
+    if (val == '') {
+      setTitle("People You Might Know")
+    }
+  }
 
   return (
     <div className="Friend_Suggestion">
@@ -34,12 +50,13 @@ const Friend_Suggestion = (props) => {
       </header>
 
       <div className="input-wrap">
-        <input className="input" type="text" placeholder="Search by user here"/>
+        <input className="input" type="search" placeholder="Search by user here"
+               value = {search_name} onInput = {e => _setTitle_Search_name(e.target.value)}/>
         <Search id='search_icon' color="grey" size={15} />
       </div>
 
       <section className="main-content">
-        <p className="desc">people you might know</p>
+        <p className="desc">{title}</p>
         <p>
           {data.map((item) => (
             <NameTag
