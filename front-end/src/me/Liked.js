@@ -6,6 +6,16 @@ import axios from 'axios'
 import PostContent from '../auxiliary/PostContent'
 
 const Liked = (props) => {
+
+/* 
+ENTIRE FUNCTION IS COMMENTED OUT BY XINYU-BOT 
+Because neither is correct and, 
+this part of feature needs future discussion. 
+    added time: 2021/3/27 15:58 China Time
+    author: Xinyu Xie
+*/
+
+/*
     //console.log(props);
 
   const [data, setData] = useState([])
@@ -36,11 +46,6 @@ useEffect(() => {
 
     //     <p id='comment'>Liked @{props.details.post_created_by}: {props.details.post_text}</p>
 
-
-
-
-
-
         <section className = "liked-content">
             {data.map((item) => (
                     <PostContent  
@@ -58,10 +63,37 @@ useEffect(() => {
 
 
     )
+*/
 
+    // Note that this is just a temporary solution and,
+    // we will need to discuss on this. 
+    return (
+        /*
+        <section className = "/me/Liked">
+            <PostContent  
+                key={props.id}
+                likeswitch = {true}
+                source = {props.source} 
+                userimg = {props.userimg}
+                UserName = {props.UserName}
+                content = {props.content}
+                Senttime = {props.Senttime} 
+                contentimg = {props.contentimg} />
+        </section>
+        */
+        <article className="Liked">
+             <div>
+               <Link to={`/my_profile`}>
+                 <img class='inline-block' id="avatar" src={props.details.liked_by_profile} />
+                 <h1 class='inline-block' id='username1' >{props.details.liked_by_username}</h1>
+                 </Link>
+                 <span id="commented_date">{props.details.post_date}</span>
+             </div>
+
+        <p id='comment'>Liked @{props.details.post_created_by}: {props.details.post_text}</p>
+        </article>
+    )
 }
   
-
-
 // make this function available to be imported into another module
 export default Liked
