@@ -33,6 +33,13 @@ app.get("/comments", (req, res) => {
     res.send("Hello!")
 });
 
+app.get("/my_comment_history", (req, res,next) => {
+    axios
+        .get(`https://my.api.mockaroo.com/my_comment_history.json?key=a2ecc780`)
+        .then(response=> res.json(response.data))
+        .catch((err) => next(err))
+            // temporary workaround because mockaro daily usage limit is exhausted at the moment...
+})
 app.get("/followers", (req, res) => {
     const response = axios
         .get(`${process.env.API_FOLLOWER_LIST}?key=${process.env.API_FOLLOWER_LIST_KEY}`)
