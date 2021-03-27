@@ -65,22 +65,15 @@ app.get("/followings", (req, res) => {
 })
 
 
+app.get("/getprelogin", (req, res,next) => {
+    axios
+        .get(`https://my.api.mockaroo.com/postcontent.json?key=a4705650`)
+        .then(response=> res.json(response.data))
+        .catch((err) => next(err))
+            // temporary workaround because mockaro daily usage limit is exhausted at the moment...
+})
 
-app.get("/getprelogin",(req,res) => {
-    request(
-        "https://my.api.mockaroo.com/sr.json?key=2d6d6d60",
-        function(error,response,body){
-            if(!error){
-                
-                
-                 var parseBody = JSON.parse(body);
-                 res.send(parseBody);
 
-            }
-        }
-
-    );
-});
 
 
 function isEmpty(obj) {
