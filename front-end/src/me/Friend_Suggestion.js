@@ -46,7 +46,7 @@ const Friend_Suggestion = (props) => {
       </div>
 
       <section className="main-content">
-        <p className="desc">{(search_name == "") ? "People You Might Know " : "Searched Result"}</p>
+        <p className="desc">{(search_name == "") ? "People You Might Know" : "Searched Result"}</p>
         <p>
           {data.map((item) => (
             <NameTag
