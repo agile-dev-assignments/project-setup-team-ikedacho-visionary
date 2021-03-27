@@ -16,7 +16,8 @@ const Friend_Suggestion = (props) => {
     axios
       .get('/friend_suggestion', {
             params: {
-              type: title
+              type: title,
+              searched_name: search_name
             }
           })
       .then((response) => {
