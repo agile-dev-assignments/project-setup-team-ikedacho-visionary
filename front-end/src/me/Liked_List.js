@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import Liked from './Liked'
-import PostContent from '../auxiliary/PostContent'
+
 
 const Liked_List = (props) => {
     // start a state variable with a blank array
@@ -33,9 +33,18 @@ const Liked_List = (props) => {
                 <h1 id="back">Back</h1>
             </Link>
             <h1 id='title'>Liked Content</h1>
+            
             <section className="Liked_List">
                 {data.map((item) => (
-                    <Liked key={item.id} details={item}/>
+
+                    <Liked key={item.id} 
+                           source = {item.source} 
+                           userimg = {item.userimg}
+                           UserName = {item.UserName}
+                           content = {item.content}
+                           Senttime = {item.Senttime} 
+                           contentimg = {item.contentimg} />
+
                 ))}
             </section>
         </div>
