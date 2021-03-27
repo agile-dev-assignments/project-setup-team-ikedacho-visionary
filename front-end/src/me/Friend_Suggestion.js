@@ -7,7 +7,6 @@ import "./Friend_Suggestion.css";
 
 const Friend_Suggestion = (props) => {
   const [data, setData] = useState([]);
-  const [title, setTitle] = useState(["People You Might Know"]);
   const [search_name, setSearch_name] = useState([]);
 
   useEffect(() => {
@@ -16,14 +15,12 @@ const Friend_Suggestion = (props) => {
     axios
       .get('/friend_suggestion', {
             params: {
-              type: title,
-              searched_name: search_name
+              search_name: search_name
             }
           })
       .then((response) => {
         // extract the data from the server response
         setData(response.data.result);
-        setTitle(response.data.type)
       })
       .catch((err) => {
         /*
@@ -31,14 +28,6 @@ const Friend_Suggestion = (props) => {
         setData(backupData);*/
       });
   }, [search_name]); // only run it once!
-
-  const _setTitle_Search_name = (val) => {
-    setSearch_name(val)
-    setTitle("Searched Result")
-    if (val == '') {
-      setTitle("People You Might Know")
-    }
-  }
 
   return (
     <div className="Friend_Suggestion">
@@ -52,12 +41,12 @@ const Friend_Suggestion = (props) => {
 
       <div className="input-wrap">
         <input className="input" type="search" placeholder="Search by user here"
-               value = {search_name} onInput = {e => _setTitle_Search_name(e.target.value)}/>
+               value = {search_name} onInput = {e => setSearch_name(e.target.value)}/>
         <Search id='search_icon' color="grey" size={15} />
       </div>
 
       <section className="main-content">
-        <p className="desc">{title}</p>
+        <p className="desc">{(search_name == "") ? "People You Might Know" : "Searched Result"}</p>
         <p>
           {data.map((item) => (
             <NameTag
