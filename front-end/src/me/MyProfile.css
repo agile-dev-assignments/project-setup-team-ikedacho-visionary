@@ -117,6 +117,7 @@ div.MyProfile #main_container3{
 }
 div.MyProfile #main_container3 .icon{
     background-color: rgba(195, 166, 197, 0.767);
+    padding: 0px;
     margin-left: 3%;
     margin-right: 3%;
     margin-top: 5px;
@@ -127,10 +128,19 @@ div.MyProfile #main_container3 .icon{
    
     
 }
-
-div.MyProfile #browse_history_icon,#commented-icon, #liked-icon{
+/* facebook icon, twitter icon, instagram icon */
+div.MyProfile #select_all, #facebook, #twitter, #instagram{
     position:relative;
     left:5px;
-    top:6px;
+    top:5px;
 }
+div.MyProfile #select_all_text{
+    font-size: 1em;
+    font-weight: bold;
+    color:white;
+    position: relative;
+    left:9px;
+    top:11px;
 
+  
+}
