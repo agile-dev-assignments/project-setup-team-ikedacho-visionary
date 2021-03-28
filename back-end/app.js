@@ -54,7 +54,6 @@ app.get("/my_profile", async (req, res) => {
             },
             {"id":2,"source":"facebook","content":"Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.","senttime":"9/7/2020","contentimg":"http://dummyimage.com/224x143.png/5fa2dd/ffffff"},{"id":3,"source":"instagram","content":"Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo.","senttime":"10/22/2020","contentimg":"http://dummyimage.com/219x245.png/5fa2dd/ffffff"},{"id":4,"source":"instagram","content":"Suspendisse potenti. Cras in purus eu magna vulputate luctus.","senttime":"9/30/2020","contentimg":"http://dummyimage.com/185x107.png/cc0000/ffffff"},{"id":5,"source":"twitter","content":"Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.","senttime":"7/29/2020","contentimg":"http://dummyimage.com/137x169.png/dddddd/000000"},{"id":6,"source":"twitter","content":"Nulla mollis molestie lorem.","senttime":"6/13/2020","contentimg":"http://dummyimage.com/137x202.png/dddddd/000000"},{"id":7,"source":"twitter","content":"Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros.","senttime":"1/18/2021","contentimg":"http://dummyimage.com/212x108.png/5fa2dd/ffffff"},{"id":8,"source":"facebook","content":"Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis.","senttime":"6/24/2020","contentimg":"http://dummyimage.com/232x197.png/ff4444/ffffff"},{"id":9,"source":"instagram","content":"Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.","senttime":"6/12/2020","contentimg":"http://dummyimage.com/143x282.png/5fa2dd/ffffff"},{"id":10,"source":"facebook","content":"Vivamus vel nulla eget eros elementum pellentesque.","senttime":"3/17/2021","contentimg":"http://dummyimage.com/243x125.png/dddddd/000000"
             }]//end of backup data
-        //console.log("backup data:", post_data)
     })//end of catch,axios,post_data
 
     //user_info data
@@ -75,11 +74,7 @@ app.get("/my_profile", async (req, res) => {
     let filtered_post_data=post_data.slice()
 
     if (req.query.platform_name_array!==undefined) {
-        console.log("111111")
         filtered_post_data=post_data.filter(element=>{
-           if (req.query.platform_name_array.includes(element.source)){
-               return true
-           }//end of if
         
         })//end of filtered_post_data
     }//end of if
@@ -98,7 +93,6 @@ app.get("/my_comment_history", (req, res,next) => {
         .get(`https://my.api.mockaroo.com/my_comment_history.json?key=a2ecc780`)
         .then(response=> res.json(response.data))
         .catch((err) => next(err))
-            // temporary workaround because mockaro daily usage limit is exhausted at the moment...
 })
 
 app.get("/followers", (req, res) => {
@@ -190,7 +184,7 @@ app.get("/being_mentioned", (req, res) => {
     XINYU-BOT DECIDED TO USE BACKUPDATA HERE INTENTIONALLY 
     */
     const response = axios
-        .get(`${process.env.API_BEING_MENTIONED}?key=${process.env.API_BEING_MENTIONED_KEy}`)
+        .get(`${process.env.API_BEING_MENTIONED}?key=${process.env.API_BEING_MENTIONED_KEY}`)
         //.then(response => res.json(response.data))
         .catch((err) => {/*console.log(err)*/})
 
