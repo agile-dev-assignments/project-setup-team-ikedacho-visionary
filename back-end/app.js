@@ -37,16 +37,15 @@ app.get("/my_profile", async (req, res) => {
     //post data
     let post_data=''
     await axios
-    .get('')//'correct api address: https://my.api.mockaroo.com/my_post_data.json?key=a2ecc780'.
+    .get(`${process.env.API_MY_PROFILE}?key=${process.env.API_MY_PROFILE_KEY}`)//'correct: `${process.env.API_MY_PROFILE}?key=${process.env.API_MY_PROFILE_KEY}`
     .then(apiResponse => {post_data = apiResponse.data}) //apiResponse.data 
     //I will use backup data in this version to avoid randomness of my post content caused by mockaroo and to save mockaroo day limit.
     .catch((err) => {
         console.log("Error: cannot fetch data from mockaroo api. Use backup data")
         console.log(err)
         //backup data
-        post_data =[{"id":1, "source":"instagram", "content":"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum.","senttime":"3/21/2021","contentimg":"http://dummyimage.com/250x145.png/ff4444/ffffff"
-            },{"id":2,"source":"facebook","content":"Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.","senttime":"9/7/2020","contentimg":"http://dummyimage.com/224x143.png/5fa2dd/ffffff"},{"id":3,"source":"instagram","content":"Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo.","senttime":"10/22/2020","contentimg":"http://dummyimage.com/219x245.png/5fa2dd/ffffff"},{"id":4,"source":"instagram","content":"Suspendisse potenti. Cras in purus eu magna vulputate luctus.","senttime":"9/30/2020","contentimg":"http://dummyimage.com/185x107.png/cc0000/ffffff"},{"id":5,"source":"twitter","content":"Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.","senttime":"7/29/2020","contentimg":"http://dummyimage.com/137x169.png/dddddd/000000"},{"id":6,"source":"twitter","content":"Nulla mollis molestie lorem.","senttime":"6/13/2020","contentimg":"http://dummyimage.com/137x202.png/dddddd/000000"},{"id":7,"source":"twitter","content":"Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros.","senttime":"1/18/2021","contentimg":"http://dummyimage.com/212x108.png/5fa2dd/ffffff"},{"id":8,"source":"facebook","content":"Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis.","senttime":"6/24/2020","contentimg":"http://dummyimage.com/232x197.png/ff4444/ffffff"},{"id":9,"source":"instagram","content":"Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.","senttime":"6/12/2020","contentimg":"http://dummyimage.com/143x282.png/5fa2dd/ffffff"},{"id":10,"source":"facebook","content":"Vivamus vel nulla eget eros elementum pellentesque.","senttime":"3/17/2021","contentimg":"http://dummyimage.com/243x125.png/dddddd/000000"
-            }]//end of backup data
+        post_data =[{"id":1, "source":"instagram", "content":"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum.","senttime":"3/21/2021","contentimg":"http://dummyimage.com/250x145.png/ff4444/ffffff"},{"id":2,"source":"facebook","content":"Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.","senttime":"9/7/2020","contentimg":"http://dummyimage.com/224x143.png/5fa2dd/ffffff"},{"id":3,"source":"instagram","content":"Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo.","senttime":"10/22/2020","contentimg":"http://dummyimage.com/219x245.png/5fa2dd/ffffff"},{"id":4,"source":"instagram","content":"Suspendisse potenti. Cras in purus eu magna vulputate luctus.","senttime":"9/30/2020","contentimg":"http://dummyimage.com/185x107.png/cc0000/ffffff"},{"id":5,"source":"twitter","content":"Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.","senttime":"7/29/2020","contentimg":"http://dummyimage.com/137x169.png/dddddd/000000"},{"id":6,"source":"twitter","content":"Nulla mollis molestie lorem.","senttime":"6/13/2020","contentimg":"http://dummyimage.com/137x202.png/dddddd/000000"},{"id":7,"source":"twitter","content":"Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros.","senttime":"1/18/2021","contentimg":"http://dummyimage.com/212x108.png/5fa2dd/ffffff"},{"id":8,"source":"facebook","content":"Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis.","senttime":"6/24/2020","contentimg":"http://dummyimage.com/232x197.png/ff4444/ffffff"},{"id":9,"source":"instagram","content":"Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.","senttime":"6/12/2020","contentimg":"http://dummyimage.com/143x282.png/5fa2dd/ffffff"},{"id":10,"source":"facebook","content":"Vivamus vel nulla eget eros elementum pellentesque.","senttime":"3/17/2021","contentimg":"http://dummyimage.com/243x125.png/dddddd/000000"
+                    }]//end of backup data
         //console.log("backup data:", post_data)
     })//end of catch,axios,post_data
 
@@ -63,12 +62,11 @@ app.get("/my_profile", async (req, res) => {
         "linked_social_media": ["Facebook","Twitter","Instagram"]
     }//end of user_info
 
-
-    console.log("req.query.platform_name_array:", req.query.platform_name_array)
+    //FILTER POST DATA to send back to client, based on platform user selected in frontend
+    //console.log("req.query.platform_name_array:", req.query.platform_name_array)
     let filtered_post_data=post_data.slice()
-
     if (req.query.platform_name_array!==undefined) {
-        console.log("111111")
+        //console.log("111111")
         filtered_post_data=post_data.filter(element=>{
            if (req.query.platform_name_array.includes(element.source)){
                return true
@@ -76,22 +74,35 @@ app.get("/my_profile", async (req, res) => {
         
         })//end of filtered_post_data
     }//end of if
-
+    //send back response_data which consists of user_info and filtered_post_data as post_data
     const response_data={
         "user_info" : user_info,
         "post_data" : filtered_post_data, //return the filtered data based on platform selected 
     }
     res.json(response_data)
-        
 })
 
 
-app.get("/my_comment_history", (req, res,next) => {
-    axios
-        .get(`https://my.api.mockaroo.com/my_comment_history.json?key=a2ecc780`)
-        .then(response=> res.json(response.data))
-        .catch((err) => next(err))
-            // temporary workaround because mockaro daily usage limit is exhausted at the moment...
+app.get("/my_comment_history", async (req, res)  => {
+    let response_data=''
+    
+    //without async and await, axios block will execute after res.json(response_data) which will send incorrect data back to front-end. It is because I already declared and assigned value to the variable response_data above.
+    await axios 
+    .get(`${process.env.API_MY_COMMENT_HISTOR}?key=${process.env.API_MY_COMMENT_HISTORY_KEY}`)//`Here, I intentionally misspell the variable to use backup data. Correct: ${process.env.API_MY_COMMENT_HISTORY}?key=${process.env.API_MY_COMMENT_HISTORY_KEY}`
+    .then(apiResponse => {response_data = apiResponse.data})//apiResponse.data 
+    .catch((err) => {
+        console.log("Error: cannot fetch data from mockaroo api. Use backup data")
+        console.log(err)
+        //backup data
+        response_data = [{"id":1,"post_created_by":"sgosart0","post_text":"Nunc purus. Phasellus in felis. Donec semper sapien a libero.","post_image":"http://dummyimage.com/80x80.png/5fa2dd/ffffff","commented_date":"12/23/2020","commented_content":"In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum."},{"id":2,"post_created_by":"dvellacott1","post_text":"Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy.","post_image":"http://dummyimage.com/80x80.png/ff4444/ffffff","commented_date":"2/14/2021","commented_content":"Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum."},{"id":3,"post_created_by":"alowndsbrough2","post_text":"Nam dui.","post_image":"http://dummyimage.com/80x80.jpg/5fa2dd/ffffff","commented_date":"8/15/2020","commented_content":"Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue."},{"id":4,"post_created_by":"swoodstock3","post_text":"Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.","post_image":"http://dummyimage.com/80x80.jpg/ff4444/ffffff","commented_date":"6/30/2020","commented_content":"Phasellus in felis. Donec semper sapien a libero. Nam dui."},{"id":5,"post_created_by":"riacopini4","post_text":"In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc.","post_image":"http://dummyimage.com/80x80.png/ff4444/ffffff","commented_date":"5/29/2020","commented_content":"Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum."},{"id":6,"post_created_by":"kfraniak5","post_text":"Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.","post_image":"http://dummyimage.com/80x80.jpg/dddddd/000000","commented_date":"9/19/2020","commented_content":"Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh."},{"id":7,"post_created_by":"egyrgorcewicx6","post_text":"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.","post_image":"http://dummyimage.com/80x80.bmp/dddddd/000000","commented_date":"9/24/2020","commented_content":"Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat."},{"id":8,"post_created_by":"pvinick7","post_text":"In hac habitasse platea dictumst.","post_image":"http://dummyimage.com/80x80.jpg/ff4444/ffffff","commented_date":"9/22/2020","commented_content":"Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus."},{"id":9,"post_created_by":"abillion8","post_text":"Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.","post_image":"http://dummyimage.com/80x80.jpg/5fa2dd/ffffff","commented_date":"5/6/2020","commented_content":"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio."},{"id":10,"post_created_by":"lmackellar9","post_text":"Quisque ut erat.","post_image":"http://dummyimage.com/80x80.png/dddddd/000000","commented_date":"1/12/2021","commented_content":"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla."}]
+        //console.log('backup data:',response_data)
+      
+    })//end of catch,axios
+
+    //without async and await, the following code be executed before the axios block. So the response_data will be '' as I assign to it at the beginning. So the client will not receive the correct data, but only "". 
+    //to avoid this problem, use async and await so that the following code will wait until axios block finish its work in which we get correct data and assign to response_data.
+    //console.log('response_data_end:',response_data )
+    res.json(response_data)
 })
 
 app.get("/followers", (req, res) => {
