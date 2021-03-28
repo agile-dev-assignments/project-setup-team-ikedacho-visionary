@@ -6,35 +6,26 @@ const Mentions = (props) => {
 
 
   return (
-    <article className="mentions">
+    <article className = "mentions">
 
-            <div>
-            <Link to={`/friend_profile`}>
-                <img class='inline-block' id='avatar' src={props.details.post_image} />
-                <h1 class='inline-block' id='username1' >{props.details.mentioned_by_username}</h1>
-                </Link>
-                <span id="commented_date">{props.details.mentioned_date}</span>
-            </div>
+      <div>
+          <img class = 'inline-block' id = 'avatar' src={props.details.mentioner_avatar} onClick={() => window.location.href = '/friend_profile'}/>
+          <h1 class = 'inline-block' id = 'username1' onClick={() => window.location.href = '/friend_profile'}>{props.details.mentioner_username}</h1>
+          <span id = "mentioned_date">{props.details.mentioned_date}</span>
+      </div>
 
-        <p id='like'>{props.details.mentioned_content}</p>
-
-
-
-        <Link to={`/detailpost`}>
-
-
-                <p id='post' >
-
-                <img id="post_image" src={props.details.post_image} />
-                <br></br>
-                <span id='username'>{props.details.mentioned_by_username}</span>
-                <br></br>
-                <br></br>
-                <div id='post_text'>{props.details.post_text}</div>
-                </p>
-
-
-        </Link>
+      <Link to={`/detailpost`}>
+        <p id = 'post' >
+          {/* so, we probably want the back-end/database to
+              return the first image if the post contains multiple */}
+          <img id = "post_image" src = {props.details.post_image} />
+          <br></br>
+          <span id = 'username'>{props.details.post_username}</span>
+          <br></br>
+          <br></br>
+          <div id = 'post_text'>{props.details.post_text}</div>
+        </p>
+      </Link>
 
     </article>
   )
