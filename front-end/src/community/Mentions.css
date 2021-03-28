@@ -25,7 +25,7 @@ article.mentions #avatar {
 
 }
 
-article.mentions #commented_date {
+article.mentions #mentioned_date {
     position: absolute;
     right: 10px;
     padding-top:10px ;
@@ -49,6 +49,7 @@ article.mentions #post{
 
 article.mentions #post_image{
     float: left;
+    width: 21vw;
 }
 
 article.mentions #username{
