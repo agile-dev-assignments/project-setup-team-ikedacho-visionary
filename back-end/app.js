@@ -8,7 +8,7 @@ const app = express() // instantiate an Express object
 // import some useful middleware
 const multer = require("multer") // middleware to handle HTTP POST requests with file uploads
 const axios = require("axios") // middleware for making requests to APIs
-require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
+require("dotenv").config() // load environmental variables from a hidden file named .env
 const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
 var request = require('request');
 // use the morgan middleware to log all incoming http requests
@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("front-end/public"))
 
-
+console.log(process.env);
 //put routes here:
 
 // route for HTTP GET requests to the home document
@@ -97,7 +97,7 @@ app.get("/followers", (req, res) => {
     const response = axios
         .get(`${process.env.API_FOLLOWER_LIST}?key=${process.env.API_FOLLOWER_LIST_KEY}`)
         //.then(response=> res.json(response.data))
-        .catch((err) => {/*console.log(err)*/})
+        .catch((err) => {console.log(err)})
 
     // temporary workaround because mockaro daily usage limit is exhausted at the moment...
     const backupData = [{"img":"https://robohash.org/animirationequia.bmp?size=50x50\u0026set=set1","UserName":"express.js follower","bio":"p v g t d W U J W w ","action":"unfollow"},{"img":"https://robohash.org/sedquosequi.bmp?size=50x50\u0026set=set1","UserName":"abalser1","bio":"k e x N L B C M S u ","action":"unfollow"},{"img":"https://robohash.org/ullamvoluptasiure.png?size=50x50\u0026set=set1","UserName":"agretton2","bio":"B C I S O L G x U J ","action":"unfollow"},{"img":"https://robohash.org/quiperferendisdistinctio.jpg?size=50x50\u0026set=set1","UserName":"cchaffin3","bio":"j D N E t y F X N I ","action":"unfollow"},{"img":"https://robohash.org/doloremetquaerat.png?size=50x50\u0026set=set1","UserName":"sbrosenius4","bio":"P D n U y n j E b E ","action":"unfollow"},{"img":"https://robohash.org/doloribusfugitest.png?size=50x50\u0026set=set1","UserName":"koskehan5","bio":"s b z h i R M C b W ","action":"unfollow"},{"img":"https://robohash.org/totamvoluptasoccaecati.png?size=50x50\u0026set=set1","UserName":"afrackiewicz6","bio":"u C V V n q f h C t ","action":"unfollow"},{"img":"https://robohash.org/undeevenietquidem.jpg?size=50x50\u0026set=set1","UserName":"wghidetti7","bio":"r v x W x V Y k j E ","action":"unfollow"},{"img":"https://robohash.org/porroautut.png?size=50x50\u0026set=set1","UserName":"lswaby8","bio":"D h m L d E W G j r ","action":"unfollow"},{"img":"https://robohash.org/dignissimosillumplaceat.jpg?size=50x50\u0026set=set1","UserName":"lclemerson9","bio":"D S z Y s l g z g r ","action":"unfollow"}
@@ -212,13 +212,25 @@ app.get("/liked_history", (req, res) => {
 
 
 app.get("/getprelogin", (req, res,next) => {
-    axios
-        .get(`https://my.api.mockaroo.com/postcontent.json?key=a4705650`)
-        .then(response=> res.json(response.data))
-        .catch((err) => next(err))
-            // temporary workaround because mockaro daily usage limit is exhausted at the moment...
-})
 
+    const response = axios
+    .get(`${process.env.API_PRELOGIN}?key=${process.env.API_PRELOGIN_KEY}`)
+    //.then(response=> res.json(response.data))
+    .catch((err) => {console.log(err)})
+
+// temporary workaround because mockaro daily usage limit is exhausted at the moment...
+const backupData = [{"source":"backupPlatform",
+"userimg":"https://robohash.org/laboriosamaliquamconsequuntur.jpg?size=50x50\u0026set=set1",
+"UserName":"mgalliard0",
+"content":"Aaaahhhhhh! I do not know what to say. ",
+"Senttime":"10/18/2020",
+"contentimg":"http://dummyimage.com/112x136.jpg/cc0000/ffffff"
+},{"source":"Domainer","userimg":"https://robohash.org/utculpaesse.png?size=50x50\u0026set=set1","UserName":"hrevie1","content":"Aaaahhhhhhhhhhh! I do not know what to say. ","Senttime":"4/15/2020","contentimg":"http://dummyimage.com/228x124.bmp/cc0000/ffffff"},{"source":"Ventosanzap","userimg":"https://robohash.org/etquosa.bmp?size=50x50\u0026set=set1","UserName":"avedenisov2","content":"Aaaahhhhh! I do not know what to say. ","Senttime":"2/5/2021","contentimg":"http://dummyimage.com/107x217.jpg/5fa2dd/ffffff"},{"source":"Lotlux","userimg":"https://robohash.org/inciduntatest.png?size=50x50\u0026set=set1","UserName":"fhenniger3","content":"Aaaahhhhhhhhhhhhh! I do not know what to say. ","Senttime":"3/1/2021","contentimg":"http://dummyimage.com/219x227.jpg/5fa2dd/ffffff"},{"source":"Span","userimg":"https://robohash.org/quidemquicupiditate.bmp?size=50x50\u0026set=set1","UserName":"gmacqueen4","content":"Aaaahhhhhhhhhhhhhh! I do not know what to say. ","Senttime":"5/21/2020","contentimg":"http://dummyimage.com/185x108.bmp/dddddd/000000"},{"source":"Namfix","userimg":"https://robohash.org/dolorcumqueeaque.png?size=50x50\u0026set=set1","UserName":"gmorot5","content":"Aaaahhhhhhhhhhhh! I do not know what to say. ","Senttime":"9/27/2020","contentimg":"http://dummyimage.com/223x118.jpg/5fa2dd/ffffff"},{"source":"Overhold","userimg":"https://robohash.org/oditdolorenesciunt.png?size=50x50\u0026set=set1","UserName":"mmcileen6","content":"Aaaahhhhhhhhhhhh! I do not know what to say. ","Senttime":"6/17/2020","contentimg":"http://dummyimage.com/181x111.bmp/5fa2dd/ffffff"},{"source":"Pannier","userimg":"https://robohash.org/etnobisest.jpg?size=50x50\u0026set=set1","UserName":"gthrustle7","content":"Aaaahhhhhhhhhhhhhhh! I do not know what to say. ","Senttime":"5/2/2020","contentimg":"http://dummyimage.com/161x248.png/ff4444/ffffff"},{"source":"Overhold","userimg":"https://robohash.org/oditautet.jpg?size=50x50\u0026set=set1","UserName":"rlafond8","content":"Aaaahhhhhh! I do not know what to say. ","Senttime":"3/21/2020","contentimg":"http://dummyimage.com/123x113.png/5fa2dd/ffffff"},{"source":"Bamity","userimg":"https://robohash.org/autdeleniticonsequuntur.bmp?size=50x50\u0026set=set1","UserName":"ckarleman9","content":"Aaaahhhhhh! I do not know what to say. ","Senttime":"11/14/2020","contentimg":"http://dummyimage.com/234x151.jpg/cc0000/ffffff"
+} ]
+
+res.json(backupData)
+})
+   
 
 
 // helper function, can remove anytime
