@@ -38,25 +38,25 @@ app.get("/my_profile", async (req, res) => {
     //post data
     let post_data=''
     await axios
-    .get(' ')//'correct api address: https://my.api.mockaroo.com/sr.json?key=2d6d6d60'.
+    .get('https://my.api.mockaroo.com/my_post_data.json?key=a2ecc780')//'correct api address: https://my.api.mockaroo.com/sr.json?key=2d6d6d60'.
     .then(apiResponse => {post_data = apiResponse.data}) //apiResponse.data 
     //I will use backup data in this version for save mockaroo day limit
     
     .catch((err) => {
         console.log("Error from mockaroo api. Use backup data")
-        console.log
-        post_data =[{"source":"Konklux",
-                  "userimg":"https://robohash.org/laboriosamaliquamconsequuntur.jpg?size=50x50\u0026set=set1",
-                  "UserName":"mgalliard0",
-                  "content":"Aaaahhhhhh! I do not know what to say. ",
-                  "Senttime":"10/18/2020",
-                  "contentimg":"http://dummyimage.com/112x136.jpg/cc0000/ffffff"
-                },{"source":"Domainer","userimg":"https://robohash.org/utculpaesse.png?size=50x50\u0026set=set1","UserName":"hrevie1","content":"Aaaahhhhhhhhhhh! I do not know what to say. ","Senttime":"4/15/2020","contentimg":"http://dummyimage.com/228x124.bmp/cc0000/ffffff"},{"source":"Ventosanzap","userimg":"https://robohash.org/etquosa.bmp?size=50x50\u0026set=set1","UserName":"avedenisov2","content":"Aaaahhhhh! I do not know what to say. ","Senttime":"2/5/2021","contentimg":"http://dummyimage.com/107x217.jpg/5fa2dd/ffffff"},{"source":"Lotlux","userimg":"https://robohash.org/inciduntatest.png?size=50x50\u0026set=set1","UserName":"fhenniger3","content":"Aaaahhhhhhhhhhhhh! I do not know what to say. ","Senttime":"3/1/2021","contentimg":"http://dummyimage.com/219x227.jpg/5fa2dd/ffffff"},{"source":"Span","userimg":"https://robohash.org/quidemquicupiditate.bmp?size=50x50\u0026set=set1","UserName":"gmacqueen4","content":"Aaaahhhhhhhhhhhhhh! I do not know what to say. ","Senttime":"5/21/2020","contentimg":"http://dummyimage.com/185x108.bmp/dddddd/000000"},{"source":"Namfix","userimg":"https://robohash.org/dolorcumqueeaque.png?size=50x50\u0026set=set1","UserName":"gmorot5","content":"Aaaahhhhhhhhhhhh! I do not know what to say. ","Senttime":"9/27/2020","contentimg":"http://dummyimage.com/223x118.jpg/5fa2dd/ffffff"},{"source":"Overhold","userimg":"https://robohash.org/oditdolorenesciunt.png?size=50x50\u0026set=set1","UserName":"mmcileen6","content":"Aaaahhhhhhhhhhhh! I do not know what to say. ","Senttime":"6/17/2020","contentimg":"http://dummyimage.com/181x111.bmp/5fa2dd/ffffff"},{"source":"Pannier","userimg":"https://robohash.org/etnobisest.jpg?size=50x50\u0026set=set1","UserName":"gthrustle7","content":"Aaaahhhhhhhhhhhhhhh! I do not know what to say. ","Senttime":"5/2/2020","contentimg":"http://dummyimage.com/161x248.png/ff4444/ffffff"},{"source":"Overhold","userimg":"https://robohash.org/oditautet.jpg?size=50x50\u0026set=set1","UserName":"rlafond8","content":"Aaaahhhhhh! I do not know what to say. ","Senttime":"3/21/2020","contentimg":"http://dummyimage.com/123x113.png/5fa2dd/ffffff"},{"source":"Bamity","userimg":"https://robohash.org/autdeleniticonsequuntur.bmp?size=50x50\u0026set=set1","UserName":"ckarleman9","content":"Aaaahhhhhh! I do not know what to say. ","Senttime":"11/14/2020","contentimg":"http://dummyimage.com/234x151.jpg/cc0000/ffffff"
-                }
-                ]//end of backup data
-        //console.log("backup:", backup)
-    }
-    )//end of catch,axios,post_data
+        console.log(err)
+        //backup data
+        post_data =[
+            {"id":1,
+            "source":"instagram",
+            "content":"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum.",
+            "senttime":"3/21/2021",
+            "contentimg":"http://dummyimage.com/250x145.png/ff4444/ffffff"
+            },
+            {"id":2,"source":"facebook","content":"Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.","senttime":"9/7/2020","contentimg":"http://dummyimage.com/224x143.png/5fa2dd/ffffff"},{"id":3,"source":"instagram","content":"Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo.","senttime":"10/22/2020","contentimg":"http://dummyimage.com/219x245.png/5fa2dd/ffffff"},{"id":4,"source":"instagram","content":"Suspendisse potenti. Cras in purus eu magna vulputate luctus.","senttime":"9/30/2020","contentimg":"http://dummyimage.com/185x107.png/cc0000/ffffff"},{"id":5,"source":"twitter","content":"Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.","senttime":"7/29/2020","contentimg":"http://dummyimage.com/137x169.png/dddddd/000000"},{"id":6,"source":"twitter","content":"Nulla mollis molestie lorem.","senttime":"6/13/2020","contentimg":"http://dummyimage.com/137x202.png/dddddd/000000"},{"id":7,"source":"twitter","content":"Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros.","senttime":"1/18/2021","contentimg":"http://dummyimage.com/212x108.png/5fa2dd/ffffff"},{"id":8,"source":"facebook","content":"Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis.","senttime":"6/24/2020","contentimg":"http://dummyimage.com/232x197.png/ff4444/ffffff"},{"id":9,"source":"instagram","content":"Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.","senttime":"6/12/2020","contentimg":"http://dummyimage.com/143x282.png/5fa2dd/ffffff"},{"id":10,"source":"facebook","content":"Vivamus vel nulla eget eros elementum pellentesque.","senttime":"3/17/2021","contentimg":"http://dummyimage.com/243x125.png/dddddd/000000"
+            }]//end of backup data
+        //console.log("backup data:", post_data)
+    })//end of catch,axios,post_data
 
     //user_info data
     const user_info={
@@ -68,12 +68,26 @@ app.get("/my_profile", async (req, res) => {
         "bio":"I love cat",
         "follower_number": "500",
         "following_number": "200",
-        "linked_social_media": ["Facebook","Twitter","Instagram","TikTok"]
+        "linked_social_media": ["Facebook","Twitter","Instagram"]
     }//end of user_info
+
+
+    console.log("req.query.platform_name_array:", req.query.platform_name_array)
+    let filtered_post_data=post_data.slice()
+
+    if (req.query.platform_name_array!==undefined) {
+        console.log("111111")
+        filtered_post_data=post_data.filter(element=>{
+           if (req.query.platform_name_array.includes(element.source)){
+               return true
+           }//end of if
+        
+        })//end of filtered_post_data
+    }//end of if
 
     const response_data={
         "user_info" : user_info,
-        "post_data" : post_data,
+        "post_data" : filtered_post_data, //return the filtered data based on platform selected 
     }
     res.json(response_data)
         
