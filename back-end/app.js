@@ -33,17 +33,16 @@ app.get("/comments", (req, res) => {
     res.send("Hello!")
 });
 
-//I will use backup data in this version to save mockaroo day limit.
+//I will use backup data in this version to avoid randomness of my post content caused by mockaroo and to save mockaroo day limit.
 app.get("/my_profile", async (req, res) => {
     //post data
     let post_data=''
     await axios
-    .get('https://my.api.mockaroo.com/my_post_data.json?key=a2ecc780')//'correct api address: https://my.api.mockaroo.com/sr.json?key=2d6d6d60'.
+    .get('')//'correct api address: https://my.api.mockaroo.com/my_post_data.json?key=a2ecc780'.
     .then(apiResponse => {post_data = apiResponse.data}) //apiResponse.data 
-    //I will use backup data in this version for save mockaroo day limit
-    
+    //I will use backup data in this version to avoid randomness of my post content caused by mockaroo and to save mockaroo day limit.
     .catch((err) => {
-        console.log("Error from mockaroo api. Use backup data")
+        console.log("Error: cannot fetch data from mockaroo api. Use backup data")
         console.log(err)
         //backup data
         post_data =[
