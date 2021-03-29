@@ -87,7 +87,7 @@ const MyProfile = (props) => {
     return (
         <div className = "MyProfile">
             <section id='header'>
-                <Link onClick={goTOPreviousPath}> 
+                <Link to = {'/me'}> 
                     <ChevronLeft id="back" color='black' size={17}/> 
                 </Link>
                 
@@ -105,12 +105,13 @@ const MyProfile = (props) => {
                     background picture setting: Take the following HTML form that allows users to upload files to the server as part of the POST request.  
                     Note that the form tag has an addition attribute, enctype that must be included for forms with file uploads.
                     Note also the optional multiple attribute that allows the user to upload multiple files, if desired. I am not using multiple attribute here*/}
-                <form action="/my_profile" method="POST" enctype="multipart/form-data">
-                    <input name="background_picture" type="file" />
-                    <input type="submit" value="set picture" />
+                <form className="form" action="/my_profile" method="POST" enctype="multipart/form-data">
+                    <input className="form" id="choose_file" name="background_picture" type="file" />
+                    <br></br>
+                    <input className="form"  id="form_submit"  type="submit" value="upload picture" />
                 </form>
                 
-                <img class='inline-block' id='background' src={`${user_info.background_picture}`}/> {/* src is the url to request and find static file in public/ folder. don't use /static/url !!!!!!! it cause error*/}
+                <img class='inline-block' id='background_picture' src={`${user_info.background_picture}`}/> {/* src is the url to request and find static file in public/ folder. don't use /static/url !!!!!!! it cause error*/}
 
 
                 <div id="overview">
@@ -150,7 +151,7 @@ const MyProfile = (props) => {
             
             <section>
                
-            <h1>Linked Social Medias</h1>  
+            <h1>Linked Social Media</h1>  
             <div  id="main_container3">
                 <div className='icon' id='select_all' onClick={e=> { handleClick(e.target.id) }} >  {/* target is the element clicked */}
                     <span id='select_all_text' >All</span>
