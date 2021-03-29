@@ -21,31 +21,17 @@ div.MyProfile #background_picture{
     opacity: 0.9;
     z-index: -1;
 }
-div.MyProfile .form{
+
+
+div.MyProfile #background_picture_button{
     position: relative;
-   
+    top:5px;
+    padding-top: 1px;
+    background-color: aliceblue;
     z-index: 2;
     border-radius: 10px;
-    height: 25px;
-
     border: 0px solid rgb(230, 215, 215);
-    margin-bottom: 5px;
-    font-size: 1em;
-}
-
-
-div.MyProfile #form_submit{
-    position: relative;
-
-    z-index: 2;
-    border-radius: 10px;
-    height: 25px;
-    font-size: 14pt;
-    
-    background-color: white;
-    border: 0px solid rgb(230, 215, 215);
-    margin-bottom: 5px;
-    font-size: 1em;
+    font-size: 0.85em;
 }
 
 div.MyProfile h1{

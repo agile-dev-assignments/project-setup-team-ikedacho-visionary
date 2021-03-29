@@ -6,8 +6,19 @@ import { FileEarmarkPlus } from 'react-bootstrap-icons';
 import axios from 'axios'
 import PostContent from '../auxiliary/PostContent'
 import { useHistory } from 'react-router-dom'
+import Background_picture from './Background_picture'
 
 const MyProfile = (props) => {
+    const [state, setState] = useState({
+        showComment: false
+    })
+
+    const _showComment = () => {
+        let cur = state.showComment
+        setState({
+          showComment: !cur
+        });
+      };
     /*
     const handleClick=()=>{
         console.log('clicked!')
@@ -50,7 +61,7 @@ const MyProfile = (props) => {
 
 
     let history=useHistory();
-    const goTOPreviousPath=()=>{
+        const goTOPreviousPath=()=>{
         history.goBack()
     }
 
@@ -87,10 +98,10 @@ const MyProfile = (props) => {
     return (
         <div className = "MyProfile">
             <section id='header'>
-                <Link to = {'/me'}> 
+                <Link to='/me'> 
                     <ChevronLeft id="back" color='black' size={17}/> 
-                </Link>
                 
+                </Link>
                 <h1>Me</h1>
                
 
@@ -101,15 +112,19 @@ const MyProfile = (props) => {
            
             <section id='main_container1'>
 
-                {/* Note: the form send a POST request to /my_profile.
-                    background picture setting: Take the following HTML form that allows users to upload files to the server as part of the POST request.  
-                    Note that the form tag has an addition attribute, enctype that must be included for forms with file uploads.
-                    Note also the optional multiple attribute that allows the user to upload multiple files, if desired. I am not using multiple attribute here*/}
-                <form className="form" action="/my_profile" method="POST" enctype="multipart/form-data">
-                    <input className="form" id="choose_file" name="background_picture" type="file" />
-                    <br></br>
-                    <input className="form"  id="form_submit"  type="submit" value="upload picture" />
-                </form>
+            <button className = "Commentbutton" onClick = {_showComment.bind()}>Edit picture</button>
+
+
+
+            {state.showComment && (
+              <>
+                <Background_picture />
+              </>
+            )}
+
+
+
+         
                 
                 <img class='inline-block' id='background_picture' src={`${user_info.background_picture}`}/> {/* src is the url to request and find static file in public/ folder. don't use /static/url !!!!!!! it cause error*/}
 

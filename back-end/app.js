@@ -107,7 +107,7 @@ const upload_background_picture = multer({ storage: storage })
 //Multer middleware will automatically save any uploaded files in the request into the specified directory, rename them as instructed, 
 //and make a field named req.files containing the paths to the files on the server.
 //the following code, upload.array('my_files', 1), instructs multer to store no more than 1 files, coming from an HTML element named background_picture.
-app.post("/my_profile", upload_background_picture.array("background_picture", 1), (req, res) => {
+app.post("/background_picture", upload_background_picture.array("background_picture", 1), (req, res) => {
     // check whether anything was uploaded. If success, send a response back. I will re-render my_profile page with background picture added in this case.
    
     if (req.files) {
@@ -128,6 +128,9 @@ app.post("/my_profile", upload_background_picture.array("background_picture", 1)
         res.redirect('/my_profile') //redirect to my_proile page
     
     }//end of if
+    else{//if no file is uploaded, the submit button cannot send request. 
+        
+    }
 
    
 })
