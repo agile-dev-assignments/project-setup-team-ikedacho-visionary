@@ -21,6 +21,21 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("front-end/public"))
 
+
+//user_info data
+const user_info={
+    "id": 1,
+    "user_name": "Joe",
+    "user_photo": "https://robohash.org/doloremqueofficiaet.jpg?size=50x50",
+    "background_picture":"",
+    "post_number": "116",
+    "bio":"I love cat",
+    "follower_number": "500",
+    "following_number": "200",
+    "linked_social_media": ["Facebook","Twitter","Instagram"]
+}//end of user_info
+
+
 //put routes here:
 
 // route for HTTP GET requests to the home document
@@ -49,18 +64,6 @@ app.get("/my_profile", async (req, res) => {
         //console.log("backup data:", post_data)
     })//end of catch,axios,post_data
 
-    //user_info data
-    const user_info={
-        "id": 1,
-        "user_name": "Joe",
-        "user_photo": "https://robohash.org/doloremqueofficiaet.jpg?size=50x50",
-        "background_picture":"",
-        "post_number": "116",
-        "bio":"I love cat",
-        "follower_number": "500",
-        "following_number": "200",
-        "linked_social_media": ["Facebook","Twitter","Instagram"]
-    }//end of user_info
 
     //FILTER POST DATA to send back to client, based on platform user selected in frontend
     //console.log("req.query.platform_name_array:", req.query.platform_name_array)
@@ -82,6 +85,51 @@ app.get("/my_profile", async (req, res) => {
     res.json(response_data)
 })
 
+ 
+// it tell multer to save uploaded files to disk into a directory named public/uploads, with a filename based on the current time.
+// the file storage rule function referred by a varibale called storage will be used later as parameter when we initiated a multer object.
+const storage = multer.diskStorage({
+    // set file saved destination. Multer can save uploaded files to a number of different destinations.
+    destination: function (req, file, cb) {
+        cb(null, "../front-end/public/uploads")
+    },
+    // set filename rules
+    filename: function (req, file, cb) {
+        const ext = file.mimetype.split('/')[1];
+        cb(null, file.fieldname + "_" + Date.now()+ `.${ext}`)
+    },
+})
+
+//Then instantiate a multer object "upload_background_picture" to be used in app.post("/my_profile", upload.array("background_picture", 1), (req, res)...
+//and upload_background_picture multure object use the storage rule as defined in storage variable.
+const upload_background_picture = multer({ storage: storage })
+
+//Multer middleware will automatically save any uploaded files in the request into the specified directory, rename them as instructed, 
+//and make a field named req.files containing the paths to the files on the server.
+//the following code, upload.array('my_files', 1), instructs multer to store no more than 1 files, coming from an HTML element named background_picture.
+app.post("/my_profile", upload_background_picture.array("background_picture", 1), (req, res) => {
+    // check whether anything was uploaded. If success, send a response back. I will re-render my_profile page with background picture added in this case.
+    if (req.files) {
+        // success! send data back to the client, e.g. some JSON data
+        // do something with the data we received from the client
+        const data = {
+            status: "all good",
+            message: "success, the files were uploaded!",
+            background_picture: req.files,
+        }//end of data
+        //console.log(data.background_picture);
+        /* [ { fieldname: 'background_picture', originalname: 'sky.jpg', encoding: '7bit', mimetype: 'image/jpeg', destination: 'public/uploads', filename: 'background_picture-1616974883630', path: 'public/uploads/background_picture-1616974883630',
+            size: 78269 } ] */
+        // then send a response to client with modification on data we receive from client. otherwise, it will occur 500 error.
+        // add the background image src to user_info data
+        user_info.background_picture=`/uploads/${data.background_picture[0].filename}`
+        console.log(`path:${data.background_picture[0].path}`) //'public/uploads/background_picture-1616975456180'
+        res.redirect('/my_profile') //redirect to my_proile page
+     
+    }//end of if
+})
+
+    
 
 app.get("/my_comment_history", async (req, res)  => {
     let response_data=''
