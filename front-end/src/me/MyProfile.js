@@ -6,7 +6,7 @@ import { FileEarmarkPlus } from 'react-bootstrap-icons';
 import axios from 'axios'
 import PostContent from '../auxiliary/PostContent'
 import { useHistory } from 'react-router-dom'
-// import Background_picture from './Background_picture'
+import Background_picture from './Background_picture'
 
 const MyProfile = (props) => {
     const [state, setState] = useState({
@@ -23,7 +23,6 @@ const MyProfile = (props) => {
     const handleClick=()=>{
         console.log('clicked!')
         setPlatform_name(document.getElementById('facebook-icon').getAttribute("value") )
-
     }
   */
     const handleClick=(e)=>{//e is the id of the element clicked
@@ -76,13 +75,10 @@ const MyProfile = (props) => {
     useEffect(() => {
         //request data from server once user open my_profile page
         console.log('fetching response from server')
-        
-
-        axios
-          .get('/api_my_profile', {
-                params: {
-                    platform_name_array: platform_name_array
-                }
+        axios.get('/get_my_profile', {
+            params: {
+                platform_name_array: platform_name_array
+            }
         })
         //deal with the response sent back from server
         .then((response) => {
@@ -101,7 +97,7 @@ const MyProfile = (props) => {
     return (
         <div className = "MyProfile">
             <section id='header'>
-                <Link to='/me'> 
+                <Link onClick={goTOPreviousPath}> 
                     <ChevronLeft id="back" color='black' size={17}/> 
                 
                 </Link>
@@ -121,8 +117,7 @@ const MyProfile = (props) => {
 
             {state.showComment && (
               <>
-                {//<Background_picture />
-                }
+                <Background_picture />
               </>
             )}
 
