@@ -109,6 +109,7 @@ const upload_background_picture = multer({ storage: storage })
 //the following code, upload.array('my_files', 1), instructs multer to store no more than 1 files, coming from an HTML element named background_picture.
 app.post("/my_profile", upload_background_picture.array("background_picture", 1), (req, res) => {
     // check whether anything was uploaded. If success, send a response back. I will re-render my_profile page with background picture added in this case.
+   
     if (req.files) {
         // success! send data back to the client, e.g. some JSON data
         // do something with the data we received from the client
@@ -125,8 +126,10 @@ app.post("/my_profile", upload_background_picture.array("background_picture", 1)
         user_info.background_picture=`/uploads/${data.background_picture[0].filename}`
         console.log(`path:${data.background_picture[0].path}`) //'public/uploads/background_picture-1616975456180'
         res.redirect('/my_profile') //redirect to my_proile page
-     
+    
     }//end of if
+
+   
 })
 
     
