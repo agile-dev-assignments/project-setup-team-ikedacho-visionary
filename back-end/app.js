@@ -27,7 +27,7 @@ const user_info={
     "id": 1,
     "user_name": "Joe",
     "user_photo": "https://robohash.org/doloremqueofficiaet.jpg?size=50x50",
-    "background_picture":"",
+    "background_picture":"https://resilientblog.co/wp-content/uploads/2019/07/sky-quotes.jpg",
     "post_number": "116",
     "bio":"I love cat",
     "follower_number": "500",
@@ -129,7 +129,7 @@ app.post("/background_picture", upload_background_picture.array("background_pict
     
     }//end of if
     else{//if no file is uploaded, the submit button cannot send request. 
-        
+        res.redirect('/my_profile')
     }
 
    
