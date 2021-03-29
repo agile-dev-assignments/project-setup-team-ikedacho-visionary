@@ -76,10 +76,13 @@ const MyProfile = (props) => {
     useEffect(() => {
         //request data from server once user open my_profile page
         console.log('fetching response from server')
-        axios.get('/my_profile', {
-            params: {
-                platform_name_array: platform_name_array
-            }
+        
+
+        axios
+          .get('/api_my_profile', {
+                params: {
+                    platform_name_array: platform_name_array
+                }
         })
         //deal with the response sent back from server
         .then((response) => {

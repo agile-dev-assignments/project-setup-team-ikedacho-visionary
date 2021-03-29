@@ -16,7 +16,7 @@ const Liked_List = (props) => {
 
     // 'https://my.api.mockaroo.com/liked_history.json?key=a2ecc780'
     axios
-      .get('/being_liked', {
+      .get('/api_being_liked', {
         params: {
           /* INTENTIONALLY ADDED AS BLANK BY XINYU-BOT FOR POTENTIAL FUTURE NEED */
         }

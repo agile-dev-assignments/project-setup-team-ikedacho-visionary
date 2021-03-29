@@ -13,7 +13,7 @@ const Prelogin = (props) => {
   useEffect(() => {
     // fetch some mock data about animals for sale
     console.log('fetching my comment history')
-    axios('/getprelogin')
+    axios('/api_getprelogin')
       .then((response) => {
         // extract the data from the server response
         setData(response.data)

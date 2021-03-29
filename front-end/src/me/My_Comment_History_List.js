@@ -15,7 +15,7 @@ const My_Comment_History_List = (props) => {
   useEffect(() => {
     // fetch some mock data about animals for sale
     console.log('fetching my comment history')
-    axios('/my_comment_history')
+    axios('/api_my_comment_history')
       .then((response) => {
         // extract the data from the server response
         setData(response.data)

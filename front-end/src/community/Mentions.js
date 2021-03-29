@@ -27,7 +27,7 @@ const Mentions = (props) => {
         </p>
       </Link>
 
-    </article>
+    </article> 
   )
 }
 

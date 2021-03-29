@@ -11,7 +11,7 @@ const Pre_Recommended = (props) => {
     useEffect(() => {
 
         console.log('fetching posts recommended')
-        axios('/getprelogin_recommended')
+        axios('/api_getprelogin_recommended')
           .then((response) => {
             // extract the data from the server response
             setData(response.data)

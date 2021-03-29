@@ -10,7 +10,7 @@ const Followings = (props) => {
 
     useEffect(() => {
         // 'https://my.api.mockaroo.com/followings.json?key=2d6d6d60'
-        axios('/followings')
+        axios('/api_followings')
             .then((response) => {
                 // extract the data from the server response
                 setData(response.data)

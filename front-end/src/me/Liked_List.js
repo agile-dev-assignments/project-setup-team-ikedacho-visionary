@@ -11,7 +11,7 @@ const Liked_List = (props) => {
     useEffect(() => {
         // 'https://my.api.mockaroo.com/liked_history.json?key=49286830'
         axios
-            .get('/liked_history', {
+            .get('/api_liked_history', {
             params: {
                 /* INTENTIONALLY ADDED AS BLANK BY XINYU-BOT FOR POTENTIAL FUTURE NEED */
             }
