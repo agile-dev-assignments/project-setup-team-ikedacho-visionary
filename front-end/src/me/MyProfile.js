@@ -6,7 +6,7 @@ import { FileEarmarkPlus } from 'react-bootstrap-icons';
 import axios from 'axios'
 import PostContent from '../auxiliary/PostContent'
 import { useHistory } from 'react-router-dom'
-import Background_picture from './Background_picture'
+// import Background_picture from './Background_picture'
 
 const MyProfile = (props) => {
     const [state, setState] = useState({
@@ -121,7 +121,8 @@ const MyProfile = (props) => {
 
             {state.showComment && (
               <>
-                <Background_picture />
+                {//<Background_picture />
+                }
               </>
             )}
 
