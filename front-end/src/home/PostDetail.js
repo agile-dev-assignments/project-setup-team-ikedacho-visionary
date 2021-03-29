@@ -4,11 +4,17 @@ import PostContent_noAction from '../auxiliary/PostContent_noAction'
 import './PostDetail.css'
 import { Link } from 'react-router-dom'
 import Comment from '../auxiliary/Comment'
-import { useHistory } from 'react-router-dom'
+import { useHistory,useLocation } from 'react-router-dom'
 
 
 const PostDetail = (props) => {
         let history=useHistory();
+        const {state} = useLocation();
+    //     props =
+    // (props.location && props.location.props) || {};
+
+    // setData(props.location.props);
+    // console.log(props.location.props);
         const goTOPreviousPath=()=>{
             history.goBack()
         }
@@ -17,12 +23,18 @@ const PostDetail = (props) => {
             "username":"cgilligan0",
             "user_photo":"https://robohash.org/doloremqueofficiaet.jpg?size=50x50\u0026set=set1",
             "Content":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.",
-            "contentimgs":["https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2019/07/Man-Silhouette.jpg","https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2019/07/Man-Silhouette.jpg"],
+            "contentimg":["https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2019/07/Man-Silhouette.jpg","https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2019/07/Man-Silhouette.jpg"],
             "post_date":"4/19/2020"
         
         }
 
+  
+
         ])
+        useEffect(() => {
+        setPostData(state);
+            }, []) // only run it once!
+        console.log(state);
         const [data, setData] = useState([
 
             {"id":1,
@@ -51,8 +63,7 @@ const PostDetail = (props) => {
             }, []) // only run it once!
   
 
-console.log("loadingpage");
-console.log(PostData[0].contentimgs[0]);
+
 
 
     return (
@@ -67,12 +78,12 @@ console.log(PostData[0].contentimgs[0]);
         <div className = "Postfield">
             <section className = "main-content">
                 <PostContent_noAction 
-            source = {PostData[0].source} 
-            userimg = {PostData[0].user_photo}
-            UserName = {PostData[0].username}
-            content = {PostData[0].Content}
-            Senttime = {PostData[0].post_date}
-            contentimg = {PostData[0].contentimgs}
+            source = {PostData.source} 
+            userimg = {PostData.userimg}
+            UserName = {PostData.UserName}
+            content = {PostData.content}
+            Senttime = {PostData.Senttime}
+            contentimg = {PostData.contentimg}
             />
 
 
