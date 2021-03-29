@@ -2,9 +2,11 @@ import './PostContent.css'
 import Repost from './ToRepost'
 import React, { useState } from 'react'
 import ToComment from './ToComment'
-
-
+import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom'
+import { createBrowserHistory } from "history";
 const PostContent = (props) => {
+  const history = createBrowserHistory({forceRefresh:true});
 
   const [state, setState] = useState({
       showRepost: false,
@@ -37,7 +39,13 @@ const PostContent = (props) => {
     });
   };
 
-
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+   history.push({
+      pathname: '/detailpost',
+      state:props
+    });
+  };
   return (
 
     <div className="PostContent">
@@ -56,8 +64,10 @@ const PostContent = (props) => {
       
       </div>
 
-      <div onClick={() => window.location.href = '/detailpost'}>
-      
+      <div
+        title="Go to Details"
+        onClick={handleOnSubmit.bind()}
+      >
         <p className = "postcontent">{props.content}</p>
         <img className="contentimg" src={props.contentimg} />
 

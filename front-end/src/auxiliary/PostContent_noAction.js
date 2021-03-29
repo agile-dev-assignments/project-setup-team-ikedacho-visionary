@@ -6,7 +6,7 @@ const PostContent_noAction = (props) => {
    contentimgs=props.contentimg;
   return (
     <div class="PostContent_noAction">
-        <strong class="PlatformSource">{props.source}</strong>
+        <strong class="PlatformSource_noAction">{props.source}</strong>
         <div class = "block_noAction">
     <img class="userimg" src={props.userimg} />
         <div class="Text">
@@ -16,14 +16,16 @@ const PostContent_noAction = (props) => {
 </div>
 
         <p class = "postcontent_noAction">{props.content}</p>
-        <div class="imageimport" >
+      
+        <img className="contentimg" src={props.contentimg} />
+        {/* <div class="imageimport" >
         {contentimgs.map((img)=>(
                 <PostContent_img_na 
   
                 key ={img.id} 
                 contentimg={img} />
                 ))}
-                </div>
+                </div> */}
 
     </div>
   )
