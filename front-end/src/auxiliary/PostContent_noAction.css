@@ -40,8 +40,11 @@
 }
 
 .PlatformSource_noAction{
-    align-self:flex-end;
+    position: absolute;
+    right:50px;
+
 }
+
 
 .footer_noAction{
     padding-left:70px;
