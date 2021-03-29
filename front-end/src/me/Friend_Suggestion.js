@@ -13,14 +13,14 @@ const Friend_Suggestion = (props) => {
     // previous developer used my mockaroo API...:
     // "https://my.api.mockaroo.com/followings.json?key=2d6d6d60"
     axios
-      .get('/friend_suggestion', {
+      .get('api_friend_suggestion', {
             params: {
               search_name: search_name
             }
           })
       .then((response) => {
         // extract the data from the server response
-        setData(response.data.result);
+        setData(response.data);
       })
       .catch((err) => {
         /*

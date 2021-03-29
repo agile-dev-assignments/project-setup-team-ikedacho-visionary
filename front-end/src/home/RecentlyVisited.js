@@ -9,7 +9,7 @@ const RecentlyVisited = (props) => {
     // the following side-effect will be called once upon initial render
     useEffect(() => {
 
-        axios('/recent')
+        axios('/api_recent')
         .then((response) => {
           // extract the data from the server response
           setData(response.data)

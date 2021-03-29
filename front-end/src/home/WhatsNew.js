@@ -10,7 +10,7 @@ const WhatsNew = (props) => {
     // the following side-effect will be called once upon initial render
     useEffect(() => {
 
-        axios('/whatsnew')
+        axios('/api_whatsnew')
         .then((response) => {
           // extract the data from the server response
           setData(response.data)

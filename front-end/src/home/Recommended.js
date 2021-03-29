@@ -10,7 +10,7 @@ const Recommended = (props) => {
     // the following side-effect will be called once upon initial render
     useEffect(() => {
 
-        axios('/recommended')
+        axios('/api_recommended')
         .then((response) => {
           // extract the data from the server response
           setData(response.data)

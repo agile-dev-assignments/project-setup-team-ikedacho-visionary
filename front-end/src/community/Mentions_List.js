@@ -13,7 +13,7 @@ const Mentions_List = (props) => {
         
         // 'https://my.api.mockaroo.com/mentioned_history.json?key=49286830'
         axios
-            .get("/being_mentioned", {
+            .get("/api_being_mentioned", {
                 params: {
                     /* INTENTIONALLY LEFT AS BLANK BY XINYU-BOT */
                 }

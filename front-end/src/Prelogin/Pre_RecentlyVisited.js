@@ -9,7 +9,7 @@ const Pre_RecentlyVisited = (props) => {
     // the following side-effect will be called once upon initial render
     useEffect(() => {
 
-        axios('/getprelogin_recent')
+        axios('/api_getprelogin_recent')
         .then((response) => {
           // extract the data from the server response
           setData(response.data)

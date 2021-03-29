@@ -82,7 +82,7 @@ const MyProfile = (props) => {
         console.log('fetching response from server')
         
 
-        axios.get('/my_profile', {
+        axios.get('/api_my_profile', {
             params: {
                 platform_name_array: platform_name_array
             }
