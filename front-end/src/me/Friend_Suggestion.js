@@ -13,7 +13,7 @@ const Friend_Suggestion = (props) => {
     // previous developer used my mockaroo API...:
     // "https://my.api.mockaroo.com/followings.json?key=2d6d6d60"
     axios
-      .get('api_friend_suggestion', {
+      .get('/api_friend_suggestion', {
             params: {
               search_name: search_name
             }

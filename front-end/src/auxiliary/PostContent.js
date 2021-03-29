@@ -5,8 +5,10 @@ import ToComment from './ToComment'
 import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom'
 import { createBrowserHistory } from "history";
+
 const PostContent = (props) => {
-  const history = createBrowserHistory({forceRefresh:true});
+
+  const history = createBrowserHistory({forceRefresh:true})
 
   const [state, setState] = useState({
       showRepost: false,
@@ -23,29 +25,45 @@ const PostContent = (props) => {
     let cur = state.showRepost
     setState({
       showRepost: !cur
-    });
-  };
+    })
+  }
+
   const _showComment = () => {
     let cur = state.showComment
     setState({
       showComment: !cur
-    });
-  };
+    })
+  }
 
-  const _setLike = (e) => {
+  const _setLike = () => {
     let cur = like.liked;
     setLike({
       liked: !cur
-    });
-  };
+    })
+  }
 
-  const handleOnSubmit = (event) => {
-    event.preventDefault();
-   history.push({
+  const _PostDetail_with_param = (event) => {
+    event.preventDefault()
+    history.push({
       pathname: '/detailpost',
-      state:props
-    });
-  };
+      state: props
+    })
+  }
+
+
+
+  const _Friend_Profile_with_param = (event) => {
+    event.preventDefault()
+    const params = {
+      UserName: props.UserName,
+      userimg: props.userimg
+    }
+    history.push({
+      pathname: '/friend_profile',
+      state: params
+    })
+  }
+
   return (
 
     <div className="PostContent">
@@ -54,25 +72,25 @@ const PostContent = (props) => {
     
       <div className = "block">
      
-          <img className = "userimg" onClick={() => window.location.href = '/friend_profile'} src = {props.userimg} />
+          <img className = "userimg" onClick={_Friend_Profile_with_param.bind()} src = {props.userimg} />
         
         
         <div className="Text">
-          <strong className = "username" onClick={() => window.location.href = '/friend_profile'}>{props.UserName}</strong>
+          <strong className = "username" onClick={_Friend_Profile_with_param.bind()}>{props.UserName}</strong>
           <p className = "time">{props.Senttime}</p>
         </div>
       
       </div>
 
       <div
-        title="Go to Details"
-        onClick={handleOnSubmit.bind()}
+        title = "Go to Details"
+        onClick = {_PostDetail_with_param.bind()}
       >
         <p className = "postcontent">{props.content}</p>
         <img className="contentimg" src={props.contentimg} />
 
 
-        </div>
+      </div>
         
         <div className = "footer">
             <button className = "Commentbutton" onClick = {_showComment.bind()}>Comment</button>
