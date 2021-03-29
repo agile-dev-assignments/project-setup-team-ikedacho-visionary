@@ -37,7 +37,6 @@ const user_info={
 //put routes here:
 
 // route for HTTP GET requests to the home document
-
 //I will use backup data in this version to avoid randomness of my post content caused by mockaroo and to save mockaroo day limit.
 
 app.get("/get_my_profile", async (req, res) => {
