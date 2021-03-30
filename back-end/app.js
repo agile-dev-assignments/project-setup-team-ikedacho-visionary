@@ -39,6 +39,32 @@ const user_info={
 // route for HTTP GET requests to the home document
 //I will use backup data in this version to avoid randomness of my post content caused by mockaroo and to save mockaroo day limit.
 
+app.post('/newuser', function(req, res) {
+    const newuser = {
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      password_confirmation: req.body.password_confirmation
+    };
+
+  
+   // users.push(newusers);
+   if(newuser.password == newuser.password_confirmation){
+        res.send({
+            status: "created"
+        })
+         // users.push(newusers);
+         //res.send("created") 
+   }
+   else{
+    res.send({
+        status: "password does not match"
+    })
+   }
+    console.log(newuser);
+
+  });
+
 app.get("/get_my_profile", async (req, res) => {
 
     //post data
