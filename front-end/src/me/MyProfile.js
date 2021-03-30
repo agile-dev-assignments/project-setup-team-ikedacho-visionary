@@ -6,7 +6,7 @@ import { FileEarmarkPlus } from 'react-bootstrap-icons';
 import axios from 'axios'
 import PostContent from '../auxiliary/PostContent'
 import { useHistory } from 'react-router-dom'
-// import Background_picture from './Background_picture'
+import Background_picture from './Background_picture'
 
 const MyProfile = (props) => {
     const [state, setState] = useState({
@@ -79,7 +79,7 @@ const MyProfile = (props) => {
         
 
         axios
-          .get('/api_my_profile', {
+          .get('/get_my_profile', {
                 params: {
                     platform_name_array: platform_name_array
                 }
@@ -101,7 +101,7 @@ const MyProfile = (props) => {
     return (
         <div className = "MyProfile">
             <section id='header'>
-                <Link to='/me'> 
+                <Link onClick={goTOPreviousPath}> 
                     <ChevronLeft id="back" color='black' size={17}/> 
                 
                 </Link>
@@ -121,7 +121,7 @@ const MyProfile = (props) => {
 
             {state.showComment && (
               <>
-                {//<Background_picture />
+                {<Background_picture />
                 }
               </>
             )}
