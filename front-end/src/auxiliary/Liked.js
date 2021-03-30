@@ -10,10 +10,16 @@ const Liked = (props) => {
     <article className="liked">
         
             <div>
-            <Link to={`/friend_profile`}>
+            <Link to = {{
+                pathname: '/friend_profile', 
+                state: {
+                    UserName: props.details.liked_by_username, 
+                    userimg: props.details.liked_by_profile_image
+                }}
+              }>   
                 <img class='inline-block' id='avatar' src={props.details.liked_by_profile_image} />
                 <h1 class='inline-block' id='username1' >{props.details.liked_by_username}</h1>
-                </Link>
+              </Link>
                 <span id="commented_date">{props.details.liked_date}</span>
             </div>
         

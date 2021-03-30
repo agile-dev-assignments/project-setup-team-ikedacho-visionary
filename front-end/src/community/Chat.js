@@ -22,8 +22,15 @@ const Chat = (props) => {
             <>  
                 {props.fromSender && (
                     <div className = "Chat_from_others">
-                        <img className = "Chat_avatar" src = {props.userimg} 
-                             onClick={() => window.location.href = '/friend_profile'}/>
+                        <Link to = {{
+                            pathname: '/friend_profile', 
+                            state: {
+                                UserName: props.username, 
+                                userimg: props.userimg
+                            }}
+                        }>                        
+                            <img className = "Chat_avatar" src = {props.userimg}/>
+                        </Link>
                         <p>{props.username}</p>
                         <p>{props.time}</p>
                         <p className = "Chat_from_others">{props.content}</p>
@@ -32,8 +39,19 @@ const Chat = (props) => {
 
                 {!props.fromSender && (
                     <div className = "Chat_from_self">
-                        <img className = "Chat_avatar" src = {props.userimg} 
-                             onClick={() => window.location.href = '/my_profile'} />
+                        <Link to = {{
+                            pathname: '/my_profile', 
+                            /*
+                            For my_profile page, we probably don't need to pass in param
+                            But for structural purposes, state: {} will remain here until the final launch
+                            state: {
+                                UserName: props.username, 
+                                userimg: props.userimg
+                            }
+                            */}
+                        }> 
+                            <img className = "Chat_avatar" src = {props.userimg} />
+                        </Link>
                         <p>{props.time}</p>
                         <p className = "Chat_from_self">{props.content}</p>
                     </div>

@@ -9,7 +9,13 @@ const Message_History = (props) => {
     <article className="Message_History">
       <div id='message'>
         <p id='message_text' >
-            <Link to = {'/friend_profile'}>
+            <Link to = {{
+              pathname: '/friend_profile', 
+              state: {
+                  UserName: props.details.username, 
+                  userimg: props.details.user_photo
+              }}
+            }>
               <img class='inline-block' id='avatar' src={props.details.user_photo} />
             </Link>
 

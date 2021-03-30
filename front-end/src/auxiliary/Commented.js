@@ -9,7 +9,13 @@ const Commented = (props) => {
     <article className="commented">
 
             <div>
-              <Link to={`/friend_profile`}>
+              <Link to = {{
+                pathname: '/friend_profile', 
+                state: {
+                    UserName: props.details.commented_by_username, 
+                    userimg: props.details.commented_by_profile_image
+                }}
+              }>   
                 <img class='inline-block' id='avatar' src={props.details.commented_by_profile_image} />
                 <h1 class='inline-block' id='username1' >{props.details.commented_by_username}</h1>
               </Link>
