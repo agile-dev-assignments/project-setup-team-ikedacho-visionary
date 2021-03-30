@@ -73,7 +73,6 @@ app.get("/api_my_profile", async (req, res) => {
     res.json(response_data)
 })
 
- 
 // it tell multer to save uploaded files to disk into a directory named public/uploads, with a filename based on the current time.
 // the file storage rule function referred by a varibale called storage will be used later as parameter when we initiated a multer object.
 const storage = multer.diskStorage({
@@ -118,9 +117,7 @@ app.post("/background_picture", upload_background_picture.array("background_pict
     }//end of if
     else{//if no file is uploaded, the submit button cannot send request. 
         res.redirect('/my_profile')
-    }
-
-   
+    }   
 })
 
 app.get("/api_my_comment_history", async (req, res)  => {
@@ -290,7 +287,6 @@ app.get("/api_getprelogin_recommended", async (req, res, next) => {
         })
     res.json(ret)
 })
-
 
 app.get("/api_getprelogin_recent", async (req, res, next) => {
     let ret = {}
