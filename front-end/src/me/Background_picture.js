@@ -15,7 +15,8 @@ const Background_picture = (props) => {
             Note also the optional multiple attribute that allows the user to upload multiple files, if desired. I am not using multiple attribute here*/}
 
             <form className="form" action="/post_background_picture" method="POST" enctype="multipart/form-data">
-                <input className="form" id="choose_file" name="background_picture" type="file" />
+                {/*client-side form validation using require attribute. user must select one form before submiting the form. Otherwise, it will cause 500 error*/}
+                <input className="form" id="choose_file" name="background_picture" type="file" required / >
                <br></br>
                 <input className="form"  id="form_submit"  type="submit" value="Submit" />
 
