@@ -279,6 +279,26 @@ app.get("/api_liked_history", async (req, res) => {
     res.json(ret)
 })
 
+app.get("/api_chat_messages", async (req, res) => {
+    let ret = {}
+    const user_name = req.query.user_name
+    const user_photo = req.query.user_photo
+
+    /* 
+    For this API, as for March 30, we still not have database yet, so I use hard coded backup data directly
+    with API_CHAT_MESSAGES and API_CHAT_MESSAGES_KEY actually being empty string
+    */
+    await axios
+        .get(`${process.env.API_CHAT_MESSAGES}?key=${process.env.API_CHAT_MESSAGES_KEY}`)
+        .then(apiResponse => ret = apiResponse.data)
+        .catch((err) => {
+            const backupData = [{"userimg": `${user_photo}`,"username": `${user_name}`,"time": "03/22/2021 11:00 AM","fromSender": true,"content": "Hi. "},{"userimg": "https://gravatar.com/avatar/412dd18bd4b3e7b5ff96752e42a767c9?s=200&d=robohash&r=x","username": "Tom","time": "03/22/2021 11:01 AM","fromSender": false,"content": "Hi there. "},{"userimg": `${user_photo}`,"username": `${user_name}`,"time": "03/22/2021 11:02 AM","fromSender": `${true}`,"content": "How are you? "},{"userimg": "https://gravatar.com/avatar/412dd18bd4b3e7b5ff96752e42a767c9?s=200&d=robohash&r=x","username": "Tom","time": "03/22/2021 2:00 PM","fromSender": false,"content": "Bye... "},{"userimg": `${user_photo}`,"username": `${user_name}`,"time": "03/22/2021 2:05 PM","fromSender": true,"content": "Ok... "}]
+            ret = backupData
+        })
+
+    res.json(ret)
+})
+
 app.get("/api_getprelogin", async (req, res, next) => {
     let ret = {}
 

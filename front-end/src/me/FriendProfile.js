@@ -10,10 +10,12 @@ import { Youtube } from 'react-bootstrap-icons';
 import { Linkedin } from 'react-bootstrap-icons';
 import axios from 'axios'
 import PostContent from '../auxiliary/PostContent'
+import { createBrowserHistory } from "history";
 
 
 const FriendProfile = (props) => {
   
+    const _history = createBrowserHistory({forceRefresh:true})
     let history = useHistory();
     const {state} = useLocation()
 
@@ -60,11 +62,11 @@ const FriendProfile = (props) => {
                         <br></br>
 
                         <span id='post_follow'>
-                            <Link id='button' to = '/my_profile'>
+                            {/*<Link id='button' to = '/my_profile'>*/}
                                 {friend_info.post_number}
                                 <br></br>
                                 Posts
-                            </Link>
+                            {/*</Link>*/}
 
                             <Link id='button' to = '/followers'>
                                 {friend_info.follower_number}
@@ -86,10 +88,17 @@ const FriendProfile = (props) => {
                             Following
                     </button>
                     
-                    <button id='button2' onClick={() => window.location.href = '/chat'}>
-                            Chat
-                    </button>
-                    
+                    <Link to = {{
+                                pathname: '/chat', 
+                                state: {
+                                    user_name: friend_info.user_name, 
+                                    user_photo: friend_info.user_photo
+                                }}
+                    }>
+                        <button id='button2' onClick={() => {}}>
+                                Chat
+                        </button>
+                    </Link>
                 </div >
             </section>
             
