@@ -10,12 +10,11 @@ import { Youtube } from 'react-bootstrap-icons';
 import { Linkedin } from 'react-bootstrap-icons';
 import axios from 'axios'
 import PostContent from '../auxiliary/PostContent'
-import { createBrowserHistory } from "history";
+
 
 
 const FriendProfile = (props) => {
-  
-    const _history = createBrowserHistory({forceRefresh:true})
+
     let history = useHistory();
     const {state} = useLocation()
 
