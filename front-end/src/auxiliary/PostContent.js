@@ -50,8 +50,6 @@ const PostContent = (props) => {
     })
   }
 
-
-
   const _Friend_Profile_with_param = (event) => {
     event.preventDefault()
     const params = {

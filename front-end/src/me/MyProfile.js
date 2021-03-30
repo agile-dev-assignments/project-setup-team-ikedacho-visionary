@@ -142,11 +142,11 @@ const MyProfile = (props) => {
                        
 
                         <span id='post_follow'>
-                        <Link id='button' to = '/my_profile'>
+                        {/*<Link id='button' to = '/my_profile'>*/}
                         {user_info.post_number}
                             <br></br>
                             Posts
-                        </Link>
+                        {/*</Link>*/}
 
                         <Link id='button' to = '/followers'>
                         {user_info.follower_number}

@@ -2,12 +2,20 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import './Chat.css'
+import { useHistory, useLocation } from 'react-router-dom'
 
 const Chat = (props) => {
     // start a state variable with a blank array
     const [data, setData] = useState([])
+    const history = useHistory()
+    const {state} = useLocation();
 
+    // go back to the previous page
+    const goTOPreviousPath = () => {
+        history.goBack()
+    }
 
+    // nested component
     const ChatMessages = (props) => {
 
         return (
@@ -36,59 +44,28 @@ const Chat = (props) => {
 
     // the following side-effect will be called once upon initial render
     useEffect(() => {
-
-        axios('https://my.api.mockaroo.com/chat.json?key=2d6d6d60_')
-        .then((response) => {
-            // extract the data from the server response
-            setData(response.data)
-        })
-        .catch((err) => {
-            const backupData = [
-                {
-                    "userimg": "https://gravatar.com/avatar/3ab0a552855dd378a994d72beeaf7ed6?s=200&d=robohash&r=x",
-                    "username": "Bob",
-                    "time": "03/22/2021 11:00 AM",
-                    "fromSender": true,
-                    "content": "Hi. "
-                },
-                {
-                    "userimg": "https://gravatar.com/avatar/412dd18bd4b3e7b5ff96752e42a767c9?s=200&d=robohash&r=x",
-                    "username": "Tom",
-                    "time": "03/22/2021 11:01 AM",
-                    "fromSender": false,
-                    "content": "Hi there. "
-                },
-                {
-                    "userimg": "https://gravatar.com/avatar/3ab0a552855dd378a994d72beeaf7ed6?s=200&d=robohash&r=x",
-                    "username": "Bob",
-                    "time": "03/22/2021 11:02 AM",
-                    "fromSender": true,
-                    "content": "How are you? "
-                },
-                {
-                    "userimg": "https://gravatar.com/avatar/412dd18bd4b3e7b5ff96752e42a767c9?s=200&d=robohash&r=x",
-                    "username": "Tom",
-                    "time": "03/22/2021 2:00 PM",
-                    "fromSender": false,
-                    "content": "Bye... "
-                },
-                {
-                    "userimg": "https://gravatar.com/avatar/3ab0a552855dd378a994d72beeaf7ed6?s=200&d=robohash&r=x",
-                    "username": "Bob",
-                    "time": "03/22/2021 2:05 PM",
-                    "fromSender": true,
-                    "content": "Ok... "
+        // 'https://my.api.mockaroo.com/chat.json?key=2d6d6d60_'
+        axios
+            .get('/api_chat_messages', {
+                params: {
+                    user_name: state.user_name,
+                    user_photo: state.user_photo
                 }
-            ]
-            setData(backupData)
-        })
+            })
+            .then((response) => {
+                // extract the data from the server response
+                setData(response.data)
+            })
+            .catch((err) => {
+                /*  */
+            })
     }, []) // only run it once!
 
   return (
     <div className = "Chat">
 
         <div className = "Chat_title">
-            <Link to = '/community' id = "back">Back</Link>
+            <Link onClick = {() => goTOPreviousPath()}>Back</Link>
             <h2>Chat</h2>
         </div>        
 
