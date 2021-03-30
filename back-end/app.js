@@ -231,6 +231,7 @@ app.get("/api_followers", async (req, res) => {
 
 app.get("/api_followings", async (req, res) => {
     let ret = {}
+    const UserName = req.query.UserName
 
     await axios
         .get(`${process.env.API_FOLLOWING_LIST}?key=${process.env.API_FOLLOWING_LIST_KEY}`)

@@ -9,8 +9,16 @@ const Mentions = (props) => {
     <article className = "mentions">
 
       <div>
-          <img class = 'inline-block' id = 'avatar' src={props.details.mentioner_avatar} onClick={() => window.location.href = '/friend_profile'}/>
-          <h1 class = 'inline-block' id = 'username1' onClick={() => window.location.href = '/friend_profile'}>{props.details.mentioner_username}</h1>
+        <Link to = {{
+          pathname: '/friend_profile', 
+          state: {
+              UserName: props.details.mentioner_username, 
+              userimg: props.details.mentioner_avatar
+          }}
+        }>
+          <img class = 'inline-block' id = 'avatar' src={props.details.mentioner_avatar} />
+          <h1 class = 'inline-block' id = 'username1'>{props.details.mentioner_username}</h1>
+        </Link>
           <span id = "mentioned_date">{props.details.mentioned_date}</span>
       </div>
 

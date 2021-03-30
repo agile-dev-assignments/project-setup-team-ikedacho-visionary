@@ -6,7 +6,13 @@ const Browse = (props) => {
     return (
         <div className="Browse">
             <div className="block">
-                <Link to="/friend_profile">
+                <Link to = {{
+                    pathname: '/friend_profile', 
+                    state: {
+                        UserName: props.UserName, 
+                        userimg: props.userimg
+                    }}
+                }>
                     <img className="userimg" src={props.userimg}/>
                 </Link>
 
