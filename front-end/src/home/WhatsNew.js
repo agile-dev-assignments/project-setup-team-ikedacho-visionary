@@ -2,10 +2,35 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import PostContent from '../auxiliary/PostContent'
 import './WhatsNew.css'
-
+import { useHistory,useLocation } from 'react-router-dom'
 
 const WhatsNew = (props) => {
     const [data, setData] = useState([])
+
+     let history=useHistory();
+        const {state} = useLocation();
+    //     props =
+    // (props.location && props.location.props) || {};
+
+    // setData(props.location.props);
+    // console.log(props.location.props);
+        const goTOPreviousPath=()=>{
+            history.goBack()
+        }
+      const [UserData, setUserData] = useState([
+            {
+                username: "",
+                email: ""
+        }
+
+  
+
+        ])
+        useEffect(() => {
+            const userdatadisplay = { username: state.username , email: state.email}
+        setUserData(userdatadisplay);
+            }, []) // only run it once!
+        console.log("logged in as: "+ UserData.username);
 
     // the following side-effect will be called once upon initial render
     useEffect(() => {
