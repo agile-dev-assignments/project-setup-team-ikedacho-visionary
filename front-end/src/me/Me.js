@@ -119,19 +119,28 @@ const Me = (props) => {
                         <br></br>
                         Posts
                     </Link>
-                    <Link id='button' to = '/followers'>
-                    {user_info.follower_number}
-                        <br></br>
 
+                    <Link id='button' to = {{
+                        pathname: '/followers', 
+                        state: {
+                            UserName: user_info.user_name, 
+                        }}
+                    }>  
+                        {user_info.follower_number}
+                        <br></br>
                         Followers
                     </Link>
-                    <Link id='button' to = '/followings'>
-                    {user_info.following_number}
+
+                    <Link id='button' to = {{
+                        pathname: '/followings', 
+                        state: {
+                            UserName: user_info.user_name, 
+                        }}
+                    }>  
+                        {user_info.following_number}
                         <br></br>
                         Following
                     </Link>
-                    
-
                 </div>
             </section>
 
