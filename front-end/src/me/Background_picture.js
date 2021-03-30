@@ -15,7 +15,7 @@ const Background_picture = (props) => {
             Note also the optional multiple attribute that allows the user to upload multiple files, if desired. I am not using multiple attribute here*/}
 
             <form className="form" action="/post_background_picture" method="POST" enctype="multipart/form-data">
-                <input className="form" id="choose_file" name="background_picture" type="file" />
+                <input className="form" id="choose_file" name="background_picture" type="file" required /> {/*form validation on front-end to make sure some file is uploaded before submit*/}
                <br></br>
                 <input className="form"  id="form_submit"  type="submit" value="Submit" />
 
