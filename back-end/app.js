@@ -40,8 +40,7 @@ const user_info={
     "following_number": "200",
     "linked_social_media": ["Facebook","Twitter","Instagram"]
 }//end of user_info
-
-<<<<<<< HEAD
+const linked_social_media= ["Facebook","Twitter","Instagram"]
 // mongoose.connect(
 //     "mongodb+srv://{Place Your Username Here!}:{Place Your Password Here!}@cluster0-q9g9s.mongodb.net/test?retryWrites=true&w=majority",
 //     {
@@ -73,10 +72,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 // require("./passportConfig.js")(passport);
 //----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
-=======
-const linked_social_media= ["Facebook","Twitter","Instagram"]
 
->>>>>>> 2471644dd28264ea885f91c6fde0d5e110eb86bb
+
+
 //put routes here:
 
 // route for HTTP GET requests to the home document
