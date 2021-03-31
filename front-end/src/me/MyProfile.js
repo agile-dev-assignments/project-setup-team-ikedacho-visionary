@@ -27,6 +27,8 @@ const MyProfile = (props) => {
 
     }
   */
+  
+
     const handleClick=(e)=>{//e is the id of the element clicked
 
         //console.log("before:",document.getElementById(e).style.border)
@@ -52,18 +54,31 @@ const MyProfile = (props) => {
 
        
         //only allow one selection. select one platform, then only show post from that platform. if e="select_all_text", then show posts from all platfrom
-        if(e==="select" || e==="select_all_text" ){
-            console.log('222')
-            console.log(e)
-            setPlatform_name_array(["Facebook",'Instagram','Twitter'])
+        if( e==="select_all_text" ){
+            console.log('select all platform')
+            setPlatform_name_array(linked_social_media) //if click "All" text field, set platform_name_array to linked_social_media
         }
         else{
-            console.log('111')
-            console.log(e)
+            console.log('select a single platform: ',e)
             setPlatform_name_array(e);
         }   
+
+
+    }
+    const handleClick2=(e)=>{
+            console.log('selected Facebook')
+            setPlatform_name_array("Facebook");
+    }
+    const handleClick3=(e)=>{
+        console.log('selected Twitter')
+        setPlatform_name_array("Twitter");
+    }
+    const handleClick4=(e)=>{
+        console.log('selected Instagram')
+        setPlatform_name_array("Instagram");
     }
 
+   
 
     let history=useHistory();
         const goTOPreviousPath=()=>{
@@ -99,8 +114,18 @@ const MyProfile = (props) => {
             setUser_info(response.data.user_info)
             setPost_data(response.data.post_data)
             setLinked_social_media(response.data.linked_social_media)
+             //handle click
+            let element = document.getElementById("Facebook")
+            element.addEventListener('click',handleClick2)
+
+            let element2 = document.getElementById("Twitter")
+            element2.addEventListener('click',handleClick3)
+            
+            let element3 = document.getElementById("Instagram")
+            element3.addEventListener('click',handleClick4)
+
            
-         
+
         })
         .catch((err) => {
             console.log("error: cannot fetch response from server")
@@ -197,14 +222,19 @@ const MyProfile = (props) => {
                         <span id='select_all_text' onClick={e=> {console.log('all'); handleClick(e.target.id) }} >All</span>
                     </div>
 
-                    {linked_social_media.map((item) => (
+
+                    {linked_social_media.map((item,i) => (
                         <Linked_platform 
+
                             key={item.id}
                             details={item}
-                            onClick= {() => item.handleClick}
-                            />
+                        />
+
                     ))} 
+                    
                 </div>
+
+
 
             </section>
 
