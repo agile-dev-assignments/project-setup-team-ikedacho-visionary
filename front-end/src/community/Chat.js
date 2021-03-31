@@ -9,12 +9,42 @@ const Chat = (props) => {
     const [data, setData] = useState([])
     const history = useHistory()
     const {state} = useLocation();
+    const [ newMessage, setNewMessage] = useState("");
 
-    // go back to the previous page
+    const [userData, setUserData] = useState([
+        {
+            username: "",
+            userimg: "",
+            content: newMessage
+    }])
+    
+    useEffect(() => {
+
+        axios("/my_info")
+        .then((response) => {
+          // extract the data from the server response
+          setUserData(
+          { userimg : response.data.user_photo,
+            username : response.data.user_name,
+            content: newMessage}
+        )})
+        .catch((err) => {
+          console.log(`Can not get user info`)
+        })
+        }, []) // only run it once!
+
+   
+     const submitMessage  = () => {
+        userData.content = newMessage;
+        console.log(userData)
+
+     }
+
     const goTOPreviousPath = () => {
         history.goBack()
     }
 
+   
     // nested component
     const ChatMessages = (props) => {
 
@@ -62,7 +92,7 @@ const Chat = (props) => {
 
     // the following side-effect will be called once upon initial render
     useEffect(() => {
-        // 'https://my.api.mockaroo.com/chat.json?key=2d6d6d60_'
+        // 'https://my.api.mockaroo.com/chat.json?key=2d6d6d60'
         axios
             .get('/api_chat_messages', {
                 params: {
@@ -100,8 +130,8 @@ const Chat = (props) => {
         </div>
 
         <div className = "Chat_user_input">
-            <input className = "Chat_user_input" type = "text"></input>
-            <button className = "Chat_user_input">Enter</button>
+            <input className = "Chat_user_input" type = "text" onChange={(e) => setNewMessage(e.target.value)}/>
+            <button className = "Chat_user_input" onClick={submitMessage.bind()}>Enter</button>
         </div>
 
     </div>
