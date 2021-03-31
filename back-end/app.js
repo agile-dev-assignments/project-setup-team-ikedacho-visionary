@@ -107,6 +107,8 @@ app.get("/get_my_profile", async (req, res) => {
 
 })
 
+
+
 // it tell multer to save uploaded files to disk into a directory named public/uploads, with a filename based on the current time.
 // the file storage rule function referred by a varibale called storage will be used later as parameter when we initiated a multer object.
 const storage = multer.diskStorage({
@@ -211,7 +213,9 @@ app.get("/api_commented_history", async (req, res)  => {
 })
 
 app.get("/api_friend_profile", async (req, res) => {
-    let ret = {}
+
+    let post_data=''
+    let friend_info=''
     // extract the UserName and userimg passed in along with the request
     const UserName = req.query.UserName
     const userimg = req.query.userimg
@@ -224,8 +228,8 @@ app.get("/api_friend_profile", async (req, res) => {
         .get(``)
         .then(apiResponse => ret.friend_info = apiResponse.data)
         .catch((err) => {
-            const backupData = {"id": 1, "user_name": `${UserName}`, "user_photo": `${userimg}`, "post_number": "300", "bio":"studying", "follower_number": "400", "following_number": "298","linked_social_media": ["Facebook","Twitter","Instagram","Youtube","Linkedin"]}
-            ret.friend_info = backupData
+            friend_info = {"id": 1, "user_name": `${UserName}`, "user_photo": `${userimg}`, "post_number": "300", "bio":"studying", "follower_number": "400", "following_number": "298","linked_social_media": ["Facebook","Twitter","Instagram","Youtube","Linkedin"]}
+           
         })
 
     // JIT retrieval of friend's posts
@@ -233,11 +237,33 @@ app.get("/api_friend_profile", async (req, res) => {
         .get(``)
         .then(apiResponse => ret.data = apiResponse.data)
         .catch((err) => {
-            const backupData = [{"source":"Konklux","userimg":"https://robohash.org/laboriosamaliquamconsequuntur.jpg?size=50x50\u0026set=set1","UserName":"mgalliard0","content":"Aaaahhhhhh! I do not know what to say. ","Senttime":"10/18/2020","contentimg":"http://dummyimage.com/112x136.jpg/cc0000/ffffff"},{"source":"Domainer","userimg":"https://robohash.org/utculpaesse.png?size=50x50\u0026set=set1","UserName":"hrevie1","content":"Aaaahhhhhhhhhhh! I do not know what to say. ","Senttime":"4/15/2020","contentimg":"http://dummyimage.com/228x124.bmp/cc0000/ffffff"},{"source":"Ventosanzap","userimg":"https://robohash.org/etquosa.bmp?size=50x50\u0026set=set1","UserName":"avedenisov2","content":"Aaaahhhhh! I do not know what to say. ","Senttime":"2/5/2021","contentimg":"http://dummyimage.com/107x217.jpg/5fa2dd/ffffff"},{"source":"Lotlux","userimg":"https://robohash.org/inciduntatest.png?size=50x50\u0026set=set1","UserName":"fhenniger3","content":"Aaaahhhhhhhhhhhhh! I do not know what to say. ","Senttime":"3/1/2021","contentimg":"http://dummyimage.com/219x227.jpg/5fa2dd/ffffff"},{"source":"Span","userimg":"https://robohash.org/quidemquicupiditate.bmp?size=50x50\u0026set=set1","UserName":"gmacqueen4","content":"Aaaahhhhhhhhhhhhhh! I do not know what to say. ","Senttime":"5/21/2020","contentimg":"http://dummyimage.com/185x108.bmp/dddddd/000000"},{"source":"Namfix","userimg":"https://robohash.org/dolorcumqueeaque.png?size=50x50\u0026set=set1","UserName":"gmorot5","content":"Aaaahhhhhhhhhhhh! I do not know what to say. ","Senttime":"9/27/2020","contentimg":"http://dummyimage.com/223x118.jpg/5fa2dd/ffffff"},{"source":"Overhold","userimg":"https://robohash.org/oditdolorenesciunt.png?size=50x50\u0026set=set1","UserName":"mmcileen6","content":"Aaaahhhhhhhhhhhh! I do not know what to say. ","Senttime":"6/17/2020","contentimg":"http://dummyimage.com/181x111.bmp/5fa2dd/ffffff"},{"source":"Pannier","userimg":"https://robohash.org/etnobisest.jpg?size=50x50\u0026set=set1","UserName":"gthrustle7","content":"Aaaahhhhhhhhhhhhhhh! I do not know what to say. ","Senttime":"5/2/2020","contentimg":"http://dummyimage.com/161x248.png/ff4444/ffffff"},{"source":"Overhold","userimg":"https://robohash.org/oditautet.jpg?size=50x50\u0026set=set1","UserName":"rlafond8","content":"Aaaahhhhhh! I do not know what to say. ","Senttime":"3/21/2020","contentimg":"http://dummyimage.com/123x113.png/5fa2dd/ffffff"},{"source":"Bamity","userimg":"https://robohash.org/autdeleniticonsequuntur.bmp?size=50x50\u0026set=set1","UserName":"ckarleman9","content":"Aaaahhhhhh! I do not know what to say. ","Senttime":"11/14/2020","contentimg":"http://dummyimage.com/234x151.jpg/cc0000/ffffff"}]
-            ret.posts = backupData
+            post_data = [{"source":"Facebook","userimg":"https://robohash.org/quasconsecteturquia.png?size=50x50\u0026set=set1","UserName":"thaffard0","content":"Sed ante. Vivamus tortor. Duis mattis egestas metus.","Senttime":"10/15/2020","contentimg":"http://dummyimage.com/135x100.png/5fa2dd/ffffff"},{"source":"Twitter","userimg":"https://robohash.org/molestiaeporrodicta.png?size=50x50\u0026set=set1","UserName":"fbinyon1","content":"Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.","Senttime":"10/30/2020","contentimg":"http://dummyimage.com/240x100.png/5fa2dd/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/utautmolestiae.png?size=50x50\u0026set=set1","UserName":"kalton2","content":"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.","Senttime":"7/7/2020","contentimg":"http://dummyimage.com/193x100.png/dddddd/000000"},{"source":"Instagram","userimg":"https://robohash.org/cumautquas.png?size=50x50\u0026set=set1","UserName":"liori3","content":"Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.","Senttime":"5/4/2020","contentimg":"http://dummyimage.com/130x100.png/cc0000/ffffff"},{"source":"Facebook","userimg":"https://robohash.org/quiaaccusantiumasperiores.png?size=50x50\u0026set=set1","UserName":"shyndson4","content":"Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.","Senttime":"6/11/2020","contentimg":"http://dummyimage.com/153x100.png/ff4444/ffffff"},{"source":"Twitter","userimg":"https://robohash.org/omnisdoloribuscorporis.png?size=50x50\u0026set=set1","UserName":"aitzcovich5","content":"Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\nEtiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.\n\nPraesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.","Senttime":"2/4/2021","contentimg":"http://dummyimage.com/186x100.png/5fa2dd/ffffff"},{"source":"Twitter","userimg":"https://robohash.org/voluptaseavoluptas.png?size=50x50\u0026set=set1","UserName":"mpetrowsky6","content":"In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.","Senttime":"4/26/2020","contentimg":"http://dummyimage.com/194x100.png/cc0000/ffffff"},{"source":"Twitter","userimg":"https://robohash.org/temporaitaqueest.png?size=50x50\u0026set=set1","UserName":"rjouannin7","content":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.","Senttime":"11/19/2020","contentimg":"http://dummyimage.com/125x100.png/5fa2dd/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/sintsaepedoloremque.png?size=50x50\u0026set=set1","UserName":"cozanne8","content":"Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.","Senttime":"7/21/2020","contentimg":"http://dummyimage.com/236x100.png/ff4444/ffffff"},{"source":"Twitter","userimg":"https://robohash.org/sequiutsunt.png?size=50x50\u0026set=set1","UserName":"bfaucherand9","content":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.","Senttime":"10/27/2020","contentimg":"http://dummyimage.com/163x100.png/dddddd/000000"}]
+        
         })
 
-    res.json(ret)
+
+    //FILTER POST DATA to send back to client, based on platform user selected in frontend
+    //console.log("req.query.platform_name_array:", req.query.platform_name_array)
+    let filtered_post_data=post_data.slice()
+    if (req.query.platform_name_array!==undefined) {
+        //console.log("111111")
+        filtered_post_data=post_data.filter(element=>{
+           if (req.query.platform_name_array.includes(element.source)){
+               return true
+           }//end of if
+        })//end of filtered_post_data
+
+    }//end of if
+
+    //send back response_data which consists of user_info and filtered_post_data as post_data
+    const response_data={
+        "friend_info" : friend_info,
+        "post_data" : filtered_post_data, //return the filtered data based on platform selected
+        "linked_social_media": ["Facebook","Twitter","Instagram"],//return linked_platform name
+    }
+    //console.log("in get_my_profile:", user_info)
+    console.log("linked_social_media:",linked_social_media)
+    res.json(response_data)
 })
 
 app.get("/api_followers", async (req, res) => {

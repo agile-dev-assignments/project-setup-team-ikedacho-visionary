@@ -125,6 +125,16 @@ div.FriendProfile #main_container3{
     
     
 }
+div.FriendProfile #select_all_text{
+    font-size: 1em;
+    font-weight: bold;
+    color:white;
+    position: relative;
+    left:1px;
+    top:11px;
+    padding:10px;
+
+} 
 
 div.FriendProfile #main_container3{
     padding: 5px;
