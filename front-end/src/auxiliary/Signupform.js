@@ -7,7 +7,21 @@ const Signup = (props) => {
 
 
     const history = createBrowserHistory({forceRefresh:true})
+    const [registerUsername, setRegisterUsername] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
 
+    const register = () => {
+        axios
+        .post(
+        "/register",
+         {
+            username: registerUsername,
+            password: registerPassword,        
+            withCredentials: true,
+           })
+        .then((res) => console.log(res));
+      };
+      
     const [state, setState] = useState({
         username: "",
         email: "",
@@ -55,19 +69,7 @@ const Signup = (props) => {
         };
 
  
-    const SignUp_button = (event) => {
-        event.preventDefault()
-        history.push({
-            pathname: '/',
-            state: state
-        })
-        axios
-        .post('/newuser', state)
-        .then(() => console.log('new user Created'+state))
-        .catch(err => {
-          console.error(err);
-        });
-      };
+
 
  
         
@@ -78,12 +80,12 @@ const Signup = (props) => {
         <section class="sign-in">  
             <div className = "align-center">
         <form action="" onChange={handleInputChange} onSubmit={handleSubmit} >
-        <input type="text" name="username" placeholder="Name"onChange={handleInputChange}/>
+        <input type="text" name="username" placeholder="Name"onChange={handleInputChange} onChange={(e) => setRegisterUsername(e.target.value)}/>
         <input type="text" name="email" placeholder="Email"onChange={handleInputChange}/>
-        <input type="password" name="password" placeholder="Password"onChange={handleInputChange}/>
+        <input type="password" name="password" placeholder="Password"onChange={handleInputChange} onChange={(e) => setRegisterPassword(e.target.value)}/>
         <input type="password" name="password_confirmation" placeholder="Confirm Password"onChange={handleInputChange}/>
         <button 
-        // onClick = {SignUp_button.bind()}
+        onClick={register}
         type="submit"
         >Create Account</button>
         </form> 

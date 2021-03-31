@@ -6,9 +6,9 @@ import { useHistory,useLocation } from 'react-router-dom'
 
 const WhatsNew = (props) => {
     const [data, setData] = useState([])
-
+    //const [userdata, setUserData] = useState([]);
      let history=useHistory();
-        const {state} = useLocation();
+    const {state} = useLocation();
     //     props =
     // (props.location && props.location.props) || {};
 
@@ -17,15 +17,26 @@ const WhatsNew = (props) => {
         const goTOPreviousPath=()=>{
             history.goBack()
         }
-      const [UserData, setUserData] = useState([
+        const [UserData, setUserData] = useState([
             {
                 username: "",
                 email: ""
-        }
+        }])
+    
+        const getUser = () => {
+            axios("/user")
+            .then(response => {
+              setUserData(response.data);
 
-  
 
-        ])
+            });
+          };
+       // getUser();      
+    useEffect(() => {
+        const userdatadisplay = { username: state.username , email: state.password}
+    setUserData(userdatadisplay);
+        }, []) // only run it once!
+
         // before we figure out how login system would work, these following lines should remain commented
         /*
         useEffect(() => {
@@ -35,6 +46,7 @@ const WhatsNew = (props) => {
         console.log("logged in as: "+ UserData.username);
         */
 
+    console.log("logged in as: "+ UserData.username);
     // the following side-effect will be called once upon initial render
     useEffect(() => {
 
