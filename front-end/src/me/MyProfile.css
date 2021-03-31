@@ -152,11 +152,9 @@ div.MyProfile #main_container3 .icon{
     width:40px;
     height: 40px;
     border-radius: 50%;
-
-
 }
 /* facebook icon, twitter icon, instagram icon */
-div.MyProfile #select_all, #facebook, #twitter, #instagram{
+div.MyProfile #select{
     position:relative;
     left:5px;
     top:5px;
@@ -166,8 +164,15 @@ div.MyProfile #select_all_text{
     font-weight: bold;
     color:white;
     position: relative;
-    left:9px;
+    left:1px;
     top:11px;
-
+    padding:10px;
 
 } 
+
+div.MyProfile #Facebook, #Twitter, #Instagram, #Facebook, #Facebook,#Facebook,#Facebook{ 
+    position:relative;
+    padding:5px;
+    left:0px;
+    top:0px;
+}

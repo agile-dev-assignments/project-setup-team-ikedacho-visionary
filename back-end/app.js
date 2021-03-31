@@ -33,6 +33,7 @@ const user_info={
     "linked_social_media": ["Facebook","Twitter","Instagram"]
 }//end of user_info
 
+const linked_social_media= ["Facebook","Twitter","Instagram"]
 
 //put routes here:
 
@@ -48,15 +49,15 @@ app.post('/newuser', function(req, res) {
     };
 
   
-   // users.push(newusers);
-   if(newuser.password == newuser.password_confirmation){
+    // users.push(newusers);
+    if(newuser.password == newuser.password_confirmation){
         res.send({
             status: "created"
         })
          // users.push(newusers);
          //res.send("created") 
-   }
-   else{
+    }
+    else{
     res.send({
         status: "password does not match"
     })
@@ -77,8 +78,7 @@ app.get("/get_my_profile", async (req, res) => {
         console.log("Error: cannot fetch data from mockaroo api. Use backup data")
         console.log(err)
         //backup data
-        post_data =[{"id":1, "source":"instagram", "content":"Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum.","senttime":"3/21/2021","contentimg":"http://dummyimage.com/250x145.png/ff4444/ffffff"},{"id":2,"source":"facebook","content":"Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.","senttime":"9/7/2020","contentimg":"http://dummyimage.com/224x143.png/5fa2dd/ffffff"},{"id":3,"source":"instagram","content":"Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo.","senttime":"10/22/2020","contentimg":"http://dummyimage.com/219x245.png/5fa2dd/ffffff"},{"id":4,"source":"instagram","content":"Suspendisse potenti. Cras in purus eu magna vulputate luctus.","senttime":"9/30/2020","contentimg":"http://dummyimage.com/185x107.png/cc0000/ffffff"},{"id":5,"source":"twitter","content":"Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.","senttime":"7/29/2020","contentimg":"http://dummyimage.com/137x169.png/dddddd/000000"},{"id":6,"source":"twitter","content":"Nulla mollis molestie lorem.","senttime":"6/13/2020","contentimg":"http://dummyimage.com/137x202.png/dddddd/000000"},{"id":7,"source":"twitter","content":"Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros.","senttime":"1/18/2021","contentimg":"http://dummyimage.com/212x108.png/5fa2dd/ffffff"},{"id":8,"source":"facebook","content":"Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis.","senttime":"6/24/2020","contentimg":"http://dummyimage.com/232x197.png/ff4444/ffffff"},{"id":9,"source":"instagram","content":"Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.","senttime":"6/12/2020","contentimg":"http://dummyimage.com/143x282.png/5fa2dd/ffffff"},{"id":10,"source":"facebook","content":"Vivamus vel nulla eget eros elementum pellentesque.","senttime":"3/17/2021","contentimg":"http://dummyimage.com/243x125.png/dddddd/000000"
-                    }]//end of backup data
+        post_data =[{"id":1,"source":"Twitter","content":"Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat.","senttime":"2/18/2021","contentimg":"http://dummyimage.com/238x249.png/cc0000/ffffff"},{"id":2,"source":"Facebook","content":"Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.","senttime":"2/17/2021","contentimg":"http://dummyimage.com/190x250.png/5fa2dd/ffffff"},{"id":3,"source":"Facebook","content":"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst.","senttime":"8/1/2020","contentimg":"http://dummyimage.com/187x154.png/ff4444/ffffff"},{"id":4,"source":"Instagram","content":"Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","senttime":"12/1/2020","contentimg":"http://dummyimage.com/117x277.png/dddddd/000000"},{"id":5,"source":"Twitter","content":"Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","senttime":"11/8/2020","contentimg":"http://dummyimage.com/200x111.png/dddddd/000000"},{"id":6,"source":"Facebook","content":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante.","senttime":"4/8/2020","contentimg":"http://dummyimage.com/204x133.png/dddddd/000000"},{"id":7,"source":"Twitter","content":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.","senttime":"2/13/2021","contentimg":"http://dummyimage.com/184x147.png/ff4444/ffffff"},{"id":8,"source":"Twitter","content":"Nullam porttitor lacus at turpis.","senttime":"8/6/2020","contentimg":"http://dummyimage.com/163x149.png/5fa2dd/ffffff"},{"id":9,"source":"Facebook","content":"Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","senttime":"12/29/2020","contentimg":"http://dummyimage.com/182x256.png/ff4444/ffffff"},{"id":10,"source":"Instagram","content":"Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.","senttime":"4/27/2020","contentimg":"http://dummyimage.com/182x193.png/dddddd/000000"}]//end of backup data
         //console.log("backup data:", post_data)
     })//end of catch,axios,post_data
 
@@ -99,8 +99,10 @@ app.get("/get_my_profile", async (req, res) => {
     const response_data={
         "user_info" : user_info,
         "post_data" : filtered_post_data, //return the filtered data based on platform selected
+        "linked_social_media": user_info.linked_social_media,//return linked_platform name
     }
-    console.log("in get_my_profile:", user_info)
+    //console.log("in get_my_profile:", user_info)
+    console.log("linked_social_media:",linked_social_media)
     res.json(response_data)
 
 })
@@ -113,7 +115,7 @@ const storage = multer.diskStorage({
         cb(null, "../front-end/public/uploads")
     },
 
-   // set filename rules
+    // set filename rules
     filename: function (req, file, cb) {
         const ext = file.mimetype.split('/')[1];
         cb(null, file.fieldname + "_" + Date.now()+ `.${ext}`)
@@ -187,7 +189,7 @@ app.get("/api_my_comment_history", async (req, res)  => {
 
 app.get("/api_friend_profile", async (req, res) => {
     let ret = {}
-    // extract the username passed in along with the request
+    // extract the UserName and userimg passed in along with the request
     const UserName = req.query.UserName
     const userimg = req.query.userimg
 
