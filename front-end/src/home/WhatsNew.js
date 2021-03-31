@@ -28,14 +28,23 @@ const WhatsNew = (props) => {
             .then(response => {
               setUserData(response.data);
 
+
             });
           };
-       // getUser();
-        
+       // getUser();      
     useEffect(() => {
         const userdatadisplay = { username: state.username , email: state.password}
     setUserData(userdatadisplay);
         }, []) // only run it once!
+
+        // before we figure out how login system would work, these following lines should remain commented
+        /*
+        useEffect(() => {
+            const userdatadisplay = { username: state.username , email: state.email}
+        setUserData(userdatadisplay);
+            }, []) // only run it once!
+        console.log("logged in as: "+ UserData.username);
+        */
 
     console.log("logged in as: "+ UserData.username);
     // the following side-effect will be called once upon initial render

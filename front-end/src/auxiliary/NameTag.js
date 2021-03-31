@@ -11,7 +11,13 @@ const NameTag = (props) => {
 
   return (
     <div className = "NameTag">
-        <Link to="/friend_profile">
+        <Link to = {{
+            pathname: '/friend_profile', 
+            state: {
+                UserName: props.UserName, 
+                userimg: props.img
+            }}
+        }>
             <img className = "img" src = {props.img} />
         </Link>
         <div className = "Text">
