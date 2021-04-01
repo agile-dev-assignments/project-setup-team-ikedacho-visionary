@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 const Browse = (props) => {
     return (
         <div className="Browse">
+            <h3>----{props.viewdate}----</h3>
             <div className="block">
                 <Link to = {{
                     pathname: '/friend_profile', 

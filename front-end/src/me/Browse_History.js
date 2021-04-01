@@ -1,62 +1,89 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import Browse from "../auxiliary/Browse";
 import "./Browse_History.css";
-
+import axios from "axios"
 const Browse_History = (props) => {
-    const todayData = [
+    const [PostData, setPostData] = useState([
         {
-            UserName: "rmorcombe0",
-            contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
-            userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",
-            content: "Post Content",
-        },
-        {
-            UserName: "ghort1",
-            contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"]
-            ,
-            userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
-            content: "Post Content",
-        },
-        {
-            UserName: "rmorcombe0",
-            contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
-            userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",
-            content: "Post Content",
-        },
-    ];
-
-    const yesterdayDate = [
-        {
+            viewDate: "2021-4-1",
             UserName: "asidjashdkasdhk9",
             contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
             userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
             content: "Post Content",
-        },
-        {
-            UserName: "rmorcombe0",
-            contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
-            userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",
-            content: "Post Content",
-        },
-        {
-            UserName: "ghort1",
-            contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"]
-            ,
-            userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
-            content: "Post Content",
         }
-    ];
+    ])
 
-    return (
+    // const todayData = [
+    //     {
+    //         UserName: "rmorcombe0",
+    //         contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
+    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
+    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
+    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
+    //         userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",
+    //         content: "Post Content",
+    //     },
+    //     {
+    //         UserName: "ghort1",
+    //         contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"]
+    //         ,
+    //         userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
+    //         content: "Post Content",
+    //     },
+    //     {
+    //         UserName: "rmorcombe0",
+    //         contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
+    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
+    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
+    //         userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",
+    //         content: "Post Content",
+    //     },
+    // ];
+
+    // const yesterdayDate = [
+    //     {
+    //         UserName: "asidjashdkasdhk9",
+    //         contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
+    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
+    //         userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
+    //         content: "Post Content",
+    //     },
+    //     {
+    //         UserName: "rmorcombe0",
+    //         contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
+    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
+    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
+    //         userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",
+    //         content: "Post Content",
+    //     },
+    //     {
+    //         UserName: "ghort1",
+    //         contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"]
+    //         ,
+    //         userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
+    //         content: "Post Content",
+    //     }
+    // ];
+
+    useEffect(() => {
+    
+        axios('/api_browse')
+            .then((response) => {
+                // extract the data from the server response
+                setPostData(response.data)
+            })
+            .catch((err) => {
+               console.log(err);
+            })
+        }, []) // only run it once!
+
+        console.log(PostData);
+        
+        
+
+          return (
         <div className="Browse_History">
             <header>
                 <Link to="/Me">
@@ -67,30 +94,20 @@ const Browse_History = (props) => {
             </header>
 
             <div className="Browse_List">
-                <h4>today</h4>
-                {todayData.map((item) => (
-                    <Browse 
-                        key={item.id}
-                        UserName={item.UserName}
-                        userimg={item.userimg}
-                        content={item.content}
-                        contentimgs={item.contentimgs}
-                    />
-                ))}
+            {PostData.map((item) => (
+                console.log("rendering"),
+                <Browse 
+                    viewdate = {item.viewDate}
+                    UserName={item.UserName}
+                    userimg={item.userimg}
+                    content={item.content}
+                    contentimgs={item.contentimgs}
+                />
+                  
+            ))}
+               
             </div>
 
-            <div className="Browse_List">
-                <h4>yesterday</h4>
-                {yesterdayDate.map((item) => (
-                    <Browse
-                        key={item.id}
-                        UserName={item.UserName}
-                        userimg={item.userimg}
-                        content={item.content}
-                        contentimgs={item.contentimgs}
-                    />
-                ))}
-            </div>
         </div>
     );
 

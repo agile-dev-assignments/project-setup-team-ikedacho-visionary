@@ -9,6 +9,7 @@ import { useHistory,useLocation } from 'react-router-dom'
 
 const PostDetail = (props) => {
         let history=useHistory();
+
         const {state} = useLocation();
     //     props =
     // (props.location && props.location.props) || {};
@@ -18,23 +19,51 @@ const PostDetail = (props) => {
         const goTOPreviousPath=()=>{
             history.goBack()
         }
-      const [PostData, setPostData] = useState([
+
+        const [PostData, setPostData] = useState([
+            {date: 
             {"id":1,
-            "username":"cgilligan0",
-            "user_photo":"https://robohash.org/doloremqueofficiaet.jpg?size=50x50\u0026set=set1",
-            "Content":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.",
-            "contentimg":["https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2019/07/Man-Silhouette.jpg","https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2019/07/Man-Silhouette.jpg"],
-            "post_date":"4/19/2020"
-        
+            "username":"",
+            "user_photo":"",
+            "Content":"",
+            "contentimg":[],
+            "post_date":""
+            }
         }
-
-  
-
         ])
+
+        var today = new Date()
+
+        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+
         useEffect(() => {
         setPostData(state);
             }, []) // only run it once!
         console.log(state);
+       
+        const saveBrowseData = () => {
+            axios
+            .post(
+            "/browsed",
+            {
+                viewdate: date,
+                PostData
+            })
+            .then(response => {
+                if (response.data.status === "created") {
+                    console.log(response.data.status);                  
+                }
+                else{
+                    console.log(response.data);
+                }
+                })
+                .catch(error => {
+                    console.log("unable to save browse history", error);
+                    })
+                };
+    
+                saveBrowseData();
         const [data, setData] = useState([
 
             {"id":1,
