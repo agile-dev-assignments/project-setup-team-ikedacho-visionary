@@ -157,7 +157,7 @@ app.post('/newuser', function(req, res) {
 
   });
 
-  app.get("/browse", (req, res) => {
+  app.get("/api_browse", (req, res) => {
 
     const browsedData = [{
                 viewDate: "2021-4-1",

@@ -6,11 +6,12 @@ import axios from "axios"
 const Browse_History = (props) => {
     const [PostData, setPostData] = useState([
         {
-            viewdate :"",
-            data: {UserName: "rmorcombe0",
-            contentimg: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
-            content: "Post Content"
-        }
+            viewDate: "2021-4-1",
+            UserName: "asidjashdkasdhk9",
+            contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
+            userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
+            content: "Post Content",
         }
     ])
 
@@ -68,7 +69,7 @@ const Browse_History = (props) => {
 
     useEffect(() => {
     
-        axios('/browse')
+        axios('/api_browse')
             .then((response) => {
                 // extract the data from the server response
                 setPostData(response.data)
@@ -78,7 +79,7 @@ const Browse_History = (props) => {
             })
         }, []) // only run it once!
 
-        console.log(PostData[0].contentimgs);
+        console.log(PostData);
         
         
 
