@@ -113,6 +113,24 @@ app.post("/register", (req, res) => {
     // })(req, res, next);
   });
 
+  app.post("/browsed", (req, res, next) => {
+    // passport.authenticate("local", (err, user, info) => {
+    //   if (err) throw err;
+    //   if (!user) res.send("No User Exists");
+    //   else {
+    //     req.logIn(user, (err) => {
+    //       if (err) throw err;
+        console.log(req.body); 
+        browsedData = req.body;
+        res.send({
+            status: "created"
+        })
+
+    //     });
+    //   }
+    // })(req, res, next);
+  });
+
 app.post('/newuser', function(req, res) {
     const newuser = {
       username: req.body.username,
@@ -138,6 +156,31 @@ app.post('/newuser', function(req, res) {
     console.log(newuser);
 
   });
+
+  app.get("/browse", (req, res) => {
+
+    const browsedData = [{
+                viewDate: "2021-4-1",
+                UserName: "asidjashdkasdhk9",
+                contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
+                userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
+                content: "Post Content",
+            },
+            {
+                viewDate: "2021-4-1",
+                UserName: "rmorcombe0",
+                contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
+                userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",
+                content: "Post Content",
+            }
+    ];
+        console.log(browsedData)
+        res.json(browsedData); // The req.user stores the entire user that has been authenticated inside of it.
+  });
+
 
   app.get("/user", (req, res) => {
     res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
