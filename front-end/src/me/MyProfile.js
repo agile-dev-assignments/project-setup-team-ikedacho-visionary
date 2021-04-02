@@ -255,7 +255,7 @@ const MyProfile = (props) => {
                                 userimg = {user_info.user_photo}
                                 UserName = {user_info.user_name}
                                 content = {item.content}
-                                Senttime = {item.Senttime} 
+                                Senttime = {item.senttime} 
                                 contentimg = {item.contentimg} />
                     ))} 
             </section>

@@ -206,6 +206,7 @@ app.get("/get_me", (req, res) => {
     }
     //console.log("in get_my_profile:", user_info)
     console.log("linked_social_media:",linked_social_media)
+    console.log("in me's post_data:",post_data)
     res.json(response_data)
    
 })
@@ -247,6 +248,8 @@ app.get("/get_my_profile", async (req, res) => {
     }
     //console.log("in get_my_profile:", user_info)
     console.log("linked_social_media:",linked_social_media)
+    console.log("in my_profile's filtered post_data:",filtered_post_data)
+    console.log("in my_profile's  post_data:",post_data)
     res.json(response_data)
 
 })
@@ -328,8 +331,10 @@ app.get("/get_edit", (req, res) => {
     new_post.content= post_text
     new_post.senttime = new Date().toLocaleString()
     new_post.contentimg=" "
-   
+    console.log("before",post_data)
     post_data.unshift(new_post)
+
+    console.log("after",post_data)
 })
 
 
