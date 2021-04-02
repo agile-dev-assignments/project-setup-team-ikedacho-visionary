@@ -2,18 +2,53 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import "./Edit.css";
 import { useHistory } from 'react-router-dom'
+import {useEffect } from 'react'
+import axios from 'axios'
 
 const Edit = (props) => {
+
+    const [show, setShow] = useState(false)
+    //represnet if the send button is clicked. false: not clicked. true: clicked
+    const [send, setSend]=  useState(false)
+    const [post_text, setPost_text]=  useState("defualt text")
+
+
     let history=useHistory();
+
     const goTOPreviousPath=()=>{
         history.goBack()
     }
-    const [show, setShow] = useState(false)
+
+
+    const goTOPreviousPath2=()=>{
+        setSend(!send)
+        setPost_text('my post text')
+        console.log("send:",send)
+        console.log("post_text:",post_text)
+        document.getElementById("myTextarea").value = post_text;
+        console.log(post_text)
+
+        axios
+            .get('/get_edit', {
+                //send along the post_text user typed 
+               
+                params: {
+                  post_text: post_text,
+             
+                }
+            })
+        history.goBack()
+        
+        
+    }
+
+
 
     const _setShow = () => {
         console.log(show);
         setShow(!show);
     };
+
 
     return (
         <div className="edit">
@@ -22,11 +57,11 @@ const Edit = (props) => {
                     <button>back</button>
                 </Link>
                 <h2>New Post</h2>
-                <button onClick={goTOPreviousPath}>send</button>
+                <button onClick={goTOPreviousPath2}>send</button>
             </header>
 
             <section className="edit-wrap">
-                <textarea className="textarea" placeholder="what's on your mind?"/>
+                <textarea id="myTextarea" onInput = {e => setPost_text(e.target.value)}/>
 
                 <div className="post">
                     <span onClick={_setShow}>Post to ▼️ </span>
@@ -40,7 +75,7 @@ const Edit = (props) => {
 
                 <div className="checkbox">
                     <input type="checkbox"/>
-                    <span>Post as Public</span>
+                    <span>Post as Pravite</span>
                 </div>
 
             </section>

@@ -65,6 +65,10 @@ const MyProfile = (props) => {
 
 
     }
+    const handleClick1=(e)=>{
+        console.log('selected O-Zone')
+        setPlatform_name_array("O-Zone");
+    }
     const handleClick2=(e)=>{
             console.log('selected Facebook')
             setPlatform_name_array("Facebook");
@@ -115,6 +119,10 @@ const MyProfile = (props) => {
             setPost_data(response.data.post_data)
             setLinked_social_media(response.data.linked_social_media)
              //handle click
+             let element1 = document.getElementById("O-Zone")
+             element1.addEventListener('click',handleClick1)
+ 
+
             let element = document.getElementById("Facebook")
             element.addEventListener('click',handleClick2)
 
@@ -221,6 +229,7 @@ const MyProfile = (props) => {
                     <div className='icon' id='select'  >  {/* target is the element clicked */}
                         <span id='select_all_text' onClick={e=> {console.log('all'); handleClick(e.target.id) }} >All</span>
                     </div>
+
 
 
                     {linked_social_media.map((item,i) => (
