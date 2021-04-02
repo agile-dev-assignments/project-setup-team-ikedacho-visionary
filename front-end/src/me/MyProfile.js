@@ -24,7 +24,6 @@ const MyProfile = (props) => {
     const handleClick=()=>{
         console.log('clicked!')
         setPlatform_name(document.getElementById('facebook-icon').getAttribute("value") )
-
     }
   */
   
@@ -46,7 +45,6 @@ const MyProfile = (props) => {
             platform_name_array.push(e)
             console.log(`array after add ${e}:`,platform_name_array)
         }
-
         setPlatform_name_array(platform_name_array);
         console.log("setPlatform",platform_name_array)
         */

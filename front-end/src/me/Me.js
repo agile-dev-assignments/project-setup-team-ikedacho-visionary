@@ -187,6 +187,7 @@ const Me = (props) => {
                         Following
                     </Link>
                 </div>
+                
             </section>
 
 

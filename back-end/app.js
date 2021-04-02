@@ -209,7 +209,6 @@ app.get("/get_me", (req, res) => {
     res.json(response_data)
    
 })
-
 app.get("/get_my_profile", async (req, res) => {
 
     //post data
