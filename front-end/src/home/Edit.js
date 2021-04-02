@@ -4,8 +4,19 @@ import "./Edit.css";
 import { useHistory } from 'react-router-dom'
 import {useEffect } from 'react'
 import axios from 'axios'
+import Post_picture from '../me/Post_picture'
 
 const Edit = (props) => {
+    const [state, setState] = useState({
+        showComment: false
+    })
+
+    const _showComment = () => {
+        let cur = state.showComment
+        setState({
+          showComment: !cur
+        });
+    };
 
     const [show, setShow] = useState(false)
     //represnet if the send button is clicked. false: not clicked. true: clicked
@@ -62,6 +73,26 @@ const Edit = (props) => {
 
             <section className="edit-wrap">
                 <textarea id="myTextarea" onInput = {e => setPost_text(e.target.value)}/>
+                
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+
+                <button className = "Commentbutton" onClick = {_showComment.bind()}>Upload picture</button>
+
+                {state.showComment && (
+                <>
+                    {<Post_picture />
+                    }
+                </>
+                )}
+
+
+
 
                 <div className="post">
                     <span onClick={_setShow}>Post to ▼️ </span>

@@ -257,7 +257,6 @@ const storage = multer.diskStorage({
 //and upload_background_picture multure object use the storage rule as defined in storage variable.
 const upload_background_picture = multer({ storage: storage })
 
-
 //Multer middleware will automatically save any uploaded files in the request into the specified directory, rename them as instructed,
 //and make a field named req.files containing the paths to the files on the server.
 //the following code, upload.array('my_files', 1), instructs multer to store no more than 1 files, coming from an HTML element named background_picture.
@@ -293,6 +292,9 @@ app.post("/post_background_picture", upload_background_picture.array("background
         res.redirect('/my_profile')
     }   
 })
+//Then instantiate a multer object "upload_post_picture" to be used in app.post("/post_Post_picture", upload.array("background_picture", 1), (req, res)...
+//and upload_post_picture multure object use the storage rule as defined in storage variable.
+const upload_post_picture = multer({ storage: storage })
 
 app.get("/get_edit", (req, res) => {
     const post_text=req.query.post_text
@@ -307,11 +309,40 @@ app.get("/get_edit", (req, res) => {
     new_post.id=2
     new_post.source="O-Zone"
     new_post.content= post_text
-    new_post.senttime = new Date()
+    new_post.senttime = new Date().toLocaleString()
     new_post.contentimg=" "
    
     post_data.unshift(new_post)
 })
+
+
+
+/*
+const post_picture = multer({ storage: storage })
+app.post("/post_picture", upload_post_picture.array("post_picture", 1), (req, res) => {
+    // check whether anything was uploaded. If success, send a response back. I will re-render my_profile page with background picture added in this case.
+    if (req.files) {
+       // success! send data back to the client, e.g. some JSON data
+       // do something with the data we received from the client
+       console.log("success! req.files")
+       const data = {
+           status: "all good",
+           message: "success, the files were uploaded!",
+           post_picture: req.files,
+
+       }//end of data
+       //console.log(data.post_picture);
+       
+       // then send a response to client with modification on data we receive from client. otherwise, it will occur 500 error.
+       // add the background image src to user_info data
+
+       new_post.contentimg=`/uploads/${data.post_picture[0].filename}`
+       
+      
+   }//end of if
+   ...... to be continue
+})
+*/
 
 
 app.get("/api_my_comment_history", async (req, res)  => {
