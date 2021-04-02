@@ -25,7 +25,7 @@ const Linked_platform = (props) => {
     return (
     
    
-        <div className='icon' id="select"  >  {/* target is the element clicked */}
+        <div className='icon' id=  {props.details} >  {/* target is the element clicked */}
         {/*cannot use onLoad in this case, it will cause infinite loop. Reason: When image is not loaded you aren't actually rendering the image. You need to render it for its onLoad to fire*/}
         {/*The problem is that you re-assign the successUrl repeatedly in your onload callback, causing infinite recursion because it gets called over and over again.*/}
         {/*So I will use onError in this case with src='' */}

@@ -244,7 +244,7 @@ app.get("/get_my_profile", async (req, res) => {
     const response_data={
         "user_info" : user_info,
         "post_data" : filtered_post_data, //return the filtered data based on platform selected
-        "linked_social_media": user_info.linked_social_media,//return linked_platform name
+        "linked_social_media": linked_social_media,//return linked_platform name
     }
     //console.log("in get_my_profile:", user_info)
     console.log("linked_social_media:",linked_social_media)

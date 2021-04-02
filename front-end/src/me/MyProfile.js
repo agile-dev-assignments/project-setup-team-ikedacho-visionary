@@ -62,7 +62,7 @@ const MyProfile = (props) => {
         }   
 
 
-    }
+    }/*
     const handleClick1=(e)=>{
         console.log('selected O-Zone')
         setPlatform_name_array("O-Zone");
@@ -79,7 +79,7 @@ const MyProfile = (props) => {
         console.log('selected Instagram')
         setPlatform_name_array("Instagram");
     }
-
+*/
    
 
     let history=useHistory();
@@ -117,6 +117,53 @@ const MyProfile = (props) => {
             setPost_data(response.data.post_data)
             setLinked_social_media(response.data.linked_social_media)
              //handle click
+
+
+            let elements = document.getElementsByClassName("icon")
+            console.log("elements of icon:",elements)
+            console.log("elements.length:", elements.length)
+            for(let i = 0; i < elements.length; i++) {
+                console.log(i,"th iteration")
+                console.log("elements:", elements[i])
+                
+                let element = elements[i];
+
+                if(element.id==="O-Zone"){
+                    element.addEventListener('click',function(){
+                        console.log("enter O-zone block")
+                        console.log('selected O-Zone')
+                        setPlatform_name_array("O-Zone");
+                    })
+                  
+                }
+
+                else if(element.id==="Facebook"){
+                    element.addEventListener('click',function(){
+                        console.log("enter Facebook block")
+                        console.log('selected Facebook')
+                        setPlatform_name_array("Facebook");
+                    })
+
+                }
+                else if(element.id==="Twitter"){
+                    element.addEventListener('click',function(){
+                        console.log("enter Twitter block")
+                        console.log('selected Twitter')
+                        setPlatform_name_array("Twitter");
+                    })
+                   
+                }
+                else if(element.id==="Instagram"){
+                    element.addEventListener('click',function(){
+                        console.log("enter Instagram block")
+                        console.log('selected Instagram')
+                        setPlatform_name_array("Instagram");
+                    })
+                   
+                }
+            }
+
+            /*
              let element1 = document.getElementById("O-Zone")
              element1.addEventListener('click',handleClick1)
  
@@ -129,7 +176,7 @@ const MyProfile = (props) => {
             
             let element3 = document.getElementById("Instagram")
             element3.addEventListener('click',handleClick4)
-
+*/
            
 
         })
