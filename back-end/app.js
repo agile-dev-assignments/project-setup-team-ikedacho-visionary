@@ -326,7 +326,7 @@ app.get("/get_edit", (req, res) => {
     //add the newly sent post to post_data in myprofile page
     //{"id":1,"source":"Twitter","content":"lcuit amet turicula consequat.","senttime":"2/18/2021","contentimg":"http://dummyimage.com/238x249.png/cc0000/ffffff"}
     const new_post={}
-    new_post.id=2
+    new_post.id= +post_data[0].id -1
     new_post.source="O-Zone"
     new_post.content= post_text
     new_post.senttime = new Date().toLocaleString()
