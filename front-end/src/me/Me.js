@@ -2,17 +2,14 @@ import React, { useState, useEffect } from 'react'
 import './Me.css'
 import { Link, NavLink } from 'react-router-dom'
 import { PersonPlus } from 'react-bootstrap-icons';
-import { Facebook } from 'react-bootstrap-icons';
-import { Instagram } from 'react-bootstrap-icons';
-import { Twitter } from 'react-bootstrap-icons';
 import { Gear } from 'react-bootstrap-icons';
 import { ClockHistory } from 'react-bootstrap-icons';
 import { TextParagraph } from 'react-bootstrap-icons';
 import { HeartFill } from 'react-bootstrap-icons';
 import { Youtube } from 'react-bootstrap-icons';
 import { Linkedin } from 'react-bootstrap-icons';
-
-
+import axios from 'axios'
+import Linked_platform_connect from './Linked_platform_connect';
 
 
 const Me = (props) => {
@@ -71,8 +68,10 @@ const Me = (props) => {
         }
     }
 
-    // start a state variable with a blank array
-    const [user_info, setUser_info] = useState(
+
+
+    /* backup data
+    const user_info=
         {
         "id": 1,
         "user_name": "Joe",
@@ -83,7 +82,42 @@ const Me = (props) => {
         "following_number": "200",
         "linked_social_media": ["Facebook","Twitter","Instagram","TikTok"]
       })
+      */
+
+    //set user_info
+    const [user_info, setUser_info] = useState([])
+    //set linked_social_media
+    const [linked_social_media, setLinked_social_media]=useState([])
+
+    useEffect(() => {
+       
+        axios('/get_me')
+            .then((response) => {
+                setUser_info(response.data.user_info)
+                setLinked_social_media(response.data.linked_social_media)
+
+                //add button for each social media
+                let element1 = document.getElementById("O-Zone")
+                element1.addEventListener('load',handleClick1)
+
+
+                let element = document.getElementById("Facebook")
+                element.addEventListener('click',handleClick2)
+
+                let element2 = document.getElementById("Twitter")
+                element2.addEventListener('click',handleClick3)
+                
+                let element3 = document.getElementById("Instagram")
+                element3.addEventListener('click',handleClick4)
+            
+            })
+            .catch((err) => {
+               console.log("error:", err)
+            })
+    }, [])  
    
+
+
     return (
         <div className = "Me">
             <section id='header'>
@@ -171,45 +205,24 @@ const Me = (props) => {
             
             <section>
                
-            <h1>Linked Social Medias</h1>  
+            <h1>Linked Social Media</h1>  
+
+
             <div  id="main_container3">
-                <div class='icon'> 
-                    <Facebook id='browse_history_icon' size={30} color="white"/>
-                        <button id="button1" onClick={handleClick1}>
-                        {facebook}
-                        </button>
 
-                </div>
-                <div class='icon' >
-                    <Twitter id='browse_history_icon' size={30} color="white"/>
-                        <button id="button1" onClick={handleClick2}>
-                       {twitter}
-                        </button>
-                </div>
+                {linked_social_media.map((item,i) => (
+                            <Linked_platform_connect 
+                                
+                                key={item.id}
+                                details={item}
+                            />
 
-                <div class='icon'>
-                    <Instagram id='browse_history_icon' size={30} color="white"/>
-                        <button id="button1" onClick={handleClick3} >
-                      {instagram}
-                        </button>
-                </div>
-                <div class='icon'>
-                    <Youtube id='browse_history_icon' size={30} color="white"/>
-                        <button id="button1" onClick={handleClick4}>
-                    {youtube}
-                        </button>
-                </div>
-                <div class='icon'>
-                    <Linkedin id='browse_history_icon' size={30} color="white"/>
-                        <button id="button1" onClick={handleClick5}>
-                   {linkedin}
-                        </button>
-                </div>
+                        ))} 
 
-                </div>
+            </div>
 
 
-            </section>
+        </section>
 
          
 
