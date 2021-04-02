@@ -119,7 +119,7 @@ const MyProfile = (props) => {
              //handle click
 
 
-            let elements = document.getElementsByClassName("icon")
+            let elements = document.getElementsByTagName("IMG")
             console.log("elements of icon:",elements)
             console.log("elements.length:", elements.length)
             for(let i = 0; i < elements.length; i++) {
