@@ -99,7 +99,7 @@ app.post("/register", (req, res) => {
     // });
   });
 
-  app.post("/login", (req, res, next) => {
+app.post("/login", (req, res, next) => {
     // passport.authenticate("local", (err, user, info) => {
     //   if (err) throw err;
     //   if (!user) res.send("No User Exists");
@@ -115,7 +115,7 @@ app.post("/register", (req, res) => {
     // })(req, res, next);
   });
 
-  app.post("/browsed", (req, res, next) => {
+app.post("/browsed", (req, res, next) => {
     // passport.authenticate("local", (err, user, info) => {
     //   if (err) throw err;
     //   if (!user) res.send("No User Exists");
@@ -135,10 +135,10 @@ app.post("/register", (req, res) => {
 
 app.post('/newuser', function(req, res) {
     const newuser = {
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      password_confirmation: req.body.password_confirmation
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        password_confirmation: req.body.password_confirmation
     };
 
   
@@ -159,39 +159,38 @@ app.post('/newuser', function(req, res) {
 
   });
 
-  app.get("/api_browse", (req, res) => {
+app.get("/api_browse", (req, res) => {
 
-    const browsedData = [{
-                viewDate: "2021-4-1",
-                UserName: "asidjashdkasdhk9",
-                contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
-                userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
-                content: "Post Content",
-            },
-            {
-                viewDate: "2021-4-1",
-                UserName: "rmorcombe0",
-                contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
-                userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",
-                content: "Post Content",
-            }
-    ];
-        console.log(browsedData)
-        res.json(browsedData); // The req.user stores the entire user that has been authenticated inside of it.
+    const browsedData = [{viewDate: "2021-4-1",UserName: "asidjashdkasdhk9",contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",content: "Post Content",},
+        {viewDate: "2021-4-1",UserName: "rmorcombe0",contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",content: "Post Content",
+        }];
+    console.log(browsedData)
+    res.json(browsedData); // The req.user stores the entire user that has been authenticated inside of it.
   });
 
 
-  app.get("/user", (req, res) => {
+app.get("/user", (req, res) => {
     res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
   });
 
-  app.get("/my_info", (req, res) => {
+app.get("/my_info", (req, res) => {
     const response_data=user_info
     res.json(response_data); // The req.user stores the entire user that has been authenticated inside of it.
   });
+
+  app.get("/get_me", async (req, res) => {
+    //send back response_data which consists of user_info and filtered_post_data as post_data
+    const response_data={
+        "user_info" : user_info,
+        "linked_social_media": linked_social_media,//return linked_platform name
+        
+    }
+    //console.log("in get_me:", user_info)
+    //console.log("linked_social_media:",linked_social_media)
+    res.json(response_data)
+
+})
+
 app.get("/get_my_profile", async (req, res) => {
 
     //post data
