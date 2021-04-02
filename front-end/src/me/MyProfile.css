@@ -169,6 +169,16 @@ div.MyProfile #select_all_text{
     padding:10px;
 
 } 
+div.MyProfile #O-Zone{
+    font-size: 1.7em;
+    font-weight: bold;
+    color:white;
+    position: relative;
+    left:-4px;
+    top:-5px;
+    padding:10px;
+
+} 
 
 div.MyProfile #Facebook, #Twitter, #Instagram, #Facebook, #Facebook,#Facebook,#Facebook{ 
     position:relative;
