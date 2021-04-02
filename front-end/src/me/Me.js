@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import './Me.css'
 import { Link, NavLink } from 'react-router-dom'
 import { PersonPlus } from 'react-bootstrap-icons';
+import { Facebook } from 'react-bootstrap-icons';
+import { Instagram } from 'react-bootstrap-icons';
+import { Twitter } from 'react-bootstrap-icons';
 import { Gear } from 'react-bootstrap-icons';
 import { ClockHistory } from 'react-bootstrap-icons';
 import { TextParagraph } from 'react-bootstrap-icons';
@@ -14,60 +17,15 @@ import Linked_platform_connect from './Linked_platform_connect';
 
 const Me = (props) => {
 
-    const [facebook, setFacebook] = useState('connected')
-    const [twitter, setTwitter] = useState('connected')
-    const [instagram, setInstagram] = useState('connected')
-    const [youtube, setYoutube] = useState('connect')
-    const [linkedin, setLinkedin] = useState('connect')
-    
-    const handleClick1=()=>{
-        console.log('clicked')
-        if (facebook==='connect'){
-            setFacebook('connected');
-        }
-        else if (facebook==='connected'){
-            setFacebook('connect');
-        }
-    }
-   
-    const handleClick2=()=>{
-        console.log('clicked')
-        if (twitter==='connect'){
-            setTwitter('connected');
-        }
-        else if (twitter==='connected'){
-            setTwitter('connect');
-        }
-    }
-    const handleClick3=()=>{
-        console.log('clicked')
-        if (instagram==='connect'){
-            setInstagram('connected');
-        }
-        else if (instagram==='connected'){
-            setInstagram('connect');
-        }
-        console.log(instagram)
-    }
-    const handleClick4=()=>{
-        console.log('clicked')
-        if (youtube==='connect'){
-            setYoutube('connected');
-        }
-        else if (youtube==='connected'){
-            setYoutube('connect');
-        }
-    }
-    const handleClick5=()=>{
-        console.log('clicked')
-        if (linkedin==='connect'){
-            setLinkedin('connected');
-        }
-        else if (linkedin==='connected'){
-            setLinkedin('connect');
-        }
-    }
+  
 
+
+
+    //set user_info
+    const [user_info, setUser_info] = useState([])
+    //set linked_social_media
+    let [linked_social_media, setLinked_social_media]=useState([])
+    let [clicked_linked_social_media, SetClicked_linked_social_media]=useState([])
 
 
     /* backup data
@@ -83,38 +41,91 @@ const Me = (props) => {
         "linked_social_media": ["Facebook","Twitter","Instagram","TikTok"]
       })
       */
-
-    //set user_info
-    const [user_info, setUser_info] = useState([])
-    //set linked_social_media
-    const [linked_social_media, setLinked_social_media]=useState([])
+  
 
     useEffect(() => {
        
-        axios('/get_me')
-            .then((response) => {
-                setUser_info(response.data.user_info)
-                setLinked_social_media(response.data.linked_social_media)
+        axios('/get_me',{
+            params: {
+                clicked_linked_social_media: clicked_linked_social_media
+            }
+        })
+        .then((response) => {
+            setUser_info(response.data.user_info)
+      
+            setLinked_social_media(response.data.linked_social_media)
+          
 
-                //add button for each social media
-                let element1 = document.getElementById("O-Zone")
-                element1.addEventListener('load',handleClick1)
-
-
-                let element = document.getElementById("Facebook")
-                element.addEventListener('click',handleClick2)
-
-                let element2 = document.getElementById("Twitter")
-                element2.addEventListener('click',handleClick3)
+                //add click even listener to all icons of linked social media. 
+                //when click one social media, remove it from the linked_social_media array.
                 
-                let element3 = document.getElementById("Instagram")
-                element3.addEventListener('click',handleClick4)
-            
+               //the following will only execute once. but as linked+social_meida list will call the useEffect function once it get changed, ,,,
+              //handle click
+
+            let elements = document.getElementsByTagName("BUTTON")
+            console.log("elements of BUTTON:",elements)
+            console.log("elements.length:", elements.length)
+            for(let i = 0; i < elements.length; i++) {
+                console.log(i,"th iteration")
+                console.log("elements:", elements[i])
+                
+                let element = elements[i];
+
+                if(element.id==="O-Zone"){
+                    console.log("enter O-zone block")
+                    element.addEventListener('click', function(){
+                        console.log('selected O-Zone')
+                        SetClicked_linked_social_media("O-Zone");
+                        alert("Do you want to unconnect O-Zone")
+                        //refresh the page to get rid of O-zone icon 
+                        window.location.reload();
+                    })
+                  
+                }
+
+                else if(element.id==="Facebook"){
+                    console.log("enter Facebook block")
+                    element.addEventListener('click',function(){
+                        console.log('selected Facebook')
+                        SetClicked_linked_social_media("Facebook");
+                        alert("Do you want to unconnect Facebook")
+                        //refresh the page to get rid of facebook icon 
+                        window.location.reload();
+                    })
+                  
+
+                }
+                else if(element.id==="Twitter"){
+                    console.log("enter Twitter block")
+                    element.addEventListener('click',function(){
+                        console.log('selected Twitter')
+                        SetClicked_linked_social_media("Twitter");
+                        alert("Do you want to unconnect Twitter")
+                        //refresh the page to get rid of twitter icon 
+                        window.location.reload();
+                    })
+                   
+                }
+                else if(element.id==="Instagram"){
+                    console.log("enter Instagram block")
+                    element.addEventListener('click',function(){
+                        console.log('selected Instagram')
+                        SetClicked_linked_social_media("Instagram");
+                        alert("Do you want to unconnect Instagram")
+                        //refresh the page to get rid of instagram icon 
+                        window.location.reload();
+                    })
+                   
+                }
+            }
+
             })
             .catch((err) => {
                console.log("error:", err)
             })
-    }, [])  
+            console.log("clicked_linked_social_media:",clicked_linked_social_media)
+
+    }, [clicked_linked_social_media])  
    
 
 
@@ -208,7 +219,7 @@ const Me = (props) => {
             <h1>Linked Social Media</h1>  
 
 
-            <div  id="main_container3">
+            <div  id="main_container3" >
 
                 {linked_social_media.map((item,i) => (
                             <Linked_platform_connect 

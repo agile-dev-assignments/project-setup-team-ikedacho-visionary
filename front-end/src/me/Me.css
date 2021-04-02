@@ -175,10 +175,12 @@ div.Me #main_container3 .icon{
 }
 
 div.Me #O-Zone{
+   
     position: relative;
     left:0px;
     top:0px;
     padding:5px;
+
 } 
 
 div.Me button{
@@ -187,5 +189,5 @@ div.Me button{
     border:1px solid white;
     text-align: center;
     position: relative;
-    left:-19px;
+    left:0px;
 }
