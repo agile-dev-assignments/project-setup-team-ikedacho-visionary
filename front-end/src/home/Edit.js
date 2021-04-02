@@ -72,7 +72,7 @@ const Edit = (props) => {
             </header>
 
             <section className="edit-wrap">
-                <textarea id="myTextarea" onInput = {e => setPost_text(e.target.value)}/>
+                <textarea id="myTextarea" placeholder="What's you mind?" onInput = {e => setPost_text(e.target.value)}/>
                 
                 <br></br>
                 <br></br>
@@ -82,7 +82,7 @@ const Edit = (props) => {
                 <br></br>
                 <br></br>
 
-                <button className = "Commentbutton" onClick = {_showComment.bind()}>Upload picture</button>
+                {/*<button className = "Commentbutton" onClick = {_showComment.bind()}>Upload picture</button>*/}
 
                 {state.showComment && (
                 <>
