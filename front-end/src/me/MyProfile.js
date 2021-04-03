@@ -24,7 +24,6 @@ const MyProfile = (props) => {
     const handleClick=()=>{
         console.log('clicked!')
         setPlatform_name(document.getElementById('facebook-icon').getAttribute("value") )
-
     }
   */
   
@@ -46,7 +45,6 @@ const MyProfile = (props) => {
             platform_name_array.push(e)
             console.log(`array after add ${e}:`,platform_name_array)
         }
-
         setPlatform_name_array(platform_name_array);
         console.log("setPlatform",platform_name_array)
         */
@@ -64,7 +62,7 @@ const MyProfile = (props) => {
         }   
 
 
-    }
+    }/*
     const handleClick1=(e)=>{
         console.log('selected O-Zone')
         setPlatform_name_array("O-Zone");
@@ -81,7 +79,7 @@ const MyProfile = (props) => {
         console.log('selected Instagram')
         setPlatform_name_array("Instagram");
     }
-
+*/
    
 
     let history=useHistory();
@@ -119,6 +117,53 @@ const MyProfile = (props) => {
             setPost_data(response.data.post_data)
             setLinked_social_media(response.data.linked_social_media)
              //handle click
+
+
+            let elements = document.getElementsByTagName("IMG")
+            console.log("elements of icon:",elements)
+            console.log("elements.length:", elements.length)
+            for(let i = 0; i < elements.length; i++) {
+                console.log(i,"th iteration")
+                console.log("elements:", elements[i])
+                
+                let element = elements[i];
+
+                if(element.id==="O-Zone"){
+                    element.addEventListener('click',function(){
+                        console.log("enter O-zone block")
+                        console.log('selected O-Zone')
+                        setPlatform_name_array("O-Zone");
+                    })
+                  
+                }
+
+                else if(element.id==="Facebook"){
+                    element.addEventListener('click',function(){
+                        console.log("enter Facebook block")
+                        console.log('selected Facebook')
+                        setPlatform_name_array("Facebook");
+                    })
+
+                }
+                else if(element.id==="Twitter"){
+                    element.addEventListener('click',function(){
+                        console.log("enter Twitter block")
+                        console.log('selected Twitter')
+                        setPlatform_name_array("Twitter");
+                    })
+                   
+                }
+                else if(element.id==="Instagram"){
+                    element.addEventListener('click',function(){
+                        console.log("enter Instagram block")
+                        console.log('selected Instagram')
+                        setPlatform_name_array("Instagram");
+                    })
+                   
+                }
+            }
+
+            /*
              let element1 = document.getElementById("O-Zone")
              element1.addEventListener('click',handleClick1)
  
@@ -131,7 +176,7 @@ const MyProfile = (props) => {
             
             let element3 = document.getElementById("Instagram")
             element3.addEventListener('click',handleClick4)
-
+*/
            
 
         })
@@ -257,7 +302,7 @@ const MyProfile = (props) => {
                                 userimg = {user_info.user_photo}
                                 UserName = {user_info.user_name}
                                 content = {item.content}
-                                Senttime = {item.Senttime} 
+                                Senttime = {item.senttime} 
                                 contentimg = {item.contentimg} />
                     ))} 
             </section>

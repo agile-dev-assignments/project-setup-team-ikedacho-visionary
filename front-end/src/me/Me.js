@@ -11,68 +11,25 @@ import { TextParagraph } from 'react-bootstrap-icons';
 import { HeartFill } from 'react-bootstrap-icons';
 import { Youtube } from 'react-bootstrap-icons';
 import { Linkedin } from 'react-bootstrap-icons';
-
-
+import axios from 'axios'
+import Linked_platform_connect from './Linked_platform_connect';
 
 
 const Me = (props) => {
 
-    const [facebook, setFacebook] = useState('connected')
-    const [twitter, setTwitter] = useState('connected')
-    const [instagram, setInstagram] = useState('connected')
-    const [youtube, setYoutube] = useState('connect')
-    const [linkedin, setLinkedin] = useState('connect')
-    
-    const handleClick1=()=>{
-        console.log('clicked')
-        if (facebook==='connect'){
-            setFacebook('connected');
-        }
-        else if (facebook==='connected'){
-            setFacebook('connect');
-        }
-    }
-   
-    const handleClick2=()=>{
-        console.log('clicked')
-        if (twitter==='connect'){
-            setTwitter('connected');
-        }
-        else if (twitter==='connected'){
-            setTwitter('connect');
-        }
-    }
-    const handleClick3=()=>{
-        console.log('clicked')
-        if (instagram==='connect'){
-            setInstagram('connected');
-        }
-        else if (instagram==='connected'){
-            setInstagram('connect');
-        }
-        console.log(instagram)
-    }
-    const handleClick4=()=>{
-        console.log('clicked')
-        if (youtube==='connect'){
-            setYoutube('connected');
-        }
-        else if (youtube==='connected'){
-            setYoutube('connect');
-        }
-    }
-    const handleClick5=()=>{
-        console.log('clicked')
-        if (linkedin==='connect'){
-            setLinkedin('connected');
-        }
-        else if (linkedin==='connected'){
-            setLinkedin('connect');
-        }
-    }
+  
 
-    // start a state variable with a blank array
-    const [user_info, setUser_info] = useState(
+
+
+    //set user_info
+    const [user_info, setUser_info] = useState([])
+    //set linked_social_media
+    let [linked_social_media, setLinked_social_media]=useState([])
+    let [clicked_linked_social_media, SetClicked_linked_social_media]=useState([])
+
+
+    /* backup data
+    const user_info=
         {
         "id": 1,
         "user_name": "Joe",
@@ -83,7 +40,95 @@ const Me = (props) => {
         "following_number": "200",
         "linked_social_media": ["Facebook","Twitter","Instagram","TikTok"]
       })
+      */
+  
+
+    useEffect(() => {
+       
+        axios('/get_me',{
+            params: {
+                clicked_linked_social_media: clicked_linked_social_media
+            }
+        })
+        .then((response) => {
+            setUser_info(response.data.user_info)
+      
+            setLinked_social_media(response.data.linked_social_media)
+          
+
+                //add click even listener to all icons of linked social media. 
+                //when click one social media, remove it from the linked_social_media array.
+                
+               //the following will only execute once. but as linked+social_meida list will call the useEffect function once it get changed, ,,,
+              //handle click
+
+            let elements = document.getElementsByTagName("BUTTON")
+            console.log("elements of BUTTON:",elements)
+            console.log("elements.length:", elements.length)
+            for(let i = 0; i < elements.length; i++) {
+                console.log(i,"th iteration")
+                console.log("elements:", elements[i])
+                
+                let element = elements[i];
+
+                if(element.id==="O-Zone"){
+                    console.log("enter O-zone block")
+                    element.addEventListener('click', function(){
+                        console.log('selected O-Zone')
+                        SetClicked_linked_social_media("O-Zone");
+                        alert("Do you want to unconnect O-Zone")
+                        //refresh the page to get rid of O-zone icon 
+                        window.location.reload();
+                    })
+                  
+                }
+
+                else if(element.id==="Facebook"){
+                    console.log("enter Facebook block")
+                    element.addEventListener('click',function(){
+                        console.log('selected Facebook')
+                        SetClicked_linked_social_media("Facebook");
+                        alert("Do you want to unconnect Facebook")
+                        //refresh the page to get rid of facebook icon 
+                        window.location.reload();
+                    })
+                  
+
+                }
+                else if(element.id==="Twitter"){
+                    console.log("enter Twitter block")
+                    element.addEventListener('click',function(){
+                        console.log('selected Twitter')
+                        SetClicked_linked_social_media("Twitter");
+                        alert("Do you want to unconnect Twitter")
+                        //refresh the page to get rid of twitter icon 
+                        window.location.reload();
+                    })
+                   
+                }
+                else if(element.id==="Instagram"){
+                    console.log("enter Instagram block")
+                    element.addEventListener('click',function(){
+                        console.log('selected Instagram')
+                        SetClicked_linked_social_media("Instagram");
+                        alert("Do you want to unconnect Instagram")
+                        //refresh the page to get rid of instagram icon 
+                        window.location.reload();
+                    })
+                   
+                }
+            }
+
+            })
+            .catch((err) => {
+               console.log("error:", err)
+            })
+            console.log("clicked_linked_social_media:",clicked_linked_social_media)
+
+    }, [clicked_linked_social_media])  
    
+
+
     return (
         <div className = "Me">
             <section id='header'>
@@ -142,6 +187,7 @@ const Me = (props) => {
                         Following
                     </Link>
                 </div>
+                
             </section>
 
 
@@ -171,45 +217,24 @@ const Me = (props) => {
             
             <section>
                
-            <h1>Linked Social Medias</h1>  
-            <div  id="main_container3">
-                <div class='icon'> 
-                    <Facebook id='browse_history_icon' size={30} color="white"/>
-                        <button id="button1" onClick={handleClick1}>
-                        {facebook}
-                        </button>
-
-                </div>
-                <div class='icon' >
-                    <Twitter id='browse_history_icon' size={30} color="white"/>
-                        <button id="button1" onClick={handleClick2}>
-                       {twitter}
-                        </button>
-                </div>
-
-                <div class='icon'>
-                    <Instagram id='browse_history_icon' size={30} color="white"/>
-                        <button id="button1" onClick={handleClick3} >
-                      {instagram}
-                        </button>
-                </div>
-                <div class='icon'>
-                    <Youtube id='browse_history_icon' size={30} color="white"/>
-                        <button id="button1" onClick={handleClick4}>
-                    {youtube}
-                        </button>
-                </div>
-                <div class='icon'>
-                    <Linkedin id='browse_history_icon' size={30} color="white"/>
-                        <button id="button1" onClick={handleClick5}>
-                   {linkedin}
-                        </button>
-                </div>
-
-                </div>
+            <h1>Linked Social Media</h1>  
 
 
-            </section>
+            <div  id="main_container3" >
+
+                {linked_social_media.map((item,i) => (
+                            <Linked_platform_connect 
+                                
+                                key={item.id}
+                                details={item}
+                            />
+
+                        ))} 
+
+            </div>
+
+
+        </section>
 
          
 

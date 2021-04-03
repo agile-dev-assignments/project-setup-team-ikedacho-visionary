@@ -40,9 +40,9 @@ const user_info={
     "following_number": "200",
     "linked_social_media": ["O-Zone","Facebook","Twitter","Instagram"]
 }//end of user_info
-const linked_social_media= ["O-Zone","Facebook","Twitter","Instagram"]
+let linked_social_media= ["O-Zone","Facebook","Twitter","Instagram"]
 
-const post_data =[{"id":1,"source":"Twitter","content":"Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat.","senttime":"2/18/2021","contentimg":"http://dummyimage.com/238x249.png/cc0000/ffffff"},{"id":2,"source":"Facebook","content":"Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.","senttime":"2/17/2021","contentimg":"http://dummyimage.com/190x250.png/5fa2dd/ffffff"},{"id":3,"source":"Facebook","content":"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst.","senttime":"8/1/2020","contentimg":"http://dummyimage.com/187x154.png/ff4444/ffffff"},{"id":4,"source":"Instagram","content":"Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","senttime":"12/1/2020","contentimg":"http://dummyimage.com/117x277.png/dddddd/000000"},{"id":5,"source":"Twitter","content":"Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","senttime":"11/8/2020","contentimg":"http://dummyimage.com/200x111.png/dddddd/000000"},{"id":6,"source":"Facebook","content":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante.","senttime":"4/8/2020","contentimg":"http://dummyimage.com/204x133.png/dddddd/000000"},{"id":7,"source":"Twitter","content":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.","senttime":"2/13/2021","contentimg":"http://dummyimage.com/184x147.png/ff4444/ffffff"},{"id":8,"source":"Twitter","content":"Nullam porttitor lacus at turpis.","senttime":"8/6/2020","contentimg":"http://dummyimage.com/163x149.png/5fa2dd/ffffff"},{"id":9,"source":"Facebook","content":"Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","senttime":"12/29/2020","contentimg":"http://dummyimage.com/182x256.png/ff4444/ffffff"},{"id":10,"source":"Instagram","content":"Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.","senttime":"4/27/2020","contentimg":"http://dummyimage.com/182x193.png/dddddd/000000"}]//end of backup data
+let post_data =[{"id":1,"source":"Twitter","content":"Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat.","senttime":"2/18/2021","contentimg":"http://dummyimage.com/238x249.png/cc0000/ffffff"},{"id":2,"source":"Facebook","content":"Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.","senttime":"2/17/2021","contentimg":"http://dummyimage.com/190x250.png/5fa2dd/ffffff"},{"id":3,"source":"Facebook","content":"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst.","senttime":"8/1/2020","contentimg":"http://dummyimage.com/187x154.png/ff4444/ffffff"},{"id":4,"source":"Instagram","content":"Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","senttime":"12/1/2020","contentimg":"http://dummyimage.com/117x277.png/dddddd/000000"},{"id":5,"source":"Twitter","content":"Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","senttime":"11/8/2020","contentimg":"http://dummyimage.com/200x111.png/dddddd/000000"},{"id":6,"source":"Facebook","content":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante.","senttime":"4/8/2020","contentimg":"http://dummyimage.com/204x133.png/dddddd/000000"},{"id":7,"source":"Twitter","content":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.","senttime":"2/13/2021","contentimg":"http://dummyimage.com/184x147.png/ff4444/ffffff"},{"id":8,"source":"Twitter","content":"Nullam porttitor lacus at turpis.","senttime":"8/6/2020","contentimg":"http://dummyimage.com/163x149.png/5fa2dd/ffffff"},{"id":9,"source":"Facebook","content":"Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","senttime":"12/29/2020","contentimg":"http://dummyimage.com/182x256.png/ff4444/ffffff"},{"id":10,"source":"Instagram","content":"Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.","senttime":"4/27/2020","contentimg":"http://dummyimage.com/182x193.png/dddddd/000000"}]//end of backup data
 
 // mongoose.connect(
 //     "mongodb+srv://{Place Your Username Here!}:{Place Your Password Here!}@cluster0-q9g9s.mongodb.net/test?retryWrites=true&w=majority",
@@ -99,7 +99,7 @@ app.post("/register", (req, res) => {
     // });
   });
 
-  app.post("/login", (req, res, next) => {
+app.post("/login", (req, res, next) => {
     // passport.authenticate("local", (err, user, info) => {
     //   if (err) throw err;
     //   if (!user) res.send("No User Exists");
@@ -115,7 +115,7 @@ app.post("/register", (req, res) => {
     // })(req, res, next);
   });
 
-  app.post("/browsed", (req, res, next) => {
+app.post("/browsed", (req, res, next) => {
     // passport.authenticate("local", (err, user, info) => {
     //   if (err) throw err;
     //   if (!user) res.send("No User Exists");
@@ -135,10 +135,10 @@ app.post("/register", (req, res) => {
 
 app.post('/newuser', function(req, res) {
     const newuser = {
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      password_confirmation: req.body.password_confirmation
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        password_confirmation: req.body.password_confirmation
     };
 
   
@@ -159,39 +159,57 @@ app.post('/newuser', function(req, res) {
 
   });
 
-  app.get("/api_browse", (req, res) => {
+app.get("/api_browse", (req, res) => {
 
-    const browsedData = [{
-                viewDate: "2021-4-1",
-                UserName: "asidjashdkasdhk9",
-                contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
-                userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
-                content: "Post Content",
-            },
-            {
-                viewDate: "2021-4-1",
-                UserName: "rmorcombe0",
-                contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
-                userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",
-                content: "Post Content",
-            }
-    ];
-        console.log(browsedData)
-        res.json(browsedData); // The req.user stores the entire user that has been authenticated inside of it.
+    const browsedData = [{viewDate: "2021-4-1",UserName: "asidjashdkasdhk9",contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",content: "Post Content",},
+        {viewDate: "2021-4-1",UserName: "rmorcombe0",contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",content: "Post Content",
+        }];
+    console.log(browsedData)
+    res.json(browsedData); // The req.user stores the entire user that has been authenticated inside of it.
   });
 
 
-  app.get("/user", (req, res) => {
+app.get("/user", (req, res) => {
     res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
   });
 
-  app.get("/my_info", (req, res) => {
+app.get("/my_info", (req, res) => {
     const response_data=user_info
     res.json(response_data); // The req.user stores the entire user that has been authenticated inside of it.
   });
+
+app.get("/get_me", (req, res) => {
+    // extract the linked_social_platform that is passed in along with the request
+    let clicked_linked_social_media = req.query.clicked_linked_social_media
+   
+
+    //FILTER POST DATA to send back to client, based on platform user selected in frontend
+    //console.log("req.query.platform_name_array:", req.query.platform_name_array)
+
+    if (clicked_linked_social_media!==undefined) {
+        //console.log("111111")
+        linked_social_media=linked_social_media.filter(element=>{
+          //delete the selected platfrom from linked_social
+            if (!element.includes(req.query.clicked_linked_social_media)){
+                return true
+        }//end of if
+
+        })//end of filtered_post_data
+
+    }//end of if
+
+    //send back response_data which consists of user_info and filtered_post_data as post_data
+    const response_data={
+        "user_info" : user_info,
+       
+        "linked_social_media": linked_social_media,//return linked_platform name
+    }
+    //console.log("in get_my_profile:", user_info)
+    console.log("linked_social_media:",linked_social_media)
+    console.log("in me's post_data:",post_data)
+    res.json(response_data)
+   
+})
 app.get("/get_my_profile", async (req, res) => {
 
     //post data
@@ -212,13 +230,23 @@ app.get("/get_my_profile", async (req, res) => {
     //FILTER POST DATA to send back to client, based on platform user selected in frontend
     //console.log("req.query.platform_name_array:", req.query.platform_name_array)
     let filtered_post_data=post_data.slice()
+    //filter the post_data to only contain the linked_social_media 
+    filtered_post_data=post_data.filter(element=>{
+        if (linked_social_media.includes(element.source)){
+            return true
+        }//end of if
+     })//end 
+
+    //filtered_post_data by selected platfrom_name by user 
     if (req.query.platform_name_array!==undefined) {
         //console.log("111111")
         filtered_post_data=post_data.filter(element=>{
            if (req.query.platform_name_array.includes(element.source)){
                return true
            }//end of if
-        })//end of filtered_post_data
+        })//end of filtered_post_data by selected platfrom_name by user 
+
+
 
     }//end of if
 
@@ -226,10 +254,12 @@ app.get("/get_my_profile", async (req, res) => {
     const response_data={
         "user_info" : user_info,
         "post_data" : filtered_post_data, //return the filtered data based on platform selected
-        "linked_social_media": user_info.linked_social_media,//return linked_platform name
+        "linked_social_media": linked_social_media,//return linked_platform name
     }
     //console.log("in get_my_profile:", user_info)
     console.log("linked_social_media:",linked_social_media)
+    console.log("in my_profile's filtered post_data:",filtered_post_data)
+    console.log("in my_profile's  post_data:",post_data)
     res.json(response_data)
 
 })
@@ -306,13 +336,15 @@ app.get("/get_edit", (req, res) => {
     //add the newly sent post to post_data in myprofile page
     //{"id":1,"source":"Twitter","content":"lcuit amet turicula consequat.","senttime":"2/18/2021","contentimg":"http://dummyimage.com/238x249.png/cc0000/ffffff"}
     const new_post={}
-    new_post.id=2
+    new_post.id= +post_data[0].id -1
     new_post.source="O-Zone"
     new_post.content= post_text
     new_post.senttime = new Date().toLocaleString()
     new_post.contentimg=" "
-   
+    console.log("before",post_data)
     post_data.unshift(new_post)
+
+    console.log("after",post_data)
 })
 
 
