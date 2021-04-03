@@ -152,21 +152,27 @@ div.MyProfile #main_container3 .icon{
     width:40px;
     height: 40px;
     border-radius: 50%;
+    
 }
 /* facebook icon, twitter icon, instagram icon */
 div.MyProfile #select{
     position:relative;
     left:5px;
     top:5px;
+    
+    
 }
 div.MyProfile #select_all_text{
     font-size: 1em;
     font-weight: bold;
     color:white;
     position: relative;
-    left:1px;
+    left:0px;
     top:11px;
-    padding:10px;
+    padding:11px;
+    border-radius: 50%;
+   
+
 
 } 
 div.MyProfile #O-Zone{
@@ -174,15 +180,21 @@ div.MyProfile #O-Zone{
     font-weight: bold;
     color:white;
     position: relative;
-    left:-4px;
-    top:-5px;
-    padding:10px;
+    left: 0px;
+    top:0px;
+    padding:5px;
+    border-radius: 50%;
 
 } 
 
-div.MyProfile #Facebook, #Twitter, #Instagram, #Facebook, #Facebook,#Facebook,#Facebook{ 
+div.MyProfile #Facebook, #Twitter, #Instagram{ 
     position:relative;
     padding:5px;
     left:0px;
     top:0px;
+    border-radius: 50%;
+}
+
+div.MyProfile .selected{
+    background-color:#b988cc;
 }

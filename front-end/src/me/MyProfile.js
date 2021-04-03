@@ -52,9 +52,16 @@ const MyProfile = (props) => {
 
        
         //only allow one selection. select one platform, then only show post from that platform. if e="select_all_text", then show posts from all platfrom
+        
+        
         if( e==="select_all_text" ){
             console.log('select all platform')
             setPlatform_name_array(linked_social_media) //if click "All" text field, set platform_name_array to linked_social_media
+            document.getElementById("select_all_text").classList.add("selected")
+            document.getElementById("O-Zone").classList.remove("selected")
+            document.getElementById("Facebook").classList.remove("selected")
+            document.getElementById("Twitter").classList.remove("selected")
+            document.getElementById("Instagram").classList.remove("selected")
         }
         else{
             console.log('select a single platform: ',e)
@@ -97,6 +104,9 @@ const MyProfile = (props) => {
     //platform the is selected by user who browser the page
     let [platform_name_array, setPlatform_name_array] = useState([]);
    
+     //set border
+    const [border,setBorder] = useState([])
+
 
     useEffect(() => {
         //request data from server once user open my_profile page
@@ -117,12 +127,14 @@ const MyProfile = (props) => {
             setPost_data(response.data.post_data)
             setLinked_social_media(response.data.linked_social_media)
              //handle click
+            
 
 
             let elements = document.getElementsByTagName("IMG")
             console.log("elements of icon:",elements)
             console.log("elements.length:", elements.length)
             for(let i = 0; i < elements.length; i++) {
+               
                 console.log(i,"th iteration")
                 console.log("elements:", elements[i])
                 
@@ -133,6 +145,14 @@ const MyProfile = (props) => {
                         console.log("enter O-zone block")
                         console.log('selected O-Zone')
                         setPlatform_name_array("O-Zone");
+                        setBorder("O-Zone")
+                        //set border
+                        document.getElementById("select_all_text").style.backgroundColor= "rgba(195, 166, 197, 0.767)"
+                        document.getElementById("O-Zone").classList.add("selected")
+                        document.getElementById("Facebook").classList.remove("selected")
+                        document.getElementById("Twitter").classList.remove("selected")
+                        document.getElementById("Instagram").classList.remove("selected")
+                        
                     })
                   
                 }
@@ -142,6 +162,15 @@ const MyProfile = (props) => {
                         console.log("enter Facebook block")
                         console.log('selected Facebook')
                         setPlatform_name_array("Facebook");
+                        setBorder("Facebook")
+                         //set border
+                         document.getElementById("select_all_text").classList.remove("selected")
+                        document.getElementById("O-Zone").classList.remove("selected")
+                        document.getElementById("Facebook").classList.add("selected")
+                        document.getElementById("Twitter").classList.remove("selected")
+                        document.getElementById("Instagram").classList.remove("selected")
+                       
+                    
                     })
 
                 }
@@ -150,6 +179,13 @@ const MyProfile = (props) => {
                         console.log("enter Twitter block")
                         console.log('selected Twitter')
                         setPlatform_name_array("Twitter");
+                        setBorder("Twitter")
+                         //set border
+                         document.getElementById("select_all_text").classList.remove("selected")
+                         document.getElementById("O-Zone").classList.remove("selected")
+                         document.getElementById("Facebook").classList.remove("selected")
+                         document.getElementById("Twitter").classList.add("selected")
+                         document.getElementById("Instagram").classList.remove("selected")
                     })
                    
                 }
@@ -158,6 +194,13 @@ const MyProfile = (props) => {
                         console.log("enter Instagram block")
                         console.log('selected Instagram')
                         setPlatform_name_array("Instagram");
+                        setBorder("Instagram")
+                         //set border
+                         document.getElementById("select_all_text").classList.remove("selected")
+                         document.getElementById("O-Zone").classList.remove("selected")
+                         document.getElementById("Facebook").classList.remove("selected")
+                         document.getElementById("Twitter").classList.remove("selected")
+                         document.getElementById("Instagram").classList.add("selected")
                     })
                    
                 }
@@ -177,6 +220,7 @@ const MyProfile = (props) => {
             let element3 = document.getElementById("Instagram")
             element3.addEventListener('click',handleClick4)
 */
+           //set border
            
 
         })
@@ -272,7 +316,7 @@ const MyProfile = (props) => {
 
                 <div id="main_container3">
                     <div className='icon' id='select'  >  {/* target is the element clicked */}
-                        <span id='select_all_text' onClick={e=> {console.log('all'); handleClick(e.target.id) }} >All</span>
+                        <span id='select_all_text'  className='selected' onClick={e=> {console.log('all'); handleClick(e.target.id) }} >All</span>
                     </div>
 
 
