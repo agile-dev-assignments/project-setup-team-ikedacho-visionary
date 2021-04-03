@@ -183,11 +183,25 @@ div.Me #O-Zone{
 
 } 
 
-div.Me button{
+div.Me #Facebook{
+    position: relative;
+    left:5px;
+    top:5px;
+}
+div.Me button#O-Zone, button#Facebook , button#Instagram, button#Twitter{
     width:80px;
     background-color: rgb(231, 219, 219);
     border:1px solid white;
     text-align: center;
     position: relative;
-    left:0px;
+    left:-18px;
+    border-radius: 0;
+}
+
+div.Me button#Facebook {
+    
+    position: relative;
+    left:-20px;
+    top:10px;
+    padding:5px;
 }
