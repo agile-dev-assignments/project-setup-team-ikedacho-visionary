@@ -61,7 +61,7 @@ div.Chat_title h2{
     z-index: 1;
     font-weight:600;
     font-size: 1em;
-    padding-top:3px;
+    margin-top:15px;
 }
 
 div.Chat_title a{
@@ -76,6 +76,6 @@ div.Chat_title #back{
     z-index: 1;
     font-weight:600;
     font-size: 0.9em;
-    padding-top:16px;
+    margin-top:15px;
 
 }
