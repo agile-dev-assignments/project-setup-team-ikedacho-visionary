@@ -57,11 +57,7 @@ const MyProfile = (props) => {
         if( e==="select_all_text" ){
             console.log('select all platform')
             setPlatform_name_array(linked_social_media) //if click "All" text field, set platform_name_array to linked_social_media
-            document.getElementById("select_all_text").classList.add("selected")
-            document.getElementById("O-Zone").classList.remove("selected")
-            document.getElementById("Facebook").classList.remove("selected")
-            document.getElementById("Twitter").classList.remove("selected")
-            document.getElementById("Instagram").classList.remove("selected")
+         
         }
         else{
             console.log('select a single platform: ',e)
@@ -147,11 +143,8 @@ const MyProfile = (props) => {
                         setPlatform_name_array("O-Zone");
                         setBorder("O-Zone")
                         //set border
-                        document.getElementById("select_all_text").style.backgroundColor= "rgba(195, 166, 197, 0.767)"
-                        document.getElementById("O-Zone").classList.add("selected")
-                        document.getElementById("Facebook").classList.remove("selected")
-                        document.getElementById("Twitter").classList.remove("selected")
-                        document.getElementById("Instagram").classList.remove("selected")
+                        document.getElementById('select_all_text').style.backgroundColor="rgba(195, 166, 197, 0.767)"
+                       
                         
                     })
                   
@@ -164,12 +157,8 @@ const MyProfile = (props) => {
                         setPlatform_name_array("Facebook");
                         setBorder("Facebook")
                          //set border
-                         document.getElementById("select_all_text").classList.remove("selected")
-                        document.getElementById("O-Zone").classList.remove("selected")
-                        document.getElementById("Facebook").classList.add("selected")
-                        document.getElementById("Twitter").classList.remove("selected")
-                        document.getElementById("Instagram").classList.remove("selected")
                        
+                         document.getElementById('select_all_text').style.backgroundColor="rgba(195, 166, 197, 0.767)"
                     
                     })
 
@@ -181,11 +170,7 @@ const MyProfile = (props) => {
                         setPlatform_name_array("Twitter");
                         setBorder("Twitter")
                          //set border
-                         document.getElementById("select_all_text").classList.remove("selected")
-                         document.getElementById("O-Zone").classList.remove("selected")
-                         document.getElementById("Facebook").classList.remove("selected")
-                         document.getElementById("Twitter").classList.add("selected")
-                         document.getElementById("Instagram").classList.remove("selected")
+                         document.getElementById('select_all_text').style.backgroundColor="rgba(195, 166, 197, 0.767)"
                     })
                    
                 }
@@ -196,11 +181,7 @@ const MyProfile = (props) => {
                         setPlatform_name_array("Instagram");
                         setBorder("Instagram")
                          //set border
-                         document.getElementById("select_all_text").classList.remove("selected")
-                         document.getElementById("O-Zone").classList.remove("selected")
-                         document.getElementById("Facebook").classList.remove("selected")
-                         document.getElementById("Twitter").classList.remove("selected")
-                         document.getElementById("Instagram").classList.add("selected")
+                         document.getElementById('select_all_text').style.backgroundColor="rgba(195, 166, 197, 0.767)"
                     })
                    
                 }
