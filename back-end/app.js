@@ -586,26 +586,17 @@ app.get("/api_message", async (req, res, next) => {
         .get(`${process.env.API_COMMUNITY_MESSAGES}?key=${process.env.API_COMMUNITY_MESSAGES_KEY}_`)
         .then(apiResponse => ret = apiResponse.data)
         .catch((err) => {
-            console.log(err)
-            const backupData = [
-                {"id":1,
-                "username":"cgilligan0",
-                "user_photo":"https://robohash.org/doloremqueofficiaet.jpg?size=50x50\u0026set=set1",
-                "newest_message":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.",
-                "unread_message_number":"6",
-                "newest_message_date":"4/19/2020"},
-                {"id":2,"username":"rmurkitt1","user_photo":"https://robohash.org/consequaturculpamaxime.png?size=50x50\u0026set=set1","newest_message":"Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam. Nam tristique tortor eu pede.","unread_message_number":"7","newest_message_date":"9/30/2020"},{"id":3,"username":"fwannes2","user_photo":"https://robohash.org/voluptatemfugiatea.bmp?size=50x50\u0026set=set1","newest_message":"Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum.","unread_message_number":"0","newest_message_date":"4/9/2020"},{"id":4,"username":"aopy3","user_photo":"https://robohash.org/expeditamollitianisi.bmp?size=50x50\u0026set=set1","newest_message":"Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum.","unread_message_number":"0","newest_message_date":"1/20/2021"},{"id":5,"username":"acritchell4","user_photo":"https://robohash.org/exercitationemsintest.bmp?size=50x50\u0026set=set1","newest_message":"Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula.","unread_message_number":"4","newest_message_date":"10/9/2020"},{"id":6,"username":"jprozescky5","user_photo":"https://robohash.org/etconsequaturab.png?size=50x50\u0026set=set1","newest_message":"Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.","unread_message_number":"1","newest_message_date":"5/4/2020"},{"id":7,"username":"ehunnicot6","user_photo":"https://robohash.org/necessitatibusaccusantiumitaque.jpg?size=50x50\u0026set=set1","newest_message":"Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.","unread_message_number":"6","newest_message_date":"1/21/2021"},{"id":8,"username":"rdesporte7","user_photo":"https://robohash.org/etdoloremqueipsam.bmp?size=50x50\u0026set=set1","newest_message":"Morbi ut odio.","unread_message_number":"1","newest_message_date":"8/24/2020"},{"id":9,"username":"rnials8","user_photo":"https://robohash.org/natusautquod.bmp?size=50x50\u0026set=set1","newest_message":"Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst. Etiam faucibus cursus urna.","unread_message_number":"2","newest_message_date":"10/25/2020"},{"id":10,"username":"lpee9","user_photo":"https://robohash.org/voluptatesnecessitatibusvoluptatibus.jpg?size=50x50\u0026set=set1","newest_message":"In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem.","unread_message_number":"8","newest_message_date":"7/7/2020"}   
-            ]          
-               ret = backupData
+            const backupData = [{"roomID":1,"username":"Group Chat","user_photo":"https://www.flaticon.com/free-icon/group_1182776?term=group%20chat&page=1&position=7&page=1&position=7&related_id=1182776&origin=tag","newest_message":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","unread_message_number":"6","newest_message_date":"4/19/2020"},{"roomID":2,"username":"rmurkitt1","user_photo":"https://robohash.org/consequaturculpamaxime.png?size=50x50\u0026set=set1","newest_message":"Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.Nam tristique tortor eu pede.","unread_message_number":"7","newest_message_date":"9/30/2020"}]      
+            ret = backupData
             
         })
 
     res.json(ret)
 })
+
 app.get("/api_chat_messages", async (req, res) => {
     let ret = {}
-    const user_name = req.query.user_name
-    const user_photo = req.query.user_photo
+    const roomID = req.query.roomID
 
     /* 
     For this API, as for March 30, we still not have database yet, so I use hard coded backup data directly
@@ -615,7 +606,40 @@ app.get("/api_chat_messages", async (req, res) => {
         .get(`${process.env.API_CHAT_MESSAGES}?key=${process.env.API_CHAT_MESSAGES_KEY}`)
         .then(apiResponse => ret = apiResponse.data)
         .catch((err) => {
+            const user_photo = "https://robohash.org/laboriosamaliquamconsequuntur.jpg?size=50x50\u0026set=set1"
+            const user_name = "ChatHistoryFakeName"
             const backupData = [{"userimg": `${user_photo}`,"username": `${user_name}`,"time": "03/22/2021 11:00 AM","fromSender": true,"content": "Hi. "},{"userimg": "https://gravatar.com/avatar/412dd18bd4b3e7b5ff96752e42a767c9?s=200&d=robohash&r=x","username": "Tom","time": "03/22/2021 11:01 AM","fromSender": false,"content": "Hi there. "},{"userimg": `${user_photo}`,"username": `${user_name}`,"time": "03/22/2021 11:02 AM","fromSender": `${true}`,"content": "How are you? "},{"userimg": "https://gravatar.com/avatar/412dd18bd4b3e7b5ff96752e42a767c9?s=200&d=robohash&r=x","username": "Tom","time": "03/22/2021 2:00 PM","fromSender": false,"content": "Bye... "},{"userimg": `${user_photo}`,"username": `${user_name}`,"time": "03/22/2021 2:05 PM","fromSender": true,"content": "Ok... "}]
+            ret = backupData
+        })
+
+    res.json(ret)
+})
+
+app.get("/api_create_new_chat_list", async (req, res) => {
+    let ret = {}
+
+    await axios
+        .get(`${process.env.API_CREATE_NEW_CHAT_LIST}?key=${process.env.API_CREATE_NEW_CHAT_LIST_KEY}`)
+        .then(apiResponse => ret = apiResponse.data)
+        .catch((err) => {
+            const backupData = [{"username":"ccamus0","userimg":"https://robohash.org/quiaperferendisquis.jpg?size=50x50\u0026set=set1"},{"username":"krantoul1","userimg":"https://robohash.org/etquisit.jpg?size=50x50\u0026set=set1"},{"username":"omccourt2","userimg":"https://robohash.org/velitinvel.png?size=50x50\u0026set=set1"},{"username":"tbagnold3","userimg":"https://robohash.org/isteineligendi.png?size=50x50\u0026set=set1"},{"username":"tlievesley4","userimg":"https://robohash.org/quasiautenim.bmp?size=50x50\u0026set=set1"},{"username":"rstockton5","userimg":"https://robohash.org/teneturprovidentpraesentium.jpg?size=50x50\u0026set=set1"},{"username":"apetren6","userimg":"https://robohash.org/impeditporrout.png?size=50x50\u0026set=set1"},{"username":"dmcmains7","userimg":"https://robohash.org/dictapossimusquis.bmp?size=50x50\u0026set=set1"},{"username":"neuler8","userimg":"https://robohash.org/suscipitquiillum.bmp?size=50x50\u0026set=set1"},{"username":"eclemenza9","userimg":"https://robohash.org/abvoluptatemsit.jpg?size=50x50\u0026set=set1"}]
+            ret = backupData
+        })
+
+    res.json(ret)
+})
+
+app.get("/api_create_new_chat_roomID", async (req, res) => {
+    let ret
+    const participants = req.query.participants
+
+    await axios
+        .get(``)
+        .then(apiResponse => ret = apiResponse.data)
+        .catch((err) => {
+            // arbitrarily picked number
+            // when Database is done, we will generate a much complex roomID 
+            const backupData = 15
             ret = backupData
         })
 

@@ -8,8 +8,8 @@ const Chat = (props) => {
     // start a state variable with a blank array
     const [data, setData] = useState([])
     const history = useHistory()
-    const {state} = useLocation();
-    const [ newMessage, setNewMessage] = useState("");
+    const {state} = useLocation()
+    const [ newMessage, setNewMessage] = useState("")
 
     const [userData, setUserData] = useState([
         {
@@ -96,8 +96,7 @@ const Chat = (props) => {
         axios
             .get('/api_chat_messages', {
                 params: {
-                    user_name: state.user_name,
-                    user_photo: state.user_photo
+                    roomID: state.roomID
                 }
             })
             .then((response) => {
@@ -109,33 +108,33 @@ const Chat = (props) => {
             })
     }, []) // only run it once!
 
-  return (
-    <div className = "Chat">
+    return (
+        <div className = "Chat">
 
-        <div className = "Chat_title">
-            <Link onClick = {() => goTOPreviousPath()}>Back</Link>
-            <h2>Chat</h2>
-        </div>        
+            <div className = "Chat_title">
+                <Link onClick = {() => goTOPreviousPath()}>Back</Link>
+                <h2>Chat</h2>
+            </div>        
 
-        <div className = "Chat_messages">
-            {data.map((item) => (
-                <ChatMessages
-                    key={item.id}
-                    userimg = {item.userimg}
-                    username = {item.username}
-                    time = {item.time}
-                    fromSender = {item.fromSender}
-                    content = {item.content} />
-            ))}
+            <div className = "Chat_messages">
+                {data.map((item) => (
+                    <ChatMessages
+                        key={item.id}
+                        userimg = {item.userimg}
+                        username = {item.username}
+                        time = {item.time}
+                        fromSender = {item.fromSender}
+                        content = {item.content} />
+                ))}
+            </div>
+
+            <div className = "Chat_user_input">
+                <input className = "Chat_user_input" type = "text" onChange={(e) => setNewMessage(e.target.value)}/>
+                <button className = "Chat_user_input" onClick={submitMessage.bind()}>Enter</button>
+            </div>
+
         </div>
-
-        <div className = "Chat_user_input">
-            <input className = "Chat_user_input" type = "text" onChange={(e) => setNewMessage(e.target.value)}/>
-            <button className = "Chat_user_input" onClick={submitMessage.bind()}>Enter</button>
-        </div>
-
-    </div>
-  )
+    )
 }
 
 export default Chat
