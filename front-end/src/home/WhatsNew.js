@@ -5,8 +5,12 @@ import './WhatsNew.css'
 import { useHistory,useLocation } from 'react-router-dom'
 
 const WhatsNew = (props) => {
-    const [data, setData] = useState([])
+    const [post_data, setData] = useState([])
     //const [userdata, setUserData] = useState([]);
+
+    //platform the is selected by user who browser the page
+    let [platform_name_array, setPlatform_name_array] = useState([]);
+   
      let history=useHistory();
    // const {state} = useLocation();
     //     props =
@@ -50,7 +54,9 @@ const WhatsNew = (props) => {
     // the following side-effect will be called once upon initial render
     useEffect(() => {
 
-        axios('/api_whatsnew')
+        axios.get('/api_whatsnew', {
+           
+        })
         .then((response) => {
           // extract the data from the server response
           setData(response.data)
@@ -67,7 +73,7 @@ const WhatsNew = (props) => {
     return (
         <div className = "WhatsNew">
             <section className = "main-content">
-                {data.map((item) => (
+                {post_data.map((item) => (
                         <PostContent key={item.id} 
                                 source = {item.source} 
                                 userimg = {item.userimg}
