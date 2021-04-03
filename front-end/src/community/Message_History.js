@@ -22,8 +22,7 @@ const Message_History = (props) => {
             <Link to = {{
               pathname: '/chat', 
               state: {
-                user_name: props.details.username, 
-                user_photo: props.details.user_photo
+                roomID: props.details.roomID
               }}
               }>
               <span class='inline-block' id='username' >{props.details.username}</span>

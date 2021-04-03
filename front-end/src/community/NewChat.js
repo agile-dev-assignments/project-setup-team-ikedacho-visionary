@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import './NewChat.css'
+import { createBrowserHistory } from "history";
 
 const NewChat = (props) => {
     // start a state variable with a blank array
     const [data, setData] = useState([])
+    const history = createBrowserHistory({forceRefresh:true})
 
+    let selectedList = []
+
+    // nested component
     const NewChatSelection = (props) => {
-
         const [select, setSelect] = useState({
             selected: false
         })
@@ -17,10 +21,20 @@ const NewChat = (props) => {
             setSelect({
                 selected: !cur
             });
-            
+
             // green(#00FF00) if selected
-            cur == true ? e.target.style.backgroundColor = '#e7e7e7' : e.target.style.backgroundColor = '#00FF00'
+            cur ? e.target.style.backgroundColor = '#e7e7e7' : e.target.style.backgroundColor = '#00FF00'
         };
+
+        // update selected list
+        if (select.selected) {
+            selectedList.push(props)
+        } else {
+            selectedList = selectedList.filter(item => item !== props)
+        }
+
+        // weird behavior here: props Obj gets pushed into the array twice continuously
+        selectedList = [...new Set(selectedList)]
 
         return (
             <div>
@@ -35,18 +49,47 @@ const NewChat = (props) => {
         )
     }
 
+    const _handleCreate = (event) => {
+        event.preventDefault()
+        let roomID
+        
+        axios
+        .get('/api_create_new_chat_roomID', {
+            params: {
+                participants: selectedList
+            }
+        })
+        .then((response) => {
+            // fetch room ID from backend
+            roomID = response.data
+            // jump to the chat room with `roomID`
+            history.push({
+                pathname: '/chat', 
+                state: {
+                    roomID: roomID
+                }
+            })
+        })
+        .catch((err) => {
+
+        })
+        
+        
+    }
+
     // the following side-effect will be called once upon initial render
     useEffect(() => {
 
-        axios('https://https://my.api.mockaroo.com/new_chat_creation.json?key=2d6d6d60_')
+        axios('/api_create_new_chat_list')
         .then((response) => {
             // extract the data from the server response
             setData(response.data)
         })
         .catch((err) => {
+            /*
             const backupData = [{"username":"ccamus0","userimg":"https://robohash.org/quiaperferendisquis.jpg?size=50x50\u0026set=set1"},{"username":"krantoul1","userimg":"https://robohash.org/etquisit.jpg?size=50x50\u0026set=set1"},{"username":"omccourt2","userimg":"https://robohash.org/velitinvel.png?size=50x50\u0026set=set1"},{"username":"tbagnold3","userimg":"https://robohash.org/isteineligendi.png?size=50x50\u0026set=set1"},{"username":"tlievesley4","userimg":"https://robohash.org/quasiautenim.bmp?size=50x50\u0026set=set1"},{"username":"rstockton5","userimg":"https://robohash.org/teneturprovidentpraesentium.jpg?size=50x50\u0026set=set1"},{"username":"apetren6","userimg":"https://robohash.org/impeditporrout.png?size=50x50\u0026set=set1"},{"username":"dmcmains7","userimg":"https://robohash.org/dictapossimusquis.bmp?size=50x50\u0026set=set1"},{"username":"neuler8","userimg":"https://robohash.org/suscipitquiillum.bmp?size=50x50\u0026set=set1"},{"username":"eclemenza9","userimg":"https://robohash.org/abvoluptatemsit.jpg?size=50x50\u0026set=set1"}
             ]
-            setData(backupData)
+            setData(backupData)*/
         })
     }, []) // only run it once!
 
@@ -57,7 +100,7 @@ const NewChat = (props) => {
         </div>
 
         <div className = "NewChat_create">
-            <Link to = '/chat'>Create</Link>
+            <Link onClick = {_handleCreate.bind()}>Create</Link>
         </div>
 
         <h3 className = "NewChat_title">Create New Chat</h3>
