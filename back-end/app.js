@@ -41,8 +41,11 @@ const user_info={
     "linked_social_media": ["O-Zone","Facebook","Twitter","Instagram"]
 }//end of user_info
 let linked_social_media= ["O-Zone","Facebook","Twitter","Instagram"]
-
+//for my_profile page
 let post_data =[{"id":1,"source":"Twitter","content":"Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat.","senttime":"2/18/2021","contentimg":"http://dummyimage.com/238x249.png/cc0000/ffffff"},{"id":2,"source":"Facebook","content":"Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.","senttime":"2/17/2021","contentimg":"http://dummyimage.com/190x250.png/5fa2dd/ffffff"},{"id":3,"source":"Facebook","content":"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst.","senttime":"8/1/2020","contentimg":"http://dummyimage.com/187x154.png/ff4444/ffffff"},{"id":4,"source":"Instagram","content":"Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","senttime":"12/1/2020","contentimg":"http://dummyimage.com/117x277.png/dddddd/000000"},{"id":5,"source":"Twitter","content":"Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","senttime":"11/8/2020","contentimg":"http://dummyimage.com/200x111.png/dddddd/000000"},{"id":6,"source":"Facebook","content":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante.","senttime":"4/8/2020","contentimg":"http://dummyimage.com/204x133.png/dddddd/000000"},{"id":7,"source":"Twitter","content":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.","senttime":"2/13/2021","contentimg":"http://dummyimage.com/184x147.png/ff4444/ffffff"},{"id":8,"source":"Twitter","content":"Nullam porttitor lacus at turpis.","senttime":"8/6/2020","contentimg":"http://dummyimage.com/163x149.png/5fa2dd/ffffff"},{"id":9,"source":"Facebook","content":"Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","senttime":"12/29/2020","contentimg":"http://dummyimage.com/182x256.png/ff4444/ffffff"},{"id":10,"source":"Instagram","content":"Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.","senttime":"4/27/2020","contentimg":"http://dummyimage.com/182x193.png/dddddd/000000"},{"id":11,"source":"O-Zone","content":"itae non mattis pulvinar, ede ullamcorper auglit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur atellusemper inteMauris ulrpernulla.","senttime":"4/30/2020","contentimg":"http://dummyimage.com/182x193.png/dddddd/000000"}]//end of backup data
+//for home page
+let selected_social_media= ["O-Zone","Facebook","Twitter","Instagram"]
+
 
 // mongoose.connect(
 //     "mongodb+srv://{Place Your Username Here!}:{Place Your Password Here!}@cluster0-q9g9s.mongodb.net/test?retryWrites=true&w=majority",
@@ -376,6 +379,15 @@ app.post("/post_picture", upload_post_picture.array("post_picture", 1), (req, re
 })
 */
 
+app.post('/post_home', (req, res) => {
+    console.log('ssssssss')
+    //selected_social_media=req.query.selected_social_media
+    //console.log("selected_social_media:" , req.body)
+    selected_social_media=req.body.selected_social_media
+   // console.log("selected_social_media:" ,selected_social_media)
+    res.redirect('/')
+
+})
 
 app.get("/api_my_comment_history", async (req, res)  => {
     let response_data=''
@@ -679,49 +691,82 @@ Please notice that the following three Mockaroo APIs are intentionally disabled 
 So, use backup data instead
 */
 app.get("/api_whatsnew", async (req, res, next) => {
-    let ret = {}
-
+    let post_data = []
+    
     await axios
         .get(`${process.env.API_LOGIN_WHATSNEW}?key=${process.env.API_LOGIN_WHATSNEW_KEY}_`)
-        .then(apiResponse => ret = apiResponse.data)
+        .then(apiResponse => post_data = apiResponse.data)
         .catch((err) => {
             console.log(err)
             const backupData =  [{"source":"Twitter","userimg":"https://robohash.org/officiisnonenim.png?size=50x50\u0026set=set1","UserName":"mgye0","content":"Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.\n\nPraesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.","Senttime":"4/13/2020","contentimg":"http://dummyimage.com/202x260.png/cc0000/ffffff"},{"source":"Facebook","userimg":"https://robohash.org/sitquiaaperiam.png?size=50x50\u0026set=set1","UserName":"cbaudy1","content":"Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.","Senttime":"3/26/2021","contentimg":"http://dummyimage.com/180x120.png/cc0000/ffffff"},{"source":"Facebook","userimg":"https://robohash.org/numquamvoluptatibusvoluptatem.png?size=50x50\u0026set=set1","UserName":"dkillough2","content":"Phasellus in felis. Donec semper sapien a libero. Nam dui.","Senttime":"3/16/2021","contentimg":"http://dummyimage.com/241x123.png/5fa2dd/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/suntuteaque.png?size=50x50\u0026set=set1","UserName":"emander3","content":"Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.\n\nMorbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.","Senttime":"12/15/2020","contentimg":"http://dummyimage.com/243x260.png/5fa2dd/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/quasquisapiente.png?size=50x50\u0026set=set1","UserName":"ktrevarthen4","content":"Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.","Senttime":"8/16/2020","contentimg":"http://dummyimage.com/106x231.png/5fa2dd/ffffff"},{"source":"Facebook","userimg":"https://robohash.org/essevoluptatemvoluptates.png?size=50x50\u0026set=set1","UserName":"scregeen5","content":"In congue. Etiam justo. Etiam pretium iaculis justo.\n\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\n\nNulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.","Senttime":"6/30/2020","contentimg":"http://dummyimage.com/118x202.png/cc0000/ffffff"},{"source":"Facebook","userimg":"https://robohash.org/voluptasporroducimus.png?size=50x50\u0026set=set1","UserName":"ncanario6","content":"Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.","Senttime":"4/21/2020","contentimg":"http://dummyimage.com/154x100.png/5fa2dd/ffffff"},{"source":"Facebook","userimg":"https://robohash.org/necessitatibusutsimilique.png?size=50x50\u0026set=set1","UserName":"tkuller7","content":"Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.","Senttime":"2/20/2021","contentimg":"http://dummyimage.com/248x196.png/cc0000/ffffff"},{"source":"Facebook","userimg":"https://robohash.org/inciduntnihilharum.png?size=50x50\u0026set=set1","UserName":"xmcinility8","content":"Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.","Senttime":"4/6/2020","contentimg":"http://dummyimage.com/149x289.png/5fa2dd/ffffff"},{"source":"Facebook","userimg":"https://robohash.org/assumendamolestiasculpa.png?size=50x50\u0026set=set1","UserName":"cbuse9","content":"Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.","Senttime":"12/5/2020","contentimg":"http://dummyimage.com/125x263.png/5fa2dd/ffffff"}]
-            ret = backupData
+            post_data = backupData
             
         })
+    let filtered_post_data=post_data.slice()
+   
+    console.log("selected_social_media",selected_social_media)
+    filtered_post_data=post_data.filter(element=>{
+        if (selected_social_media.includes(element.source)){
+            return true
+        }//end of if
+    })//end of filtered_post_data
 
-    res.json(ret)
+      console.log("filtered_post_data", filtered_post_data)
+
+    res.json(filtered_post_data)
 })
 
 app.get("/api_recommended", async (req, res, next) => {
-    let ret = {}
-
+    let post_data = []
+    
     await axios
-        .get(`${process.env.API_LOGIN_RECOMMEND}?key=${process.env.API_LOGIN_RECOMMEND_KEY}_`)
-        .then(apiResponse => ret = apiResponse.data)
+        .get(`${process.env.API_LOGIN_RECOMMENT}?key=${process.env.API_LOGIN_RECOMMEND_KEY}_`)
+        .then(apiResponse => post_data = apiResponse.data)
         .catch((err) => {
             console.log(err)
             const backupData =  [{"source":"Twitter","userimg":"https://robohash.org/aperiamnesciuntquasi.png?size=50x50\u0026set=set1","UserName":"hfitzsymons0","content":"Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.","Senttime":"7/2/2020","contentimg":"http://dummyimage.com/106x298.png/ff4444/ffffff"},{"source":"Facebook","userimg":"https://robohash.org/doloresuterror.png?size=50x50\u0026set=set1","UserName":"lgieraths1","content":"Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.","Senttime":"2/6/2021","contentimg":"http://dummyimage.com/161x232.png/ff4444/ffffff"},{"source":"Twitter","userimg":"https://robohash.org/quiquiest.png?size=50x50\u0026set=set1","UserName":"mheselwood2","content":"Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.","Senttime":"6/22/2020","contentimg":"http://dummyimage.com/238x289.png/5fa2dd/ffffff"},{"source":"Twitter","userimg":"https://robohash.org/eaqueiureut.png?size=50x50\u0026set=set1","UserName":"cfearby3","content":"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.\n\nNam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.\n\nCurabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.","Senttime":"6/28/2020","contentimg":"http://dummyimage.com/133x134.png/ff4444/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/sintcorporisquod.png?size=50x50\u0026set=set1","UserName":"ghavock4","content":"Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.","Senttime":"11/4/2020","contentimg":"http://dummyimage.com/164x127.png/ff4444/ffffff"},{"source":"Facebook","userimg":"https://robohash.org/autsapienteeos.png?size=50x50\u0026set=set1","UserName":"pashbe5","content":"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.","Senttime":"6/19/2020","contentimg":"http://dummyimage.com/146x150.png/5fa2dd/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/temporibusquicorporis.png?size=50x50\u0026set=set1","UserName":"npinkney6","content":"Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\nEtiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.\n\nPraesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.","Senttime":"3/14/2021","contentimg":"http://dummyimage.com/133x137.png/ff4444/ffffff"},{"source":"Twitter","userimg":"https://robohash.org/odioteneturquod.png?size=50x50\u0026set=set1","UserName":"bpetrello7","content":"Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.","Senttime":"5/22/2020","contentimg":"http://dummyimage.com/103x168.png/5fa2dd/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/odiomodierror.png?size=50x50\u0026set=set1","UserName":"mkehoe8","content":"Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.","Senttime":"2/24/2021","contentimg":"http://dummyimage.com/145x197.png/dddddd/000000"},{"source":"Instagram","userimg":"https://robohash.org/utmaximein.png?size=50x50\u0026set=set1","UserName":"rghione9","content":"Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.","Senttime":"5/25/2020","contentimg":"http://dummyimage.com/178x254.png/dddddd/000000"}]
             ret = backupData
+            post_data = backupData
+            
         })
+    let filtered_post_data=post_data.slice()
+   
+    console.log("selected_social_media",selected_social_media)
+    filtered_post_data=post_data.filter(element=>{
+        if (selected_social_media.includes(element.source)){
+            return true
+        }//end of if
+    })//end of filtered_post_data
 
-    res.json(ret)
+      console.log("filtered_post_data", filtered_post_data)
+
+    res.json(filtered_post_data)
 })
 
 app.get("/api_recent", async (req, res, next) => {
-    let ret = {}
-
+    let post_data = []
+    
     await axios
-        .get(`${process.env.API_LOGIN_RECENT}?key=${process.env.API_LOGIN_RECENT_KEY}_`)
-        .then(apiResponse => ret = apiResponse.data)
+        .get(`${process.env.API_LOGIN_RECNET}?key=${process.env.API_LOGIN_RECENT_KEY}_`)
+        .then(apiResponse => post_data = apiResponse.data)
         .catch((err) => {
             console.log(err)
             const backupData =  [{"source":"Instagram","userimg":"https://robohash.org/etetdolore.png?size=50x50\u0026set=set1","UserName":"fpetchey0","content":"In congue. Etiam justo. Etiam pretium iaculis justo.","Senttime":"4/22/2020","contentimg":"http://dummyimage.com/146x132.png/dddddd/000000"},{"source":"Instagram","userimg":"https://robohash.org/utmolestiaequi.png?size=50x50\u0026set=set1","UserName":"awhitsun1","content":"Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.","Senttime":"7/23/2020","contentimg":"http://dummyimage.com/112x207.png/cc0000/ffffff"},{"source":"Twitter","userimg":"https://robohash.org/voluptasillumtenetur.png?size=50x50\u0026set=set1","UserName":"epetcher2","content":"Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.","Senttime":"11/21/2020","contentimg":"http://dummyimage.com/180x198.png/cc0000/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/voluptasaliasnesciunt.png?size=50x50\u0026set=set1","UserName":"blipson3","content":"Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.","Senttime":"9/19/2020","contentimg":"http://dummyimage.com/216x286.png/cc0000/ffffff"},{"source":"Facebook","userimg":"https://robohash.org/inarchitectotempore.png?size=50x50\u0026set=set1","UserName":"iannesley4","content":"Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.","Senttime":"5/9/2020","contentimg":"http://dummyimage.com/112x135.png/dddddd/000000"},{"source":"Twitter","userimg":"https://robohash.org/cupiditatequiadeserunt.png?size=50x50\u0026set=set1","UserName":"rbilovus5","content":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.","Senttime":"10/25/2020","contentimg":"http://dummyimage.com/121x127.png/dddddd/000000"},{"source":"Instagram","userimg":"https://robohash.org/molestiaeeosquis.png?size=50x50\u0026set=set1","UserName":"kswain6","content":"Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.","Senttime":"11/18/2020","contentimg":"http://dummyimage.com/134x115.png/dddddd/000000"},{"source":"Instagram","userimg":"https://robohash.org/laborumetadipisci.png?size=50x50\u0026set=set1","UserName":"mdecruze7","content":"Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.","Senttime":"8/6/2020","contentimg":"http://dummyimage.com/207x138.png/cc0000/ffffff"},{"source":"Facebook","userimg":"https://robohash.org/estillocum.png?size=50x50\u0026set=set1","UserName":"pflann8","content":"Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.\n\nPhasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.","Senttime":"6/8/2020","contentimg":"http://dummyimage.com/156x233.png/dddddd/000000"},{"source":"Facebook","userimg":"https://robohash.org/magninonvoluptate.png?size=50x50\u0026set=set1","UserName":"kokell9","content":"Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.","Senttime":"2/3/2021","contentimg":"http://dummyimage.com/208x273.png/dddddd/000000"}]
-            ret = backupData
+            post_data = backupData
+            
         })
+    let filtered_post_data=post_data.slice()
+   
+    console.log("selected_social_media",selected_social_media)
+    filtered_post_data=post_data.filter(element=>{
+        if (selected_social_media.includes(element.source)){
+            return true
+        }//end of if
+    })//end of filtered_post_data
 
-    res.json(ret)
+      console.log("filtered_post_data", filtered_post_data)
+
+    res.json(filtered_post_data)
 })
 
 // helper function, can remove anytime
