@@ -27,9 +27,6 @@ const HomeNav = (props) => {
         
         }
 
-
-        
-       
     }
 
     return (
@@ -40,7 +37,7 @@ const HomeNav = (props) => {
                 <div className="post-checkbox" style={{display: show ? "block" : "none"}}>
                 
                 <form name="form" onSubmit={e=>{anyvalidate(e)}} action="/post_home" method="POST" >
-                    <label id="platform_label"><input id="platform_label1" name="selected_social_media" value="All" type="checkbox"/><p>All</p></label>
+                    <label id="platform_label"><input id="platform_label1" name="selected_social_media" value="All" type="checkbox" /><p>All</p></label>
 
                     <label id="platform_label"><input id="platform_label2" name="selected_social_media" value="O-Zone" type="checkbox"/><p>O-Zone</p></label>
                     <label id="platform_label"><input id="platform_label3" name="selected_social_media" value="Facebook"  type="checkbox"/><p>Facebook</p></label>

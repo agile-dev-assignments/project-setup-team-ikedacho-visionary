@@ -24,8 +24,8 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  color: #fff;
-  background-color: #494646;
+  color: black;
+  background-color: rgb(238, 238, 238);
   z-index: 9;
 }
 
@@ -33,7 +33,7 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid rgb(255, 255, 255);
 }
 #homenav_button{
   background:white;
@@ -80,7 +80,8 @@
 
 #submit_homenav{
   width:120px;
-  background-color:#1a1515;
+  background-color:#5c5555;
   color:white;
   height: 30px;
+  border:0px;
 }
