@@ -13,7 +13,7 @@ import { Youtube } from 'react-bootstrap-icons';
 import { Linkedin } from 'react-bootstrap-icons';
 import axios from 'axios'
 import Linked_platform_connect from './Linked_platform_connect';
-
+import Unconnected_social_media from './Unconnected_social_media';
 
 const Me = (props) => {
 
@@ -27,6 +27,8 @@ const Me = (props) => {
     let [linked_social_media, setLinked_social_media]=useState([])
     let [clicked_linked_social_media, SetClicked_linked_social_media]=useState([])
 
+    let [unconnected_social_media, setUnconnected_social_media]=useState([])
+    let [clicked_unconnected_social_media, SetClicked_unconnected_social_media]=useState([])
 
     /* backup data
     const user_info=
@@ -47,15 +49,17 @@ const Me = (props) => {
        
         axios('/get_me',{
             params: {
-                clicked_linked_social_media: clicked_linked_social_media
+                clicked_linked_social_media: clicked_linked_social_media,
+                clicked_unconnected_social_media: clicked_unconnected_social_media
             }
         })
         .then((response) => {
             setUser_info(response.data.user_info)
       
             setLinked_social_media(response.data.linked_social_media)
-          
-
+            console.log("linked", linked_social_media)
+            setUnconnected_social_media( response.data.unconnected_social_media )
+            console.log("unconnected", unconnected_social_media)
                 //add click even listener to all icons of linked social media. 
                 //when click one social media, remove it from the linked_social_media array.
                 
@@ -65,7 +69,7 @@ const Me = (props) => {
             let elements = document.getElementsByTagName("BUTTON")
             console.log("elements of BUTTON:",elements)
             console.log("elements.length:", elements.length)
-            for(let i = 0; i < elements.length; i++) {
+            for(let i = 0; i < response.data.linked_social_media.length; i++) {
                 console.log(i,"th iteration")
                 console.log("elements:", elements[i])
                 
@@ -119,13 +123,71 @@ const Me = (props) => {
                 }
             }
 
+
+
+            //deal with unconnected social media
+            for(let i = response.data.linked_social_media.length ; i < elements.length; i++) {
+                console.log(i,"th iteration")
+                console.log("elements:", elements[i])
+                
+                let element = elements[i];
+
+                if(element.id==="O-Zone"){
+                    console.log("enter O-zone block")
+                    element.addEventListener('click', function(){
+                        console.log('selected O-Zone')
+                        SetClicked_unconnected_social_media("O-Zone");
+                        alert("Do you want to connect O-Zone")
+                        //refresh the page to get rid of O-zone icon 
+                        window.location.reload();
+                    })
+                  
+                }
+
+                else if(element.id==="Facebook"){
+                    console.log("enter Facebook block")
+                    element.addEventListener('click',function(){
+                        console.log('selected Facebook')
+                        SetClicked_unconnected_social_media("Facebook");
+                        alert("Do you want to connect Facebook")
+                        //refresh the page to get rid of facebook icon 
+                        window.location.reload();
+                    })
+                  
+
+                }
+                else if(element.id==="Twitter"){
+                    console.log("enter Twitter block")
+                    element.addEventListener('click',function(){
+                        console.log('selected Twitter')
+                        SetClicked_unconnected_social_media("Twitter");
+                        alert("Do you want to connect Twitter")
+                        //refresh the page to get rid of twitter icon 
+                        window.location.reload();
+                    })
+                   
+                }
+                else if(element.id==="Instagram"){
+                    console.log("enter Instagram block")
+                    element.addEventListener('click',function(){
+                        console.log('selected Instagram')
+                        SetClicked_unconnected_social_media("Instagram");
+                        alert("Do you want to connect Instagram")
+                        //refresh the page to get rid of instagram icon 
+                        window.location.reload();
+                    })
+                   
+                }
+            }
+
+
             })
             .catch((err) => {
                console.log("error:", err)
             })
             console.log("clicked_linked_social_media:",clicked_linked_social_media)
 
-    }, [clicked_linked_social_media])  
+    }, [clicked_linked_social_media, clicked_unconnected_social_media])  
    
 
 
@@ -217,7 +279,7 @@ const Me = (props) => {
             
             <section>
                
-            <h1>Linked Social Media</h1>  
+            <h1>Connected Social Media</h1>  
 
 
             <div  id="main_container3" >
@@ -229,7 +291,20 @@ const Me = (props) => {
                                 details={item}
                             />
 
-                        ))} 
+                ))} 
+
+            </div>
+            <h1>Unconnected Social Media</h1>  
+            <div  id="main_container3" >
+
+                {unconnected_social_media.map((item,i) => (
+                            <Unconnected_social_media 
+                                
+                                key={item.id}
+                                details={item}
+                            />
+
+                ))} 
 
             </div>
 
