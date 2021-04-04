@@ -1,29 +1,42 @@
 import './ToComment.css'
-
+import { useHistory } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const ToComment = (props) => {
+    let history=useHistory();
     const [show, setShow] = useState('true')
     const [currentTime, setCurrentTime] = useState('')
 
-    const handleClick=()=>{
+       //represnet if the send button is clicked. false: not clicked. true: clicked
+    const [send, setSend]=  useState(false)
+    let [comment_text, setComment_text]=  useState("default comment")
+
+
+
+    const goTOPreviousPath2=()=>{
+        setSend(!send)
+       // setComment_text('my comment_text')
+        console.log("send:",send)
+        console.log("comment_text:",comment_text)
+        comment_text =  document.getElementById("myTextarea").value;
+        console.log(comment_text)
         console.log('clicked!')
+
         setShow(!show);
     
         setCurrentTime(new Date());
+         
     }
-
-
-
 
     return (
         < >
+        <textarea style={{ display: show ? "block" : "none" }}  id="myTextarea" placeholder=" What's your comment?" onInput = {e => setComment_text(e.target.value)}/>
+
+        <button id= "sendPost_edit" onClick={goTOPreviousPath2} style={{ display: show ? "block" : "none" } }>Send</button>
         
-            <input id = "repost_edit_text" style={{ display: show ? "block" : "none" }} placeholder="   write your comment here" type = "text" / >
-        
-            <button id= "sendPost_edit" onClick={handleClick} style={{ display: show ? "block" : "none" } }>Send</button>
-        
+     
         
         <div id='mycomment' style={{ display: !show ? "block" : "none" }}>
             <div style={{ display: !show ? "block" : "none" }}>
@@ -32,7 +45,7 @@ const ToComment = (props) => {
                    Joe:
                     
                 </Link>
-                my comments
+                 {comment_text}
             </div>
            
         </div>

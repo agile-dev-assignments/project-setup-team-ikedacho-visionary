@@ -1,11 +1,13 @@
-input#repost_edit_text {
-    height: 25px;
+textarea#myTextarea {
+    height: 20px;
     font-size: 14pt;
     width:80%;
     background-color: white;
     border: 0px solid rgb(230, 215, 215);
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     font-size: 1em;
+    margin-top:0px;
+    padding-top: 3px;
 }
 
 button#sendPost_edit{
