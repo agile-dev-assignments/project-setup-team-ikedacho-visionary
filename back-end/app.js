@@ -465,7 +465,6 @@ app.get("/api_friend_profile", async (req, res) => {
     */
     // JIT retrieval of friend's info
     await axios
-    await axios
     .get(``)//'correct: ${process.env.API_FRIEND_PROFILE}?key=${process.env.API_FRIEND_PROFILE_KEY}
         .then(apiResponse => ret.friend_info = apiResponse.data)
         .catch((err) => {
@@ -598,6 +597,8 @@ app.get("/api_liked_history", async (req, res) => {
     res.json(ret)
 })
 
+// temporary workaround to update chat list before we have an actual database
+let backupData_message_list = [{"roomID":1,"username":"Group Chat","user_photo":"https://www.flaticon.com/svg/vstatic/svg/681/681494.svg?token=exp=1617521792~hmac=4643d292f0f6a8813a84b31301b89834","newest_message":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","unread_message_number":"6","newest_message_date":"4/19/2020"},{"roomID":2,"username":"rmurkitt1","user_photo":"https://robohash.org/consequaturculpamaxime.png?size=50x50\u0026set=set1","newest_message":"Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.Nam tristique tortor eu pede.","unread_message_number":"7","newest_message_date":"9/30/2020"}]      
 app.get("/api_message", async (req, res, next) => {
     let ret = {}
 
@@ -605,8 +606,8 @@ app.get("/api_message", async (req, res, next) => {
         .get(`${process.env.API_COMMUNITY_MESSAGES}?key=${process.env.API_COMMUNITY_MESSAGES_KEY}_`)
         .then(apiResponse => ret = apiResponse.data)
         .catch((err) => {
-            const backupData = [{"roomID":1,"username":"Group Chat","user_photo":"https://www.flaticon.com/free-icon/group_1182776?term=group%20chat&page=1&position=7&page=1&position=7&related_id=1182776&origin=tag","newest_message":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","unread_message_number":"6","newest_message_date":"4/19/2020"},{"roomID":2,"username":"rmurkitt1","user_photo":"https://robohash.org/consequaturculpamaxime.png?size=50x50\u0026set=set1","newest_message":"Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.Nam tristique tortor eu pede.","unread_message_number":"7","newest_message_date":"9/30/2020"}]      
-            ret = backupData
+            // const backupData = [{"roomID":1,"username":"Group Chat","user_photo":"https://www.flaticon.com/free-icon/group_1182776?term=group%20chat&page=1&position=7&page=1&position=7&related_id=1182776&origin=tag","newest_message":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","unread_message_number":"6","newest_message_date":"4/19/2020"},{"roomID":2,"username":"rmurkitt1","user_photo":"https://robohash.org/consequaturculpamaxime.png?size=50x50\u0026set=set1","newest_message":"Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.Nam tristique tortor eu pede.","unread_message_number":"7","newest_message_date":"9/30/2020"}]      
+            ret = backupData_message_list
             
         })
 
@@ -649,8 +650,19 @@ app.get("/api_create_new_chat_list", async (req, res) => {
 })
 
 app.get("/api_create_new_chat_roomID", async (req, res) => {
-    let ret
-    const participants = req.query.participants
+    let ret, chatroom_info
+    // note that this participantsList is in format of {user: [{}, {}, {}]}
+    const participantsList = JSON.parse(req.query.participantsList)
+    
+    // temporary workaround to update chat list before we have an actual database
+    console.log(participantsList)
+    if (participantsList.user.length === 1) {
+        chatroom_info = {"roomID":15,"username":`${participantsList.user[0].username}`,"user_photo":`${participantsList.user[0].userimg}`,"newest_message":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","unread_message_number":"0","newest_message_date":"4/19/2020"}
+    } else {
+        chatroom_info = {"roomID":15,"username":"Group Chat","user_photo":"https://www.flaticon.com/svg/vstatic/svg/681/681494.svg?token=exp=1617521792~hmac=4643d292f0f6a8813a84b31301b89834","newest_message":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","unread_message_number":"0","newest_message_date":"4/19/2020"}
+    } 
+    backupData_message_list.unshift(chatroom_info)
+    // temporary workaround ends
 
     await axios
         .get(``)
