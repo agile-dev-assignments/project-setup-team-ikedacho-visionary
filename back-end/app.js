@@ -411,14 +411,15 @@ app.post('/post_home', (req, res) => {
     //console.log("selected_social_media:" , req.body)
     selected_social_media=req.body.selected_social_media
    // console.log("selected_social_media:" ,selected_social_media)
-    res.json(selected_social_media)
+   //redirect to same page
+   res.redirect('back');
 
 })
 
 app.get("/get_comments_in_post_content", async (req, res)  => {
     const comment_text=req.query.comment_text
     console.log("comment_text:",comment_text)
-    
+
 })
 
 
