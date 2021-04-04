@@ -21,15 +21,14 @@ const PostDetail = (props) => {
         }
 
         const [PostData, setPostData] = useState([
-            {date: 
-            {"id":1,
-            "username":"",
-            "user_photo":"",
-            "Content":"",
-            "contentimg":[],
-            "post_date":""
+            {id:1,
+            source:"",
+            UserName:"",
+            user_photo:"",
+            Content:"",
+            contentimg:[],
+            post_date:""
             }
-        }
         ])
 
         var today = new Date()
@@ -38,10 +37,12 @@ const PostDetail = (props) => {
 
 
         useEffect(() => {
-        setPostData(state);
+            if(state != undefined){ 
+                setPostData(state);
+            }
             }, []) // only run it once!
         console.log(state);
-       
+
         const saveBrowseData = () => {
             axios
             .post(
