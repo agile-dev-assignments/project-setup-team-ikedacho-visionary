@@ -21,7 +21,7 @@ const HomeNav = (props) => {
                 <div className="post-checkbox" style={{display: show ? "block" : "none"}}>
                 
                 <form className="form" action="/post_home" method="POST" >
-                    <label><input name="selected_social_media" value="O-zone" type="checkbox"/><p>O-Zone</p></label>
+                    <label><input name="selected_social_media" value="O-Zone" type="checkbox"/><p>O-Zone</p></label>
                     <label><input name="selected_social_media" value="Facebook"  type="checkbox"/><p>Facebook</p></label>
                     <label><input name="selected_social_media" value="Twitter"  type="checkbox"/><p>Twitter</p></label>
                     <label><input name="selected_social_media" value="Instagram"  type="checkbox"/><p>Instagram</p></label>

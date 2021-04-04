@@ -35,6 +35,11 @@ const FriendProfile = (props) => {
 
 
     }
+    const handleClick1=(e)=>{
+        console.log('selected O-Zone')
+        setPlatform_name_array("O-Zone");
+}
+
     const handleClick2=(e)=>{
             console.log('selected Facebook')
             setPlatform_name_array("Facebook");
@@ -66,6 +71,10 @@ const FriendProfile = (props) => {
                 setFriend_info(response.data.friend_info)
                 setLinked_social_media(response.data.linked_social_media) 
                   //handle click
+
+                  let element1 = document.getElementById("O-Zone")
+                  element1.addEventListener('click',handleClick1)
+
                 let element = document.getElementById("Facebook")
                 element.addEventListener('click',handleClick2)
 

@@ -1,8 +1,8 @@
 import React from 'react'
 //import user_info from '../me/Me'
-import './Linked_platform_connect.css'
+import './Unconnected_social_media.css'
 
-const Linked_platform_connect = (props) => {
+const Unconnected_social_media = (props) => {
   
     const setImg=(e)=>{   //e is the id of the element that call this function. it is a string
         if (e === "Facebook"){
@@ -34,11 +34,10 @@ const Linked_platform_connect = (props) => {
             <img  id={props.details} onError={e=>{setImg(e.target.id)}}  alt={props.details}   src=""/>
             
             
-            <button id={props.details} >Unconnect</button>
+            <button id={props.details} >Connect</button>
         </div>
 
     )
 }
-
 // make this function available to be imported into another module
-export default Linked_platform_connect
+export default Unconnected_social_media
