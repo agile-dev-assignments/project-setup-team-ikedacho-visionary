@@ -1,5 +1,5 @@
-textarea#myTextarea {
-    height: 20px;
+textarea#myTextarea_ToComment {
+    height: 30px;
     font-size: 14pt;
     width:80%;
     background-color: white;
@@ -7,14 +7,15 @@ textarea#myTextarea {
     margin-bottom: 0px;
     font-size: 1em;
     margin-top:0px;
-    padding-top: 3px;
+    padding-top: 8px;
+    background-color: rgb(241, 240, 240);
 }
 
 button#sendPost_edit{
     width:20%;
     height: 30px;
     background-color: white;
-    border: 1px solid rgb(230, 215, 215);
+    border: none;
 
 }
 
