@@ -9,7 +9,7 @@ const Chat = (props) => {
     const [data, setData] = useState([])
     const history = useHistory()
     const {state} = useLocation()
-    const [ newMessage, setNewMessage] = useState("")
+    const [newMessage, setNewMessage] = useState("")
 
     const [userData, setUserData] = useState([
         {

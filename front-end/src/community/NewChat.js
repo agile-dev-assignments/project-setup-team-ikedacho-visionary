@@ -9,7 +9,9 @@ const NewChat = (props) => {
     const [data, setData] = useState([])
     const history = createBrowserHistory({forceRefresh:true})
 
-    let selectedList = []
+    let selectedList = {
+                        user: []
+                    }
 
     // nested component
     const NewChatSelection = (props) => {
@@ -28,13 +30,13 @@ const NewChat = (props) => {
 
         // update selected list
         if (select.selected) {
-            selectedList.push(props)
+            selectedList.user.push(props)
         } else {
-            selectedList = selectedList.filter(item => item !== props)
+            selectedList.user = selectedList.user.filter(item => item !== props)
         }
 
         // weird behavior here: props Obj gets pushed into the array twice continuously
-        selectedList = [...new Set(selectedList)]
+        selectedList.user = [...new Set(selectedList.user)]
 
         return (
             <div>
@@ -53,10 +55,15 @@ const NewChat = (props) => {
         event.preventDefault()
         let roomID
         
+        if (selectedList.user.length === 0) {
+            alert("Sorry, you cannot create chat room with 0 person! ")
+            return
+        }
+
         axios
         .get('/api_create_new_chat_roomID', {
             params: {
-                participants: selectedList
+                participantsList: selectedList
             }
         })
         .then((response) => {

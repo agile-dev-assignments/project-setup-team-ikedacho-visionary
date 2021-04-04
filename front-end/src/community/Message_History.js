@@ -9,8 +9,18 @@ const Message_History = (props) => {
     <article className="Message_History">
       <div id='message'>
         <p id='message_text' >
-        <img class='inline-block' id='avatar' src={props.details.user_photo} />
-
+            {/* 
+            // Commented out by Xinyu-bot: 
+            // should not allow user to jump to other users' profile pages from here
+            <Link to = {{
+              pathname: '/friend_profile', 
+              state: {
+                  UserName: props.details.username, 
+                  userimg: props.details.user_photo
+              }}}>
+              <img class='inline-block' id='avatar' src={props.details.user_photo} />
+            </Link>
+          */}
 
             <Link to = {{
               pathname: '/chat', 
@@ -18,6 +28,7 @@ const Message_History = (props) => {
                 roomID: props.details.roomID
               }}
               }>
+              <img class='inline-block' id='avatar' src={props.details.user_photo} />
               <span class='inline-block' id='username' >{props.details.username}</span>
               <span id="newest_message_date">{props.details.newest_message_date}</span>
               <br></br>
