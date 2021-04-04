@@ -112,7 +112,7 @@ const Chat = (props) => {
         <div className = "Chat">
 
             <div className = "Chat_title">
-                <Link onClick = {() => goTOPreviousPath()}>Back</Link>
+                <Link onClick = {() => goTOPreviousPath()} id = "back">Back</Link>
                 <h2>Chat</h2>
             </div>        
 
