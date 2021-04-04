@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import {useEffect } from 'react'
 import axios from 'axios'
 import Post_picture from '../me/Post_picture'
-
+import { ChevronLeft } from 'react-bootstrap-icons';
 const Edit = (props) => {
     const [state, setState] = useState({
         showComment: false
@@ -21,7 +21,7 @@ const Edit = (props) => {
     const [show, setShow] = useState(false)
     //represnet if the send button is clicked. false: not clicked. true: clicked
     const [send, setSend]=  useState(false)
-    const [post_text, setPost_text]=  useState("defualt text")
+    const [post_text, setPost_text]=  useState("")
 
 
     let history=useHistory();
@@ -31,7 +31,7 @@ const Edit = (props) => {
     }
 
 
-    const goTOPreviousPath2=()=>{
+    const goTOPreviousPath2=(e)=>{
         setSend(!send)
         setPost_text('my post text')
         console.log("send:",send)
@@ -47,8 +47,18 @@ const Edit = (props) => {
                   post_text: post_text,
              
                 }
+        
             })
-        history.goBack()
+            
+          if( post_text!=="") {
+            history.goBack()
+
+          }
+          else{
+            alert( "You need to write some text" );
+            e.preventDefault()
+          }
+        
         
         
     }
@@ -63,13 +73,14 @@ const Edit = (props) => {
 
     return (
         <div className="edit">
-            <header>
+           <section id='header'>
                 <Link onClick={goTOPreviousPath}>
-                    <button>back</button>
+                    <ChevronLeft id="back" color='black' size={17}/> 
                 </Link>
-                <h2>New Post</h2>
-                <button onClick={goTOPreviousPath2}>send</button>
-            </header>
+                <h1>New Post</h1>
+                <button onClick={e=>{goTOPreviousPath2(e)}} id='send_button'>send</button>
+           <hr></hr>
+            </section>
 
             <section className="edit-wrap">
                 <textarea id="myTextarea" placeholder="What's you mind?" onInput = {e => setPost_text(e.target.value)}/>
@@ -97,10 +108,11 @@ const Edit = (props) => {
                 <div className="post">
                     <span onClick={_setShow}>Post to ▼️ </span>
                     <div className="post-checkbox" style={{ opacity : show ? 1 : 0}}>
-                        <label><input name="post" type="checkbox"/>Platform A </label>
-                        <label><input name="post" type="checkbox"/>Platform B</label>
-                        <label><input name="post" type="checkbox"/>Platform C</label>
-                        <label><input name="post" type="checkbox"/>Platform D</label>
+                        <label><input name="post" type="checkbox" checked/> O-Zone</label>
+                        <label><input name="post" type="checkbox"/>Facebook </label>
+                        <label><input name="post" type="checkbox"/>Twitter</label>
+                        <label><input name="post" type="checkbox"/>Instagram</label>
+                  
                     </div>
                 </div>
 
