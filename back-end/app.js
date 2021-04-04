@@ -44,6 +44,7 @@ let linked_social_media= ["O-Zone","Facebook","Instagram"]
 //for my_profile page
 let post_data =[{"id":1,"source":"Twitter","content":"Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat.","senttime":"2/18/2021","contentimg":"http://dummyimage.com/238x249.png/cc0000/ffffff"},{"id":2,"source":"Facebook","content":"Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.","senttime":"2/17/2021","contentimg":"http://dummyimage.com/190x250.png/5fa2dd/ffffff"},{"id":3,"source":"Facebook","content":"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst.","senttime":"8/1/2020","contentimg":"http://dummyimage.com/187x154.png/ff4444/ffffff"},{"id":4,"source":"Instagram","content":"Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","senttime":"12/1/2020","contentimg":"http://dummyimage.com/117x277.png/dddddd/000000"},{"id":5,"source":"Twitter","content":"Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","senttime":"11/8/2020","contentimg":"http://dummyimage.com/200x111.png/dddddd/000000"},{"id":6,"source":"Facebook","content":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis. Sed ante.","senttime":"4/8/2020","contentimg":"http://dummyimage.com/204x133.png/dddddd/000000"},{"id":7,"source":"Twitter","content":"Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.","senttime":"2/13/2021","contentimg":"http://dummyimage.com/184x147.png/ff4444/ffffff"},{"id":8,"source":"Twitter","content":"Nullam porttitor lacus at turpis.","senttime":"8/6/2020","contentimg":"http://dummyimage.com/163x149.png/5fa2dd/ffffff"},{"id":9,"source":"Facebook","content":"Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.","senttime":"12/29/2020","contentimg":"http://dummyimage.com/182x256.png/ff4444/ffffff"},{"id":10,"source":"Instagram","content":"Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.","senttime":"4/27/2020","contentimg":"http://dummyimage.com/182x193.png/dddddd/000000"},{"id":11,"source":"O-Zone","content":"itae non mattis pulvinar, ede ullamcorper auglit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur atellusemper inteMauris ulrpernulla.","senttime":"4/30/2020","contentimg":"http://dummyimage.com/182x193.png/dddddd/000000"}]//end of backup data
 //for home page
+
 user_info.post_number=post_data.length
 let selected_social_media= ["O-Zone","Facebook", "Twitter","Instagram"]
 let unconnected_social_media = [ "Twitter"]
@@ -215,6 +216,13 @@ app.get("/get_me", (req, res) => {
         })//end of filtered_post_data
 
     }//end of if
+    let filtered_post_data_overall=post_data.slice()
+    filtered_post_data_overall=filtered_post_data_overall.filter(element=>{
+        if (linked_social_media.includes(element.source)){
+            return true
+        }//end of if
+    })//end of filtered_post_data by selected platfrom_name by user 
+    user_info.post_number=filtered_post_data_overall.length
 
 
     //send back response_data which consists of user_info and filtered_post_data as post_data
@@ -401,11 +409,26 @@ app.post('/post_home', (req, res) => {
     console.log('ssssssss')
     //selected_social_media=req.query.selected_social_media
     //console.log("selected_social_media:" , req.body)
-    selected_social_media=req.body.selected_social_media
+    
+    if(req.body.selected_social_media!="All"){
+        selected_social_media=req.body.selected_social_media
+    }
+    else{
+        selected_social_media=["O-Zone","Facebook", "Twitter","Instagram"]
+
+    }
    // console.log("selected_social_media:" ,selected_social_media)
-    res.redirect('/')
+   //redirect to same page
+   res.redirect('back');
 
 })
+
+app.get("/get_comments_in_post_content", async (req, res)  => {
+    const comment_text=req.query.comment_text
+    console.log("comment_text:",comment_text)
+
+})
+
 
 app.get("/api_my_comment_history", async (req, res)  => {
     let response_data=''
@@ -730,7 +753,7 @@ app.get("/api_whatsnew", async (req, res, next) => {
         }//end of if
     })//end of filtered_post_data
 
-      console.log("filtered_post_data", filtered_post_data)
+     // console.log("filtered_post_data", filtered_post_data)
 
     res.json(filtered_post_data)
 })
