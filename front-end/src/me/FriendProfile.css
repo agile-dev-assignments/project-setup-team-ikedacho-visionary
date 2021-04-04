@@ -159,3 +159,27 @@ div.FriendProfile #browse_history_icon,#commented-icon, #liked-icon{
     top:6px;
 }
 
+
+
+div.FriendProfile #O-Zone{
+    font-size: 1.7em;
+    font-weight: bold;
+    color:white;
+    position: relative;
+    left: 0px;
+    top:0px;
+    padding:5px;
+    border-radius: 50%;
+
+} 
+
+
+
+div.FriendProfile #Facebook, #Twitter, #Instagram{ 
+    position:relative;
+    padding:5px;
+    left:0px;
+    top:0px;
+    border-radius: 50%;
+    
+}
