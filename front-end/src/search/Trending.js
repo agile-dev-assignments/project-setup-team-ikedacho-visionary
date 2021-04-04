@@ -8,15 +8,14 @@ const Trending = (props) => {
     // the following side-effect will be called once upon initial render
     useEffect(() => {
 
-        axios('https://my.api.mockaroo.com/trending.json?key=2d6d6d60')
+        //https://my.api.mockaroo.com/trending.json?key=2d6d6d60
+        axios('api_trending')
             .then((response) => {
                 // extract the data from the server response
                 setData(response.data)
             })
             .catch((err) => {
-                const backupData = [{"topic":"hot topic #699"},{"topic":"hot topic #0"},{"topic":"hot topic #3"},{"topic":"hot topic #422"},{"topic":"hot topic #78"},{"topic":"hot topic #34"},{"topic":"hot topic #2"},{"topic":"hot topic #435"},{"topic":"hot topic #3"},{"topic":"hot topic #94"}
-                ]
-                setData(backupData)
+                console.log(err)
             })
         }, []) // only run it once!
 

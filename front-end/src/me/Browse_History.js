@@ -15,58 +15,6 @@ const Browse_History = (props) => {
         }
     ])
 
-    // const todayData = [
-    //     {
-    //         UserName: "rmorcombe0",
-    //         contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
-    //         userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",
-    //         content: "Post Content",
-    //     },
-    //     {
-    //         UserName: "ghort1",
-    //         contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"]
-    //         ,
-    //         userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
-    //         content: "Post Content",
-    //     },
-    //     {
-    //         UserName: "rmorcombe0",
-    //         contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
-    //         userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",
-    //         content: "Post Content",
-    //     },
-    // ];
-
-    // const yesterdayDate = [
-    //     {
-    //         UserName: "asidjashdkasdhk9",
-    //         contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
-    //         userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
-    //         content: "Post Content",
-    //     },
-    //     {
-    //         UserName: "rmorcombe0",
-    //         contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-    //             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
-    //         userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",
-    //         content: "Post Content",
-    //     },
-    //     {
-    //         UserName: "ghort1",
-    //         contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"]
-    //         ,
-    //         userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
-    //         content: "Post Content",
-    //     }
-    // ];
-
     useEffect(() => {
     
         axios('/api_browse')
