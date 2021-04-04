@@ -72,3 +72,15 @@
   text-decoration: underline;
 
 }
+
+
+#platform_label{
+  height: 40px;
+}
+
+#submit_homenav{
+  width:120px;
+  background-color:#1a1515;
+  color:white;
+  height: 30px;
+}

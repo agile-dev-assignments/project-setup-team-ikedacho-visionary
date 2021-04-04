@@ -409,7 +409,14 @@ app.post('/post_home', (req, res) => {
     console.log('ssssssss')
     //selected_social_media=req.query.selected_social_media
     //console.log("selected_social_media:" , req.body)
-    selected_social_media=req.body.selected_social_media
+    
+    if(req.body.selected_social_media!="All"){
+        selected_social_media=req.body.selected_social_media
+    }
+    else{
+        selected_social_media=["O-Zone","Facebook", "Twitter","Instagram"]
+
+    }
    // console.log("selected_social_media:" ,selected_social_media)
    //redirect to same page
    res.redirect('back');
@@ -746,7 +753,7 @@ app.get("/api_whatsnew", async (req, res, next) => {
         }//end of if
     })//end of filtered_post_data
 
-      console.log("filtered_post_data", filtered_post_data)
+     // console.log("filtered_post_data", filtered_post_data)
 
     res.json(filtered_post_data)
 })
