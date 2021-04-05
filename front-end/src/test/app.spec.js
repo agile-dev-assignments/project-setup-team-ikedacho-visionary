@@ -522,4 +522,59 @@ describe(" /api_commented_history api", () => {
     })
 })
 
+//Test for Trending
+describe('Trending: front-end/src/Search', () => {
+    describe('Trending', () => {
+        it('Should return .status == 200; res: an array of hot topics', () => {
+            request(app)
+            .get('/api_trending')
+            .then((response) => {
+                expect(response.statusCode).to.equal(200)
+                const parsed_in = JSON.parse(response.text)
+                expect(parsed_in)
+                    .to.be.an.instanceOf(Array)
+                    .and.to.have.property(0)
+                    .and.to.include.all.keys(['Topic'])
+                })
+            
+        })
+    })
+})
 
+//Test for Search Recommendations
+describe('Search Recommendations: front-end/src/SearchRecommeded', () => {
+    describe('Search Recommendations', () => {
+        it('Should return .status == 200; res: an array of recommended topics', () => {
+            request(app)
+            .get('/api_search_recommended')
+            .then((response) => {
+                expect(response.statusCode).to.equal(200)
+                const parsed_in = JSON.parse(response.text)
+                expect(parsed_in)
+                    .to.be.an.instanceOf(Array)
+                    .and.to.have.property(0)
+                    .and.to.include.all.keys(['Topic'])
+                })
+            
+        })
+    })
+})
+
+//Test for Search Results
+describe('Search Results: front-end/src/SearchResult', () => {
+    describe('Search Results', () => {
+        it('Should return .status == 200; res: [source, userimg, id, post_text, post_image, post_date]', () => {
+            request(app)
+            .get('/api_search_result')
+            .then((response) => {
+                expect(response.statusCode).to.equal(200)
+                const parsed_in = JSON.parse(response.text)
+                expect(parsed_in)
+                    .to.be.an.instanceOf(Array)
+                    .and.to.have.property(0)
+                    .and.to.include.all.keys(['source','userimg', 'UserName','Senttime','contentimg', 'content'])
+                })
+            
+        })
+    })
+})
