@@ -233,8 +233,8 @@ app.get("/get_me", (req, res) => {
         "unconnected_social_media": unconnected_social_media
     }
     //console.log("in get_my_profile:", user_info)
-    console.log("linked_social_media:",linked_social_media)
-    console.log("unconnected_social_media:",unconnected_social_media)
+    //console.log("linked_social_media:",linked_social_media)
+    //console.log("unconnected_social_media:",unconnected_social_media)
     //console.log("in me's post_data:",post_data)
     res.json(response_data)
    
@@ -286,9 +286,9 @@ app.get("/get_my_profile", async (req, res) => {
         "linked_social_media": linked_social_media,//return linked_platform name
     }
     //console.log("in get_my_profile:", user_info)
-    console.log("linked_social_media:",linked_social_media)
-    console.log("in my_profile's filtered post_data:",filtered_post_data)
-    console.log("in my_profile's  post_data:",post_data)
+    //console.log("linked_social_media:",linked_social_media)
+    //console.log("in my_profile's filtered post_data:",filtered_post_data)
+    //console.log("in my_profile's  post_data:",post_data)
     res.json(response_data)
 
 })
@@ -325,7 +325,7 @@ app.post("/post_background_picture", upload_background_picture.array("background
     if (req.files) {
         // success! send data back to the client, e.g. some JSON data
         // do something with the data we received from the client
-        console.log("success! req.files")
+        //console.log("success! req.files")
         const data = {
             status: "all good",
             message: "success, the files were uploaded!",
@@ -340,8 +340,8 @@ app.post("/post_background_picture", upload_background_picture.array("background
         // add the background image src to user_info data
 
         user_info.background_picture=`/uploads/${data.background_picture[0].filename}`
-        console.log(`path:${data.background_picture[0].path}`) //'public/uploads/background_picture-1616975456180'
-        console.log("user_info after req.files:",user_info)
+        //console.log(`path:${data.background_picture[0].path}`) //'public/uploads/background_picture-1616975456180'
+        //console.log("user_info after req.files:",user_info)
         res.redirect('/my_profile') //redirect to my_proile page
 
     }//end of if
@@ -361,11 +361,11 @@ app.get("/follow", (req, res) => {
 
 app.get("/get_edit", (req, res) => {
     const post_text=req.query.post_text
-    console.log("post_text:",post_text)
+    //console.log("post_text:",post_text)
 
     //post_number plus 1
     user_info.post_number = +user_info.post_number + 1 
-    console.log( user_info.post_number )
+    //console.log( user_info.post_number )
     //add the newly sent post to post_data in myprofile page
     //{"id":1,"source":"Twitter","content":"lcuit amet turicula consequat.","senttime":"2/18/2021","contentimg":"http://dummyimage.com/238x249.png/cc0000/ffffff"}
     const new_post={}
@@ -374,10 +374,10 @@ app.get("/get_edit", (req, res) => {
     new_post.content= post_text
     new_post.senttime = new Date().toLocaleString()
     new_post.contentimg=" "
-    console.log("before",post_data)
+    //console.log("before",post_data)
     post_data.unshift(new_post)
 
-    console.log("after",post_data)
+    //console.log("after",post_data)
 })
 
 
@@ -410,7 +410,7 @@ app.post("/post_picture", upload_post_picture.array("post_picture", 1), (req, re
 */
 
 app.post('/post_home', (req, res) => {
-    console.log('ssssssss')
+    //console.log('ssssssss')
     //selected_social_media=req.query.selected_social_media
     //console.log("selected_social_media:" , req.body)
     
@@ -429,7 +429,7 @@ app.post('/post_home', (req, res) => {
 
 app.get("/get_comments_in_post_content", async (req, res)  => {
     const comment_text=req.query.comment_text
-    console.log("comment_text:",comment_text)
+    //console.log("comment_text:",comment_text)
 
 })
 
@@ -442,7 +442,7 @@ app.get("/api_my_comment_history", async (req, res)  => {
         .get(`${process.env.API_MY_COMMENT_HISTOR}?key=${process.env.API_MY_COMMENT_HISTORY_KEY}`)//`Here, I intentionally misspell the variable to use backup data. Correct: ${process.env.API_MY_COMMENT_HISTORY}?key=${process.env.API_MY_COMMENT_HISTORY_KEY}`
         .then(apiResponse => {response_data = apiResponse.data})//apiResponse.data 
         .catch((err) => {
-            console.log("Error: cannot fetch data from mockaroo api. Use backup data")
+            //console.log("Error: cannot fetch data from mockaroo api. Use backup data")
             console.log(err)
             //backup data
             response_data = [{"id":1,"post_created_by":"sgosart0","post_text":"Nunc purus. Phasellus in felis. Donec semper sapien a libero.","post_image":"http://dummyimage.com/80x80.png/5fa2dd/ffffff","commented_date":"12/23/2020","commented_content":"In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum."},{"id":2,"post_created_by":"dvellacott1","post_text":"Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy.","post_image":"http://dummyimage.com/80x80.png/ff4444/ffffff","commented_date":"2/14/2021","commented_content":"Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum."},{"id":3,"post_created_by":"alowndsbrough2","post_text":"Nam dui.","post_image":"http://dummyimage.com/80x80.jpg/5fa2dd/ffffff","commented_date":"8/15/2020","commented_content":"Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue."},{"id":4,"post_created_by":"swoodstock3","post_text":"Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.","post_image":"http://dummyimage.com/80x80.jpg/ff4444/ffffff","commented_date":"6/30/2020","commented_content":"Phasellus in felis. Donec semper sapien a libero. Nam dui."},{"id":5,"post_created_by":"riacopini4","post_text":"In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc.","post_image":"http://dummyimage.com/80x80.png/ff4444/ffffff","commented_date":"5/29/2020","commented_content":"Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum."},{"id":6,"post_created_by":"kfraniak5","post_text":"Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.","post_image":"http://dummyimage.com/80x80.jpg/dddddd/000000","commented_date":"9/19/2020","commented_content":"Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh."},{"id":7,"post_created_by":"egyrgorcewicx6","post_text":"Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.","post_image":"http://dummyimage.com/80x80.bmp/dddddd/000000","commented_date":"9/24/2020","commented_content":"Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat."},{"id":8,"post_created_by":"pvinick7","post_text":"In hac habitasse platea dictumst.","post_image":"http://dummyimage.com/80x80.jpg/ff4444/ffffff","commented_date":"9/22/2020","commented_content":"Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus."},{"id":9,"post_created_by":"abillion8","post_text":"Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.","post_image":"http://dummyimage.com/80x80.jpg/5fa2dd/ffffff","commented_date":"5/6/2020","commented_content":"Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio."},{"id":10,"post_created_by":"lmackellar9","post_text":"Quisque ut erat.","post_image":"http://dummyimage.com/80x80.png/dddddd/000000","commented_date":"1/12/2021","commented_content":"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla."}]
@@ -528,6 +528,8 @@ app.get("/api_friend_profile", async (req, res) => {
         "post_data" : filtered_post_data, //return the filtered data based on platform selected
         "linked_social_media": ["O-Zone","Facebook","Twitter","Instagram"],//return linked_platform name
     }
+    //console.log("in get_my_profile:", user_info)
+    //console.log("linked_social_media:",linked_social_media)
     res.json(response_data)
 })
 
@@ -787,14 +789,14 @@ app.get("/api_recommended", async (req, res, next) => {
         })
     let filtered_post_data=post_data.slice()
    
-    console.log("selected_social_media",selected_social_media)
+    //console.log("selected_social_media",selected_social_media)
     filtered_post_data=post_data.filter(element=>{
         if (selected_social_media.includes(element.source)){
             return true
         }//end of if
     })//end of filtered_post_data
 
-      console.log("filtered_post_data", filtered_post_data)
+    //console.log("filtered_post_data", filtered_post_data)
 
     res.json(filtered_post_data)
 })
@@ -813,14 +815,14 @@ app.get("/api_recent", async (req, res, next) => {
         })
     let filtered_post_data=post_data.slice()
    
-    console.log("selected_social_media",selected_social_media)
+    //console.log("selected_social_media",selected_social_media)
     filtered_post_data=post_data.filter(element=>{
         if (selected_social_media.includes(element.source)){
             return true
         }//end of if
     })//end of filtered_post_data
 
-      console.log("filtered_post_data", filtered_post_data)
+    //console.log("filtered_post_data", filtered_post_data)
 
     res.json(filtered_post_data)
 })

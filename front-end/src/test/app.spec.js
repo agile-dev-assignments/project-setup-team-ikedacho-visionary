@@ -436,3 +436,90 @@ describe('Chat in front-end/src/me', () => {
     })
     */
 })
+
+describe("/get_my_profile api", () => { 
+    describe("res.status.", () => { 
+        it("res.status should be 200.", () => { 
+            return request(app).get('/get_my_profile').then((response) => { 
+                expect(response.status).to.equal(200)
+            })
+        })
+    })
+
+    describe('check res.body', () => {
+        it('res.body', () => {
+            request(app)
+                .get('/get_my_profile')
+                .end((err, res) => {
+                    expect(res.body)
+                    .that.includes.all.keys([ 'user_info', 'post_data', 'linked_social_media' ])
+                })
+        })
+    })
+})
+
+describe("/get_me api", () => { 
+    describe("200", () => { 
+        it("res.status should be 200.", () => { 
+            return request(app).get('/get_me').then((response) => { 
+                expect(response.status).to.equal(200)
+            })
+        })
+    })
+    describe('check res.body', () => {
+        it('res.body', () => {
+            request(app)
+                .get('/get_me')
+                .end((err, res) => {
+                    expect(res.body)
+                    .that.includes.all.keys([ 'user_info', 'linked_social_media', 'unconnected_social_media' ])
+                })
+        })
+    })
+})
+
+describe("/api_my_comment_history api", () => { 
+    describe("res.status", () => { 
+        it("res.status should be 200.", () => { 
+            return request(app).get('/api_my_comment_history').then((response) => { 
+                expect(response.status).to.equal(200)
+            })
+        })
+    })
+    describe('check res.body', () => {
+        it('res.body', () => {
+            request(app)
+                .get('/api_my_comment_history')
+                .end((err, res) => {
+                    expect(res.body)
+                        .to.be.an.instanceof(Array)
+                        .and.to.have.property(0)
+                        .that.includes.all.keys([ 'id', 'post_created_by', 'post_text', 'post_image','commented_date','commented_content' ])
+                })
+        })
+    })
+})
+
+describe(" /api_commented_history api", () => { 
+    describe(" res.status", () => { 
+        it("res.status should be 200.", () => { 
+            return request(app).get('/api_commented_history').then((response) => { 
+                expect(response.status).to.equal(200)
+            })
+        })
+    })
+    describe('check res.body', () => {
+        it('res.body', () => {
+            request(app)
+                .get('/api_commented_history')
+                .end((err, res) => {
+                    expect(res.body)
+                        .to.be.an.instanceof(Array)
+                        .and.to.have.property(0)
+                        .that.includes.all.keys([ 'id', 'post_text', 'post_image','post_date','commented_by_username','commented_by_profile_image','commented_date','commented_content'])
+                })
+        })
+    })
+})
+
+
