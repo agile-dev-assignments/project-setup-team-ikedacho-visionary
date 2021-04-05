@@ -1,86 +1,9 @@
-/*
-var expect  = require('chai').expect;
-var request = require('request');
-const assert = require ('assert');
-var chai = require('chai')
-, chaiHttp = require('chai-http');
-chai.use(chaiHttp);
-*/
-
-/*
-describe('login and signup', function() {
-    describe ('login', function() {
-           const userdata=
-            {
-                username: "xindama",
-                password: "xxxmmm",
-                 withCredentials: true,
-            }
-            it('loggedin successfully!', function() {
-            chai.request('http://localhost:4000/login')         
-                .post("/login")
-                .send(userdata)
-                .end(function (err, res) {
-                    expect(err).to.be.null;
-                    expect(res.body).toStrictEqual("created");
-                 });
-                
-            });
-        });
-
-    describe ('signup', function(done) {
-        const signupdata=
-            {
-                 username: "xindama",
-                 email: "xindama@gmail.com",
-                 password: "xxxmmm",
-                 confirmpassword: "xxxmmm",
-                  withCredentials: true,
-            }
-            it('loggedin successfully!', function() {
-                chai.request('http://localhost:4000/login')         
-                 .post("/newuser")
-                 .send(signupdata)
-                 .end(function (err, res) {
-                     expect(res.body).toStrictEqual("created");
-                  });
-                 
-             });
-        });
-});
-*/
-
-/*
-describe('accesshomepage', function() {
-    describe ('getdatahomepage', function(done) {
-        it('getalldata', function() {
-            chai.request('/')
-            .get('/api_whatsnew')
-            .end(function(err,res){
-                expect(res).to.have.status(200);
-                })  
-
-        })
-    })
-})
-
-describe('accesspostdetialpage', function() {
-    describe ('postpostdetail', function(done) {
-        it('postbrowseddata', function() {
-            chai.request('/detailpost')
-            .post("/browsed")
-            .end(function(err,res){
-                expect(res).to.have.status(200);
-                })  
-
-        })
-    })
-})
-*/
 
 const request = require('supertest')
 const app = require('../../../back-end/app') // the express server
 const expect = require('chai').expect
+
+
 
 // Test for Follower and Following
 describe('Follower and Following List in front-end/src/me', () => {
@@ -135,6 +58,89 @@ describe('Follower and Following List in front-end/src/me', () => {
                         })
                 })
             })
+        })
+    })
+})
+
+// Test for Login and Signup
+describe('login and signup', () => {
+    describe('login', () => {
+            it('loggedin successfully!', () => {
+                request(app)
+                .post('/login', {
+                    params: {
+                        username: "xindama",
+                        password: "xxxmmm",
+                         withCredentials: true,
+                    }
+                })
+                .then((response) => {
+                    // automatic statusCode must be 200 <-- success
+                    expect(response.statusCode).to.equal(200)
+                    // parse returned JSON string
+                    const parsed = JSON.parse(response.text)
+                    // assertions
+                    expect(parsed.status).to.be('created')
+                })
+            })
+        })
+
+    describe ('signup', () => {
+        const signupdata=
+            {
+                    username: "xindama",
+                    email: "xindama@gmail.com",
+                    password: "xxxmmm",
+                    confirmpassword: "xxxmmm",
+                    withCredentials: true,
+            }
+            it('loggedin successfully!', function() {
+                request(app)         
+                .post("/newuser", {
+                    params: signupdata
+                })
+                .then((response) => {
+                    // automatic statusCode must be 200 <-- success
+                    expect(response.statusCode).to.equal(200)
+                    // parse returned JSON string
+                    const parsed = JSON.parse(response.text)
+                    // assertions
+                    expect(parsed.status).to.be('created')
+                })
+                    
+                });
+        });
+    })
+
+// Test for home page
+describe('accesshomepage', () => {
+    describe ('getdatahomepage', () => {
+        it('getalldata', () => {
+            request(app)
+            .get('/api_whatsnew')
+            .then((response) => {
+                // automatic statusCode must be 200 <-- success
+                expect(response.statusCode).to.equal(200) 
+            })
+        })
+    })
+})
+
+// Test for post detail page
+describe('accesspostdetialpage', () => {
+    describe ('postpostdetail', () => {
+        it('postbrowseddata', () => {
+            request(app)
+            .post("/browsed")
+            .then((response) => {
+                // automatic statusCode must be 200 <-- success
+                expect(response.statusCode).to.equal(200)
+                // parse returned JSON string
+                const parsed = JSON.parse(response.text)
+                // assertions
+                expect(parsed.status).to.be('created')
+            })
+
         })
     })
 })
