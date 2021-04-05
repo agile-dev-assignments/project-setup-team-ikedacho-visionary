@@ -23,13 +23,11 @@ const Edit = (props) => {
     const [send, setSend]=  useState(false)
     const [post_text, setPost_text]=  useState("")
 
-
     let history=useHistory();
 
     const goTOPreviousPath=()=>{
         history.goBack()
     }
-
 
     const goTOPreviousPath2=(e)=>{
         setSend(!send)
@@ -38,48 +36,38 @@ const Edit = (props) => {
         console.log("post_text:",post_text)
         document.getElementById("myTextarea").value = post_text;
         console.log(post_text)
-
+        
+        if( post_text!=="") {
+            history.goBack()
+        
         axios
             .get('/get_edit', {
                 //send along the post_text user typed 
-               
                 params: {
                   post_text: post_text,
-             
                 }
-        
             })
-            
-          if( post_text!=="") {
-            history.goBack()
-
-          }
-          else{
+        }
+        else{
             alert( "You need to write some text" );
             e.preventDefault()
-          }
-        
-        
-        
+        }
     }
-
-
-
+    
     const _setShow = () => {
         console.log(show);
         setShow(!show);
     };
 
-
     return (
         <div className="edit">
-           <section id='header'>
+            <section id='header'>
                 <Link onClick={goTOPreviousPath}>
                     <ChevronLeft id="back" color='black' size={17}/> 
                 </Link>
                 <h1>New Post</h1>
                 <button onClick={e=>{goTOPreviousPath2(e)}} id='send_button'>send</button>
-           <hr></hr>
+            <hr></hr>
             </section>
 
             <section className="edit-wrap">
@@ -94,16 +82,12 @@ const Edit = (props) => {
                 <br></br>
 
                 {/*<button className = "Commentbutton" onClick = {_showComment.bind()}>Upload picture</button>*/}
-
                 {state.showComment && (
                 <>
                     {<Post_picture />
                     }
                 </>
                 )}
-
-
-
 
                 <div className="post">
                     <span onClick={_setShow}>Post to ▼️ </span>
@@ -112,7 +96,6 @@ const Edit = (props) => {
                         <label><input name="post" type="checkbox"/>Facebook </label>
                         <label><input name="post" type="checkbox"/>Twitter</label>
                         <label><input name="post" type="checkbox"/>Instagram</label>
-                  
                     </div>
                 </div>
 
@@ -120,13 +103,9 @@ const Edit = (props) => {
                     <input type="checkbox"/>
                     <span>Post as Pravite</span>
                 </div>
-
             </section>
-
-
         </div>
     );
-
 };
 
 export default Edit;
