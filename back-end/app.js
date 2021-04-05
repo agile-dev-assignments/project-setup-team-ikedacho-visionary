@@ -166,8 +166,8 @@ app.post('/newuser', function(req, res) {
 
 app.get("/api_browse", (req, res) => {
 
-    const browsedData = [{viewDate: "2021-4-1",UserName: "asidjashdkasdhk9",contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",content: "Post Content",},
-        {viewDate: "2021-4-1",UserName: "rmorcombe0",contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",content: "Post Content",
+    const browsedData = [{viewDate: "2021-4-1",UserName: "asidjashdkasdhk9",contentimgs: ["http://dummyimage.com/80x80.bmp/cc0000/ffffff","http://dummyimage.com/80x80.bmp/cc0000/ffffff"],userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",content: "Post Content",},
+        {viewDate: "2021-4-1",UserName: "rmorcombe0",contentimgs: ["http://dummyimage.com/80x80.jpg/5fa2dd/ffffff","http://dummyimage.com/80x80.jpg/5fa2dd/ffffff","http://dummyimage.com/80x80.jpg/5fa2dd/ffffff"],userimg: "https://robohash.org/etillumet.bmp?size=50x50\u0026set=set1",content: "Post Content",
         }];
     console.log(browsedData)
     res.json(browsedData); // The req.user stores the entire user that has been authenticated inside of it.

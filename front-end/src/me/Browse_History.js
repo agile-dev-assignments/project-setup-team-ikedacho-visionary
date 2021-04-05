@@ -8,8 +8,8 @@ const Browse_History = (props) => {
         {
             viewDate: "2021-4-1",
             UserName: "asidjashdkasdhk9",
-            contentimgs: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzIu8kI5RdzA0toecWakNnvZwWYT4HBPo8ZQ&usqp=CAU"],
+            contentimgs: ["http://dummyimage.com/80x80.jpg/cc0000/ffffff",
+                "http://dummyimage.com/80x80.jpg/5fa2dd/ffffff"],
             userimg: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1",
             content: "Post Content",
         }
