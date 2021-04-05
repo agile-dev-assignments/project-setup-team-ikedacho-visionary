@@ -12,7 +12,7 @@
     z-index: 1;
 }
 .Search_input_search input{
-    color:black;
+    color:rgb(117, 117, 117);
     outline: none;
     border: none;
 }
@@ -20,5 +20,5 @@
     z-index: 1;
     position: absolute;
     right: 11%;
-    top: 66px
+    top: 70px
 }

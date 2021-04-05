@@ -1,0 +1,14 @@
+.SearchRecommended .search_recommend_content{
+    border-bottom: 1px solid #F3F3F3;;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    line-height: 20px;
+}
+
+.SearchRecommended .search_recommend_content p{
+    margin: 0;
+}
