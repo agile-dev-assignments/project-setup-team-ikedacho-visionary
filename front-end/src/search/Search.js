@@ -11,23 +11,22 @@ const Search = (props) => {
 
     return (
         <div className = "Search">
-            <h1>Search Page here</h1>
-            <search className = "main-content">
+            <h1 className="top_title">Search Page here</h1>
+            <search className = "main_content">
                 <SearchBar 
                     searchQuery={searchQuery}
                     setSearchQuery={setSearchQuery}
                 />
-                    
             </search>
 
             <recommend>
-                <p>Recommended For You</p>
+                <p class="subtitle">Recommended For You</p>
                 <SearchRecommended />
 
             </recommend>
 
             <trending>
-                <p>🔥Trending🔥</p>
+                <p class="subtitle">Trending</p>
                 <Trending />
             </trending>
         </div>

@@ -28,7 +28,10 @@ const SearchRecommended = (props) => {
         <div className = "SearchRecommended">
             <section>
                 {data.map((item) => (
-                    <p onClick={() => window.location.href = '/searchResult'}>{item.topic}</p>
+                    <div className="search_recommend_content" onClick={() => window.location.href = '/searchResult'}>
+                    <p className="search_recommend_p" >{item.topic}</p>
+                    <p>🔥</p>
+                    </div>
                 ))}
             </section>
 

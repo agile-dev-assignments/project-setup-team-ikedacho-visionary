@@ -1,0 +1,24 @@
+.Trending {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Trending section{
+    width: 100%;
+}
+
+.Trending .trending_content{
+    border-bottom: 1px solid #F3F3F3;;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    line-height: 20px;
+
+    justify-content: space-between;
+}
+.Trending .trending_content p{
+    margin: 0;
+}

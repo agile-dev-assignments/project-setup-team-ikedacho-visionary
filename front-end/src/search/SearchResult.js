@@ -22,14 +22,14 @@ const SearchResult = (props) => {
         }, []) // only run it once!
 
     return (
-        <div className = "Search">
+        <div className = "searchResult">
+            <div className="subtitle">
+                <Link className="back_button" to={'/Search'}> 
+                    <span id="back" >Back</span>
+                </Link>
 
-            <Link to={'/Search'}> 
-                <h1 id="back" >Back</h1>
-            </Link>
-
-            <h1>Search Result</h1>
-      
+                <span>Search Result</span>
+            </div>
             <section>
                 {data.map((item) => (
                     <PostContent key={item.id}
