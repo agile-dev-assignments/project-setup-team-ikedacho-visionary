@@ -11,8 +11,8 @@ In back-end directory, run `npm install` to install all the dependency in order 
 ### `node server` or `npx nodemon sever`
 
 It start the server.
-You can see response from server if you Open [http://localhost:4000](http://localhost:4000) to view it in the browser.
-You can also see how back-end server work with front-end react component if you open another terminal in which you can cd to `front-end` directory and run `npm start`. It will open [http://localhost:3000](http://localhost:3000) in your browser.
+You can see response from server if you Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+You can also see how back-end server work with front-end react component if you open another terminal in which you can cd to `front-end` directory and run `npm start`. It will open [http://localhost:4000](http://localhost:4000) in your browser.
 
 ## For unit test, the test script is located in front-end/src/test firectory
 
