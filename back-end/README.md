@@ -1,12 +1,12 @@
 # Getting Started with running server
 
-## The back-end of your project will live in `back-end` directory.
+## The back-end of the project will live in `back-end` directory.
 
 ## In the `back-end` directory, you can run:
 
 ### `npm install`
 
-in back-end directory, run `npm install` to install all the dependency in order to launch and run the server.
+In back-end directory, run `npm install` to install all the dependency in order to launch and run the server.
 
 ### `node server` or `npx nodemon sever`
 
