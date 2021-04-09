@@ -268,15 +268,11 @@ app.get("/get_my_profile", async (req, res) => {
 
     //filtered_post_data by selected platfrom_name by user 
     if (req.query.platform_name_array!==undefined) {
-        //console.log("111111")
         filtered_post_data=post_data.filter(element=>{
            if (req.query.platform_name_array.includes(element.source)){
                return true
            }//end of if
         })//end of filtered_post_data by selected platfrom_name by user 
-
-
-
     }//end of if
 
     //send back response_data which consists of user_info and filtered_post_data as post_data
@@ -290,9 +286,7 @@ app.get("/get_my_profile", async (req, res) => {
     console.log("in my_profile's filtered post_data:",filtered_post_data)
     //console.log("in my_profile's  post_data:",post_data)
     res.json(response_data)
-
 })
-
 
 
 // it tell multer to save uploaded files to disk into a directory named public/uploads, with a filename based on the current time.
