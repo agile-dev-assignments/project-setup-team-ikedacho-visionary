@@ -25,8 +25,8 @@ const Login = (props) => {
              withCredentials: true,
         })
         .then(response => {
-            if (response.data.status === "created") {
-                console.log(response.data.status);
+            if (response.data === "Successfully Authenticated") {
+                console.log(response);
                 history.push({
                     pathname: '/',
                     state: userdata

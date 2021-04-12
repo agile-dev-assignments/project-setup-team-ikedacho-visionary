@@ -10,17 +10,17 @@ const Signup = (props) => {
     const [registerUsername, setRegisterUsername] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
 
-    const register = () => {
-        axios
-        .post(
-        "/register",
-         {
-            username: registerUsername,
-            password: registerPassword,        
-            withCredentials: true,
-           })
-        .then((res) => console.log(res));
-      };
+    // const register = () => {
+    //     axios
+    //     .post(
+    //     "/register",
+    //      {
+    //         username: registerUsername,
+    //         password: registerPassword,        
+    //         withCredentials: true,
+    //        })
+    //     .then((res) => console.log(res));
+    //   };
       
     const [state, setState] = useState({
         username: "",
@@ -41,17 +41,14 @@ const Signup = (props) => {
 
         axios
         .post(
-        "/newuser", 
-        {
-            username: username,
-            email: email,
-            password: password,
-            password_confirmation: password_confirmation
-            }
-        
-        )
+        "/register",
+         {
+            username: registerUsername,
+            password: registerPassword,        
+            withCredentials: true,
+           })
         .then(response => {
-        if (response.data.status === "created") {
+        if (response.data === "User Created") {
             console.log(response.data);
             history.push({
                 pathname: '/',
@@ -85,7 +82,7 @@ const Signup = (props) => {
         <input type="password" name="password" placeholder="Password"onChange={handleInputChange} onChange={(e) => setRegisterPassword(e.target.value)}/>
         <input type="password" name="password_confirmation" placeholder="Confirm Password"onChange={handleInputChange}/>
         <button 
-        onClick={register}
+        onClick={handleSubmit}
         type="submit"
         >Create Account</button>
         </form> 
