@@ -1,27 +1,10 @@
 // import and instantiate express
 const express = require("express") // CommonJS import style!
 const app = express() // instantiate an Express object
-require('./db.js')
-const mongoose = require('mongoose')
-// we will put some server logic here later...
-// export the express app we created to make it available to other modules
-
-// import some useful middleware
 const multer = require("multer") // middleware to handle HTTP POST requests with file uploads
 const axios = require("axios") // middleware for making requests to APIs
 require("dotenv").config({silent:true}) // load environmental variables from a hidden file named .env
 const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
-// use the morgan middleware to log all incoming http requests
-app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
-
-// use the bodyparser middleware to parse any data included in a request
-app.use(express.json()) // decode JSON-formatted incoming POST data
-app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
-
-// make 'public' directory publicly readable with static content
-app.use("/static", express.static("front-end/public"))
-// const User = require("./user");
-
 const cors = require("cors");
 const passport = require("passport");
 const passportLocal = require("passport-local").Strategy;
@@ -29,6 +12,37 @@ const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const bodyParser = require("body-parser");
+const User = require("./loginAuth/user");
+const db = require("./db");
+//----------------------------------------- END OF IMPORTS---------------------------------------------------
+
+app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
+app.use(express.json()) // decode JSON-formatted incoming POST data
+app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
+// make 'public' directory publicly readable with static content
+app.use("/static", express.static("front-end/public"))
+// const User = require("./user");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "http://localhost:3000", // <-- location of the react app were connecting to
+    credentials: true,
+  })
+);
+app.use(
+  session({
+    secret: "secretcode",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+app.use(cookieParser("secretcode"));
+app.use(passport.initialize());
+app.use(passport.session());
+ require("./loginAuth/passPortConfig.js")(passport);
+//----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
+
 
 //user_info data
 const user_info={
@@ -51,76 +65,41 @@ user_info.post_number=post_data.length
 let selected_social_media= ["O-Zone","Facebook", "Twitter","Instagram"]
 let unconnected_social_media = [ "Twitter"]
 
-// mongoose.connect(
-//     "mongodb+srv://{Place Your Username Here!}:{Place Your Password Here!}@cluster0-q9g9s.mongodb.net/test?retryWrites=true&w=majority",
-//     {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//     },
-//     () => {
-//       console.log("Mongoose Is Connected");
-//     }
-//   );
- //Middleware 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: "http://localhost:3000", // <-- location of the react app were connecting to
-    credentials: true,
-  })
-);
-app.use(
-  session({
-    secret: "secretcode",
-    resave: true,
-    saveUninitialized: true,
-  })
-);
-app.use(cookieParser("secretcode"));
-app.use(passport.initialize());
-app.use(passport.session());
-// require("./passportConfig.js")(passport);
-//----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
-
-
 
 //put routes here:
+app.post("/api_register", (req, res) => {
+  User.findOne({ username: req.body.username }, async (err, doc) => {
+    if (err) throw err;
+    if (doc) res.send("User Already Exists");
+    if (!doc) {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-// route for HTTP GET requests to the home document
-//I will use backup data in this version to avoid randomness of my post content caused by mockaroo and to save mockaroo day limit.
-app.post("/register", (req, res) => {
-    // User.findOne({ username: req.body.username }, async (err, doc) => {
-    //   if (err) throw err;
-    //   if (doc) res.send("User Already Exists");
-    //   if (!doc) {
-    //     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-  
-    //     const newUser = new User({
-    //       username: req.body.username,
-    //       password: hashedPassword,
-    //     });
-    //     await newUser.save();
-    //     res.send("User Created");
-    //   }
-    // });
+      const newUser = new User({
+        username: req.body.username,
+        password: hashedPassword,
+      });
+      await newUser.save();
+      res.send("User Created");
+    }
   });
+});
 
 app.post("/login", (req, res, next) => {
-    // passport.authenticate("local", (err, user, info) => {
-    //   if (err) throw err;
-    //   if (!user) res.send("No User Exists");
-    //   else {
-    //     req.logIn(user, (err) => {
-    //       if (err) throw err;
-        console.log(req.body); 
-        res.send({
-            status: "created"
-        })
-    //     });
-    //   }
-    // })(req, res, next);
+    passport.authenticate("local", (err, user, info) => {
+      if (err) throw err;
+      if (!user) res.send("No User Exists");
+      else {
+        req.logIn(user, (err) => {
+          if (err) throw err;
+          res.send("Successfully Authenticated");
+          console.log(req.user);
+        });
+      }
+    })(req, res, next);
   });
+
+
+
 
 app.post("/browsed", (req, res, next) => {
     // passport.authenticate("local", (err, user, info) => {
@@ -140,31 +119,7 @@ app.post("/browsed", (req, res, next) => {
     // })(req, res, next);
   });
 
-app.post('/newuser', function(req, res) {
-    const newuser = {
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        password_confirmation: req.body.password_confirmation
-    };
 
-  
-    // users.push(newusers);
-    if(newuser.password == newuser.password_confirmation){
-        res.send({
-            status: "created"
-        })
-         // users.push(newusers);
-         //res.send("created") 
-    }
-    else{
-    res.send({
-        status: "password does not match"
-    })
-   }
-    console.log(newuser);
-
-  });
 
 app.get("/api_browse", (req, res) => {
 
@@ -881,6 +836,8 @@ app.get("/api_search_result", async(req, res) => {
 
     res.json(ret)
 })
+
+//----------------------------------------- END OF ROUTES---------------------------------------------------
 
 // helper function, can remove anytime
 function isEmpty(obj) {
