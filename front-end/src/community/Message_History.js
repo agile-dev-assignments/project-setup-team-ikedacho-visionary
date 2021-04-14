@@ -12,14 +12,14 @@ const Message_History = (props) => {
             <Link to = {{
               pathname: '/chat', 
               state: {
-                roomID: props.details.roomID
+                roomID: props.details._id
               }}
               }>
-              <img class='inline-block' id='avatar' src={props.details.user_photo} />
-              <span class='inline-block' id='username' >{props.details.username}</span>
+              <img class='inline-block' id='avatar' src={props.details.chatroom_avatar} />
+              <span class='inline-block' id='username' >{props.details.chatroom_name}</span>
               <span id="newest_message_date">{props.details.newest_message_date}</span>
               <br></br>
-              {props.details.unread_message_number > 0 && <span id="unread_message_number">{props.details.unread_message_number}</span>}
+              {/*props.details.unread_message_number > 0 && <span id="unread_message_number">{props.details.unread_message_number}</span>*/}
               <div id='newest_message'>{props.details.newest_message}</div>
             </Link>
         </p>

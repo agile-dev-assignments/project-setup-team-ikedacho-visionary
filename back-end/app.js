@@ -13,6 +13,7 @@ const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const User = require("./loginAuth/user");
+const Chatroom = require("./chatroom/chatroom")
 const db = require("./db");
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
 
@@ -72,14 +73,18 @@ app.post("/api_register", (req, res) => {
     if (err) throw err;
     if (doc) res.send("User Already Exists");
     if (!doc) {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-      const newUser = new User({
+        const newUser = new User({
         username: req.body.username,
         password: hashedPassword,
-      });
-      await newUser.save();
-      res.send("User Created");
+        });
+
+        // naive way to store current user info in session
+        req.user = req.body.username
+        
+        await newUser.save();
+        res.send("User Created");
     }
   });
 });
@@ -582,25 +587,27 @@ app.get("/api_liked_history", async (req, res) => {
 })
 
 // temporary workaround to update chat list before we have an actual database
-let backupData_message_list = [{"roomID":1,"username":"Group Chat","user_photo":"https://www.flaticon.com/svg/vstatic/svg/681/681494.svg?token=exp=1617521792~hmac=4643d292f0f6a8813a84b31301b89834","newest_message":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","unread_message_number":"6","newest_message_date":"4/19/2020"},{"roomID":2,"username":"rmurkitt1","user_photo":"https://robohash.org/consequaturculpamaxime.png?size=50x50\u0026set=set1","newest_message":"Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.Nam tristique tortor eu pede.","unread_message_number":"7","newest_message_date":"9/30/2020"}]      
-app.get("/api_message", async (req, res, next) => {
-    let ret = {}
+app.get("/api_message", async (req, res) => {
+    let ret
 
-    await axios
-        .get(`${process.env.API_COMMUNITY_MESSAGES}?key=${process.env.API_COMMUNITY_MESSAGES_KEY}_`)
-        .then(apiResponse => ret = apiResponse.data)
-        .catch((err) => {
-            // const backupData = [{"roomID":1,"username":"Group Chat","user_photo":"https://www.flaticon.com/free-icon/group_1182776?term=group%20chat&page=1&position=7&page=1&position=7&related_id=1182776&origin=tag","newest_message":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","unread_message_number":"6","newest_message_date":"4/19/2020"},{"roomID":2,"username":"rmurkitt1","user_photo":"https://robohash.org/consequaturculpamaxime.png?size=50x50\u0026set=set1","newest_message":"Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.Nam tristique tortor eu pede.","unread_message_number":"7","newest_message_date":"9/30/2020"}]      
-            ret = backupData_message_list
-            
-        })
-
-    res.json(ret)
+    const current_user = req.user.username
+    Chatroom.find({
+        participants: current_user
+    })
+    .exec((err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(result)
+            ret = result
+            res.json(ret)
+        }     
+    }) 
 })
 
 app.get("/api_chat_messages", async (req, res) => {
     let ret = {}
-    const roomID = req.query.roomID
+    const roomID = req.query._id
 
     /* 
     For this API, as for March 30, we still not have database yet, so I use hard coded backup data directly
@@ -634,30 +641,33 @@ app.get("/api_create_new_chat_list", async (req, res) => {
 })
 
 app.get("/api_create_new_chat_roomID", async (req, res) => {
-    let ret, chatroom_info
-    // note that this participantsList is in format of {user: [{}, {}, {}]}
+    let ret
+    // note that this participantsList is in format of {user: [{}, {}, {}]}, where each user has username and userimg. 
     const participantsList = JSON.parse(req.query.participantsList)
+    // create an array storing all participants in this chat room
+    let participantsName = [req.user.username]
+    participantsList.user.forEach(function (item) {
+        participantsName.unshift(item.username)
+    })
+    console.log(participantsName)
     
-    // temporary workaround to update chat list before we have an actual database
-    console.log(participantsList)
-    if (participantsList.user.length === 1) {
-        chatroom_info = {"roomID":15,"username":`${participantsList.user[0].username}`,"user_photo":`${participantsList.user[0].userimg}`,"newest_message":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","unread_message_number":"0","newest_message_date":"4/19/2020"}
-    } else {
-        chatroom_info = {"roomID":15,"username":"Group Chat","user_photo":"https://www.flaticon.com/svg/vstatic/svg/681/681494.svg?token=exp=1617521792~hmac=4643d292f0f6a8813a84b31301b89834","newest_message":"Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.","unread_message_number":"0","newest_message_date":"4/19/2020"}
-    } 
-    backupData_message_list.unshift(chatroom_info)
-    // temporary workaround ends
+    // check if the chatroom is personal or grouped
+    const single_user_flag = (participantsList.user.length === 1)
+    const name = single_user_flag ? participantsList.user[0].username : "Group Chat"
+    const avatar = single_user_flag ? participantsList.user[0].userimg : "https://www.flaticon.com/svg/vstatic/svg/681/681494.svg?token=exp=1617521792~hmac=4643d292f0f6a8813a84b31301b89834"
+    const newChatRoom = new Chatroom({
+        chatroom_name: name,
+        chatroom_avatar: avatar,
+        participants: participantsName
+    })
 
-    await axios
-        .get(``)
-        .then(apiResponse => ret = apiResponse.data)
-        .catch((err) => {
-            // arbitrarily picked number
-            // when Database is done, we will generate a much complex roomID 
-            const backupData = 15
-            ret = backupData
-        })
+    newChatRoom.save((err) => {
+        if (err) {
+            console.log(err)
+        }
+    })
 
+    ret = newChatRoom._id
     res.json(ret)
 })
 
