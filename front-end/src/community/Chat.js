@@ -46,16 +46,29 @@ const Chat = (props) => {
 
     const submitMessage = () => {
         userData.content = newMessage;
-        console.log(userData)
+        console.log(userData) 
 
-
+        axios
+        .post("/api_send_new_message", {
+            roomID: state.roomID, 
+            text: userData.content, 
+            userimg: userData.userimg, 
+        })
+        .then((response) => {
+            if (response.data !== "Sent") {
+                console.log(response.data)
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     const goTOPreviousPath = () => {
         history.goBack()
     }
 
-    console.log("self_username: ",self_username)
+    console.log("self_username: ", self_username)
 
    
     // nested component
@@ -116,7 +129,9 @@ const Chat = (props) => {
             })
             .then((response) => {
                 // extract the data from the server response
-                setData(response.data)
+                console.log(response.data.message_history)
+                setData(response.data.message_history)
+                console.log("data: ", data)
             })
             .catch((err) => {
                 /*  */
