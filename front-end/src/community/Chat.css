@@ -4,6 +4,7 @@ div.Chat_from_others {
     position: relative;
     width: 60vw;
     word-wrap: break-word;
+    bottom: 20vw;
 }
 
 div.Chat_from_self {
@@ -12,6 +13,7 @@ div.Chat_from_self {
     position: relative;
     width: 60vw;
     word-wrap: break-word;
+    bottom: 20vw;
 }
 
 img.Chat_avatar {
@@ -43,7 +45,7 @@ button.Chat_user_input {
 div.Chat_messages {
     bottom: 20vw;
     position: relative;
-    top: 15vw;
+    top: 35vw;
 }
 
 

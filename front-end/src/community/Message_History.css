@@ -25,10 +25,10 @@ article.Message_History #avatar{
 }
 
 article.Message_History #newest_message{
-    padding-left:10px;
-    padding-right:40px;
+    padding-left:3vw;
+    padding-right:10vw;
     overflow: hidden;
-    height:20px;
+    height: 6vw;
     color:#747070;
     position: relative;
     bottom: -10px;

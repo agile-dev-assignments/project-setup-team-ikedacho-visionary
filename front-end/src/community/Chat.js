@@ -9,7 +9,17 @@ const Chat = (props) => {
     const [data, setData] = useState([])
     const history = useHistory()
     const {state} = useLocation()
-    const [newMessage, setNewMessage] = useState("")
+    const [newMessage, setNewMessage] = useState("")    
+    const [timer, setTimer] = useState(0)
+
+    // refresh messages every 3000ms --> 3 seconds
+    setTimeout(function(){
+        if (timer === 0) {
+            setTimer(1)
+        } else {
+            setTimer(0)
+        }
+    }, 3000);
 
     const [userData, setUserData] = useState([
         {
@@ -44,7 +54,7 @@ const Chat = (props) => {
         })
     }, [])
 
-    const submitMessage = () => {
+    const submitMessage = (e) => {
         userData.content = newMessage;
         console.log(userData) 
 
@@ -62,13 +72,15 @@ const Chat = (props) => {
         .catch((err) => {
             console.log(err)
         })
+
+        e.preventDefault();
+        // clearing the values
+        setNewMessage("")
     }
 
     const goTOPreviousPath = () => {
         history.goBack()
     }
-
-    console.log("self_username: ", self_username)
 
    
     // nested component
@@ -98,15 +110,7 @@ const Chat = (props) => {
                 {!fromSender && (
                     <div className = "Chat_from_self">
                         <Link to = {{
-                            pathname: '/my_profile', 
-                            /*
-                            For my_profile page, we probably don't need to pass in param
-                            But for structural purposes, state: {} will remain here until the final launch
-                            state: {
-                                UserName: props.username, 
-                                userimg: props.userimg
-                            }
-                            */}
+                            pathname: '/my_profile', }
                         }> 
                             <img className = "Chat_avatar" src = {props.userimg} />
                         </Link>
@@ -120,7 +124,6 @@ const Chat = (props) => {
 
     // the following side-effect will be called once upon initial render
     useEffect(() => {
-        // 'https://my.api.mockaroo.com/chat.json?key=2d6d6d60'
         axios
             .get('/api_chat_messages', {
                 params: {
@@ -129,14 +132,14 @@ const Chat = (props) => {
             })
             .then((response) => {
                 // extract the data from the server response
-                console.log(response.data.message_history)
+                console.log("response.data:", response.data)
                 setData(response.data.message_history)
                 console.log("data: ", data)
             })
             .catch((err) => {
                 /*  */
             })
-    }, []) // only run it once!
+    }, [timer]) 
 
     return (
         <div className = "Chat">
@@ -158,8 +161,11 @@ const Chat = (props) => {
             </div>
 
             <div className = "Chat_user_input">
-                <input className = "Chat_user_input" type = "text" onChange={(e) => setNewMessage(e.target.value)}/>
-                <button className = "Chat_user_input" onClick={submitMessage.bind()}>Enter</button>
+                <form>
+                    <input className = "Chat_user_input" type = "text" placeholder = "Something to say..." 
+                           value = {newMessage} onChange={(e) => setNewMessage(e.target.value)}/>
+                    <button className = "Chat_user_input" type = "submit" onClick={submitMessage}>Enter</button>
+                </form>
             </div>
 
         </div>
