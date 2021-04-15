@@ -17,6 +17,7 @@ const Community = (props) => {
     const [data, setData] = useState([])
     const [timer, setTimer] = useState(0)
 
+    // auto refresh chat room list every 3000 ms <-- 3 seconds
     setTimeout(function(){
         if (timer === 0) {
             setTimer(1)
@@ -39,7 +40,7 @@ const Community = (props) => {
         console.error(err) // the server returned an error... probably too many requests... until we pay!
         })
     }, [timer]) 
-    
+
     let unsorted = []
     let empty_chat = []
     /* 
@@ -54,20 +55,22 @@ const Community = (props) => {
             unsorted.push(data[i])
         }
     }
-    console.log(unsorted, empty_chat)
+    // console.log(unsorted, empty_chat)
 
     // fascinating bubble sort, killer of time complexity
-    function bubbleSort(a, par) {
+    function bubbleSort(array, property) {
         let swapped;
         do {
             swapped = false;
-            for (let i = 0; i < a.length - 1; i++) {
-                // console.log("------", new Date(a[i][par][a[i][par].length - 1].time).getTime())
-                // console.log("======", new Date(a[i + 1][par][a[i + 1][par].length - 1].time).getTime())
-                if (new Date(a[i][par][a[i][par].length - 1].time).getTime() < new Date(a[i + 1][par][a[i + 1][par].length - 1].time).getTime()) {
-                    let temp = a[i];
-                    a[i] = a[i + 1];
-                    a[i + 1] = temp;
+            for (let i = 0; i < array.length - 1; i++) {
+                const date1 = new Date(array[i][property][array[i][property].length - 1].time).getTime()
+                const date2 = new Date(array[i + 1][property][array[i + 1][property].length - 1].time).getTime()
+                // console.log("------", date1)
+                // console.log("======", date2)
+                if (date1 < date2) {
+                    let temp = array[i];
+                    array[i] = array[i + 1];
+                    array[i + 1] = temp;
                     swapped = true;
                 }
             }
@@ -77,7 +80,10 @@ const Community = (props) => {
     bubbleSort(unsorted, "message_history")
     // console.log("sorted!", unsorted)
 
+    // append the empty_chat to the sorted `unsorted` array
     unsorted.push(... empty_chat)
+
+    console.log(unsorted)
 
     return (
         <div className = "Community">
