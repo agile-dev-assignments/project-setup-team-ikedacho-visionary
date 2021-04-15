@@ -53,6 +53,35 @@ const FriendProfile = (props) => {
         setPlatform_name_array("Instagram");
     }
 
+    const _handleCreate = (event) => {
+        event.preventDefault()
+        let roomID
+        const _user = {username: friend_info.user_name, userimg: friend_info.user_photo}
+        console.log("Handling friend jump: ", _user)
+        axios
+        .get('/api_create_new_chat_roomID', {
+            params: {
+                participantsList: {user: [_user]}
+            }
+        })
+        .then((response) => {
+            // fetch room ID from backend
+            roomID = response.data
+            // jump to the chat room with `roomID`
+            history.push({
+                pathname: '/chat', 
+                state: {
+                    roomID: roomID
+                }
+            })
+        })
+        .catch((err) => {
+
+        })
+        
+        
+    }
+
     // the following side-effect will be called once upon initial render
     useEffect(() => {
         // 'https://my.api.mockaroo.com/sr.json?key=2d6d6d60'
@@ -141,17 +170,10 @@ const FriendProfile = (props) => {
                             Following
                     </button>
                     
-                    <Link to = {{
-                                pathname: '/chat', 
-                                state: {
-                                    user_name: friend_info.user_name, 
-                                    user_photo: friend_info.user_photo
-                                }}
-                    }>
-                        <button id='button2' onClick={() => {}}>
+                        <button id='button2' onClick = {_handleCreate.bind()}>
                                 Chat
                         </button>
-                    </Link>
+
                 </div >
             </section>
             
