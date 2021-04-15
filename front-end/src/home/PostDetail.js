@@ -31,6 +31,17 @@ const PostDetail = (props) => {
             }
         ])
 
+
+    const [self_username, Set_self_username] = useState("")
+
+    useEffect(() => {
+        axios("/user")
+        .then((response) => {
+            console.log(response.data)
+            Set_self_username(response.data.username)
+        })
+    }, [])
+
         var today = new Date()
 
         var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -48,8 +59,8 @@ const PostDetail = (props) => {
             .post(
             "/browsed",
             {
-                viewdate: date,
-                PostData
+                user_name : self_username,
+                postId :"12345"
             })
             .then(response => {
                 if (response.data.status === "created") {

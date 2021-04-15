@@ -13,6 +13,7 @@ const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const User = require("./loginAuth/user");
+const UserInfo = require("./userInfo/userInfo.js");
 const Chatroom = require("./chatroom/chatroom")
 const db = require("./db");
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
@@ -80,10 +81,16 @@ app.post("/api_register", (req, res) => {
         password: hashedPassword,
         });
 
+        const newUserInfo = new UserInfo({
+            user_name: req.body.username,
+            user_photo: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1"      
+            });
+
         // naive way to store current user info in session
         req.user = req.body.username
         
         await newUser.save();
+        await newUserInfo.save();
         res.send("User Created");
     }
   });
@@ -107,21 +114,19 @@ app.post("/login", (req, res, next) => {
 
 
 app.post("/browsed", (req, res, next) => {
-    // passport.authenticate("local", (err, user, info) => {
-    //   if (err) throw err;
-    //   if (!user) res.send("No User Exists");
-    //   else {
-    //     req.logIn(user, (err) => {
-    //       if (err) throw err;
         console.log(req.body); 
-        browsedData = req.body;
+        var myquery = { user_name: req.body.user_name };
+        var newvalues =  {$set: {my_history : {view_history: req.body.postId }}};
+        UserInfo.updateOne(myquery, newvalues, function(err, res) {
+          if (err) throw err;
+          console.log("UserInfo successfully updated");
+        });
+        
         res.send({
             status: "created"
         })
+        
 
-    //     });
-    //   }
-    // })(req, res, next);
   });
 
 
