@@ -53,7 +53,7 @@ const NewChat = (props) => {
 
     const _handleCreate = (event) => {
         event.preventDefault()
-        let roomID
+        let roomID, self_userimg
         
         if (selectedList.user.length === 0) {
             alert("Sorry, you cannot create chat room with 0 person! ")

@@ -15,6 +15,16 @@ import Message_History from './Message_History'
 const Community = (props) => {
     // start a state variable with a blank array
     const [data, setData] = useState([])
+    const [timer, setTimer] = useState(0)
+
+    // auto refresh chat room list every 3000 ms <-- 3 seconds
+    setTimeout(function(){
+        if (timer === 0) {
+            setTimer(1)
+        } else {
+            setTimer(0)
+        }
+    }, 3000);
 
     // the following side-effect will be called once upon initial render
     useEffect(() => {
@@ -29,8 +39,51 @@ const Community = (props) => {
         console.log(`couldn't get user messages`)
         console.error(err) // the server returned an error... probably too many requests... until we pay!
         })
-    }, []) // only run it once!
+    }, [timer]) 
 
+    let unsorted = []
+    let empty_chat = []
+    /* 
+    separate chat messages into two groups for sorting: 
+        1. empty
+        . non-empty <- sort on this group only
+    */
+    for (let i = 0; i < data.length; i ++) {
+        if (data[i].message_history.length === 0) {
+            empty_chat.push(data[i])
+        } else {
+            unsorted.push(data[i])
+        }
+    }
+    // console.log(unsorted, empty_chat)
+
+    // fascinating bubble sort, killer of time complexity
+    function bubbleSort(array, property) {
+        let swapped;
+        do {
+            swapped = false;
+            for (let i = 0; i < array.length - 1; i++) {
+                const date1 = new Date(array[i][property][array[i][property].length - 1].time).getTime()
+                const date2 = new Date(array[i + 1][property][array[i + 1][property].length - 1].time).getTime()
+                // console.log("------", date1)
+                // console.log("======", date2)
+                if (date1 < date2) {
+                    let temp = array[i];
+                    array[i] = array[i + 1];
+                    array[i + 1] = temp;
+                    swapped = true;
+                }
+            }
+        } while (swapped);
+    }
+
+    bubbleSort(unsorted, "message_history")
+    // console.log("sorted!", unsorted)
+
+    // append the empty_chat to the sorted `unsorted` array
+    unsorted.push(... empty_chat)
+
+    console.log(unsorted)
 
     return (
         <div className = "Community">
@@ -70,7 +123,7 @@ const Community = (props) => {
             </div>
 
             <section className = "message_list">
-                {data.map((item) => (
+                {unsorted.map((item) => (
                     <Message_History key={item.id} details={item} />
                 ))}
             </section>

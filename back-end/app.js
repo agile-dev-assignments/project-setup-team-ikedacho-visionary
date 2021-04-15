@@ -13,7 +13,7 @@ const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const User = require("./loginAuth/user");
-const UserInfo = require("./userInfo/userInfo.js");
+const UserInfo = require("./userInfo/userInfo");
 const Chatroom = require("./chatroom/chatroom")
 const db = require("./db");
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
@@ -83,7 +83,7 @@ app.post("/api_register", (req, res) => {
 
         const newUserInfo = new UserInfo({
             user_name: req.body.username,
-            user_photo: "https://robohash.org/etadipiscitempore.bmp?size=50x50\u0026set=set1"      
+            user_photo: `https://robohash.org/${req.body.username}.png?size=200x200`    
             });
 
         // naive way to store current user info in session
@@ -98,37 +98,48 @@ app.post("/api_register", (req, res) => {
 
 app.post("/login", (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
-      if (err) throw err;
-      if (!user) res.send("No User Exists");
-      else {
-        req.logIn(user, (err) => {
-          if (err) throw err;
-          res.send("Successfully Authenticated");
-          console.log(req.user);
-        });
-      }
+        if (err) throw err;
+        if (!user) res.send("No User Exists");
+        else {
+            req.logIn(user, (err) => {
+            if (err) throw err;
+            res.send("Successfully Authenticated");
+            console.log(req.user);
+            });
+        }
     })(req, res, next);
-  });
+});
 
-
+app.get("/api_get_user_info_by_name", (req, res) => {
+    const username = req.body.username
+    UserInfo.findOne({user_name: username}, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            console.log(result)
+            const ret = {
+                username: result.user_name, 
+                userimg: result.user_photo
+            }
+            res.json(ret)
+        }
+    })
+})
 
 
 app.post("/browsed", (req, res, next) => {
-        console.log(req.body); 
-        var myquery = { user_name: req.body.user_name };
-        var newvalues =  {$set: {my_history : {view_history: req.body.postId }}};
-        UserInfo.updateOne(myquery, newvalues, function(err, res) {
-          if (err) throw err;
-          console.log("UserInfo successfully updated");
-        });
-        
-        res.send({
-            status: "created"
-        })
-        
-
-  });
-
+    console.log(req.body); 
+    var myquery = { user_name: req.body.user_name };
+    var newvalues =  {$set: {my_history : {view_history: req.body.postId }}};
+    UserInfo.updateOne(myquery, newvalues, function(err, res) {
+        if (err) throw err;
+        console.log("UserInfo successfully updated");
+    });
+    
+    res.send({
+        status: "created"
+    })
+});
 
 
 app.get("/api_browse", (req, res) => {
@@ -138,17 +149,23 @@ app.get("/api_browse", (req, res) => {
         }];
     console.log(browsedData)
     res.json(browsedData); // The req.user stores the entire user that has been authenticated inside of it.
-  });
+});
 
 
 app.get("/user", (req, res) => {
     res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
-  });
+});
 
 app.get("/my_info", (req, res) => {
-    const response_data=user_info
-    res.json(response_data); // The req.user stores the entire user that has been authenticated inside of it.
-  });
+    const my_username = req.user.username
+    UserInfo.findOne({user_name: my_username}, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            res.json(result)
+        }
+    })    
+});
 
 app.get("/get_me", (req, res) => {
     // extract the linked_social_platform that is passed in along with the request
@@ -693,7 +710,7 @@ app.get("/api_create_new_chat_list", async (req, res) => {
 })
 
 app.get("/api_create_new_chat_roomID", async (req, res) => {
-    let ret
+    let ret, self_userimg
     // note that this participantsList is in format of {user: [{}, {}, {}]}, where each user has username and userimg. 
     const participantsList = JSON.parse(req.query.participantsList)
     // create an array storing all participants in this chat room
@@ -702,34 +719,40 @@ app.get("/api_create_new_chat_roomID", async (req, res) => {
         participantsName.unshift(item.username)
     })
     console.log(participantsName)
-    
-    // check if chatroom exists
-    Chatroom.findOne({participants: participantsName}, (err, result) => {
-        if (!result) {
-            console.log("NOT FOUND")
-            // check if the chatroom is personal or grouped
-            const single_user_flag = (participantsList.user.length === 1)
-            const name = single_user_flag ? participantsList.user[0].username : "Group Chat"
-            const avatar = single_user_flag ? participantsList.user[0].userimg : "https://www.flaticon.com/svg/vstatic/svg/681/681494.svg?token=exp=1617521792~hmac=4643d292f0f6a8813a84b31301b89834"
-            // create new room
-            const newChatRoom = new Chatroom({
-                chatroom_name: name,
-                chatroom_avatar: avatar,
-                participants: participantsName
-            })
-            // save to database
-            newChatRoom.save((err) => {
-                if (err) {
-                    console.log(err)
-                }
-            })
-            ret = newChatRoom._id
+
+    UserInfo.findOne({user_name: req.user.username}, (err, result) => {
+        if (err) {
+            console.error(err)
         } else {
-            ret = result._id
+            self_userimg = result.user_photo
+            // check if chatroom exists
+            Chatroom.findOne({participants: participantsName}, (err, result) => {
+                if (!result) {
+                    // check if the chatroom is personal or grouped
+                    const single_user_flag = (participantsList.user.length === 1)
+                    const name = single_user_flag ? [req.user.username, participantsList.user[0].username] : ["Group Chat"]
+                    const avatar = single_user_flag ? [self_userimg, participantsList.user[0].userimg] : ["https://www.flaticon.com/svg/vstatic/svg/681/681494.svg?token=exp=1617521792~hmac=4643d292f0f6a8813a84b31301b89834"]
+                    // create new room
+                    const newChatRoom = new Chatroom({
+                        chatroom_name: name,
+                        chatroom_avatar: avatar,
+                        participants: participantsName
+                    })
+                    // save to database
+                    newChatRoom.save((err) => {
+                        if (err) {
+                            console.log(err)
+                        }
+                    })
+                    ret = newChatRoom._id
+                    res.json(ret)
+                } else {
+                    ret = result._id
+                    res.json(ret)
+                }
+            })  
         }
     })
-
-    res.json(ret)
 })
 
 app.get("/api_getprelogin", async (req, res, next) => {
