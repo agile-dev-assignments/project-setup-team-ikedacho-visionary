@@ -51,7 +51,7 @@ const Signup = (props) => {
         if (response.data === "User Created") {
             console.log(response.data);
             history.push({
-                pathname: '/',
+                pathname: '/login',
                 state: state
             })
         }
