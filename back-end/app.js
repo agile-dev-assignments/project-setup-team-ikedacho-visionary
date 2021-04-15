@@ -586,11 +586,12 @@ app.get("/api_liked_history", async (req, res) => {
     res.json(ret)
 })
 
-// temporary workaround to update chat list before we have an actual database
 app.get("/api_message", async (req, res) => {
     let ret
 
+    // fetch current user name from req.session.user
     const current_user = req.user.username
+    // find all chatrooms that this current user is in
     Chatroom.find({
         participants: current_user
     })
@@ -607,12 +608,26 @@ app.get("/api_message", async (req, res) => {
 
 app.get("/api_chat_messages", async (req, res) => {
     let ret = {}
-    const roomID = req.query._id
+    const roomID = req.query.roomID
+
+    console.log("/api_chat_messages", roomID)
+
+    Chatroom.find({_id: roomID})
+    .exec((err, result) => {
+        if (err) {
+            console.log(err)
+        } else {
+            ret = result[0]
+            console.log(ret)
+            res.json(ret)
+        }
+    })
 
     /* 
     For this API, as for March 30, we still not have database yet, so I use hard coded backup data directly
     with API_CHAT_MESSAGES and API_CHAT_MESSAGES_KEY actually being empty string
     */
+    /*
     await axios
         .get(`${process.env.API_CHAT_MESSAGES}?key=${process.env.API_CHAT_MESSAGES_KEY}`)
         .then(apiResponse => ret = apiResponse.data)
@@ -622,8 +637,40 @@ app.get("/api_chat_messages", async (req, res) => {
             const backupData = [{"userimg": `${user_photo}`,"username": `${user_name}`,"time": "03/22/2021 11:00 AM","fromSender": true,"content": "Hi. "},{"userimg": "https://gravatar.com/avatar/412dd18bd4b3e7b5ff96752e42a767c9?s=200&d=robohash&r=x","username": "Tom","time": "03/22/2021 11:01 AM","fromSender": false,"content": "Hi there. "},{"userimg": `${user_photo}`,"username": `${user_name}`,"time": "03/22/2021 11:02 AM","fromSender": `${true}`,"content": "How are you? "},{"userimg": "https://gravatar.com/avatar/412dd18bd4b3e7b5ff96752e42a767c9?s=200&d=robohash&r=x","username": "Tom","time": "03/22/2021 2:00 PM","fromSender": false,"content": "Bye... "},{"userimg": `${user_photo}`,"username": `${user_name}`,"time": "03/22/2021 2:05 PM","fromSender": true,"content": "Ok... "}]
             ret = backupData
         })
+    */
+})
 
-    res.json(ret)
+app.post("/api_send_new_message", async (req, res) => {
+    let currentdate = new Date()
+    const newMessage = req.body.text
+    const roomID = req.body.roomID
+    const self_userimg = req.body.userimg
+    console.log(newMessage, roomID)
+
+    const message_date = currentdate.getFullYear() + "/"
+                         + (currentdate.getMonth() + 1)  + "/" 
+                         + currentdate.getDate() + " "  
+                         + currentdate.getHours() + ":"  
+                         + currentdate.getMinutes() + ":" 
+                         + currentdate.getSeconds();
+
+    console.log(message_date)
+
+    Chatroom.findOne({_id: roomID}, (err, result) => {
+        result.message_history.push({
+            userimg: self_userimg, 
+            username: req.user.username, 
+            time: message_date, 
+            content: newMessage
+        })
+        console.log(result)
+        result.save((err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
+        res.send("Sent")
+    })
 })
 
 app.get("/api_create_new_chat_list", async (req, res) => {
@@ -651,23 +698,32 @@ app.get("/api_create_new_chat_roomID", async (req, res) => {
     })
     console.log(participantsName)
     
-    // check if the chatroom is personal or grouped
-    const single_user_flag = (participantsList.user.length === 1)
-    const name = single_user_flag ? participantsList.user[0].username : "Group Chat"
-    const avatar = single_user_flag ? participantsList.user[0].userimg : "https://www.flaticon.com/svg/vstatic/svg/681/681494.svg?token=exp=1617521792~hmac=4643d292f0f6a8813a84b31301b89834"
-    const newChatRoom = new Chatroom({
-        chatroom_name: name,
-        chatroom_avatar: avatar,
-        participants: participantsName
-    })
-
-    newChatRoom.save((err) => {
-        if (err) {
-            console.log(err)
+    // check if chatroom exists
+    Chatroom.findOne({participants: participantsName}, (err, result) => {
+        if (!result) {
+            console.log("NOT FOUND")
+            // check if the chatroom is personal or grouped
+            const single_user_flag = (participantsList.user.length === 1)
+            const name = single_user_flag ? participantsList.user[0].username : "Group Chat"
+            const avatar = single_user_flag ? participantsList.user[0].userimg : "https://www.flaticon.com/svg/vstatic/svg/681/681494.svg?token=exp=1617521792~hmac=4643d292f0f6a8813a84b31301b89834"
+            // create new room
+            const newChatRoom = new Chatroom({
+                chatroom_name: name,
+                chatroom_avatar: avatar,
+                participants: participantsName
+            })
+            // save to database
+            newChatRoom.save((err) => {
+                if (err) {
+                    console.log(err)
+                }
+            })
+            ret = newChatRoom._id
+        } else {
+            ret = result._id
         }
     })
 
-    ret = newChatRoom._id
     res.json(ret)
 })
 

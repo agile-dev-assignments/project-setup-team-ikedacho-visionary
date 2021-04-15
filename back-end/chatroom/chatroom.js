@@ -7,7 +7,7 @@ const chatroom = new mongoose.Schema({
     message_history: [{
         userimg: String, 
         username: String, 
-        time: Date, 
+        time: String, 
         content: String
     }]
 })
