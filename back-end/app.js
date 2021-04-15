@@ -719,12 +719,12 @@ app.get("/api_create_new_chat_roomID", async (req, res) => {
                 }
             })
             ret = newChatRoom._id
+            res.json(ret)
         } else {
             ret = result._id
+            res.json(ret)
         }
-    })
-
-    res.json(ret)
+    })  
 })
 
 app.get("/api_getprelogin", async (req, res, next) => {
