@@ -18,6 +18,8 @@ const Chat = (props) => {
             content: newMessage
     }])
     
+    const [self_username, Set_self_username] = useState("")
+
     useEffect(() => {
 
         axios("/my_info")
@@ -33,24 +35,50 @@ const Chat = (props) => {
         })
         }, []) // only run it once!
 
-   
-     const submitMessage  = () => {
-        userData.content = newMessage;
-        console.log(userData)
+    // retrieve current user info from backend
+    useEffect(() => {
+        axios("/user")
+        .then((response) => {
+            console.log(response.data)
+            Set_self_username(response.data.username)
+        })
+    }, [])
 
-     }
+    const submitMessage = () => {
+        userData.content = newMessage;
+        console.log(userData) 
+
+        axios
+        .post("/api_send_new_message", {
+            roomID: state.roomID, 
+            text: userData.content, 
+            userimg: userData.userimg, 
+        })
+        .then((response) => {
+            if (response.data !== "Sent") {
+                console.log(response.data)
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
 
     const goTOPreviousPath = () => {
         history.goBack()
     }
 
+    console.log("self_username: ", self_username)
+
    
     // nested component
     const ChatMessages = (props) => {
 
+        let fromSender = (self_username !== props.username)
+
         return (
             <>  
-                {props.fromSender && (
+                {fromSender && (
                     <div className = "Chat_from_others">
                         <Link to = {{
                             pathname: '/friend_profile', 
@@ -67,7 +95,7 @@ const Chat = (props) => {
                     </div>
                 )}
 
-                {!props.fromSender && (
+                {!fromSender && (
                     <div className = "Chat_from_self">
                         <Link to = {{
                             pathname: '/my_profile', 
@@ -101,7 +129,9 @@ const Chat = (props) => {
             })
             .then((response) => {
                 // extract the data from the server response
-                setData(response.data)
+                console.log(response.data.message_history)
+                setData(response.data.message_history)
+                console.log("data: ", data)
             })
             .catch((err) => {
                 /*  */
@@ -123,7 +153,6 @@ const Chat = (props) => {
                         userimg = {item.userimg}
                         username = {item.username}
                         time = {item.time}
-                        fromSender = {item.fromSender}
                         content = {item.content} />
                 ))}
             </div>

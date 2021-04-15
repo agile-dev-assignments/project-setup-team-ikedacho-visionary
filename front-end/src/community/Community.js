@@ -13,26 +13,23 @@ import Message_History from './Message_History'
 
 
 const Community = (props) => {
- // start a state variable with a blank array
- const [data, setData] = useState([])
+    // start a state variable with a blank array
+    const [data, setData] = useState([])
 
- // the following side-effect will be called once upon initial render
- useEffect(() => {
-   // fetch some mock data about animals for sale
-   console.log('fetching message history')
+    // the following side-effect will be called once upon initial render
+    useEffect(() => {
+        // fetch some mock data about animals for sale
+        console.log('fetching message history')
 
-   axios("/api_message")
-    .then(response => {
-        setData(response.data);
-     })
-    .catch((err) => {
-    console.log(`couldn't get user messages`)
-    console.error(err) // the server returned an error... probably too many requests... until we pay!
-     
-
-       // make some backup fake data of commented_history
-     })
- }, []) // only run it once!
+        axios("/api_message")
+        .then(response => {
+            setData(response.data);
+        })
+        .catch((err) => {
+        console.log(`couldn't get user messages`)
+        console.error(err) // the server returned an error... probably too many requests... until we pay!
+        })
+    }, []) // only run it once!
 
 
     return (

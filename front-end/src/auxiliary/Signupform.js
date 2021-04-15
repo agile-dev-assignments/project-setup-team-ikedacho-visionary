@@ -41,7 +41,7 @@ const Signup = (props) => {
 
         axios
         .post(
-        "/register",
+        "/api_register",
          {
             username: registerUsername,
             password: registerPassword,        
