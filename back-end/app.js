@@ -176,7 +176,7 @@ app.use('/get_me',async (req,res,next)=>{
             filtered_post_data_overall=post_data.filter(element=>linked_social_media.includes(element.source))
             user_info.post_number=filtered_post_data_overall.length
             //console.log(user_info)
-            console.log("user_info.post_number",user_info.post_number)
+            //console.log("user_info.post_number",user_info.post_number)
             selected_social_media= ["O-Zone","Facebook", "Twitter","Instagram"]
         } catch(e){
             console.log(e)
@@ -203,7 +203,7 @@ app.get("/get_me", async (req, res) => {
         await UserInfo.findOneAndUpdate(filter1, update1, {
             new: true   
         })
-        console.log('a',linked_social_media )
+        //console.log('a',linked_social_media )
 
         if(!unconnected_social_media.includes(clicked_linked_social_media)){
             //update unconnected_social_media(add)
@@ -214,7 +214,7 @@ app.get("/get_me", async (req, res) => {
             await UserInfo.findOneAndUpdate(filter2, update2, {
                 new: true
             });
-            console.log('b',unconnected_social_media )
+            //console.log('b',unconnected_social_media )
         }
     }//end of if
 
@@ -231,7 +231,7 @@ app.get("/get_me", async (req, res) => {
         await UserInfo.findOneAndUpdate(filter1, update1, {
             new: true
         });
-        console.log('c',unconnected_social_media )
+        //console.log('c',unconnected_social_media )
 
         if (!linked_social_media.includes(clicked_unconnected_social_media)){
               //update linked_social_media(add)
@@ -242,7 +242,7 @@ app.get("/get_me", async (req, res) => {
         await UserInfo.findOneAndUpdate(filter2, update2, {
             new: true
         })
-        console.log('d',linked_social_media )
+        //console.log('d',linked_social_media )
         }
     }
     const response_data={
@@ -261,21 +261,73 @@ app.get("/get_me", async (req, res) => {
 
 app.get('/get_facebook', async (req, res) => {
     const accessToken = req.query.accessToken
-    let response_data=''
-    console.log("accessToken",accessToken)
+    console.log("accessToken:",accessToken)
+    let userID=''
+    let long_lived_token=''
 
-    request(
+    await request(
         `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/oauth/access_token?grant_type=fb_exchange_token&client_id=${process.env.APP_ID}&client_secret=${process.env.APP_SECRET}&fb_exchange_token=${accessToken}`,
 
+        async function (error, response, body) {
+            if(error){
+                console.log("error")
+            }
+            else{
+                const res=JSON.parse(body)
+                console.log("get long-lived-token(body)",JSON.parse(body))
+                long_lived_token=res.access_token
+                //get userid
+                await request(
+                    `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/me?access_token=${long_lived_token}`,
+                    async function (error, response, body) {
+                        if(error){
+                            console.log("error")
+                        }
+                        else{
+                            console.log("get id:",body)
+                            userID=JSON.parse(body).id
+
+                            await request(
+                                `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/${userID}/permissions?access_token=${long_lived_token}`,
+                                function (error, response, body) {
+                                    if(error){
+                                        console.log("error")
+                                    }
+                                    else{
+                                        console.log("get permissions lists allowed:",body)
+                                    }
+                                }
+                            )
+
+                            await request(
+                                `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/${userID}/feed?access_token=${long_lived_token}`,
+                                function (error, response, body) {
+                                    if(error){
+                                        console.log("error")
+                                    }
+                                    else{
+                                        console.log("get posts:",body)
+                                    }
+                                }
+                            )
+                        }
+                    }
+                )
+            }
+        }
+    )
+   /* await request(
+        `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/${userID}/permissions?access_token=${long_lived_token}`,
         function (error, response, body) {
             if(error){
                 console.log("error")
             }
             else{
-                console.log(body)
+                console.log(`https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/${userID}/permissions?access_token=${long_lived_token}`)
+                console.log("get permissions lists allowed:",body)
             }
         }
-    )
+    )*/
 })
 
 
