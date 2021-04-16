@@ -277,7 +277,7 @@ app.get("/get_my_profile", async (req, res) => {
             linked_social_media=UserInfos.linked_social_media
             unconnected_social_media=UserInfos.unconnected_social_media
             post_data=UserInfos.post_data   
-            console.log("post_data",post_data)
+            //console.log("post_data",post_data)
         } catch(e){
             console.log(e)
         }
@@ -396,6 +396,7 @@ app.get("/get_edit", async (req, res) => {
                 senttime:new Date(),
                 contentimg:" ",
             })
+            UserInfos.post_number++
             //UserInfos.post_number=+user_info.post_number + 1 
             await UserInfos.save(function(saveErr, saveUserInfos) {
                 if(err){
