@@ -46,8 +46,8 @@ const Me = (props) => {
     }
     const handleClick_Unconnected = (response) => {
         let elements = document.getElementsByTagName('BUTTON')
-        console.log('elements of BUTTON:', elements)
-        console.log('elements.length:', elements.length)
+        //console.log('elements of BUTTON:', elements)
+        //console.log('elements.length:', elements.length)
 
         //deal with unconnected social media
         for (let i = response.data.linked_social_media.length; i < elements.length; i++) {
@@ -64,6 +64,7 @@ const Me = (props) => {
         }
     }
     const LoginStatus_fb = async () => {
+        setUpFacebookSDK()
         window.FB.getLoginStatus(function (response) {
             console.log(response)
             if (response.status === 'connected') {
