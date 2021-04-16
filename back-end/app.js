@@ -16,6 +16,7 @@ const User = require("./loginAuth/user");
 const UserInfo = require("./userInfo/userInfo");
 const Chatroom = require("./chatroom/chatroom")
 const db = require("./db");
+const request=require('request')
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
 
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -68,11 +69,11 @@ app.post("/api_register", (req, res) => {
             user_photo: `https://robohash.org/${req.body.username}.png?size=200x200`,
             background_picture: 'https://resilientblog.co/wp-content/uploads/2019/07/sky-quotes.jpg',
             post_number: 0,
-            bio: '',
+            bio: 'bio:',
             follower_number: 0,
             following_number: 0,
             linked_social_media: ['O-Zone'],
-            unconnected_social_media: ['Facebook','Twitter','Instagram'],
+            unconnected_social_media: ['Twitter','Instagram','Facebook'],
             });
 
         // naive way to store current user info in session
@@ -178,6 +179,7 @@ app.use('/get_me',async (req,res,next)=>{
 })
 
 app.get("/get_me", async (req, res) => {
+    const my_username = req.user.username
     let clicked_linked_social_media = req.query.clicked_linked_social_media
     let clicked_unconnected_social_media=req.query.clicked_unconnected_social_media
     
@@ -189,7 +191,7 @@ app.get("/get_me", async (req, res) => {
             }
         })
         //update linked_social_media to database
-        const filter1 = { user_name: 'Joe' };
+        const filter1 = { user_name: my_username };
         const update1 = { linked_social_media: linked_social_media };
         await UserInfo.findOneAndUpdate(filter1, update1, {
             new: true   
@@ -200,7 +202,7 @@ app.get("/get_me", async (req, res) => {
             //update unconnected_social_media(add)
             unconnected_social_media.push(clicked_linked_social_media)
             //update unconnected_social_media to database
-            const filter2 = { user_name: 'Joe' };
+            const filter2 = { user_name: my_username };
             const update2 = { unconnected_social_media: unconnected_social_media };
             await UserInfo.findOneAndUpdate(filter2, update2, {
                 new: true
@@ -217,7 +219,7 @@ app.get("/get_me", async (req, res) => {
             }
         })
         //update unconnected_social_media to database
-        const filter1 = { user_name: 'Joe' };
+        const filter1 = { user_name: my_username };
         const update1 = { unconnected_social_media: unconnected_social_media };
         await UserInfo.findOneAndUpdate(filter1, update1, {
             new: true
@@ -228,7 +230,7 @@ app.get("/get_me", async (req, res) => {
               //update linked_social_media(add)
         linked_social_media.push(clicked_unconnected_social_media)
         //update linked_social_media to database
-        const filter2 = { user_name: 'Joe' };
+        const filter2 = { user_name: my_username };
         const update2 = { linked_social_media: linked_social_media };
         await UserInfo.findOneAndUpdate(filter2, update2, {
             new: true
@@ -249,6 +251,25 @@ app.get("/get_me", async (req, res) => {
 })
 
 
+
+app.get('/get_facebook', async (req, res) => {
+    const accessToken = req.query.accessToken
+    let response_data=''
+    console.log("accessToken",accessToken)
+
+    request(
+        `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/oauth/access_token?grant_type=fb_exchange_token&client_id=${process.env.APP_ID}&client_secret=${process.env.APP_SECRET}&fb_exchange_token=${accessToken}`,
+
+        function (error, response, body) {
+            if(error){
+                console.log("error")
+            }
+            else{
+                console.log(body)
+            }
+        }
+    )
+})
 
 
 app.get("/get_my_profile", async (req, res) => {
