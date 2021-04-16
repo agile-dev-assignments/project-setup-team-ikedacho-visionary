@@ -265,7 +265,7 @@ app.get('/get_facebook', async (req, res) => {
     let userID=''
     let long_lived_token=''
     let post_data=''
-
+    const my_username = req.user.username
     await request(
         `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/oauth/access_token?grant_type=fb_exchange_token&client_id=${process.env.APP_ID}&client_secret=${process.env.APP_SECRET}&fb_exchange_token=${accessToken}`,
 
@@ -302,7 +302,7 @@ app.get('/get_facebook', async (req, res) => {
 
                             await request(
                                 `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/${userID}/feed?fields=id,created_time,message,object_id,permalink_url&access_token=${long_lived_token}`,
-                                function (error, response, body) {
+                                async function (error, response, body) {
                                     if(error){
                                         console.log("error")
                                     }
