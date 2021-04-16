@@ -33,6 +33,7 @@ import Pre_Recent  from './Prelogin/Pre_RecentlyVisited'
 import Floatingbutton from "./auxiliary/FloatingButton"
 import Chat from './community/Chat'
 import NewChat from './community/NewChat';
+import ToFacebook from './me/ToFacebook'
 
 function App() {
   return (
@@ -62,6 +63,10 @@ function App() {
             <Route path = "/me">
                 <Me />
                 <MainNav />
+            </Route>
+
+            <Route path='/to_facebook'>
+              <ToFacebook />
             </Route>
 
             <Route path = "/my_comment_history">
