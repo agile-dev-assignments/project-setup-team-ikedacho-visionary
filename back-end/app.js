@@ -384,12 +384,8 @@ app.get("/follow", (req, res) => {
 app.get("/get_edit", async (req, res) => {
     const my_username = req.user.username
     const post_text=req.query.post_text
-    //console.log("post_text:",post_text)
- 
     await UserInfo.findOne({user_name: my_username}, async(err, UserInfos)=>{
         try {
-            //const post_id=UserInfos.post_data[0].id
-            //new_post.id=post_id+1
             UserInfos.post_data.unshift({
                 content:post_text,
                 source:"O-Zone",
@@ -397,13 +393,9 @@ app.get("/get_edit", async (req, res) => {
                 contentimg:" ",
             })
             UserInfos.post_number++
-            //UserInfos.post_number=+user_info.post_number + 1 
             await UserInfos.save(function(saveErr, saveUserInfos) {
                 if(err){
                     console.log('error saving post')
-                }
-                else{
-                    //console.log(saveUserInfos);	
                 }
             });   
         } catch(e){
