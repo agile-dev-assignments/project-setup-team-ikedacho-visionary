@@ -36,7 +36,7 @@ const PostDataSchema = new mongoose.Schema(
         id: Number,
         source: String,
         content: String,
-        senttime: Number,
+        senttime: Date,
         contentimg: String,
         liked_count: Number,
         commented_count: Number,
