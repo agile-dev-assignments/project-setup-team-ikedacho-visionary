@@ -5,29 +5,19 @@ import './Mentions_List.css'
 import Mentions from "./Mentions";
 
 const Mentions_List = (props) => {
-    // start a state varaible with a blank array
     const [data, setData] = useState([])
 
     // the following side-effect will be called once upon initial render
     useEffect(() => {
-        
-        // 'https://my.api.mockaroo.com/mentioned_history.json?key=49286830'
         axios
-            .get("/api_being_mentioned", {
-                params: {
-                    /* INTENTIONALLY LEFT AS BLANK BY XINYU-BOT */
-                }
-            })
+            .get("/api_being_mentioned")
             .then((response) => {
                 // extract the data from the server response
                 setData(response.data)
+                console.log("data fetched from backend: ", data)
             })
             .catch((err) => {
-                /* 
-                THIS CODE SEGMENT IS ENTIRELY REMOVED BY XINYU-BOT INTENTIONALLY
-                The original code is bad at readablity and just backup data
-                Backup data has been moved to back-end
-                */
+                console.error(err)
             })
     }, []) // only run it once!
 
@@ -45,7 +35,6 @@ const Mentions_List = (props) => {
                         key={item.id} 
                         details={item}/>
                 ))}
-
             </section>
         </div>
     )
