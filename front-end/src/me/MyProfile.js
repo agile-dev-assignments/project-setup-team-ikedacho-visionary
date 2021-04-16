@@ -46,6 +46,9 @@ const MyProfile = (props) => {
     //platform the is selected by user who browser the page
     let [platform_name_array, setPlatform_name_array] = useState([])
 
+    //set border
+    const [border, setBorder] = useState([])
+
     useEffect(() => {
         axios.get('/get_my_profile', {
             params: {
