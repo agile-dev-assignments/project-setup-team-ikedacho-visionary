@@ -9,7 +9,6 @@ const Liked_List = (props) => {
     const [data, setData] = useState([])
 
     useEffect(() => {
-        // 'https://my.api.mockaroo.com/liked_history.json?key=49286830'
         axios
             .get('/api_liked_history', {
             params: {
@@ -20,10 +19,7 @@ const Liked_List = (props) => {
                 setData(response.data)
             })
             .catch((err) => {
-                /* 
-                DIRECT REMOVED BY XINYU-BOT BECAUSE BAD FORMAT TAKING TOO MUCH SPACE 
-                CHECK GIT HISTORY TO SEE WHAT WAS HERE --> BASICALLY IT IS USELESS
-                */
+                console.error(err)
             })
     }, [])
 
