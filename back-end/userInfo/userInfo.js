@@ -36,7 +36,7 @@ const PostDataSchema = new mongoose.Schema(
         id: Number,
         source: String,
         content: String,
-        senttime: Date,
+        senttime: Number,
         contentimg: String,
         liked_count: Number,
         commented_count: Number,
@@ -89,6 +89,7 @@ const BrowseHistorySchema = new mongoose.Schema(
     { _id: true }
 )
 const BrowseHistory = mongoose.model('BrowseHistory', BrowseHistorySchema, 'BrowseHistory')
+
 //Community relate to UserInfo
 const OthersMentionedHistorySchema = new mongoose.Schema(
     {
@@ -139,13 +140,16 @@ const userInfo = new mongoose.Schema(
         background_picture: String,
         post_number: Number,
         bio: String,
-        follower_number: [String],
-        following_number: [String],
+        follower_number: Number,
+        follower: [String], 
+        following_number: Number,
+        following: [String],
         unconnected_social_media: Array,
         linked_social_media: Array,
         post_data: [PostDataSchema],
         my_comment_history: [MyCommentHistorySchema],
         my_browse_history: [BrowseHistorySchema],
+        my_like_history: [MyLikeHistorySchema], 
         others_mentioned_history: [OthersMentionedHistorySchema],
         others_liked_history: [OthersLikedHistorySchema],
         others_commented_history: [OthersCommentedHistorySchema],
