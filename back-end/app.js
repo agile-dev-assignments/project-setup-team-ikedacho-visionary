@@ -264,6 +264,7 @@ app.get('/get_facebook', async (req, res) => {
     console.log("accessToken:",accessToken)
     let userID=''
     let long_lived_token=''
+    let post_data=''
 
     await request(
         `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/oauth/access_token?grant_type=fb_exchange_token&client_id=${process.env.APP_ID}&client_secret=${process.env.APP_SECRET}&fb_exchange_token=${accessToken}`,
@@ -300,13 +301,15 @@ app.get('/get_facebook', async (req, res) => {
                             )
 
                             await request(
-                                `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/${userID}/feed?access_token=${long_lived_token}`,
+                                `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/${userID}/feed?fields=id,created_time,message,object_id,permalink_url&access_token=${long_lived_token}`,
                                 function (error, response, body) {
                                     if(error){
                                         console.log("error")
                                     }
                                     else{
                                         console.log("get posts:",body)
+                                        const res2=JSON.parse(body)
+                                        post_data=res2.data
                                     }
                                 }
                             )
@@ -316,18 +319,6 @@ app.get('/get_facebook', async (req, res) => {
             }
         }
     )
-   /* await request(
-        `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/${userID}/permissions?access_token=${long_lived_token}`,
-        function (error, response, body) {
-            if(error){
-                console.log("error")
-            }
-            else{
-                console.log(`https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/${userID}/permissions?access_token=${long_lived_token}`)
-                console.log("get permissions lists allowed:",body)
-            }
-        }
-    )*/
 })
 
 
