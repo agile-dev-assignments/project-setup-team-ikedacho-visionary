@@ -642,50 +642,35 @@ app.get("/api_friend_profile", async (req, res) => {
 
     let post_data=''
     let friend_info=''
-    // extract the UserName and userimg passed in along with the request
     const UserName = req.query.UserName
-    const userimg = req.query.userimg
-
-    /*
-    The following two API requests are intentionally set to be empty because we need our Database here
-    */
-    // JIT retrieval of friend's info
-    await axios
-    .get(``)//'correct: ${process.env.API_FRIEND_PROFILE}?key=${process.env.API_FRIEND_PROFILE_KEY}
-        .then(apiResponse => ret.friend_info = apiResponse.data)
-        .catch((err) => {
-            friend_info = {"id": 1, "user_name": `${UserName}`, "user_photo": `${userimg}`, "post_number": "300", "bio":"studying", "follower_number": "10", "following_number": "10","linked_social_media": ["Facebook","Twitter","Instagram","Youtube","Linkedin"]}
-           
-        })
-
-    // JIT retrieval of friend's posts
-    await axios
-        .get(``)
-        .then(apiResponse => ret.data = apiResponse.data)
-        .catch((err) => {
-            post_data = [{"source":"Twitter","userimg":"https://robohash.org/eteosoccaecati.png?size=50x50\u0026set=set1","UserName":"seisenberg0","content":"In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\n\nNulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.","Senttime":"11/28/2020","contentimg":"http://dummyimage.com/145x100.png/cc0000/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/quasassumendacupiditate.png?size=50x50\u0026set=set1","UserName":"scullen1","content":"Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.","Senttime":"1/30/2021","contentimg":"http://dummyimage.com/171x100.png/ff4444/ffffff"},{"source":"O-Zone","userimg":"https://robohash.org/etvoluptatemfuga.png?size=50x50\u0026set=set1","UserName":"dpassy2","content":"Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.","Senttime":"2/25/2021","contentimg":"http://dummyimage.com/101x100.png/dddddd/000000"},{"source":"Facebook","userimg":"https://robohash.org/quidemminusut.png?size=50x50\u0026set=set1","UserName":"akennerley3","content":"In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.","Senttime":"12/26/2020","contentimg":"http://dummyimage.com/144x100.png/cc0000/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/essequissunt.png?size=50x50\u0026set=set1","UserName":"mlarrat4","content":"In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.","Senttime":"4/8/2020","contentimg":"http://dummyimage.com/195x100.png/cc0000/ffffff"},{"source":"Twitter","userimg":"https://robohash.org/hicaliasdebitis.png?size=50x50\u0026set=set1","UserName":"wrice5","content":"Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.","Senttime":"6/16/2020","contentimg":"http://dummyimage.com/177x100.png/5fa2dd/ffffff"},{"source":"O-Zone","userimg":"https://robohash.org/earuminventoretotam.png?size=50x50\u0026set=set1","UserName":"wcobbin6","content":"Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.","Senttime":"10/8/2020","contentimg":"http://dummyimage.com/244x100.png/ff4444/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/etuteos.png?size=50x50\u0026set=set1","UserName":"agadault7","content":"Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.","Senttime":"5/27/2020","contentimg":"http://dummyimage.com/169x100.png/dddddd/000000"},{"source":"Facebook","userimg":"https://robohash.org/occaecatiomnisminima.png?size=50x50\u0026set=set1","UserName":"bmanzell8","content":"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.\n\nNam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.","Senttime":"5/22/2020","contentimg":"http://dummyimage.com/163x100.png/cc0000/ffffff"},{"source":"O-Zone","userimg":"https://robohash.org/omnispossimusrerum.png?size=50x50\u0026set=set1","UserName":"mfullylove9","content":"Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.","Senttime":"7/31/2020","contentimg":"http://dummyimage.com/152x100.png/cc0000/ffffff"}]
-            friend_info.post_number=post_data.length
-        })
-
+  
+    await UserInfo.findOne({user_name: UserName},(err, UserInfos)=>{
+        try {
+            friend_info=UserInfos
+            linked_social_media=UserInfos.linked_social_media
+            post_data=UserInfos.post_data   
+            //console.log("post_data",post_data)
+        } catch(e){
+            console.log(e)
+        }
+    })
 
     //FILTER POST DATA to send back to client, based on platform user selected in frontend
     //console.log("req.query.platform_name_array:", req.query.platform_name_array)
     let filtered_post_data=post_data.slice()
     if (req.query.platform_name_array!==undefined) {
-        //console.log("111111")
         filtered_post_data=post_data.filter(element=>{
            if (req.query.platform_name_array.includes(element.source)){
                return true
-           }//end of if
-        })//end of filtered_post_data
-
-    }//end of if
+           }
+        })
+    }
 
     //send back response_data which consists of user_info and filtered_post_data as post_data
     const response_data={
         "friend_info" : friend_info,
         "post_data" : filtered_post_data, //return the filtered data based on platform selected
-        "linked_social_media": ["O-Zone","Facebook","Twitter","Instagram"],//return linked_platform name
+        "linked_social_media": linked_social_media,//return linked_platform name
     }
     //console.log("in get_my_profile:", user_info)
     //console.log("linked_social_media:",linked_social_media)
@@ -726,22 +711,140 @@ app.get("/api_followings", async (req, res) => {
 
 app.get("/api_friend_suggestion", async (req, res) => {
     let ret = {}
-    
-    /* 
-    Note that for this specific back-end API, the mockaroo API was intentionally disabled 
-    Because we need Database to actually retrieve the searched result
-    Therefore hardcoded mock data are used
-    */
-    await axios
-        .get(`${process.env.API_FRIEND_SUGGESTION}?key=${process.env.API_FRIEND_SUGGESTION_KEY}_NOT-USING`)
-        .then(apiResponse => ret = apiResponse.data)
-        .catch((err) => {
-            const backupData_suggestion = [{"img":"https://robohash.org/animirationequia.bmp?size=50x50\u0026set=set1","UserName":"express.js friend_suggestion","bio":"p v g t d W U J W w ","action":"follow"},{"img":"https://robohash.org/sedquosequi.bmp?size=50x50\u0026set=set1","UserName":"abalser1","bio":"k e x N L B C M S u ","action":"follow"},{"img":"https://robohash.org/ullamvoluptasiure.png?size=50x50\u0026set=set1","UserName":"agretton2","bio":"B C I S O L G x U J ","action":"follow"},{"img":"https://robohash.org/quiperferendisdistinctio.jpg?size=50x50\u0026set=set1","UserName":"cchaffin3","bio":"j D N E t y F X N I ","action":"follow"},{"img":"https://robohash.org/doloremetquaerat.png?size=50x50\u0026set=set1","UserName":"sbrosenius4","bio":"P D n U y n j E b E ","action":"follow"},{"img":"https://robohash.org/doloribusfugitest.png?size=50x50\u0026set=set1","UserName":"koskehan5","bio":"s b z h i R M C b W ","action":"follow"},{"img":"https://robohash.org/totamvoluptasoccaecati.png?size=50x50\u0026set=set1","UserName":"afrackiewicz6","bio":"u C V V n q f h C t ","action":"follow"},{"img":"https://robohash.org/undeevenietquidem.jpg?size=50x50\u0026set=set1","UserName":"wghidetti7","bio":"r v x W x V Y k j E ","action":"follow"},{"img":"https://robohash.org/porroautut.png?size=50x50\u0026set=set1","UserName":"lswaby8","bio":"D h m L d E W G j r ","action":"follow"},{"img":"https://robohash.org/dignissimosillumplaceat.jpg?size=50x50\u0026set=set1","UserName":"lclemerson9","bio":"D S z Y s l g z g r ","action":"follow"}]
-            const backupData_searched = [{"img":"https://robohash.org/animirationequia.bmp?size=50x50\u0026set=set1","UserName": `${req.query.search_name}`,"bio":"p v g t d W U J W w ","action":"follow"}]
-            ret = (req.query.search_name == "" || req.query.search_name == undefined) ? backupData_suggestion : backupData_searched
-        })
+    let unfollowed_list=[]//list of user who is not followed by me
+    let following_list
+    const my_username = req.user.username
+    await UserInfo.find((err, UserInfos)=>{
+        try {
+            user_info=UserInfos
+            unfollowed_list=user_info.filter((item)=>{
+                if (!item.follower.includes(my_username)){
+                    return true
+                }
+            })
+            unfollowed_list=unfollowed_list.filter((item)=>{
+                if (item.user_name!==my_username){
+                    return true
+                }
+            })
+
+            following_list=user_info.filter((item)=>{
+                if (item.follower.includes(my_username)){
+                    return true
+                }
+            })
+        } catch(e){
+            console.log(e)
+        }
+    })
+
+    //console.log(unfollowed_list)
+            const suggestion = unfollowed_list
+            const searched = [{"user_photo":"https://robohash.org/animirationequia.bmp?size=50x50\u0026set=set1","user_name": `${req.query.search_name}`,"bio":"p v g t d W U J W w "}]
+            //ret = (req.query.search_name == "" || req.query.search_name == undefined) ? suggestion : searched
+            ret.unfollowed_list=unfollowed_list
+            ret.following_list=following_list
 
     res.json(ret)
+})
+
+app.get("/get_add_friend", async (req, res) => {
+    const clicked_follow_username=req.query.clicked_follow_username
+    console.log("clicked_follow_username",clicked_follow_username)
+    //when user click a people to follow in front-end. the
+    const my_username = req.user.username
+    await UserInfo.findOne({user_name: my_username},async (err, UserInfos)=>{
+        try {
+            user_info=UserInfos
+            following_list=user_info.following
+            if(!following_list.includes(clicked_follow_username)){
+                following_list.push(clicked_follow_username)
+                user_info.following_number++
+            }
+            await UserInfos.save(function(saveErr, saveUserInfos) {
+                if(err){
+                    console.log('error saving following')
+                }
+            });   
+        } catch(e){
+            console.log(e)
+        }
+    })
+
+    await UserInfo.findOne({user_name: clicked_follow_username},async (err, UserInfos)=>{
+        try {
+            user_info=UserInfos
+            follower_list=user_info.follower
+            if(!follower_list.includes(my_username)){
+                follower_list.push(my_username)
+                user_info.follower_number++
+            }
+            await UserInfos.save(function(saveErr, saveUserInfos) {
+                if(err){
+                    console.log('error saving adding a following')
+                }
+            });   
+        } catch(e){
+            console.log(e)
+        }
+    })
+})
+
+app.get("/get_remove_friend", async (req, res) => {
+    const clicked_unfollow_username=req.query.clicked_unfollow_username
+    console.log("clicked_unfollow_username",clicked_unfollow_username)
+
+    const my_username = req.user.username
+    console.log(my_username)
+    await UserInfo.findOne({user_name: my_username},async (err, UserInfos)=>{
+        try {
+            console.log("here")
+            user_info=UserInfos
+            following_list=user_info.following.slice()
+            console.log("following_list",following_list)
+            if(following_list.includes(clicked_unfollow_username)){
+                user_info.following=following_list.filter(item=>{
+                    if(item!==clicked_unfollow_username){
+                        console.log("start",item)
+                        return true
+                    }
+                    user_info.following=following_list.slice()
+                    console.log(following_list)
+                    console.log(user_info.following)
+                })
+                user_info.following_number--
+            }
+            await UserInfos.save(function(saveErr, saveUserInfos) {
+                if(err){
+                    console.log('error saving deleteing a following')
+                }
+            });   
+        } catch(e){
+            console.log(e)
+        }
+    })
+    await UserInfo.findOne({user_name: clicked_unfollow_username},async (err, UserInfos)=>{
+        try {
+            user_info=UserInfos
+            follower_list=user_info.follower.slice()
+            console.log(follower_list)
+            if(follower_list.includes(my_username)){
+                user_info.follower=follower_list.filter(item=>{
+                    if(item!==my_username){
+                        return true
+                    }
+                })
+                user_info.follower_number--
+            }
+            await UserInfos.save(function(saveErr, saveUserInfos) {
+                if(err){
+                    console.log('error saving deleting a following')
+                }
+            });   
+        } catch(e){
+            console.log(e)
+        }
+    })
 })
 
 app.get("/api_being_liked", async (req, res) => {
