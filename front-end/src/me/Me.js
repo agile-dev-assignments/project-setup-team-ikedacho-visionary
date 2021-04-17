@@ -6,7 +6,6 @@ import { Gear } from 'react-bootstrap-icons'
 import { ClockHistory } from 'react-bootstrap-icons'
 import { TextParagraph } from 'react-bootstrap-icons'
 import { HeartFill } from 'react-bootstrap-icons'
-
 import axios from 'axios'
 import Linked_platform_connect from './Linked_platform_connect'
 import Unconnected_social_media from './Unconnected_social_media'
@@ -65,6 +64,7 @@ const Me = (props) => {
     }
     const LoginStatus_fb = async () => {
         setUpFacebookSDK()
+
         window.FB.getLoginStatus(function (response) {
             console.log(response)
             if (response.status === 'connected') {
