@@ -6,10 +6,8 @@ import { Link } from 'react-router-dom'
 const NameTag = (props) => {
     // replace by API to follow/unfollow
 
-    const setButton = (e) => {
+    const setButton = async (e) => {
         if (e.className === 'Follow') {
-            alert('Follow_button is clicked! ')
-
             axios('/get_add_friend', {
                 params: {
                     clicked_follow_username: e.id,
@@ -17,13 +15,12 @@ const NameTag = (props) => {
             })
             window.location.href = '/friend_suggestion'
         } else {
-            alert('Unfollow_button is clicked! ')
-
             axios('/get_remove_friend', {
                 params: {
                     clicked_unfollow_username: e.id,
                 },
             })
+            window.location.href = '/friend_suggestion'
         }
     }
 
