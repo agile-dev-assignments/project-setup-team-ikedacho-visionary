@@ -718,13 +718,25 @@ app.get("/api_followings", async (req, res) => {
 
 app.get("/api_friend_suggestion", async (req, res) => {
     let ret = {}
-    let unfollowed_list=[]
+    let unfollowed_list=[]//list of user who is not followed by me
+    let following_list
     const my_username = req.user.username
     await UserInfo.find((err, UserInfos)=>{
         try {
             user_info=UserInfos
             unfollowed_list=user_info.filter((item)=>{
-                if (!item.following.includes(my_username)){
+                if (!item.follower.includes(my_username)){
+                    return true
+                }
+            })
+            unfollowed_list=unfollowed_list.filter((item)=>{
+                if (item.user_name!==my_username){
+                    return true
+                }
+            })
+
+            following_list=user_info.filter((item)=>{
+                if (item.follower.includes(my_username)){
                     return true
                 }
             })
@@ -732,11 +744,13 @@ app.get("/api_friend_suggestion", async (req, res) => {
             console.log(e)
         }
     })
+
     console.log(unfollowed_list)
             const suggestion = unfollowed_list
             const searched = [{"user_photo":"https://robohash.org/animirationequia.bmp?size=50x50\u0026set=set1","user_name": `${req.query.search_name}`,"bio":"p v g t d W U J W w "}]
-            ret = (req.query.search_name == "" || req.query.search_name == undefined) ? suggestion : searched
-    
+            //ret = (req.query.search_name == "" || req.query.search_name == undefined) ? suggestion : searched
+            ret.unfollowed_list=unfollowed_list
+            ret.following_list=following_list
 
     res.json(ret)
 })
