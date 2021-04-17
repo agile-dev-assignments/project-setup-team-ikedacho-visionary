@@ -18,6 +18,7 @@ const Chatroom = require("./chatroom/chatroom")
 const db = require("./db");
 const request=require('request')
 const oauthSignature = require('oauth-signature')
+var authUser = require('./authIns')
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
 
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -99,6 +100,8 @@ app.post("/login", (req, res, next) => {
         }
     })(req, res, next);
 });
+
+
 
 app.get("/api_get_user_info_by_name", (req, res) => {
     const username = req.body.username
@@ -395,7 +398,14 @@ app.get("/get_twitter_request_token", async (req, res) => {
         }
     })
 })
+app.get('/auth/instagram', authUser);
 
+app.get('/auth/instagram/callback', authUser);
+
+
+
+
+           
 app.get("/get_my_profile", async (req, res) => {
     const my_username = req.user.username
     await UserInfo.findOne({user_name: my_username},(err, UserInfos)=>{

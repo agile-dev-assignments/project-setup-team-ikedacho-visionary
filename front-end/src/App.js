@@ -35,6 +35,7 @@ import Chat from './community/Chat'
 import NewChat from './community/NewChat';
 import ToFacebook from './me/ToFacebook'
 import ToTwitter from './me/ToTwitter'
+import ToInstagram from './me/ToInstagram'
 
 function App() {
   return (
@@ -70,8 +71,13 @@ function App() {
               <ToFacebook />
             </Route>
 
+
             <Route path='/to_twitter'>
               <ToTwitter />
+            </Route>
+
+            <Route path='/to_instagram'>
+              <ToInstagram />
             </Route>
 
             <Route path = "/my_comment_history">

@@ -68,7 +68,16 @@ const Me = (props) => {
                     window.location.href = '/to_twitter'
                 })                
             }
-        }
+
+            if (element.id === 'Instagram') {
+                element.style.background = '#3b5998'
+                element.style.color = 'white'
+                element.addEventListener('click', () => {
+                    window.location.href = '/to_instagram'
+                })              
+            
+            }
+    }
     }
     const LoginStatus_fb = async () => {
         setUpFacebookSDK()
