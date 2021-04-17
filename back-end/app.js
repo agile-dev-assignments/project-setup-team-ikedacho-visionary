@@ -177,7 +177,7 @@ app.use('/get_me',async (req,res,next)=>{
             filtered_post_data_overall=post_data.filter(element=>linked_social_media.includes(element.source))
             user_info.post_number=filtered_post_data_overall.length
             //console.log(user_info)
-            //console.log("user_info.post_number",user_info.post_number)
+            console.log("user_info.post_number",user_info.post_number)
             selected_social_media= ["O-Zone","Facebook", "Twitter","Instagram"]
         } catch(e){
             console.log(e)
@@ -204,7 +204,7 @@ app.get("/get_me", async (req, res) => {
         await UserInfo.findOneAndUpdate(filter1, update1, {
             new: true   
         })
-        //console.log('a',linked_social_media )
+        console.log('a',linked_social_media )
 
         if(!unconnected_social_media.includes(clicked_linked_social_media)){
             //update unconnected_social_media(add)
@@ -215,7 +215,7 @@ app.get("/get_me", async (req, res) => {
             await UserInfo.findOneAndUpdate(filter2, update2, {
                 new: true
             });
-            //console.log('b',unconnected_social_media )
+            console.log('b',unconnected_social_media )
         }
     }//end of if
 
@@ -232,7 +232,7 @@ app.get("/get_me", async (req, res) => {
         await UserInfo.findOneAndUpdate(filter1, update1, {
             new: true
         });
-        //console.log('c',unconnected_social_media )
+        console.log('c',unconnected_social_media )
 
         if (!linked_social_media.includes(clicked_unconnected_social_media)){
               //update linked_social_media(add)
@@ -243,7 +243,7 @@ app.get("/get_me", async (req, res) => {
         await UserInfo.findOneAndUpdate(filter2, update2, {
             new: true
         })
-        //console.log('d',linked_social_media )
+        console.log('d',linked_social_media )
         }
     }
     const response_data={
