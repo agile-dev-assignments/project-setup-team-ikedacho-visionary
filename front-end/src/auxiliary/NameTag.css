@@ -1,13 +1,11 @@
-
-.NameTag{
+div.NameTag {
     padding: 10px;
     margin: 10px;
     background-color: white;
     /*border: 2px solid lightgray;*/
     display: flex;
-
 }
-.NameTag img{
+div.NameTag img {
     border: 1px solid #ddd;
     border-radius: 50%;
     padding: 5px;
@@ -16,14 +14,15 @@
     position: relative;
 }
 
-.Text{
+div.NameTag .Text {
     flex: 1;
     padding-left: 10px;
     padding-top: 3px;
     position: relative;
 }
 
-button.follow {
+div.NameTag button.Follow,
+button.Unfollow {
     position: absolute;
     right: 0px;
     top: 5px;

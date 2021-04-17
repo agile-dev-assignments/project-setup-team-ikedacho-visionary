@@ -755,6 +755,17 @@ app.get("/api_friend_suggestion", async (req, res) => {
     res.json(ret)
 })
 
+app.get("/get_add_friend", async (req, res) => {
+    const clicked_follow_username=req.query.clicked_follow_username
+    console.log("clicked_follow_username",clicked_follow_username)
+
+})
+
+app.get("/get_remove_friend", async (req, res) => {
+    console.log("clicked_unfollow_username",req.query.clicked_unfollow_username)
+
+})
+
 app.get("/api_being_liked", async (req, res) => {
     let ret = {}
 
