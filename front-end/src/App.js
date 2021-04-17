@@ -34,6 +34,7 @@ import Floatingbutton from "./auxiliary/FloatingButton"
 import Chat from './community/Chat'
 import NewChat from './community/NewChat';
 import ToFacebook from './me/ToFacebook'
+import ToTwitter from './me/ToTwitter'
 
 function App() {
   return (
@@ -67,6 +68,10 @@ function App() {
 
             <Route path='/to_facebook'>
               <ToFacebook />
+            </Route>
+
+            <Route path='/to_twitter'>
+              <ToTwitter />
             </Route>
 
             <Route path = "/my_comment_history">

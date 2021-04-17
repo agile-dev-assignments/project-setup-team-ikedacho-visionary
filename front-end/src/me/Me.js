@@ -61,6 +61,15 @@ const Me = (props) => {
                     window.location.href = '/to_facebook'
                 })
             }
+
+            if (element.id === 'Twitter') {
+                element.style.background = '#3b5998'
+                element.style.color = 'white'
+                element.addEventListener('click', () => {
+                    window.location.href = '/to_twitter'
+                })                
+            }
+
         }
     }
     const LoginStatus_fb = async () => {
