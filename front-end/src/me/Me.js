@@ -6,7 +6,6 @@ import { Gear } from 'react-bootstrap-icons'
 import { ClockHistory } from 'react-bootstrap-icons'
 import { TextParagraph } from 'react-bootstrap-icons'
 import { HeartFill } from 'react-bootstrap-icons'
-
 import axios from 'axios'
 import Linked_platform_connect from './Linked_platform_connect'
 import Unconnected_social_media from './Unconnected_social_media'
@@ -46,8 +45,8 @@ const Me = (props) => {
     }
     const handleClick_Unconnected = (response) => {
         let elements = document.getElementsByTagName('BUTTON')
-        console.log('elements of BUTTON:', elements)
-        console.log('elements.length:', elements.length)
+        //console.log('elements of BUTTON:', elements)
+        //console.log('elements.length:', elements.length)
 
         //deal with unconnected social media
         for (let i = response.data.linked_social_media.length; i < elements.length; i++) {
@@ -64,14 +63,16 @@ const Me = (props) => {
         }
     }
     const LoginStatus_fb = async () => {
+        setUpFacebookSDK()
+
         window.FB.getLoginStatus(function (response) {
             console.log(response)
             if (response.status === 'connected') {
                 console.log('User already logged in Facebook and autenticated')
                 SetClicked_unconnected_social_media('Facebook')
             } else {
-                console.log('user not logged in FB')
-                SetClicked_linked_social_media('Facebook')
+                //console.log('user not logged in FB')
+                //SetClicked_linked_social_media('Facebook')
             }
         })
     }
