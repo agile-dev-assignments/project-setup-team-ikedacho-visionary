@@ -5,18 +5,19 @@ const multer = require("multer") // middleware to handle HTTP POST requests with
 const axios = require("axios") // middleware for making requests to APIs
 require("dotenv").config({silent:true}) // load environmental variables from a hidden file named .env
 const morgan = require("morgan") // middleware for nice logging of incoming HTTP requests
-const cors = require("cors");
-const passport = require("passport");
-const passportLocal = require("passport-local").Strategy;
-const cookieParser = require("cookie-parser");
-const bcrypt = require("bcryptjs");
-const session = require("express-session");
-const bodyParser = require("body-parser");
-const User = require("./loginAuth/user");
-const UserInfo = require("./userInfo/userInfo");
+const cors = require("cors")
+const passport = require("passport")
+const passportLocal = require("passport-local").Strategy
+const cookieParser = require("cookie-parser")
+const bcrypt = require("bcryptjs")
+const session = require("express-session")
+const bodyParser = require("body-parser")
+const User = require("./loginAuth/user")
+const UserInfo = require("./userInfo/userInfo")
 const Chatroom = require("./chatroom/chatroom")
 const db = require("./db");
-const request=require('request')
+const request = require('request')
+const oauthSignature = require('oauth-signature')
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
 
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -276,6 +277,49 @@ app.get('/get_facebook', async (req, res) => {
             }
         }
     )
+})
+
+app.get("/get_twitter_request_token", async (req, res) => {
+    // get timestamp in seconds
+    const date = Math.floor(Date.now() / 1000)
+    const username = req.user.username 
+    const nonce = `${fast_hash(date + username)}`
+    console.log("Calculated: ", date, nonce)
+    
+    // Alright, let me just manually generate an encoded signature!!!!!!!
+    const parameters = {
+        oauth_consumer_key: process.env.TWITTER_API_KEY,
+        oauth_token: process.env.TWITTER_ACCESS_TOKEN,
+        oauth_nonce :nonce,
+        oauth_timestamp : date,
+        oauth_signature_method : 'HMAC-SHA1',
+        oauth_version : '1.0',
+        oauth_callback: "http://localhost:4000/me"
+    }
+    const request_url = 'https://api.twitter.com/oauth/request_token'
+    const consumerSecret = process.env.TWITTER_API_SECRET_KEY
+    const tokenSecret = process.env.TWITTER_ACCESS_TOKEN_SECRET
+	const signature = oauthSignature.generate('POST', request_url, parameters, consumerSecret, tokenSecret)
+
+    const AuthHeader = `OAuth oauth_consumer_key="${process.env.TWITTER_API_KEY}",oauth_token="${process.env.TWITTER_ACCESS_TOKEN}",oauth_signature_method="HMAC-SHA1",oauth_timestamp="${date}",oauth_nonce="${nonce}",oauth_version="1.0",oauth_callback="http%3A%2F%2Flocalhost%3A4000%2Fme",oauth_signature="${signature}"`
+
+    // HTTPS request 
+    const options = {
+        'method': 'POST',
+        'url': request_url,
+        'headers': {
+            
+            'Authorization': AuthHeader
+        }
+    };
+
+    request(options, (error, result) => {
+        if (error) {
+            console.error(err)
+        } else {
+            console.log(result.body)
+        }
+    })
 })
 
 
@@ -982,6 +1026,18 @@ app.get("/api_search_result", async(req, res) => {
 // helper function, can remove anytime
 function isEmpty(obj) {
     return Object.keys(obj).length === 0;
+}
+
+// helper function, can remove anytime
+// fast hash <-- but not secure at all
+function fast_hash(str) {
+    let hash = 0
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i)
+        hash = (hash << 5) - hash + char
+        hash &= hash
+    }
+    return hash
 }
 
 module.exports = app
