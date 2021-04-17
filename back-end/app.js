@@ -718,22 +718,140 @@ app.get("/api_followings", async (req, res) => {
 
 app.get("/api_friend_suggestion", async (req, res) => {
     let ret = {}
-    
-    /* 
-    Note that for this specific back-end API, the mockaroo API was intentionally disabled 
-    Because we need Database to actually retrieve the searched result
-    Therefore hardcoded mock data are used
-    */
-    await axios
-        .get(`${process.env.API_FRIEND_SUGGESTION}?key=${process.env.API_FRIEND_SUGGESTION_KEY}_NOT-USING`)
-        .then(apiResponse => ret = apiResponse.data)
-        .catch((err) => {
-            const backupData_suggestion = [{"img":"https://robohash.org/animirationequia.bmp?size=50x50\u0026set=set1","UserName":"express.js friend_suggestion","bio":"p v g t d W U J W w ","action":"follow"},{"img":"https://robohash.org/sedquosequi.bmp?size=50x50\u0026set=set1","UserName":"abalser1","bio":"k e x N L B C M S u ","action":"follow"},{"img":"https://robohash.org/ullamvoluptasiure.png?size=50x50\u0026set=set1","UserName":"agretton2","bio":"B C I S O L G x U J ","action":"follow"},{"img":"https://robohash.org/quiperferendisdistinctio.jpg?size=50x50\u0026set=set1","UserName":"cchaffin3","bio":"j D N E t y F X N I ","action":"follow"},{"img":"https://robohash.org/doloremetquaerat.png?size=50x50\u0026set=set1","UserName":"sbrosenius4","bio":"P D n U y n j E b E ","action":"follow"},{"img":"https://robohash.org/doloribusfugitest.png?size=50x50\u0026set=set1","UserName":"koskehan5","bio":"s b z h i R M C b W ","action":"follow"},{"img":"https://robohash.org/totamvoluptasoccaecati.png?size=50x50\u0026set=set1","UserName":"afrackiewicz6","bio":"u C V V n q f h C t ","action":"follow"},{"img":"https://robohash.org/undeevenietquidem.jpg?size=50x50\u0026set=set1","UserName":"wghidetti7","bio":"r v x W x V Y k j E ","action":"follow"},{"img":"https://robohash.org/porroautut.png?size=50x50\u0026set=set1","UserName":"lswaby8","bio":"D h m L d E W G j r ","action":"follow"},{"img":"https://robohash.org/dignissimosillumplaceat.jpg?size=50x50\u0026set=set1","UserName":"lclemerson9","bio":"D S z Y s l g z g r ","action":"follow"}]
-            const backupData_searched = [{"img":"https://robohash.org/animirationequia.bmp?size=50x50\u0026set=set1","UserName": `${req.query.search_name}`,"bio":"p v g t d W U J W w ","action":"follow"}]
-            ret = (req.query.search_name == "" || req.query.search_name == undefined) ? backupData_suggestion : backupData_searched
-        })
+    let unfollowed_list=[]//list of user who is not followed by me
+    let following_list
+    const my_username = req.user.username
+    await UserInfo.find((err, UserInfos)=>{
+        try {
+            user_info=UserInfos
+            unfollowed_list=user_info.filter((item)=>{
+                if (!item.follower.includes(my_username)){
+                    return true
+                }
+            })
+            unfollowed_list=unfollowed_list.filter((item)=>{
+                if (item.user_name!==my_username){
+                    return true
+                }
+            })
+
+            following_list=user_info.filter((item)=>{
+                if (item.follower.includes(my_username)){
+                    return true
+                }
+            })
+        } catch(e){
+            console.log(e)
+        }
+    })
+
+    //console.log(unfollowed_list)
+            const suggestion = unfollowed_list
+            const searched = [{"user_photo":"https://robohash.org/animirationequia.bmp?size=50x50\u0026set=set1","user_name": `${req.query.search_name}`,"bio":"p v g t d W U J W w "}]
+            //ret = (req.query.search_name == "" || req.query.search_name == undefined) ? suggestion : searched
+            ret.unfollowed_list=unfollowed_list
+            ret.following_list=following_list
 
     res.json(ret)
+})
+
+app.get("/get_add_friend", async (req, res) => {
+    const clicked_follow_username=req.query.clicked_follow_username
+    console.log("clicked_follow_username",clicked_follow_username)
+    //when user click a people to follow in front-end. the
+    const my_username = req.user.username
+    await UserInfo.findOne({user_name: my_username},async (err, UserInfos)=>{
+        try {
+            user_info=UserInfos
+            following_list=user_info.following
+            if(!following_list.includes(clicked_follow_username)){
+                following_list.push(clicked_follow_username)
+                user_info.following_number++
+            }
+            await UserInfos.save(function(saveErr, saveUserInfos) {
+                if(err){
+                    console.log('error saving following')
+                }
+            });   
+        } catch(e){
+            console.log(e)
+        }
+    })
+
+    await UserInfo.findOne({user_name: clicked_follow_username},async (err, UserInfos)=>{
+        try {
+            user_info=UserInfos
+            follower_list=user_info.follower
+            if(!follower_list.includes(my_username)){
+                follower_list.push(my_username)
+                user_info.follower_number++
+            }
+            await UserInfos.save(function(saveErr, saveUserInfos) {
+                if(err){
+                    console.log('error saving adding a following')
+                }
+            });   
+        } catch(e){
+            console.log(e)
+        }
+    })
+})
+
+app.get("/get_remove_friend", async (req, res) => {
+    const clicked_unfollow_username=req.query.clicked_unfollow_username
+    console.log("clicked_unfollow_username",clicked_unfollow_username)
+
+    const my_username = req.user.username
+    console.log(my_username)
+    await UserInfo.findOne({user_name: my_username},async (err, UserInfos)=>{
+        try {
+            console.log("here")
+            user_info=UserInfos
+            following_list=user_info.following.slice()
+            console.log("following_list",following_list)
+            if(following_list.includes(clicked_unfollow_username)){
+                user_info.following=following_list.filter(item=>{
+                    if(item!==clicked_unfollow_username){
+                        console.log("start",item)
+                        return true
+                    }
+                    user_info.following=following_list.slice()
+                    console.log(following_list)
+                    console.log(user_info.following)
+                })
+                user_info.following_number--
+            }
+            await UserInfos.save(function(saveErr, saveUserInfos) {
+                if(err){
+                    console.log('error saving deleteing a following')
+                }
+            });   
+        } catch(e){
+            console.log(e)
+        }
+    })
+    await UserInfo.findOne({user_name: clicked_unfollow_username},async (err, UserInfos)=>{
+        try {
+            user_info=UserInfos
+            follower_list=user_info.follower.slice()
+            console.log(follower_list)
+            if(follower_list.includes(my_username)){
+                user_info.follower=follower_list.filter(item=>{
+                    if(item!==my_username){
+                        return true
+                    }
+                })
+                user_info.follower_number--
+            }
+            await UserInfos.save(function(saveErr, saveUserInfos) {
+                if(err){
+                    console.log('error saving deleting a following')
+                }
+            });   
+        } catch(e){
+            console.log(e)
+        }
+    })
 })
 
 app.get("/api_being_liked", async (req, res) => {
