@@ -641,11 +641,12 @@ app.get("/api_commented_history", async (req, res)  => {
 })
 
 app.get("/api_friend_profile", async (req, res) => {
-
+    const my_username = req.user.username
+    //friend data
     let post_data=''
     let friend_info=''
     const UserName = req.query.UserName
-  
+    let friend = false
     await UserInfo.findOne({user_name: UserName},(err, UserInfos)=>{
         try {
             friend_info=UserInfos
@@ -656,6 +657,16 @@ app.get("/api_friend_profile", async (req, res) => {
             console.log(e)
         }
     })
+    await UserInfo.findOne({user_name: my_username},(err, UserInfos)=>{
+        try {
+            if (UserInfos.following.includes(UserName)){
+                friend=true
+            }
+        } catch(e){
+            console.log(e)
+        }
+    })
+
 
     //FILTER POST DATA to send back to client, based on platform user selected in frontend
     //console.log("req.query.platform_name_array:", req.query.platform_name_array)
@@ -673,6 +684,7 @@ app.get("/api_friend_profile", async (req, res) => {
         "friend_info" : friend_info,
         "post_data" : filtered_post_data, //return the filtered data based on platform selected
         "linked_social_media": linked_social_media,//return linked_platform name
+        "friend":friend,
     }
     //console.log("in get_my_profile:", user_info)
     //console.log("linked_social_media:",linked_social_media)
