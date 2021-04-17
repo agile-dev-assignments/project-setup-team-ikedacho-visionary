@@ -18,7 +18,8 @@ const Chatroom = require("./chatroom/chatroom")
 const db = require("./db");
 const request=require('request')
 const oauthSignature = require('oauth-signature')
-var authUser = require('./authIns')
+const authUser = require('./authIns')
+
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
 
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -68,7 +69,7 @@ app.post("/api_register", (req, res) => {
             user_photo: `https://robohash.org/${req.body.username}.png?size=200x200`,
             background_picture: 'https://resilientblog.co/wp-content/uploads/2019/07/sky-quotes.jpg',
             post_number: 0,
-            bio: 'bio:',
+            bio: 'This person is too lazy to change this default',
             follower_number: 0,
             follower: [], 
             following_number: 0,
@@ -101,8 +102,7 @@ app.post("/login", (req, res, next) => {
     })(req, res, next);
 });
 
-
-
+// return insensitive information about other users
 app.get("/api_get_user_info_by_name", (req, res) => {
     const username = req.body.username
     UserInfo.findOne({user_name: username}, (err, result) => {
@@ -112,7 +112,8 @@ app.get("/api_get_user_info_by_name", (req, res) => {
             console.log(result)
             const ret = {
                 username: result.user_name, 
-                userimg: result.user_photo
+                userimg: result.user_photo, 
+                bio: result.bio
             }
             res.json(ret)
         }
@@ -357,6 +358,8 @@ app.get('/get_facebook', async (req, res) => {
 })
 
 app.get("/get_twitter_request_token", async (req, res) => {
+    let ret = {}
+
     // get timestamp in seconds
     const date = Math.floor(Date.now() / 1000)
     const username = req.user.username 
@@ -385,27 +388,26 @@ app.get("/get_twitter_request_token", async (req, res) => {
         'method': 'POST',
         'url': request_url,
         'headers': {
-            
             'Authorization': AuthHeader
         }
-    };
+    }
 
     request(options, (error, result) => {
         if (error) {
             console.error(err)
         } else {
-            console.log(result.body)
+            // manually parse the returned string
+            let arr = result.body.split('&')
+            for (let i = 0; i < 3; i ++) {
+                let temp = arr[i].split('=')
+                ret[temp[0]] = temp[1]
+            }
+            console.log(ret)
+            res.json(ret)
         }
     })
 })
-app.get('/auth/instagram', authUser);
 
-app.get('/auth/instagram/callback', authUser);
-
-
-
-
-           
 app.get("/get_my_profile", async (req, res) => {
     const my_username = req.user.username
     await UserInfo.findOne({user_name: my_username},(err, UserInfos)=>{
@@ -641,12 +643,13 @@ app.get("/api_commented_history", async (req, res)  => {
 })
 
 app.get("/api_friend_profile", async (req, res) => {
+
     const my_username = req.user.username
-    //friend data
     let post_data=''
     let friend_info=''
     const UserName = req.query.UserName
     let friend = false
+  
     await UserInfo.findOne({user_name: UserName},(err, UserInfos)=>{
         try {
             friend_info=UserInfos
@@ -657,6 +660,7 @@ app.get("/api_friend_profile", async (req, res) => {
             console.log(e)
         }
     })
+
     await UserInfo.findOne({user_name: my_username},(err, UserInfos)=>{
         try {
             if (UserInfos.following.includes(UserName)){
@@ -666,7 +670,6 @@ app.get("/api_friend_profile", async (req, res) => {
             console.log(e)
         }
     })
-
 
     //FILTER POST DATA to send back to client, based on platform user selected in frontend
     //console.log("req.query.platform_name_array:", req.query.platform_name_array)
@@ -683,8 +686,8 @@ app.get("/api_friend_profile", async (req, res) => {
     const response_data={
         "friend_info" : friend_info,
         "post_data" : filtered_post_data, //return the filtered data based on platform selected
-        "linked_social_media": linked_social_media,//return linked_platform name
-        "friend":friend,
+        "linked_social_media": linked_social_media, //return linked_platform name
+        friend: friend
     }
     //console.log("in get_my_profile:", user_info)
     //console.log("linked_social_media:",linked_social_media)
@@ -692,35 +695,72 @@ app.get("/api_friend_profile", async (req, res) => {
 })
 
 app.get("/api_followers", async (req, res) => {
-    let ret = {}
+    let follower_list = [], following_list = [], ret = []
     const UserName = req.query.UserName
 
     // find user object in database and extract its follower array
-    UserInfo.findOne({user_name: UserName}, (err, result) => {
+    await UserInfo.findOne({user_name: UserName}, (err, result) => {
         if (err) {
             console.error(err)
         } else {
-            ret = result.follower
-            console.log("follower: ", ret)
-            res.json(ret)
+            follower_list = result.follower 
+            following_list = result.following           
         }
     })
+
+    // retrieve extended user info from database
+    for (let i = 0; i < follower_list.length; i ++) {
+        await UserInfo.findOne({user_name: follower_list[i]}, (err, result) => {
+            if (err) {
+                console.error(err)
+            } else {
+                ret.push({
+                    user_name: result.user_name, 
+                    bio: result.bio,
+                    user_photo: result.user_photo, 
+                    // dynamically decide the action based on the following status
+                    action: following_list.includes(result.user_name) ? "Unfollow" : "Follow"
+                })
+            }
+        })
+    }
+
+    console.log("Follower info\n: ", ret)
+    res.json(ret)
 })
 
 app.get("/api_followings", async (req, res) => {
-    let ret = {}
+    let follower_list = [], following_list = [], ret = []
     const UserName = req.query.UserName
 
-    // find user object in database and extract its following array
-    UserInfo.findOne({user_name: UserName}, (err, result) => {
+    // find user object in database and extract its follower array
+    await UserInfo.findOne({user_name: UserName}, (err, result) => {
         if (err) {
             console.error(err)
         } else {
-            ret = result.following
-            console.log("following: ", ret)
-            res.json(ret)
+            follower_list = result.follower 
+            following_list = result.following           
         }
     })
+
+    // retrieve extended user info from database
+    for (let i = 0; i < following_list.length; i ++) {
+        await UserInfo.findOne({user_name: following_list[i]}, (err, result) => {
+            if (err) {
+                console.error(err)
+            } else {
+                ret.push({
+                    user_name: result.user_name, 
+                    bio: result.bio,
+                    user_photo: result.user_photo, 
+                    action: "Unfollow"
+                })
+            }
+        })
+    }
+
+    console.log("Following info\n: ", ret)
+    res.json(ret)
 })
 
 app.get("/api_friend_suggestion", async (req, res) => {
@@ -728,6 +768,9 @@ app.get("/api_friend_suggestion", async (req, res) => {
     let unfollowed_list=[]//list of user who is not followed by me
     let following_list
     const my_username = req.user.username
+    const search_name = req.query.search_name
+    console.log("search_name: ", search_name, " <---")
+
     await UserInfo.find((err, UserInfos)=>{
         try {
             user_info=UserInfos
@@ -742,6 +785,14 @@ app.get("/api_friend_suggestion", async (req, res) => {
                 }
             })
 
+            // if searching by name, one more filtering
+            if (search_name !== '' && search_name !== undefined) {
+                unfollowed_list=unfollowed_list.filter((item)=>{
+                        return item.user_name === search_name
+                    }
+                )
+            }
+
             following_list=user_info.filter((item)=>{
                 if (item.follower.includes(my_username)){
                     return true
@@ -753,11 +804,8 @@ app.get("/api_friend_suggestion", async (req, res) => {
     })
 
     //console.log(unfollowed_list)
-            const suggestion = unfollowed_list
-            const searched = [{"user_photo":"https://robohash.org/animirationequia.bmp?size=50x50\u0026set=set1","user_name": `${req.query.search_name}`,"bio":"p v g t d W U J W w "}]
-            //ret = (req.query.search_name == "" || req.query.search_name == undefined) ? suggestion : searched
-            ret.unfollowed_list=unfollowed_list
-            ret.following_list=following_list
+    ret.unfollowed_list=(unfollowed_list !== undefined) ? unfollowed_list : []
+    ret.following_list=(following_list !== undefined) ? following_list : []
 
     res.json(ret)
 })

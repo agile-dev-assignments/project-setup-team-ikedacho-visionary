@@ -16,19 +16,22 @@ const Followings = (props) => {
 
     useEffect(() => {
         axios
-            .get('/api_followings', {
-                params: {
-                    UserName: state.UserName
-                }
-            })
-            .then((response) => {
-                // extract the data from the server response
-                setData(response.data)
-            })
-            .catch((err) => {
-                console.error(err)
-            })
-        }, []) // only run it once!
+        .get('/api_followings', {
+            params: {
+                UserName: state.UserName
+            }
+        })
+        .then((response) => {
+            // extract the data from the server response
+            setData(response.data)
+        })
+        .catch((err) => {
+            console.error(err)
+        })
+    }, []) // only run it once!
+
+    console.log(data)
+
 
     return (
         <div className = "Followings">
@@ -41,8 +44,8 @@ const Followings = (props) => {
                     {data.map((item) => (
                         <NameTag 
                             key={item.id}
-                            img = {item.img}
-                            UserName = {item.UserName}
+                            img = {item.user_photo}
+                            UserName = {item.user_name}
                             bio = {item.bio}
                             action = {item.action} />
                     ))}
