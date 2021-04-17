@@ -71,8 +71,8 @@ const Me = (props) => {
                 console.log('User already logged in Facebook and autenticated')
                 SetClicked_unconnected_social_media('Facebook')
             } else {
-                console.log('user not logged in FB')
-                SetClicked_linked_social_media('Facebook')
+                //console.log('user not logged in FB')
+                //SetClicked_linked_social_media('Facebook')
             }
         })
     }
