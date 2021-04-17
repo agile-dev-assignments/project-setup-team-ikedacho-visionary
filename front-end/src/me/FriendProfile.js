@@ -21,6 +21,25 @@ const FriendProfile = (props) => {
     //platform the is selected by user who browser the page
     let [platform_name_array, setPlatform_name_array] = useState([])
 
+    const setButton = async (e) => {
+        if (e.innerHTML === 'Follow') {
+            console.log('here')
+            axios('/get_add_friend', {
+                params: {
+                    clicked_follow_username: friend_info.user_name,
+                },
+            })
+            window.location.href = '/friend_profile'
+        } else {
+            axios('/get_remove_friend', {
+                params: {
+                    clicked_unfollow_username: friend_info.user_name,
+                },
+            })
+            window.location.href = '/friend_profile'
+        }
+    }
+
     const handleClick = (e) => {
         //e is the id of the element clicked
 
@@ -166,7 +185,12 @@ const FriendProfile = (props) => {
                         <span id='bio'>{friend_info.bio}</span>
                     </p>
 
-                    <button id='button2' onClick={() => alert('following is clicked (to unfollow)!')}>
+                    <button
+                        id='button2'
+                        onClick={(e) => {
+                            setButton(e.target)
+                        }}
+                    >
                         {friend === true ? 'Following' : 'Follow'}
                     </button>
 
