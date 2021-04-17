@@ -17,7 +17,7 @@ const Friend_Suggestion = (props) => {
         axios
             .get('/api_friend_suggestion', {
                 params: {
-                    search_name: search_name,
+                    search_name: search_name
                 },
             })
             .then((response) => {
@@ -31,6 +31,8 @@ const Friend_Suggestion = (props) => {
         setData(backupData);*/
             })
     }, [search_name]) // only run it once!
+
+    console.log(unfollowed_list)
 
     return (
         <div className='Friend_Suggestion'>

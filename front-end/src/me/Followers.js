@@ -31,6 +31,8 @@ const Followers = (props) => {
             })
         }, []) // only run it once!
 
+    console.log(data)
+
     return (
         <div className = "Followers">
             <h2>Followers Page here</h2>
@@ -42,8 +44,8 @@ const Followers = (props) => {
                     {data.map((item) => (
                         <NameTag 
                             key={item.id}
-                            img = {item.img}
-                            UserName = {item.UserName}
+                            img = {item.user_photo}
+                            UserName = {item.user_name}
                             bio = {item.bio}
                             action = {item.action} />
                     ))}
