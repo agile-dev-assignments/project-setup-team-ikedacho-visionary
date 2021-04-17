@@ -93,38 +93,37 @@ const NewChat = (props) => {
             setData(response.data)
         })
         .catch((err) => {
-            /*
-            const backupData = [{"username":"ccamus0","userimg":"https://robohash.org/quiaperferendisquis.jpg?size=50x50\u0026set=set1"},{"username":"krantoul1","userimg":"https://robohash.org/etquisit.jpg?size=50x50\u0026set=set1"},{"username":"omccourt2","userimg":"https://robohash.org/velitinvel.png?size=50x50\u0026set=set1"},{"username":"tbagnold3","userimg":"https://robohash.org/isteineligendi.png?size=50x50\u0026set=set1"},{"username":"tlievesley4","userimg":"https://robohash.org/quasiautenim.bmp?size=50x50\u0026set=set1"},{"username":"rstockton5","userimg":"https://robohash.org/teneturprovidentpraesentium.jpg?size=50x50\u0026set=set1"},{"username":"apetren6","userimg":"https://robohash.org/impeditporrout.png?size=50x50\u0026set=set1"},{"username":"dmcmains7","userimg":"https://robohash.org/dictapossimusquis.bmp?size=50x50\u0026set=set1"},{"username":"neuler8","userimg":"https://robohash.org/suscipitquiillum.bmp?size=50x50\u0026set=set1"},{"username":"eclemenza9","userimg":"https://robohash.org/abvoluptatemsit.jpg?size=50x50\u0026set=set1"}
-            ]
-            setData(backupData)*/
+            console.error(err)
         })
     }, []) // only run it once!
 
-  return (
-    <div className = "NewChat">
-        <div className = "NewChat_back">
-            <Link to = '/community' id="back">Back</Link>
+    console.log(data)
+
+    return (
+        <div className = "NewChat">
+            <div className = "NewChat_back">
+                <Link to = '/community' id="back">Back</Link>
+            </div>
+
+            <div className = "NewChat_create">
+                <Link onClick = {_handleCreate.bind()}>Create</Link>
+            </div>
+
+            <h3 className = "NewChat_title">Create New Chat</h3>
+
+            <section className = "NewChat">
+                {data.map((item) => (
+                    <>
+                        <NewChatSelection 
+                            key={item.id}
+                            username = {item.user_name}
+                            userimg = {item.user_photo} />
+                    </>
+                ))}
+            </section>
+
         </div>
-
-        <div className = "NewChat_create">
-            <Link onClick = {_handleCreate.bind()}>Create</Link>
-        </div>
-
-        <h3 className = "NewChat_title">Create New Chat</h3>
-
-        <section className = "NewChat">
-            {data.map((item) => (
-                <>
-                    <NewChatSelection 
-                        key={item.id}
-                        username = {item.username}
-                        userimg = {item.userimg} />
-                </>
-            ))}
-        </section>
-
-    </div>
-  )
+    )
 }
 
 export default NewChat
