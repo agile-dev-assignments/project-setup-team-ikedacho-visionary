@@ -18,6 +18,8 @@ const Chatroom = require("./chatroom/chatroom")
 const db = require("./db");
 const request=require('request')
 const oauthSignature = require('oauth-signature')
+const authUser = require('./authIns')
+
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
 
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -67,7 +69,7 @@ app.post("/api_register", (req, res) => {
             user_photo: `https://robohash.org/${req.body.username}.png?size=200x200`,
             background_picture: 'https://resilientblog.co/wp-content/uploads/2019/07/sky-quotes.jpg',
             post_number: 0,
-            bio: 'This person is too lazy to change this default bio...',
+            bio: 'This person is too lazy to change this default',
             follower_number: 0,
             follower: [], 
             following_number: 0,
