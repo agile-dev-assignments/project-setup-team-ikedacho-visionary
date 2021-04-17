@@ -13,14 +13,18 @@ const NameTag = (props) => {
                     clicked_follow_username: e.id,
                 },
             })
-            window.location.href = '/friend_suggestion'
+            setTimeout(()=>{
+                window.location.reload(false);
+            }, 500);
         } else {
             axios('/get_remove_friend', {
                 params: {
                     clicked_unfollow_username: e.id,
                 },
             })
-            window.location.href = '/friend_suggestion'
+            setTimeout(()=>{
+                window.location.reload(false);
+            }, 500);
         }
     }
 
