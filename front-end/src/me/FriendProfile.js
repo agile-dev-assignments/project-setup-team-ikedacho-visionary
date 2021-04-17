@@ -17,6 +17,7 @@ const FriendProfile = (props) => {
     const [friend_info, setFriend_info] = useState([])
     const [post_data, setData] = useState([])
     const [linked_social_media, setLinked_social_media] = useState([])
+    const [friend, setFriend] = useState([])
     //platform the is selected by user who browser the page
     let [platform_name_array, setPlatform_name_array] = useState([])
 
@@ -89,6 +90,7 @@ const FriendProfile = (props) => {
                 setData(response.data.post_data)
                 setFriend_info(response.data.friend_info)
                 setLinked_social_media(response.data.linked_social_media)
+                setFriend(response.data.friend)
                 //handle click
 
                 let element1 = document.getElementById('O-Zone')
@@ -106,7 +108,7 @@ const FriendProfile = (props) => {
             .catch((err) => {
                 console.log('Error that should never happen!')
             })
-    }, [platform_name_array]) // only run it once!
+    }, [platform_name_array])
     return (
         <div className='FriendProfile'>
             <section id='header'>
@@ -165,7 +167,7 @@ const FriendProfile = (props) => {
                     </p>
 
                     <button id='button2' onClick={() => alert('following is clicked (to unfollow)!')}>
-                        Following
+                        {friend === true ? 'Following' : 'Follow'}
                     </button>
 
                     <button id='button2' onClick={_handleCreate.bind()}>
@@ -175,7 +177,7 @@ const FriendProfile = (props) => {
             </section>
 
             <section>
-                <h1>Linked Social Medias</h1>
+                <h1>Linked Social Media</h1>
 
                 <div id='main_container3'>
                     <div className='icon' id='select'>
