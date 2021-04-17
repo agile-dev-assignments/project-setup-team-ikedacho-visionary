@@ -15,6 +15,7 @@ const NameTag = (props) => {
                     clicked_follow_username: e.id,
                 },
             })
+            window.location.href = '/friend_suggestion'
         } else {
             alert('Unfollow_button is clicked! ')
 
