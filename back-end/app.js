@@ -354,6 +354,8 @@ app.get('/get_facebook', async (req, res) => {
 })
 
 app.get("/get_twitter_request_token", async (req, res) => {
+    let ret = {}
+
     // get timestamp in seconds
     const date = Math.floor(Date.now() / 1000)
     const username = req.user.username 
@@ -382,16 +384,22 @@ app.get("/get_twitter_request_token", async (req, res) => {
         'method': 'POST',
         'url': request_url,
         'headers': {
-            
             'Authorization': AuthHeader
         }
-    };
+    }
 
     request(options, (error, result) => {
         if (error) {
             console.error(err)
         } else {
-            console.log(result.body)
+            // manually parse the returned string
+            let arr = result.body.split('&')
+            for (let i = 0; i < 3; i ++) {
+                let temp = arr[i].split('=')
+                ret[temp[0]] = temp[1]
+            }
+            console.log(ret)
+            res.json(ret)
         }
     })
 })
