@@ -634,50 +634,35 @@ app.get("/api_friend_profile", async (req, res) => {
 
     let post_data=''
     let friend_info=''
-    // extract the UserName and userimg passed in along with the request
     const UserName = req.query.UserName
-    const userimg = req.query.userimg
-
-    /*
-    The following two API requests are intentionally set to be empty because we need our Database here
-    */
-    // JIT retrieval of friend's info
-    await axios
-    .get(``)//'correct: ${process.env.API_FRIEND_PROFILE}?key=${process.env.API_FRIEND_PROFILE_KEY}
-        .then(apiResponse => ret.friend_info = apiResponse.data)
-        .catch((err) => {
-            friend_info = {"id": 1, "user_name": `${UserName}`, "user_photo": `${userimg}`, "post_number": "300", "bio":"studying", "follower_number": "10", "following_number": "10","linked_social_media": ["Facebook","Twitter","Instagram","Youtube","Linkedin"]}
-           
-        })
-
-    // JIT retrieval of friend's posts
-    await axios
-        .get(``)
-        .then(apiResponse => ret.data = apiResponse.data)
-        .catch((err) => {
-            post_data = [{"source":"Twitter","userimg":"https://robohash.org/eteosoccaecati.png?size=50x50\u0026set=set1","UserName":"seisenberg0","content":"In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\n\nNulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.","Senttime":"11/28/2020","contentimg":"http://dummyimage.com/145x100.png/cc0000/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/quasassumendacupiditate.png?size=50x50\u0026set=set1","UserName":"scullen1","content":"Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.","Senttime":"1/30/2021","contentimg":"http://dummyimage.com/171x100.png/ff4444/ffffff"},{"source":"O-Zone","userimg":"https://robohash.org/etvoluptatemfuga.png?size=50x50\u0026set=set1","UserName":"dpassy2","content":"Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.","Senttime":"2/25/2021","contentimg":"http://dummyimage.com/101x100.png/dddddd/000000"},{"source":"Facebook","userimg":"https://robohash.org/quidemminusut.png?size=50x50\u0026set=set1","UserName":"akennerley3","content":"In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.","Senttime":"12/26/2020","contentimg":"http://dummyimage.com/144x100.png/cc0000/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/essequissunt.png?size=50x50\u0026set=set1","UserName":"mlarrat4","content":"In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.","Senttime":"4/8/2020","contentimg":"http://dummyimage.com/195x100.png/cc0000/ffffff"},{"source":"Twitter","userimg":"https://robohash.org/hicaliasdebitis.png?size=50x50\u0026set=set1","UserName":"wrice5","content":"Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.","Senttime":"6/16/2020","contentimg":"http://dummyimage.com/177x100.png/5fa2dd/ffffff"},{"source":"O-Zone","userimg":"https://robohash.org/earuminventoretotam.png?size=50x50\u0026set=set1","UserName":"wcobbin6","content":"Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.","Senttime":"10/8/2020","contentimg":"http://dummyimage.com/244x100.png/ff4444/ffffff"},{"source":"Instagram","userimg":"https://robohash.org/etuteos.png?size=50x50\u0026set=set1","UserName":"agadault7","content":"Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.","Senttime":"5/27/2020","contentimg":"http://dummyimage.com/169x100.png/dddddd/000000"},{"source":"Facebook","userimg":"https://robohash.org/occaecatiomnisminima.png?size=50x50\u0026set=set1","UserName":"bmanzell8","content":"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.\n\nNam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.","Senttime":"5/22/2020","contentimg":"http://dummyimage.com/163x100.png/cc0000/ffffff"},{"source":"O-Zone","userimg":"https://robohash.org/omnispossimusrerum.png?size=50x50\u0026set=set1","UserName":"mfullylove9","content":"Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.","Senttime":"7/31/2020","contentimg":"http://dummyimage.com/152x100.png/cc0000/ffffff"}]
-            friend_info.post_number=post_data.length
-        })
-
+  
+    await UserInfo.findOne({user_name: UserName},(err, UserInfos)=>{
+        try {
+            friend_info=UserInfos
+            linked_social_media=UserInfos.linked_social_media
+            post_data=UserInfos.post_data   
+            //console.log("post_data",post_data)
+        } catch(e){
+            console.log(e)
+        }
+    })
 
     //FILTER POST DATA to send back to client, based on platform user selected in frontend
     //console.log("req.query.platform_name_array:", req.query.platform_name_array)
     let filtered_post_data=post_data.slice()
     if (req.query.platform_name_array!==undefined) {
-        //console.log("111111")
         filtered_post_data=post_data.filter(element=>{
            if (req.query.platform_name_array.includes(element.source)){
                return true
-           }//end of if
-        })//end of filtered_post_data
-
-    }//end of if
+           }
+        })
+    }
 
     //send back response_data which consists of user_info and filtered_post_data as post_data
     const response_data={
         "friend_info" : friend_info,
         "post_data" : filtered_post_data, //return the filtered data based on platform selected
-        "linked_social_media": ["O-Zone","Facebook","Twitter","Instagram"],//return linked_platform name
+        "linked_social_media": linked_social_media,//return linked_platform name
     }
     //console.log("in get_my_profile:", user_info)
     //console.log("linked_social_media:",linked_social_media)
