@@ -67,7 +67,7 @@ app.post("/api_register", (req, res) => {
             user_photo: `https://robohash.org/${req.body.username}.png?size=200x200`,
             background_picture: 'https://resilientblog.co/wp-content/uploads/2019/07/sky-quotes.jpg',
             post_number: 0,
-            bio: 'bio:',
+            bio: 'This person is too lazy to change this default bio...',
             follower_number: 0,
             follower: [], 
             following_number: 0,
@@ -100,6 +100,7 @@ app.post("/login", (req, res, next) => {
     })(req, res, next);
 });
 
+// return insensitive information about other users
 app.get("/api_get_user_info_by_name", (req, res) => {
     const username = req.body.username
     UserInfo.findOne({user_name: username}, (err, result) => {
@@ -109,7 +110,8 @@ app.get("/api_get_user_info_by_name", (req, res) => {
             console.log(result)
             const ret = {
                 username: result.user_name, 
-                userimg: result.user_photo
+                userimg: result.user_photo, 
+                bio: result.bio
             }
             res.json(ret)
         }
@@ -678,35 +680,72 @@ app.get("/api_friend_profile", async (req, res) => {
 })
 
 app.get("/api_followers", async (req, res) => {
-    let ret = {}
+    let follower_list = [], following_list = [], ret = []
     const UserName = req.query.UserName
 
     // find user object in database and extract its follower array
-    UserInfo.findOne({user_name: UserName}, (err, result) => {
+    await UserInfo.findOne({user_name: UserName}, (err, result) => {
         if (err) {
             console.error(err)
         } else {
-            ret = result.follower
-            console.log("follower: ", ret)
-            res.json(ret)
+            follower_list = result.follower 
+            following_list = result.following           
         }
     })
+
+    // retrieve extended user info from database
+    for (let i = 0; i < follower_list.length; i ++) {
+        await UserInfo.findOne({user_name: follower_list[i]}, (err, result) => {
+            if (err) {
+                console.error(err)
+            } else {
+                ret.push({
+                    user_name: result.user_name, 
+                    bio: result.bio,
+                    user_photo: result.user_photo, 
+                    // dynamically decide the action based on the following status
+                    action: following_list.includes(result.user_name) ? "Unfollow" : "Follow"
+                })
+            }
+        })
+    }
+
+    console.log("Follower info\n: ", ret)
+    res.json(ret)
 })
 
 app.get("/api_followings", async (req, res) => {
-    let ret = {}
+    let follower_list = [], following_list = [], ret = []
     const UserName = req.query.UserName
 
-    // find user object in database and extract its following array
-    UserInfo.findOne({user_name: UserName}, (err, result) => {
+    // find user object in database and extract its follower array
+    await UserInfo.findOne({user_name: UserName}, (err, result) => {
         if (err) {
             console.error(err)
         } else {
-            ret = result.following
-            console.log("following: ", ret)
-            res.json(ret)
+            follower_list = result.follower 
+            following_list = result.following           
         }
     })
+
+    // retrieve extended user info from database
+    for (let i = 0; i < following_list.length; i ++) {
+        await UserInfo.findOne({user_name: following_list[i]}, (err, result) => {
+            if (err) {
+                console.error(err)
+            } else {
+                ret.push({
+                    user_name: result.user_name, 
+                    bio: result.bio,
+                    user_photo: result.user_photo, 
+                    action: "Unfollow"
+                })
+            }
+        })
+    }
+
+    console.log("Following info\n: ", ret)
+    res.json(ret)
 })
 
 app.get("/api_friend_suggestion", async (req, res) => {
@@ -714,6 +753,9 @@ app.get("/api_friend_suggestion", async (req, res) => {
     let unfollowed_list=[]//list of user who is not followed by me
     let following_list
     const my_username = req.user.username
+    const search_name = req.query.search_name
+    console.log("search_name: ", search_name, " <---")
+
     await UserInfo.find((err, UserInfos)=>{
         try {
             user_info=UserInfos
@@ -728,6 +770,14 @@ app.get("/api_friend_suggestion", async (req, res) => {
                 }
             })
 
+            // if searching by name, one more filtering
+            if (search_name !== '' && search_name !== undefined) {
+                unfollowed_list=unfollowed_list.filter((item)=>{
+                        return item.user_name === search_name
+                    }
+                )
+            }
+
             following_list=user_info.filter((item)=>{
                 if (item.follower.includes(my_username)){
                     return true
@@ -739,11 +789,8 @@ app.get("/api_friend_suggestion", async (req, res) => {
     })
 
     //console.log(unfollowed_list)
-            const suggestion = unfollowed_list
-            const searched = [{"user_photo":"https://robohash.org/animirationequia.bmp?size=50x50\u0026set=set1","user_name": `${req.query.search_name}`,"bio":"p v g t d W U J W w "}]
-            //ret = (req.query.search_name == "" || req.query.search_name == undefined) ? suggestion : searched
-            ret.unfollowed_list=unfollowed_list
-            ret.following_list=following_list
+    ret.unfollowed_list=(unfollowed_list !== undefined) ? unfollowed_list : []
+    ret.following_list=(following_list !== undefined) ? following_list : []
 
     res.json(ret)
 })
