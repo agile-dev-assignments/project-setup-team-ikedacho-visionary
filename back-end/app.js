@@ -19,7 +19,7 @@ const db = require("./db");
 const request=require('request')
 const oauthSignature = require('oauth-signature')
 const authUser = require('./authIns')
-
+const fs = require('fs');
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
 
 app.use(morgan("dev")) // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -48,7 +48,7 @@ app.use(passport.initialize());
 app.use(passport.session());
  require("./loginAuth/passPortConfig.js")(passport);
 //----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
-
+let user_name_l=''
 let selected_social_media= ["O-Zone","Facebook", "Twitter","Instagram"]
 
 //put routes here:
@@ -171,6 +171,7 @@ app.get("/my_info", (req, res) => {
 
 app.use('/get_me',async (req,res,next)=>{
     const my_username = req.user.username
+    user_name_l =  req.user.username
     await UserInfo.findOne({user_name: my_username},(err, UserInfos)=>{
         try {
             user_info=UserInfos
@@ -461,7 +462,11 @@ app.get("/get_my_profile", async (req, res) => {
 const storage = multer.diskStorage({
     // set file saved destination. Multer can save uploaded files to a number of different destinations.
     destination: function (req, file, cb) {
-        cb(null, "../front-end/public/uploads")
+        let dir=`../front-end/public/uploads/${user_name_l}`
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir);
+        }
+        cb(null, `../front-end/public/uploads/${user_name_l}`)
     },
 
     // set filename rules
@@ -502,7 +507,7 @@ app.post("/post_background_picture", upload_background_picture.array("background
         const my_username = req.user.username
         await UserInfo.findOne({user_name: my_username}, async(err, UserInfos)=>{
             try {
-                UserInfos.background_picture=`/uploads/${data.background_picture[0].filename}`
+                UserInfos.background_picture=`/uploads/${user_name_l}/${data.background_picture[0].filename}`
                 await UserInfos.save(function(saveErr, saveUserInfos) {
                     if(err){
                         console.log('error saving post')
@@ -520,9 +525,6 @@ app.post("/post_background_picture", upload_background_picture.array("background
         res.redirect('/my_profile')
     }   
 })
-//Then instantiate a multer object "upload_post_picture" to be used in app.post("/post_Post_picture", upload.array("background_picture", 1), (req, res)...
-//and upload_post_picture multure object use the storage rule as defined in storage variable.
-const upload_post_picture = multer({ storage: storage })
 
 app.get("/follow", (req, res) => {
 
@@ -550,12 +552,13 @@ app.get("/get_edit", async (req, res) => {
         }
     })
 })
+//Then instantiate a multer object "upload_post_picture" to be used in app.post("/post_Post_picture", upload.array("background_picture", 1), (req, res)...
+//and upload_post_picture multure object use the storage rule as defined in storage variable.
+const upload_post_picture = multer({ storage: storage })
 
-
-
-/*
 const post_picture = multer({ storage: storage })
 app.post("/post_picture", upload_post_picture.array("post_picture", 1), (req, res) => {
+    const my_username = req.user.username
     // check whether anything was uploaded. If success, send a response back. I will re-render my_profile page with background picture added in this case.
     if (req.files) {
        // success! send data back to the client, e.g. some JSON data
@@ -573,12 +576,9 @@ app.post("/post_picture", upload_post_picture.array("post_picture", 1), (req, re
        // add the background image src to user_info data
 
        new_post.contentimg=`/uploads/${data.post_picture[0].filename}`
-       
-      
    }//end of if
-   ...... to be continue
+
 })
-*/
 
 app.post('/post_home', (req, res) => {
     //console.log('ssssssss')
@@ -1144,6 +1144,7 @@ Please notice that the following three Mockaroo APIs are intentionally disabled 
 So, use backup data instead
 */
 app.get("/api_whatsnew", async (req, res, next) => {
+    user_name_l =  req.user.username
     let post_data = []
     
     await axios
