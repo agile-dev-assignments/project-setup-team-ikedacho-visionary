@@ -480,7 +480,7 @@ const upload_background_picture = multer({ storage: storage })
 //Multer middleware will automatically save any uploaded files in the request into the specified directory, rename them as instructed,
 //and make a field named req.files containing the paths to the files on the server.
 //the following code, upload.array('my_files', 1), instructs multer to store no more than 1 files, coming from an HTML element named background_picture.
-app.post("/post_background_picture", upload_background_picture.array("background_picture", 1), (req, res) => {
+app.post("/post_background_picture", upload_background_picture.array("background_picture", 1), async (req, res) => {
 
     // check whether anything was uploaded. If success, send a response back. I will re-render my_profile page with background picture added in this case.
     if (req.files) {
@@ -499,12 +499,20 @@ app.post("/post_background_picture", upload_background_picture.array("background
 
         // then send a response to client with modification on data we receive from client. otherwise, it will occur 500 error.
         // add the background image src to user_info data
-
-        user_info.background_picture=`/uploads/${data.background_picture[0].filename}`
-        //console.log(`path:${data.background_picture[0].path}`) //'public/uploads/background_picture-1616975456180'
-        //console.log("user_info after req.files:",user_info)
+        const my_username = req.user.username
+        await UserInfo.findOne({user_name: my_username}, async(err, UserInfos)=>{
+            try {
+                UserInfos.background_picture=`/uploads/${data.background_picture[0].filename}`
+                await UserInfos.save(function(saveErr, saveUserInfos) {
+                    if(err){
+                        console.log('error saving post')
+                    }
+                });   
+            } catch(e){
+                console.log(e)
+            }
+        })
         res.redirect('/my_profile') //redirect to my_proile page
-
     }//end of if
 
     else{//if no file is uploaded, the submit button cannot send request.
@@ -1032,40 +1040,16 @@ app.post("/api_send_new_message", async (req, res) => {
 })
 
 app.get("/api_create_new_chat_list", async (req, res) => {
-    let ret = [], friend = [], follower, following
+    let ret = {}
 
-    // retrieve follower and following lists of current user
-    await UserInfo.findOne({user_name: req.user.username}, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            follower = result.follower
-            following = result.following
-        }
-    })
-
-    // lazy finding intersection
-    for (let i = 0; i < follower.length; i ++) {
-        if (following.includes(follower[i])) {
-            friend.push(follower[i])
-        }
-    }
-
-    // retrieve extended user info from database
-    for (let i = 0; i < friend.length; i ++) {
-        await UserInfo.findOne({user_name: friend[i]}, (err, result) => {
-            if (err) {
-                console.error(err)
-            } else {
-                ret.push({
-                    user_name: result.user_name, 
-                    user_photo: result.user_photo, 
-                })
-            }
+    await axios
+        .get(`${process.env.API_CREATE_NEW_CHAT_LIST}?key=${process.env.API_CREATE_NEW_CHAT_LIST_KEY}`)
+        .then(apiResponse => ret = apiResponse.data)
+        .catch((err) => {
+            const backupData = [{"username":"ccamus0","userimg":"https://robohash.org/quiaperferendisquis.jpg?size=50x50\u0026set=set1"},{"username":"krantoul1","userimg":"https://robohash.org/etquisit.jpg?size=50x50\u0026set=set1"},{"username":"omccourt2","userimg":"https://robohash.org/velitinvel.png?size=50x50\u0026set=set1"},{"username":"tbagnold3","userimg":"https://robohash.org/isteineligendi.png?size=50x50\u0026set=set1"},{"username":"tlievesley4","userimg":"https://robohash.org/quasiautenim.bmp?size=50x50\u0026set=set1"},{"username":"rstockton5","userimg":"https://robohash.org/teneturprovidentpraesentium.jpg?size=50x50\u0026set=set1"},{"username":"apetren6","userimg":"https://robohash.org/impeditporrout.png?size=50x50\u0026set=set1"},{"username":"dmcmains7","userimg":"https://robohash.org/dictapossimusquis.bmp?size=50x50\u0026set=set1"},{"username":"neuler8","userimg":"https://robohash.org/suscipitquiillum.bmp?size=50x50\u0026set=set1"},{"username":"eclemenza9","userimg":"https://robohash.org/abvoluptatemsit.jpg?size=50x50\u0026set=set1"}]
+            ret = backupData
         })
-    }
 
-    console.log(ret)
     res.json(ret)
 })
 
