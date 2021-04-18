@@ -78,17 +78,17 @@ const MyProfile = (props) => {
                 //handle click
 
                 let elements = document.getElementsByTagName('IMG')
-                console.log('elements of icon:', elements)
-                console.log('elements.length:', elements.length)
+                //console.log('elements of icon:', elements)
+                //console.log('elements.length:', elements.length)
                 for (let i = 0; i < elements.length; i++) {
-                    console.log(i, 'th iteration')
-                    console.log('elements:', elements[i])
+                    //console.log(i, 'th iteration')
+                    //console.log('elements:', elements[i])
 
                     let element = elements[i]
 
                     if (element.id === 'O-Zone') {
                         element.addEventListener('click', function () {
-                            console.log('enter O-zone block')
+                            //console.log('enter O-zone block')
                             console.log('selected O-Zone')
                             setPlatform_name_array('O-Zone')
                             setBorder('O-Zone')
@@ -97,7 +97,7 @@ const MyProfile = (props) => {
                         })
                     } else if (element.id === 'Facebook') {
                         element.addEventListener('click', function () {
-                            console.log('enter Facebook block')
+                            //console.log('enter Facebook block')
                             console.log('selected Facebook')
                             setPlatform_name_array('Facebook')
                             setBorder('Facebook')
@@ -107,7 +107,7 @@ const MyProfile = (props) => {
                         })
                     } else if (element.id === 'Twitter') {
                         element.addEventListener('click', function () {
-                            console.log('enter Twitter block')
+                            //console.log('enter Twitter block')
                             console.log('selected Twitter')
                             setPlatform_name_array('Twitter')
                             setBorder('Twitter')
