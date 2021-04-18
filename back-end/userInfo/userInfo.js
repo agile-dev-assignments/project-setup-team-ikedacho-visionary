@@ -155,8 +155,8 @@ const userInfo = new mongoose.Schema(
             user_name: String, 
             text_content: String, 
             img_content: String, 
-            post_issued_time: String, 
-            like_issued_time: String, 
+            post_issued_time: Date, 
+            like_issued_time: Date, 
         }], 
         others_mentioned_history: [OthersMentionedHistorySchema],
         others_liked_history: [{
@@ -165,8 +165,8 @@ const userInfo = new mongoose.Schema(
             user_name: String, 
             text_content: String, 
             img_content: String, 
-            post_issued_time: String, 
-            like_issued_time: String, 
+            post_issued_time: Date, 
+            like_issued_time: Date, 
             liked_by_user_name: String, 
             liked_by_user_photo: String
         }],
