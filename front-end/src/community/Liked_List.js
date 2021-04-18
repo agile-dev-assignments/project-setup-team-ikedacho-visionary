@@ -9,15 +9,16 @@ const Liked_List = (props) => {
 
   useEffect(() => {
     axios
-      .get('/api_being_liked')
-      .then((response) => {
-        // extract the data from the server response
-        setData(response.data)
-        console.log("data fetched from backend: ", data)
-      })
-      .catch((err) => {
-        console.error(err) 
-      })
+    .get('/api_being_liked')
+    .then((response) => {
+      console.log(response)
+      // extract the data from the server response
+      setData(response.data)
+      console.log("data fetched from backend: ", data)
+    })
+    .catch((err) => {
+      console.error(err) 
+    })
   }, []) // only run it once!
 
   return (

@@ -5,6 +5,8 @@ import './Liked.css'
 const Liked = (props) => {
   // console.log(props);
 
+  const date = new Date(Date.parse(props.details.like_issued_time))
+  console.log(date.toString())
 
   return (
     <article className="liked">        
@@ -12,24 +14,25 @@ const Liked = (props) => {
             <Link to = {{
                 pathname: '/friend_profile', 
                 state: {
-                    UserName: props.details.liked_by_username, 
-                    userimg: props.details.liked_by_profile_image
+                    UserName: props.details.liked_by_user_name, 
+                    userimg: props.details.liked_by_user_photo
                 }}
               }>   
-              <img class='inline-block' id='avatar' src={props.details.liked_by_profile_image} />
-              <h1 class='inline-block' id='username1' >{props.details.liked_by_username}</h1>
+              <img class='inline-block' id='avatar' src={props.details.liked_by_user_photo} />
+              <h1 class='inline-block' id='username1' >{props.details.liked_by_user_name}</h1>
             </Link>
               <span id="commented_date">{props.details.liked_date}</span>
           </div>
-        <p id='like'>Like the post</p>
+        <p id='like'>liked the post at {date.toString()}</p>
 
         <Link to={`/detailpost`}>
           <p id='post' >
-            <img id="post_image" src={props.details.post_image} />
+            <img id="post_image" src={props.details.img_content} />
             <br></br>
-            <span id='username'>@Username</span>
+            <img class='inline-block' id='avatar2' src = {props.details.user_photo} />
+            <span id='username'>{props.details.user_name}</span>
             <br></br><br></br>
-            <div id='post_text'>{props.details.post_text}</div>
+            <div id='post_text'>{props.details.text_content}</div>
           </p>
         </Link>
 
