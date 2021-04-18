@@ -46,7 +46,7 @@ const Edit = (props) => {
             })
             history.goBack()
             setTimeout(() => {
-                window.location.href = '/my_profile'
+                window.location.href = window.location.href
             }, 100)
         } else {
             alert('You need to write some text')
