@@ -1040,16 +1040,40 @@ app.post("/api_send_new_message", async (req, res) => {
 })
 
 app.get("/api_create_new_chat_list", async (req, res) => {
-    let ret = {}
+    let ret = [], friend = [], follower, following
 
-    await axios
-        .get(`${process.env.API_CREATE_NEW_CHAT_LIST}?key=${process.env.API_CREATE_NEW_CHAT_LIST_KEY}`)
-        .then(apiResponse => ret = apiResponse.data)
-        .catch((err) => {
-            const backupData = [{"username":"ccamus0","userimg":"https://robohash.org/quiaperferendisquis.jpg?size=50x50\u0026set=set1"},{"username":"krantoul1","userimg":"https://robohash.org/etquisit.jpg?size=50x50\u0026set=set1"},{"username":"omccourt2","userimg":"https://robohash.org/velitinvel.png?size=50x50\u0026set=set1"},{"username":"tbagnold3","userimg":"https://robohash.org/isteineligendi.png?size=50x50\u0026set=set1"},{"username":"tlievesley4","userimg":"https://robohash.org/quasiautenim.bmp?size=50x50\u0026set=set1"},{"username":"rstockton5","userimg":"https://robohash.org/teneturprovidentpraesentium.jpg?size=50x50\u0026set=set1"},{"username":"apetren6","userimg":"https://robohash.org/impeditporrout.png?size=50x50\u0026set=set1"},{"username":"dmcmains7","userimg":"https://robohash.org/dictapossimusquis.bmp?size=50x50\u0026set=set1"},{"username":"neuler8","userimg":"https://robohash.org/suscipitquiillum.bmp?size=50x50\u0026set=set1"},{"username":"eclemenza9","userimg":"https://robohash.org/abvoluptatemsit.jpg?size=50x50\u0026set=set1"}]
-            ret = backupData
+    // retrieve follower and following lists of current user
+    await UserInfo.findOne({user_name: req.user.username}, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            follower = result.follower
+            following = result.following
+        }
+    })
+
+    // lazy finding intersection
+    for (let i = 0; i < follower.length; i ++) {
+        if (following.includes(follower[i])) {
+            friend.push(follower[i])
+        }
+    }
+
+    // retrieve extended user info from database
+    for (let i = 0; i < friend.length; i ++) {
+        await UserInfo.findOne({user_name: friend[i]}, (err, result) => {
+            if (err) {
+                console.error(err)
+            } else {
+                ret.push({
+                    user_name: result.user_name, 
+                    user_photo: result.user_photo, 
+                })
+            }
         })
+    }
 
+    console.log(ret)
     res.json(ret)
 })
 
