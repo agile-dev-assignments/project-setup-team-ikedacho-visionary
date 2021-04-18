@@ -411,18 +411,23 @@ app.get("/get_twitter_request_token", async (req, res) => {
 
 app.get("/get_my_profile", async (req, res) => {
     const my_username = req.user.username
+    let my_like_history
     await UserInfo.findOne({user_name: my_username},(err, UserInfos)=>{
         try {
             user_info=UserInfos
             linked_social_media=UserInfos.linked_social_media
             unconnected_social_media=UserInfos.unconnected_social_media
-            post_data=UserInfos.post_data   
+            post_data=UserInfos.post_data
+            my_like_history = UserInfos.my_like_history
             //console.log("post_data",post_data)
         } catch(e){
             console.log(e)
         }
     })
 
+    // console.log(post_data)
+
+    // console.log("my_like_history: ", my_like_history)
     let filtered_post_data=post_data.slice()
     //filter the post_data to only contain the linked_social_media 
     filtered_post_data=post_data.filter(element=>{
@@ -441,10 +446,43 @@ app.get("/get_my_profile", async (req, res) => {
         })//end of filtered_post_data by selected platform_name by user 
     }
 
+    // lr = liked_record, fr = filtered_record
+    let lr, fr, filtered_by_liked = []
+    // if my_like_history is not empty, we need to know if post has been liked by the current user
+    // forEach might be better
+    if (my_like_history !== undefined && !isEmpty(my_like_history)) {
+        for (let i = 0; i < my_like_history.length; i ++) {
+            lr = my_like_history[i]
+            for (let j = 0; j < filtered_post_data.length; j ++) {
+                fr = filtered_post_data[j]
+                // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
+                if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
+                    // console.log("matched! ")
+                    filtered_by_liked.push({
+                        content: fr.content, 
+                        source: fr.source, 
+                        senttime: fr.senttime, 
+                        contentimg: fr.contentimg, 
+                        commented: fr.commented, 
+                        liked: fr.liked, 
+                        repoted: fr.repoted, 
+                        like_switch: true
+                        })
+                } else {
+                    filtered_by_liked.push(fr)
+                }
+            }
+        }
+    } else {
+        filtered_by_liked = filtered_post_data
+    }
+
+    // console.log("filtered_by_liked: ", filtered_by_liked)
+
     //send back response_data which consists of user_info and filtered_post_data as post_data
     const response_data={
         "user_info" : user_info,
-        "post_data" : filtered_post_data, //return the filtered data based on platform selected
+        "post_data" : filtered_by_liked, //return the filtered data based on platform selected
         "linked_social_media": linked_social_media,//return linked_platform name
     }
     //console.log("in get_my_profile:", user_info)
@@ -883,14 +921,14 @@ app.get("/api_being_liked", async (req, res) => {
     let ret = {}
 
     // retrieve user info from database
-    UserInfo.findOne({user_name: req.user.username}, (err, result) => {
+    await UserInfo.findOne({user_name: req.user.username}, (err, result) => {
         if (err) {
             console.error(err)
         } else {
             // extract being liked history
             ret = result.others_liked_history
-            console.log(ret)
             res.json(ret)
+            console.log(ret)
         }
     })
 })
@@ -899,7 +937,7 @@ app.get("/api_being_mentioned", async (req, res) => {
     let ret = {}
 
     // retrieve data from database
-    UserInfo.findOne({user_name: req.user.username}, (err, result) => {
+    await UserInfo.findOne({user_name: req.user.username}, (err, result) => {
         if (err) {
             console.error(err)
         } else {
@@ -1108,7 +1146,7 @@ app.get("/api_like_a_post", async (req, res) => {
                 user_name: post_detail.UserName, 
                 text_content: post_detail.content, 
                 img_content: post_detail.contentimg, 
-                post_issued_time: post_detail.senttime, 
+                post_issued_time: post_detail.Senttime, 
                 like_issued_time: current_date, 
             })
             // also fetch the user_photo for later usage
