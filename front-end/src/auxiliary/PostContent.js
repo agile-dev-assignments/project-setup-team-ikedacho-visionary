@@ -102,7 +102,7 @@ const PostContent = (props) => {
           <img className = "userimg" onClick={_Friend_Profile_with_param.bind()} src = {props.userimg} />
         <div className="Text">
           <strong className = "username" onClick={_Friend_Profile_with_param.bind()}>{props.UserName}</strong>
-          <p className = "time">{props.senttime.slice(0,10)+'   '+props.senttime.slice(11,19)}</p>
+          <p className = "time">{props.Senttime.slice(0,10)+'   '+props.Senttime.slice(11,19)}</p>
         </div>
       
       </div>

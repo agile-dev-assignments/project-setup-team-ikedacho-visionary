@@ -33,7 +33,7 @@ const RecentlyVisited = (props) => {
                             userimg = {item.userimg}
                             UserName = {item.UserName}
                             content = {item.content}
-                            senttime = {item.senttime} 
+                            Senttime = {item.senttime} 
                             contentimg = {item.contentimg} />
                     ))} 
             </section>
