@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Me.css'
 import { Link } from 'react-router-dom'
-import { PersonPlus } from 'react-bootstrap-icons'
+import { PersonPlus, WindowSidebar } from 'react-bootstrap-icons'
 import { Gear } from 'react-bootstrap-icons'
 import { ClockHistory } from 'react-bootstrap-icons'
 import { TextParagraph } from 'react-bootstrap-icons'
@@ -82,6 +82,7 @@ const Me = (props) => {
     const LoginStatus_fb = async () => {
         setUpFacebookSDK()
 
+    if (window.FB !== undefined) {
         window.FB.getLoginStatus(function (response) {
             console.log(response)
             if (response.status === 'connected') {
@@ -91,8 +92,9 @@ const Me = (props) => {
                 //console.log('user not logged in FB')
                 //SetClicked_linked_social_media('Facebook')
             }
-        })
+        })}
     }
+    
     const fetchData = async () => {
         await axios('/get_me', {
             params: {
