@@ -21,7 +21,7 @@ const Edit = (props) => {
     const [show, setShow] = useState(false)
     //represnet if the send button is clicked. false: not clicked. true: clicked
     const [send, setSend]=  useState(false)
-    const [post_text, setPost_text]=  useState("")
+    const [post_text, setPost_text]=  useState('')
 
     let history=useHistory();
 
@@ -32,24 +32,26 @@ const Edit = (props) => {
     const goTOPreviousPath2=(e)=>{
         setSend(!send)
         setPost_text('my post text')
-        console.log("send:",send)
+        console.log('send:',send)
         console.log("post_text:",post_text)
         document.getElementById("myTextarea").value = post_text;
         console.log(post_text)
         
-        if( post_text!=="") {
-            history.goBack()
-        
-        axios
-            .get('/get_edit', {
-                //send along the post_text user typed 
-                params: {
-                  post_text: post_text,
-                }
-            })
-        }
+        if( post_text!=='') {
+            axios
+                .get('/get_edit', {
+                    //send along the post_text user typed 
+                    params: {
+                    post_text: post_text,
+                    }
+                })
+                history.goBack()
+                setTimeout(() => {
+                    window.location.href = window.location.href
+                }, 100)
+            }
         else{
-            alert( "You need to write some text" );
+            alert( 'You need to write some text');
             e.preventDefault()
         }
     }
@@ -60,7 +62,7 @@ const Edit = (props) => {
     };
 
     return (
-        <div className="edit">
+        <div className='edit'>
             <section id='header'>
                 <Link onClick={goTOPreviousPath}>
                     <ChevronLeft id="back" color='black' size={17}/> 
@@ -70,8 +72,8 @@ const Edit = (props) => {
             <hr></hr>
             </section>
 
-            <section className="edit-wrap">
-                <textarea id="myTextarea" placeholder="What's you mind?" onInput = {e => setPost_text(e.target.value)}/>
+            <section className='edit-wrap'>
+                <textarea id="myTextarea" placeholder="What's on you mind?" onInput = {e => setPost_text(e.target.value)}/>
                 
                 <br></br>
                 <br></br>
@@ -89,7 +91,7 @@ const Edit = (props) => {
                 </>
                 )}
 
-                <div className="post">
+                <div className='post'>
                     <span onClick={_setShow}>Post to ▼️ </span>
                     <div className="post-checkbox" style={{ opacity : show ? 1 : 0}}>
                         <label><input name="post" type="checkbox" checked/> O-Zone</label>
