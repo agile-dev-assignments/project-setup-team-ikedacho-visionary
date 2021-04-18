@@ -456,17 +456,22 @@ app.get("/get_my_profile", async (req, res) => {
 })
 
 
-
 // it tell multer to save uploaded files to disk into a directory named public/uploads, with a filename based on the current time.
 // the file storage rule function referred by a variable called storage will be used later as parameter when we initiated a multer object.
-const storage = multer.diskStorage({
+const storage_backgruond = multer.diskStorage({
     // set file saved destination. Multer can save uploaded files to a number of different destinations.
     destination: function (req, file, cb) {
-        let dir=`../front-end/public/uploads/${user_name_l}`
+        if (!fs.existsSync(`../front-end/public/uploads`)){
+            fs.mkdirSync(`../front-end/public/uploads`);
+        }
+        if (!fs.existsSync(`../front-end/public/uploads/background`)){
+            fs.mkdirSync(`../front-end/public/uploads/background`);
+        }
+        let dir=`../front-end/public/uploads/background/${user_name_l}`
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir);
         }
-        cb(null, `../front-end/public/uploads/${user_name_l}`)
+        cb(null, `../front-end/public/uploads/background/${user_name_l}`)
     },
 
     // set filename rules
@@ -476,38 +481,26 @@ const storage = multer.diskStorage({
     },
 
 })
-
  
 //Then instantiate a multer object "upload_background_picture" to be used in app.post("/my_profile", upload.array("background_picture", 1), (req, res)...
 //and upload_background_picture multure object use the storage rule as defined in storage variable.
-const upload_background_picture = multer({ storage: storage })
+const upload_background_picture = multer({ storage: storage_backgruond })
 
-//Multer middleware will automatically save any uploaded files in the request into the specified directory, rename them as instructed,
-//and make a field named req.files containing the paths to the files on the server.
-//the following code, upload.array('my_files', 1), instructs multer to store no more than 1 files, coming from an HTML element named background_picture.
 app.post("/post_background_picture", upload_background_picture.array("background_picture", 1), async (req, res) => {
-
     // check whether anything was uploaded. If success, send a response back. I will re-render my_profile page with background picture added in this case.
     if (req.files) {
         // success! send data back to the client, e.g. some JSON data
-        // do something with the data we received from the client
-        //console.log("success! req.files")
         const data = {
             status: "all good",
             message: "success, the files were uploaded!",
             background_picture: req.files,
-
-        }//end of data
-        //console.log(data.background_picture);
-        /* [ { fieldname: 'background_picture', originalname: 'sky.jpg', encoding: '7bit', mimetype: 'image/jpeg', destination: 'public/uploads', filename: 'background_picture-1616974883630', path: 'public/uploads/background_picture-1616974883630',
-            size: 78269 } ] */
-
+        }
         // then send a response to client with modification on data we receive from client. otherwise, it will occur 500 error.
         // add the background image src to user_info data
         const my_username = req.user.username
         await UserInfo.findOne({user_name: my_username}, async(err, UserInfos)=>{
             try {
-                UserInfos.background_picture=`/uploads/${user_name_l}/${data.background_picture[0].filename}`
+                UserInfos.background_picture=`/uploads/background/${user_name_l}/${data.background_picture[0].filename}`
                 await UserInfos.save(function(saveErr, saveUserInfos) {
                     if(err){
                         console.log('error saving post')
@@ -518,16 +511,12 @@ app.post("/post_background_picture", upload_background_picture.array("background
             }
         })
         res.redirect('/my_profile') //redirect to my_proile page
-    }//end of if
+    }
 
     else{//if no file is uploaded, the submit button cannot send request.
         console.log("error! req.files")
         res.redirect('/my_profile')
     }   
-})
-
-app.get("/follow", (req, res) => {
-
 })
 
 app.get("/get_edit", async (req, res) => {
@@ -551,33 +540,6 @@ app.get("/get_edit", async (req, res) => {
             console.log(e)
         }
     })
-})
-//Then instantiate a multer object "upload_post_picture" to be used in app.post("/post_Post_picture", upload.array("background_picture", 1), (req, res)...
-//and upload_post_picture multure object use the storage rule as defined in storage variable.
-const upload_post_picture = multer({ storage: storage })
-
-const post_picture = multer({ storage: storage })
-app.post("/post_picture", upload_post_picture.array("post_picture", 1), (req, res) => {
-    const my_username = req.user.username
-    // check whether anything was uploaded. If success, send a response back. I will re-render my_profile page with background picture added in this case.
-    if (req.files) {
-       // success! send data back to the client, e.g. some JSON data
-       // do something with the data we received from the client
-       console.log("success! req.files")
-       const data = {
-           status: "all good",
-           message: "success, the files were uploaded!",
-           post_picture: req.files,
-
-       }//end of data
-       //console.log(data.post_picture);
-       
-       // then send a response to client with modification on data we receive from client. otherwise, it will occur 500 error.
-       // add the background image src to user_info data
-
-       new_post.contentimg=`/uploads/${data.post_picture[0].filename}`
-   }//end of if
-
 })
 
 app.post('/post_home', (req, res) => {
@@ -1299,7 +1261,25 @@ app.get("/api_search_result", async(req, res) => {
 
     res.json(ret)
 })
+//Then instantiate a multer object "upload_post_picture" to be used in app.post("/post_Post_picture", upload.array("background_picture", 1), (req, res)...
+//and upload_post_picture multure object use the storage rule as defined in storage variable.
+/*const upload_post_picture = multer({ storage: storage })
 
+const post_picture = multer({ storage: storage })
+app.post("/post_picture", upload_post_picture.array("post_picture", 1), (req, res) => {
+    const my_username = req.user.username
+    // check whether anything was uploaded. If success, send a response back. I will re-render my_profile page with background picture added in this case.
+    if (req.files) {
+       // success! send data back to the client, e.g. some JSON data
+       console.log("success! req.files")
+       const data = {
+           status: "all good",
+           message: "success, the files were uploaded!",
+           post_picture: req.files,
+       }
+       new_post.contentimg=`/uploads/${data.post_picture[0].filename}`
+   }
+})*/
 //----------------------------------------- END OF ROUTES---------------------------------------------------
 
 // helper function, can remove anytime
