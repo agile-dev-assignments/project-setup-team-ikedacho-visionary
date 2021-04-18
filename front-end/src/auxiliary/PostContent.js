@@ -2,9 +2,8 @@ import './PostContent.css'
 import Repost from './ToRepost'
 import React, { useState } from 'react'
 import ToComment from './ToComment'
-import { Link } from "react-router-dom";
-import { useHistory } from 'react-router-dom'
-import { createBrowserHistory } from "history";
+import axios from 'axios'
+import { createBrowserHistory } from "history"
 
 const PostContent = (props) => {
 
@@ -40,6 +39,36 @@ const PostContent = (props) => {
     setLike({
       liked: !cur
     })
+
+    // if the action is to like a post
+    if (!like.liked) {
+      axios
+      .get("/api_like_a_post", {
+        params: {
+          post_detail: props
+        }
+      })
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+    } else { // otherwise, unlike it
+      axios
+      .get("/api_unlike_a_post", {
+        params: {
+          post_detail: props
+        }
+      })
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+    }
+
   }
 
   const _PostDetail_with_param = (event) => {
