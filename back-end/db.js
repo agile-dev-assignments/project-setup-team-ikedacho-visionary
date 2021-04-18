@@ -18,3 +18,5 @@ async function asyncCall() {
     }
 }
 asyncCall()
+
+module.exports = mongoose

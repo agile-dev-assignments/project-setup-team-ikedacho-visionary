@@ -69,7 +69,7 @@ const WhatsNew = (props) => {
         })
         }, []) // only run it once!
 
-
+        //console.log(post_data)
     return (
         <div className = "WhatsNew">
             <section className = "main-content">
@@ -79,7 +79,7 @@ const WhatsNew = (props) => {
                                 userimg = {item.userimg}
                                 UserName = {item.UserName}
                                 content = {item.content}
-                                Senttime = {item.Senttime} 
+                                senttime = {item.senttime} 
                                 contentimg = {item.contentimg} />
                     ))} 
             </section>
