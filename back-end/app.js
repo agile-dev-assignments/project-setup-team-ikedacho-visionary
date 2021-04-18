@@ -1061,7 +1061,7 @@ app.get("/api_create_new_chat_roomID", async (req, res) => {
                     // check if the chatroom is personal or grouped
                     const single_user_flag = (participantsList.user.length === 1)
                     const name = single_user_flag ? [req.user.username, participantsList.user[0].username] : ["Group Chat"]
-                    const avatar = single_user_flag ? [self_userimg, participantsList.user[0].userimg] : ["https://www.flaticon.com/svg/vstatic/svg/681/681494.svg?token=exp=1617521792~hmac=4643d292f0f6a8813a84b31301b89834"]
+                    const avatar = single_user_flag ? [self_userimg, participantsList.user[0].userimg] : ["https://img.icons8.com/plumpy/48/ffffff/people-skin-type-7.png"]
                     // create new room
                     const newChatRoom = new Chatroom({
                         chatroom_name: name,
@@ -1084,6 +1084,146 @@ app.get("/api_create_new_chat_roomID", async (req, res) => {
         }
     })
 })
+
+app.get("/api_like_a_post", async (req, res) => {
+    const self_username = req.user.username
+    const post_detail = JSON.parse(req.query.post_detail)
+    const current_date = new Date()
+    let self_userimg
+    
+    console.log("post detail: ", post_detail)
+
+    // find myself and update my liked history
+    await UserInfo.findOne({user_name: self_username}, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            // update by pushing the new post info to the list
+            if (result.my_like_history === undefined){
+                result.my_like_history = []
+            }
+            result.my_like_history.push({
+                source: post_detail.source, 
+                user_photo: post_detail.userimg, 
+                user_name: post_detail.UserName, 
+                text_content: post_detail.content, 
+                img_content: post_detail.contentimg, 
+                post_issued_time: post_detail.senttime, 
+                like_issued_time: current_date, 
+            })
+            // also fetch the user_photo for later usage
+            self_userimg = result.user_photo
+
+            // save the changes 
+            result.save((err) => {
+                if (err) {
+                    console.error(err)
+                }
+            })
+        }
+    })
+
+    const other_username = post_detail.UserName
+    // find the post author and update his being-liked history
+    await UserInfo.findOne({user_name: other_username}, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            // update by pushing the new post info to the list
+            if (result.others_liked_history === undefined){
+                result.others_liked_history = []
+            }
+            result.others_liked_history.push({
+                source: post_detail.source, 
+                user_photo: post_detail.userimg, 
+                user_name: post_detail.UserName, 
+                text_content: post_detail.content, 
+                img_content: post_detail.contentimg, 
+                post_issued_time: post_detail.senttime, 
+                like_issued_time: current_date,  
+                liked_by_user_name: self_username, 
+                liked_by_user_photo: self_userimg
+            })
+
+            // save the changes 
+            result.save((err) => {
+                if (err) {
+                    console.error(err)
+                }
+            })
+        }
+    })
+
+    res.send(`Liked on post: ${post_detail} by time ${current_date}`)
+})
+
+app.get("/api_unlike_a_post", async (req, res) => {
+    const self_username = req.user.username
+    const post_detail = JSON.parse(req.query.post_detail)
+    
+    console.log("post detail: ", post_detail)
+
+    // find myself and update my liked history
+    await UserInfo.findOne({user_name: self_username}, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            /* to dislike a post, the my_like_history must not be empty
+            if (result.my_like_history === undefined){
+                result.my_like_history = []
+            } */
+            // update by filtering out the new post info to the list
+            result.my_like_history = result.my_like_history.filter((record) => {
+                return (record.user_name === post_detail.user_name &&
+                        record.source === post_detail.source && 
+                        record.post_issued_time === post_detail.post_issued_time &&
+                        record.text_content === post_detail.text_content && 
+                        record.like_issued_time === post_detail.like_issued_time)
+            })
+
+            // save the changes <--- without error handling lol
+            result.save((err) => {
+                if (err) {
+                    console.error(err)
+                }
+            })
+        }
+    })
+
+    const other_username = post_detail.UserName
+    // find the post author and update his being-liked history
+    await UserInfo.findOne({user_name: other_username}, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            /* to dislike a post, the others_liked_history must not be empty
+            if (result.others_liked_history === undefined){
+                result.others_liked_history = []
+            } */
+            // update by pushing the new post info to the list
+            const filtered_list = result.others_liked_history.filter((record) => {
+                return (record.user_name === post_detail.user_name &&
+                        record.source === post_detail.source && 
+                        record.post_issued_time === post_detail.post_issued_time &&
+                        record.text_content === post_detail.text_content && 
+                        record.like_issued_time === post_detail.like_issued_time && 
+                        record.liked_by_user_name === self_username)
+            })
+
+            console.log(filtered_list)
+            // save the changes 
+            UserInfo.updateOne({user_name: other_username}, {others_liked_history: filtered_list}, (err) => {
+                if (err) {
+                    console.error(err)
+                }
+            })
+        }
+    })
+
+    res.send(`Un-liked on post: ${post_detail} by time ${new Date()}`)
+})
+
+
 
 app.get("/api_getprelogin", async (req, res, next) => {
     let ret = {}
