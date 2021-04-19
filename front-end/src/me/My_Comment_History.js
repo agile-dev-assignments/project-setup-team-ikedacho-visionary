@@ -21,7 +21,18 @@ const My_Comment_History = (props) => {
                 Commented @{props.details.post_created_by}: {props.details.comment_text}
             </p>
 
-            <Link to={`/detailpost`}>
+            <Link
+                to={{
+                    pathname: '/detailpost',
+                    state: {
+                        UserName: props.details.post_created_by, //pass friend_info.user_name as UserName to /followers request
+                        userimg: props.details.post_created_by_photo,
+                        content: props.details.post_text,
+                        Senttime: props.details.post_date,
+                        source: props.details.source,
+                    },
+                }}
+            >
                 <p id='post'>
                     <img id='post_image' src={props.details.post_image} />
 
