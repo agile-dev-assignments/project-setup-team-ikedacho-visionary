@@ -1637,26 +1637,40 @@ Please notice that the following three Mockaroo APIs are intentionally disabled 
 So, use backup data instead
 */
 app.get('/api_whatsnew', async (req, res, next) => {
-    user_name_l = req.user.username
-
+    const UserName = req.user.username
     const userInfos = await UserInfo.find()
-    let postData = [], 
-        my_like_history
-        
+    let followed_users = []
+    let postData = []
+    let my_like_history
+    console.log('username',UserName)
+
+    //const userInfos = await UserInfo.find()
+
+    // find user object in database and extract its follower array
+    await UserInfo.findOne({ user_name: UserName }, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            if (result != null){
+                followed_users = result.following
+                console.log('followed_users', followed_users);
+            }else{
+                followed_users = [];
+            }
+        }
+    })
+
     userInfos.forEach(userInfo => {
         const info = userInfo.toObject()
-        const data = info.post_data.map(ele => {
-            ele.userimg= userInfo.user_photo
-            ele.UserName=userInfo.user_name 
-            return ele
-        })
-       // console.log(data)
-
-       if (userInfo.user_name === req.user.username) {
-            my_like_history = userInfo.my_like_history
+        if (followed_users.includes(info.user_name)){
+            const data = info.post_data.map(ele => {
+                ele.userimg= userInfo.user_photo
+                ele.UserName=userInfo.user_name 
+                return ele
+            })
+            console.log(data)
+            postData = postData.concat(data)
         }
-
-       postData = postData.concat(data)
     })
 
     postData.sort((prev,cur)=>{

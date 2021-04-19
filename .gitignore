@@ -1,6 +1,7 @@
 # self-added 
 package-lock.json
 /back-end/package-lock.json
+*.greenlockrc
 
 # Compiled source #
 ###################
