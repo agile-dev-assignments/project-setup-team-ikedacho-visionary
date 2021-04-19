@@ -20,7 +20,6 @@ const request = require('request')
 const oauthSignature = require('oauth-signature')
 const authUser = require('./authIns')
 const fs = require('fs')
-
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
 
 app.use(morgan('dev')) // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -48,10 +47,6 @@ app.use(cookieParser('secretcode'))
 app.use(passport.initialize())
 app.use(passport.session())
 require('./loginAuth/passPortConfig.js')(passport)
-
-//https
-'use strict';
-
 //----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
 let user_name_l = ''
 let selected_social_media = ['O-Zone', 'Facebook', 'Twitter', 'Instagram']
@@ -125,11 +120,11 @@ app.get('/api_get_user_info_by_name', (req, res) => {
     })
 })
 
-app.post('/browsed', (req, res) => {
-    console.log(req.body)
-    const browsed = req.body
-    const username = req.user.username
-    UserInfo.findOne({ user_name: username }, (err, result) => {
+app.post("/browsed", (req, res) => {
+    console.log(req.body); 
+    const browsed = req.body;
+    const username = req.user.username;
+    UserInfo.findOne({user_name: username}, (err, result) => {
         result.my_browse_history.push(browsed)
         // save the update
         result.save((err) => {
@@ -137,9 +132,11 @@ app.post('/browsed', (req, res) => {
                 console.log(err)
             }
         })
-        res.send('Created')
+        res.send("Created")
     })
+   
 })
+
 
 app.get('/api_browse', (req, res) => {
     let ret
@@ -561,7 +558,8 @@ app.get('/get_edit', async (req, res) => {
 
     const regex = /@\S+\s/g
     const search_for_mention = post_text.match(regex)
-    const unique_search_names = [...new Set(search_for_mention)]
+    const unique_search_names = [...new Set(search_for_mention)];
+
 
     await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
         try {
@@ -572,7 +570,7 @@ app.get('/get_edit', async (req, res) => {
                 contentimg: ' ',
             })
             UserInfos.post_number++
-
+            
             my_user_photo = UserInfos.user_photo
 
             await UserInfos.save(function (saveErr, saveUserInfos) {
@@ -589,19 +587,19 @@ app.get('/get_edit', async (req, res) => {
         const search_name = item.replace(/@|\s/g, '')
         console.log(search_name)
         await UserInfo.findOne({ user_name: search_name }, async (err, result) => {
-            if (err) {
+            if (err) { 
                 console.error(err)
             } else {
                 if (result) {
-                    // found!
-                    result.others_mentioned_history = result.others_mentioned_history.length ? result.others_mentioned_history : []
+                    // found! 
+                    result.others_mentioned_history = (result.others_mentioned_history.length) ? result.others_mentioned_history : []
                     result.others_mentioned_history.push({
                         mentioner_avatar: my_user_photo,
                         mentioner_username: my_username,
                         mentioned_date: current_date,
                         post_image: ' ',
                         post_username: my_username,
-                        post_avatar: my_user_photo,
+                        post_avatar: my_user_photo, 
                         post_text: post_text,
                     })
 
@@ -613,6 +611,7 @@ app.get('/get_edit', async (req, res) => {
                             console.error(err)
                         }
                     })
+
                 } else {
                     // not found... -> do nothing! this is not a mention, or mentioning wrongly
                 }
@@ -637,20 +636,21 @@ app.post('/post_home', (req, res) => {
 })
 
 app.get('/get_comments_in_post_content', async (req, res) => {
-    var UserName = req.query.user_name
-    var Content = req.query.content
-    let comments = []
-    let currentPost = []
+    var UserName = req.query.user_name;
+    var Content = req.query.content;
+    let comments = [];
+    let currentPost = [];
     // console.log("content:"+ Content)
     const userInfos = await UserInfo.findOne({ user_name: UserName })
-    var postData = userInfos.post_data
-    postData.every((post) => {
-        if (post.content == Content) {
-            comments = post.commented
-            currentPost = post
+    var postData = userInfos.post_data;
+    postData.every(post => {
+    if(post.content == Content){
+        comments = post.commented
+        currentPost = post
         }
     })
-    res.send(comments)
+    res.send(comments);
+
 })
 
 app.get('/api_my_comment_history', async (req, res) => {
@@ -1329,19 +1329,19 @@ app.get('/api_create_new_chat_list', async (req, res) => {
         }
     })
 
-    console.log('follower: ', follower)
-    console.log('following: ', following)
+    console.log("follower: ", follower)
+    console.log("following: ", following)
     console.log(!isEmpty(follower[0]) && !isEmpty(following[0]))
-    if (!isEmpty(follower[0]) && !isEmpty(following[0])) {
+    if (!isEmpty(follower[0]) && !isEmpty(following[0])){    
         // lazy finding intersection
-        console.log('friend: ', friend)
+        console.log("friend: ", friend)
         for (let i = 0; i < follower[0].length; i++) {
             if (following[0].includes(follower[0][i])) {
                 friend.push(follower[0][i])
             }
         }
 
-        console.log('friend after intersection: ', friend)
+        console.log("friend after intersection: ", friend)
 
         // retrieve extended user info from database
         for (let i = 0; i < friend.length; i++) {
@@ -1881,7 +1881,7 @@ app.get('/api_whatsnew', async (req, res, next) => {
         }
     })
 
-    postData.sort((prev, cur) => {
+    postData.sort((prev,cur)=>{
         return cur.senttime - prev.senttime
     })
 
@@ -1889,11 +1889,11 @@ app.get('/api_whatsnew', async (req, res, next) => {
 
     // console.log("selected_social_media", selected_social_media)
 
-    filtered_post_data = postData.filter((element) => {
+    filtered_post_data = postData.filter(element => {
         if (selected_social_media.includes(element.source)) {
             return true
-        } //end of if
-    }) //end of filtered_post_data
+        }//end of if
+    })//end of filtered_post_data
 
     // console.log(filtered_post_data)
 
@@ -1925,7 +1925,7 @@ app.get('/api_whatsnew', async (req, res, next) => {
                         liked: fr.liked,
                         repoted: fr.repoted,
                         UserName: lr.user_name,
-                        userimg: lr.user_photo,
+                        userimg: lr.user_photo,                     
                         like_switch: true,
                     })
                     matched = true
@@ -1948,14 +1948,14 @@ app.get('/api_recommended', async (req, res, next) => {
     user_name_l = req.user.username
 
     const userInfos = await UserInfo.find()
-    let postData = [],
+    let postData = [], 
         my_like_history
 
-    userInfos.forEach((userInfo) => {
+    userInfos.forEach(userInfo => {
         const info = userInfo.toObject()
-        const data = info.post_data.map((ele) => {
-            ele.userimg = userInfo.user_photo
-            ele.UserName = userInfo.user_name
+        const data = info.post_data.map(ele => {
+            ele.userimg= userInfo.user_photo
+            ele.UserName=userInfo.user_name 
             return ele
         })
 
@@ -1963,11 +1963,11 @@ app.get('/api_recommended', async (req, res, next) => {
             my_like_history = userInfo.my_like_history
         }
 
-        // console.log(data)
-        // postData = postData.concat(data)
+       // console.log(data)
+       // postData = postData.concat(data)
     })
 
-    postData.sort((prev, cur) => {
+    postData.sort((prev,cur)=>{
         const prev_ct = prev.liked_count + prev.commented_count + prev.reposted_count
         const cur_ct = cur.liked_count + cur.commented_count + cur.reposted_count
         return cur_ct - prev_ct
@@ -1977,11 +1977,11 @@ app.get('/api_recommended', async (req, res, next) => {
 
     //console.log("selected_social_media", selected_social_media)
 
-    filtered_post_data = postData.filter((element) => {
+    filtered_post_data = postData.filter(element => {
         if (selected_social_media.includes(element.source)) {
             return true
-        } //end of if
-    }) //end of filtered_post_data
+        }//end of if
+    })//end of filtered_post_data
 
     // console.log(filtered_post_data)
 
@@ -2013,7 +2013,7 @@ app.get('/api_recommended', async (req, res, next) => {
                         liked: fr.liked,
                         repoted: fr.repoted,
                         UserName: lr.user_name,
-                        userimg: lr.user_photo,
+                        userimg: lr.user_photo,                     
                         like_switch: true,
                     })
                     matched = true
@@ -2033,18 +2033,19 @@ app.get('/api_recommended', async (req, res, next) => {
 })
 
 app.get('/api_recent', async (req, res, next) => {
+
     user_name_l = req.user.username
 
-    //currently showing all posts, need to be modified
+    //currently showing all posts, need to be modified 
     const userInfos = await UserInfo.find()
-    let postData = [],
+    let postData = [], 
         my_like_history
-
-    userInfos.forEach((userInfo) => {
+        
+    userInfos.forEach(userInfo => {
         const info = userInfo.toObject()
-        const data = info.post_data.map((ele) => {
-            ele.userimg = userInfo.user_photo
-            ele.UserName = userInfo.user_name
+        const data = info.post_data.map(ele => {
+            ele.userimg= userInfo.user_photo
+            ele.UserName=userInfo.user_name 
             return ele
         })
 
@@ -2052,19 +2053,19 @@ app.get('/api_recent', async (req, res, next) => {
             my_like_history = userInfo.my_like_history
         }
 
-        // console.log(data)
-        postData = postData.concat(data)
+       // console.log(data)
+       postData = postData.concat(data)
     })
 
     let filtered_post_data = postData.slice()
 
     //console.log("selected_social_media", selected_social_media)
 
-    filtered_post_data = postData.filter((element) => {
+    filtered_post_data = postData.filter(element => {
         if (selected_social_media.includes(element.source)) {
             return true
-        } //end of if
-    }) //end of filtered_post_data
+        }//end of if
+    })//end of filtered_post_data
 
     // console.log(filtered_post_data)
 
@@ -2096,7 +2097,7 @@ app.get('/api_recent', async (req, res, next) => {
                         liked: fr.liked,
                         repoted: fr.repoted,
                         UserName: lr.user_name,
-                        userimg: lr.user_photo,
+                        userimg: lr.user_photo,                     
                         like_switch: true,
                     })
                     matched = true
