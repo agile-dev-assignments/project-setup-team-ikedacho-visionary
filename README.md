@@ -39,8 +39,9 @@
     *   03-15-2021: Front-end development: components. 
     *   03-22-2021: Front-end development: pages.  
     *   03-29-2021: Back-end development: own API. 
+    *   04-20-2021: Database development: Data retrieval from MongoDB and basic functionality implementation. 
         <br> 
-    *   Next on Schedule: Back-end development: outside API request and interaction. 
+    *   Next on Schedule: Deployment and Integration. 
 *   ### Instruction on Building and Testing 
     *   Complete function or module given assumed inputs and desired outputs. 
     *   Unit test on function or module upon completion if possible. 
