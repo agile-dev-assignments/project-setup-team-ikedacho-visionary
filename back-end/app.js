@@ -121,9 +121,9 @@ app.get('/api_get_user_info_by_name', (req, res) => {
 })
 
 app.post("/browsed", (req, res) => {
-    console.log(req.body); 
-    const browsed = req.body;
-    const username = req.user.username;
+    console.log(req.body)
+    const browsed = req.body
+    const username = req.user.username
     UserInfo.findOne({user_name: username}, (err, result) => {
         result.my_browse_history.push(browsed)
         // save the update
