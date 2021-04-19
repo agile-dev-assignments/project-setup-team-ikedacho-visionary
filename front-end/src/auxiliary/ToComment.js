@@ -14,19 +14,33 @@ const ToComment = (props) => {
     let [comment_text, setComment_text] = useState('')
 
     const goTOPreviousPath2 = () => {
+        console.log('0send', send)
         setSend(!send)
 
         // setComment_text('my comment_text')
-        console.log('send:', send)
+        console.log('1send:', send)
         console.log('comment_text:', comment_text)
         comment_text = document.getElementById('myTextarea_ToComment').value
         console.log(comment_text)
         console.log('clicked!')
         if (comment_text !== '') {
             setShow(!show)
-        }
+            setCurrentTime(new Date())
 
-        setCurrentTime(new Date())
+            console.log('send', send)
+            axios
+                .get('/get_send_comment', {
+                    params: {
+                        comment_text: comment_text,
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+        }
     }
 
     return (

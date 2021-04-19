@@ -653,6 +653,89 @@ app.get('/get_comments_in_post_content', async (req, res) => {
 
 })
 
+let post_detail_for_comment = undefined
+app.use(async (req, res, next) => {
+    if (req.query.post_detail_for_comment) {
+        post_detail_for_comment = JSON.parse(req.query.post_detail_for_comment)
+        console.log('post detail: ', post_detail_for_comment)
+    }
+    next()
+})
+
+app.get('/get_send_comment', async (req, res) => {
+    const comment_text = req.query.comment_text
+    console.log('comment_text: ', comment_text)
+    const message = post_detail_for_comment
+    console.log('post detail2222: ', message)
+    const self_username = req.user.username
+    let self_userimg
+
+    const current_date = new Date()
+    // find myself and update my liked history
+    await UserInfo.findOne({ user_name: self_username }, async (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            // update by pushing the new post info to the list
+            if (result.my_comment_history === undefined) {
+                result.my_comment_history = []
+            }
+            result.my_comment_history.push({
+                source: message.source,
+                post_created_by_photo: message.userimg,
+                post_created_by: message.UserName,
+                post_text: message.content,
+                post_image: message.contentimg,
+                post_created_time: message.Senttime,
+                commented_date: current_date,
+                comment_text: comment_text,
+            })
+            // also fetch the user_photo for later usage
+            self_userimg = result.user_photo
+
+            // save the changes
+            await result.save((err) => {
+                if (err) {
+                    console.error(err)
+                }
+            })
+        }
+    })
+
+    const other_username = message.UserName
+    // find the post author and update his being-comment history
+    await UserInfo.findOne({ user_name: other_username }, async (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            // update by pushing the new post info to the list
+            if (result.others_commented_history === undefined) {
+                result.others_commented_history = []
+            }
+            result.others_commented_history.push({
+                source: message.source,
+                post_created_by_photo: message.userimg,
+                post_created_by: message.UserName,
+                post_text: message.content,
+                post_image: message.contentimg,
+                post_date: message.Senttime,
+                commented_date: current_date,
+                commented_by_username: self_username,
+                commented_by_profile_image: self_userimg,
+                comment_text: comment_text,
+            })
+
+            // save the changes
+            await result.save((err) => {
+                if (err) {
+                    console.error(err)
+                }
+            })
+        }
+    })
+    post_detail_for_comment = undefined
+})
+
 app.get('/api_my_comment_history', async (req, res) => {
     let response_data = ''
 

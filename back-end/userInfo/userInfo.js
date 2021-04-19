@@ -67,11 +67,14 @@ const MyLikeHistory = mongoose.model('MyLikeHistory', MyLikeHistorySchema, 'MyLi
 const MyCommentHistorySchema = new mongoose.Schema(
     {
         id: Number,
+        post_created_by_photo: String,
+        source: String,
         post_created_by: String,
         post_text: String,
         post_image: String,
+        post_created_time: Date,
         commented_date: Date,
-        commented_content: String,
+        comment_text: String,
     },
     { _id: true }
 )
@@ -121,13 +124,16 @@ const OthersLikedHistory = mongoose.model('OthersLikedHistory', OthersLikedHisto
 const OthersCommentedHistorySchema = new mongoose.Schema(
     {
         id: Number,
+        source: String,
+        post_created_by_photo: String,
+        post_created_by: String,
         post_text: String,
         post_image: String,
         post_date: Date,
+        commented_date: Date,
         commented_by_username: String,
         commented_by_profile_image: String,
-        commented_date: Date,
-        commented_content: String,
+        comment_text: String,
     },
     { _id: true }
 )
@@ -168,8 +174,8 @@ const userInfo = new mongoose.Schema(
                 post_image: String,
                 post_username: String,
                 post_avatar: String,
-                post_text: String
-            }
+                post_text: String,
+            },
         ],
         others_liked_history: [
             {
