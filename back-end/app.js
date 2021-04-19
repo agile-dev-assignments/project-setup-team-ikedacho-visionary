@@ -411,18 +411,23 @@ app.get("/get_twitter_request_token", async (req, res) => {
 
 app.get("/get_my_profile", async (req, res) => {
     const my_username = req.user.username
+    let my_like_history
     await UserInfo.findOne({user_name: my_username},(err, UserInfos)=>{
         try {
             user_info=UserInfos
             linked_social_media=UserInfos.linked_social_media
             unconnected_social_media=UserInfos.unconnected_social_media
-            post_data=UserInfos.post_data   
+            post_data=UserInfos.post_data
+            my_like_history = UserInfos.my_like_history
             //console.log("post_data",post_data)
         } catch(e){
             console.log(e)
         }
     })
 
+    // console.log(post_data)
+
+    // console.log("my_like_history: ", my_like_history)
     let filtered_post_data=post_data.slice()
     //filter the post_data to only contain the linked_social_media 
     filtered_post_data=post_data.filter(element=>{
@@ -441,10 +446,47 @@ app.get("/get_my_profile", async (req, res) => {
         })//end of filtered_post_data by selected platform_name by user 
     }
 
+    // lr = liked_record, fr = filtered_record
+    let lr, fr, matched, filtered_by_liked = []
+    // if my_like_history is not empty, we need to know if post has been liked by the current user
+    // forEach might be better
+    if (my_like_history !== undefined && !isEmpty(my_like_history)) {
+        for (let i = 0; i < filtered_post_data.length; i ++) {
+            fr = filtered_post_data[i]
+            matched = false
+            for (let j = 0; j < my_like_history.length; j ++) {
+                lr = my_like_history[j]
+                // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
+                if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
+                    // console.log("matched! ")
+                    filtered_by_liked.push({
+                        content: fr.content, 
+                        source: fr.source, 
+                        senttime: fr.senttime, 
+                        contentimg: fr.contentimg, 
+                        commented: fr.commented, 
+                        liked: fr.liked, 
+                        repoted: fr.repoted, 
+                        like_switch: true
+                        })
+                    matched = true
+                    break
+                }
+            }
+            if (matched === false) {
+                filtered_by_liked.push(fr)
+            }
+        }
+    } else {
+        filtered_by_liked = filtered_post_data
+    }
+
+    console.log("filtered_by_liked: ", filtered_by_liked)
+
     //send back response_data which consists of user_info and filtered_post_data as post_data
     const response_data={
         "user_info" : user_info,
-        "post_data" : filtered_post_data, //return the filtered data based on platform selected
+        "post_data" : filtered_by_liked, //return the filtered data based on platform selected
         "linked_social_media": linked_social_media,//return linked_platform name
     }
     //console.log("in get_my_profile:", user_info)
@@ -619,6 +661,7 @@ app.get("/api_friend_profile", async (req, res) => {
     let friend_info=''
     const UserName = req.query.UserName
     let friend = false
+    let my_like_history
   
     await UserInfo.findOne({user_name: UserName},(err, UserInfos)=>{
         try {
@@ -636,6 +679,7 @@ app.get("/api_friend_profile", async (req, res) => {
             if (UserInfos.following.includes(UserName)){
                 friend=true
             }
+            my_like_history = UserInfos.my_like_history
         } catch(e){
             console.log(e)
         }
@@ -652,10 +696,45 @@ app.get("/api_friend_profile", async (req, res) => {
         })
     }
 
+    // lr = liked_record, fr = filtered_record
+    let lr, fr, matched, filtered_by_liked = []
+    // if my_like_history is not empty, we need to know if post has been liked by the current user
+    // forEach might be better
+    if (my_like_history !== undefined && !isEmpty(my_like_history)) {
+        for (let i = 0; i < filtered_post_data.length; i ++) {
+            fr = filtered_post_data[i]
+            matched = false
+            for (let j = 0; j < my_like_history.length; j ++) {
+                lr = my_like_history[j]
+                // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
+                if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
+                    // console.log("matched! ")
+                    filtered_by_liked.push({
+                        content: fr.content, 
+                        source: fr.source, 
+                        senttime: fr.senttime, 
+                        contentimg: fr.contentimg, 
+                        commented: fr.commented, 
+                        liked: fr.liked, 
+                        repoted: fr.repoted, 
+                        like_switch: true
+                        })
+                    matched = true
+                    break
+                }
+            }
+            if (matched === false) {
+                filtered_by_liked.push(fr)
+            }
+        }
+    } else {
+        filtered_by_liked = filtered_post_data
+    }
+
     //send back response_data which consists of user_info and filtered_post_data as post_data
     const response_data={
         "friend_info" : friend_info,
-        "post_data" : filtered_post_data, //return the filtered data based on platform selected
+        "post_data" : filtered_by_liked, //return the filtered data based on platform selected
         "linked_social_media": linked_social_media, //return linked_platform name
         friend: friend
     }
@@ -883,14 +962,14 @@ app.get("/api_being_liked", async (req, res) => {
     let ret = {}
 
     // retrieve user info from database
-    UserInfo.findOne({user_name: req.user.username}, (err, result) => {
+    await UserInfo.findOne({user_name: req.user.username}, (err, result) => {
         if (err) {
             console.error(err)
         } else {
             // extract being liked history
             ret = result.others_liked_history
-            console.log(ret)
             res.json(ret)
+            console.log(ret)
         }
     })
 })
@@ -899,7 +978,7 @@ app.get("/api_being_mentioned", async (req, res) => {
     let ret = {}
 
     // retrieve data from database
-    UserInfo.findOne({user_name: req.user.username}, (err, result) => {
+    await UserInfo.findOne({user_name: req.user.username}, (err, result) => {
         if (err) {
             console.error(err)
         } else {
@@ -1108,7 +1187,7 @@ app.get("/api_like_a_post", async (req, res) => {
                 user_name: post_detail.UserName, 
                 text_content: post_detail.content, 
                 img_content: post_detail.contentimg, 
-                post_issued_time: post_detail.senttime, 
+                post_issued_time: post_detail.Senttime, 
                 like_issued_time: current_date, 
             })
             // also fetch the user_photo for later usage
@@ -1162,6 +1241,7 @@ app.get("/api_unlike_a_post", async (req, res) => {
     const post_detail = JSON.parse(req.query.post_detail)
     
     console.log("post detail: ", post_detail)
+    console.log(post_detail.Senttime, post_detail.UserName)
 
     // find myself and update my liked history
     await UserInfo.findOne({user_name: self_username}, (err, result) => {
@@ -1174,11 +1254,10 @@ app.get("/api_unlike_a_post", async (req, res) => {
             } */
             // update by filtering out the new post info to the list
             result.my_like_history = result.my_like_history.filter((record) => {
-                return (record.user_name === post_detail.user_name &&
+                return (record.user_name === post_detail.UserName &&
                         record.source === post_detail.source && 
-                        record.post_issued_time === post_detail.post_issued_time &&
-                        record.text_content === post_detail.text_content && 
-                        record.like_issued_time === post_detail.like_issued_time)
+                        record.post_issued_time === post_detail.Senttime &&
+                        record.text_content === post_detail.content)
             })
 
             // save the changes <--- without error handling lol
@@ -1201,16 +1280,15 @@ app.get("/api_unlike_a_post", async (req, res) => {
                 result.others_liked_history = []
             } */
             // update by pushing the new post info to the list
-            const filtered_list = result.others_liked_history.filter((record) => {
-                return (record.user_name === post_detail.user_name &&
+            let filtered_list = result.others_liked_history.filter((record) => {
+                return (record.user_name === post_detail.UserName &&
                         record.source === post_detail.source && 
-                        record.post_issued_time === post_detail.post_issued_time &&
-                        record.text_content === post_detail.text_content && 
-                        record.like_issued_time === post_detail.like_issued_time && 
+                        record.text_content === post_detail.content && 
+                        record.post_issued_time === post_detail.Senttime &&
                         record.liked_by_user_name === self_username)
             })
 
-            console.log(filtered_list)
+            console.log("\nfiltered_list: ", filtered_list)
             // save the changes 
             UserInfo.updateOne({user_name: other_username}, {others_liked_history: filtered_list}, (err) => {
                 if (err) {

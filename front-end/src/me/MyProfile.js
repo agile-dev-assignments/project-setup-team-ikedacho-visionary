@@ -227,7 +227,7 @@ const MyProfile = (props) => {
 
             <section className='main-content4'>
                 {post_data.map((item) => (
-                    <PostContent key={item.id} source={item.source} userimg={user_info.user_photo} UserName={user_info.user_name} content={item.content} Senttime={item.senttime} contentimg={item.contentimg} />
+                    <PostContent key={item.id} like_switch = {item.like_switch} source={item.source} userimg={user_info.user_photo} UserName={user_info.user_name} content={item.content} Senttime={item.senttime} contentimg={item.contentimg} />
                 ))}
             </section>
         </div>

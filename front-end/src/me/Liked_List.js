@@ -23,6 +23,8 @@ const Liked_List = (props) => {
             })
     }, [])
 
+    console.log(data)
+
     return (
         <div className="Liked_List">
             <Link to={'/me'}>
@@ -35,11 +37,11 @@ const Liked_List = (props) => {
 
                     <Liked key={item.id} 
                            source = {item.source} 
-                           userimg = {item.userimg}
-                           UserName = {item.UserName}
-                           content = {item.content}
-                           Senttime = {item.Senttime} 
-                           contentimg = {item.contentimg} />
+                           userimg = {item.user_photo}
+                           UserName = {item.user_name}
+                           content = {item.text_content}
+                           Senttime = {item.post_issued_time} 
+                           contentimg = {item.img_content} />
 
                 ))}
             </section>
