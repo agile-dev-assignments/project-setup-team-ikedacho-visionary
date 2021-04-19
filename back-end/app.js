@@ -1850,7 +1850,7 @@ app.get('/api_whatsnew', async (req, res, next) => {
     let followed_users = []
     let postData = []
     let my_like_history
-    console.log('username',UserName)
+    console.log('username', UserName)
 
     //const userInfos = await UserInfo.find()
 
@@ -1859,11 +1859,14 @@ app.get('/api_whatsnew', async (req, res, next) => {
         if (err) {
             console.error(err)
         } else {
-            if (result != null){
+            if (result != null) {
                 followed_users = result.following
-                console.log('followed_users', followed_users);
-            }else{
-                followed_users = [];
+                console.log('followed_users', followed_users)   
+
+                my_like_history = result.my_like_history 
+
+            } else {
+                followed_users = []
             }
         }
     })
