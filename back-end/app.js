@@ -1269,38 +1269,46 @@ app.post('/api_send_new_message', async (req, res) => {
 app.get('/api_create_new_chat_list', async (req, res) => {
     let ret = [],
         friend = [],
-        follower,
-        following
+        follower = [],
+        following = []
 
     // retrieve follower and following lists of current user
     await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
         if (err) {
             console.error(err)
         } else {
-            follower = result.follower
-            following = result.following
+            follower.push(result.follower)
+            following.push(result.following)
         }
     })
 
-    // lazy finding intersection
-    for (let i = 0; i < follower.length; i++) {
-        if (following.includes(follower[i])) {
-            friend.push(follower[i])
-        }
-    }
-
-    // retrieve extended user info from database
-    for (let i = 0; i < friend.length; i++) {
-        await UserInfo.findOne({ user_name: friend[i] }, (err, result) => {
-            if (err) {
-                console.error(err)
-            } else {
-                ret.push({
-                    user_name: result.user_name,
-                    user_photo: result.user_photo,
-                })
+    console.log("follower: ", follower)
+    console.log("following: ", following)
+    console.log(!isEmpty(follower[0]) && !isEmpty(following[0]))
+    if (!isEmpty(follower[0]) && !isEmpty(following[0])){    
+        // lazy finding intersection
+        console.log("friend: ", friend)
+        for (let i = 0; i < follower[0].length; i++) {
+            if (following[0].includes(follower[0][i])) {
+                friend.push(follower[0][i])
             }
-        })
+        }
+
+        console.log("friend after intersection: ", friend)
+
+        // retrieve extended user info from database
+        for (let i = 0; i < friend.length; i++) {
+            await UserInfo.findOne({ user_name: friend[i] }, (err, result) => {
+                if (err) {
+                    console.error(err)
+                } else {
+                    ret.push({
+                        user_name: result.user_name,
+                        user_photo: result.user_photo,
+                    })
+                }
+            })
+        }
     }
 
     console.log(ret)
@@ -1793,7 +1801,9 @@ app.get('/api_whatsnew', async (req, res, next) => {
     user_name_l = req.user.username
 
     const userInfos = await UserInfo.find()
-    let postData = []
+    let postData = [], 
+        my_like_history
+        
     userInfos.forEach(userInfo => {
         const info = userInfo.toObject()
         const data = info.post_data.map(ele => {
@@ -1802,6 +1812,11 @@ app.get('/api_whatsnew', async (req, res, next) => {
             return ele
         })
        // console.log(data)
+
+       if (userInfo.user_name === req.user.username) {
+            my_like_history = userInfo.my_like_history
+        }
+
        postData = postData.concat(data)
     })
 
@@ -1819,14 +1834,62 @@ app.get('/api_whatsnew', async (req, res, next) => {
         }//end of if
     })//end of filtered_post_data
 
-    res.json(filtered_post_data)
+    console.log(filtered_post_data)
+
+    /*
+    filtering the post data by LIKE history
+    */
+    // lr = liked_record, fr = filtered_record
+    let lr,
+        fr,
+        matched,
+        filtered_by_liked = []
+    // if my_like_history is not empty, we need to know if post has been liked by the current user
+    // forEach might be better
+    if (my_like_history !== undefined && !isEmpty(my_like_history)) {
+        for (let i = 0; i < filtered_post_data.length; i++) {
+            fr = filtered_post_data[i]
+            matched = false
+            for (let j = 0; j < my_like_history.length; j++) {
+                lr = my_like_history[j]
+                // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
+                if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
+                    // console.log("matched! ")
+                    filtered_by_liked.push({
+                        content: fr.content,
+                        source: fr.source,
+                        senttime: fr.senttime,
+                        contentimg: fr.contentimg,
+                        commented: fr.commented,
+                        liked: fr.liked,
+                        repoted: fr.repoted,
+                        UserName: lr.user_name,
+                        userimg: lr.user_photo,                     
+                        like_switch: true,
+                    })
+                    matched = true
+                    break
+                }
+            }
+            if (matched === false) {
+                filtered_by_liked.push(fr)
+            }
+        }
+    } else {
+        filtered_by_liked = filtered_post_data
+    }
+
+    console.log('filtered_by_liked: ', filtered_by_liked)
+    res.json(filtered_by_liked)
 })
 
 app.get('/api_recommended', async (req, res, next) => {
     user_name_l = req.user.username
 
     const userInfos = await UserInfo.find()
-    let postData = []
+    let postData = [], 
+        my_like_history
+
     userInfos.forEach(userInfo => {
         const info = userInfo.toObject()
         const data = info.post_data.map(ele => {
@@ -1834,6 +1897,11 @@ app.get('/api_recommended', async (req, res, next) => {
             ele.UserName=userInfo.user_name 
             return ele
         })
+
+        if (userInfo.user_name === req.user.username) {
+            my_like_history = userInfo.my_like_history
+        }
+
        // console.log(data)
        postData = postData.concat(data)
     })
@@ -1854,7 +1922,53 @@ app.get('/api_recommended', async (req, res, next) => {
         }//end of if
     })//end of filtered_post_data
 
-    res.json(filtered_post_data)
+    console.log(filtered_post_data)
+
+    /*
+    filtering the post data by LIKE history
+    */
+    // lr = liked_record, fr = filtered_record
+    let lr,
+        fr,
+        matched,
+        filtered_by_liked = []
+    // if my_like_history is not empty, we need to know if post has been liked by the current user
+    // forEach might be better
+    if (my_like_history !== undefined && !isEmpty(my_like_history)) {
+        for (let i = 0; i < filtered_post_data.length; i++) {
+            fr = filtered_post_data[i]
+            matched = false
+            for (let j = 0; j < my_like_history.length; j++) {
+                lr = my_like_history[j]
+                // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
+                if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
+                    // console.log("matched! ")
+                    filtered_by_liked.push({
+                        content: fr.content,
+                        source: fr.source,
+                        senttime: fr.senttime,
+                        contentimg: fr.contentimg,
+                        commented: fr.commented,
+                        liked: fr.liked,
+                        repoted: fr.repoted,
+                        UserName: lr.user_name,
+                        userimg: lr.user_photo,                     
+                        like_switch: true,
+                    })
+                    matched = true
+                    break
+                }
+            }
+            if (matched === false) {
+                filtered_by_liked.push(fr)
+            }
+        }
+    } else {
+        filtered_by_liked = filtered_post_data
+    }
+
+    console.log('filtered_by_liked: ', filtered_by_liked)
+    res.json(filtered_by_liked)
 })
 
 app.get('/api_recent', async (req, res, next) => {
@@ -1863,7 +1977,9 @@ app.get('/api_recent', async (req, res, next) => {
 
     //currently showing all posts, need to be modified 
     const userInfos = await UserInfo.find()
-    let postData = []
+    let postData = [], 
+        my_like_history
+        
     userInfos.forEach(userInfo => {
         const info = userInfo.toObject()
         const data = info.post_data.map(ele => {
@@ -1871,6 +1987,11 @@ app.get('/api_recent', async (req, res, next) => {
             ele.UserName=userInfo.user_name 
             return ele
         })
+
+        if (userInfo.user_name === req.user.username) {
+            my_like_history = userInfo.my_like_history
+        }
+
        // console.log(data)
        postData = postData.concat(data)
     })
@@ -1885,7 +2006,53 @@ app.get('/api_recent', async (req, res, next) => {
         }//end of if
     })//end of filtered_post_data
 
-    res.json(filtered_post_data)
+    console.log(filtered_post_data)
+
+    /*
+    filtering the post data by LIKE history
+    */
+    // lr = liked_record, fr = filtered_record
+    let lr,
+        fr,
+        matched,
+        filtered_by_liked = []
+    // if my_like_history is not empty, we need to know if post has been liked by the current user
+    // forEach might be better
+    if (my_like_history !== undefined && !isEmpty(my_like_history)) {
+        for (let i = 0; i < filtered_post_data.length; i++) {
+            fr = filtered_post_data[i]
+            matched = false
+            for (let j = 0; j < my_like_history.length; j++) {
+                lr = my_like_history[j]
+                // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
+                if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
+                    // console.log("matched! ")
+                    filtered_by_liked.push({
+                        content: fr.content,
+                        source: fr.source,
+                        senttime: fr.senttime,
+                        contentimg: fr.contentimg,
+                        commented: fr.commented,
+                        liked: fr.liked,
+                        repoted: fr.repoted,
+                        UserName: lr.user_name,
+                        userimg: lr.user_photo,                     
+                        like_switch: true,
+                    })
+                    matched = true
+                    break
+                }
+            }
+            if (matched === false) {
+                filtered_by_liked.push(fr)
+            }
+        }
+    } else {
+        filtered_by_liked = filtered_post_data
+    }
+
+    console.log('filtered_by_liked: ', filtered_by_liked)
+    res.json(filtered_by_liked)
 })
 
 app.get('/api_search_recommended', async (req, res) => {

@@ -69,7 +69,7 @@ const WhatsNew = (props) => {
         <div className='WhatsNew'>
             <section className='main-content'>
                 {post_data.map((item) => (
-                    <PostContent key={item.id} source={item.source} userimg={item.userimg} UserName={item.UserName} content={item.content} Senttime={item.senttime} contentimg={item.contentimg} />
+                    <PostContent key={item.id} like_switch = {item.like_switch} source={item.source} userimg={item.userimg} UserName={item.UserName} content={item.content} Senttime={item.senttime} contentimg={item.contentimg} />
                 ))}
             </section>
         </div>
