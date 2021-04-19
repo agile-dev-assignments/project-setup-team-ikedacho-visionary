@@ -583,7 +583,7 @@ app.get('/get_edit', async (req, res) => {
         }
     })
 
-    search_for_mention.forEach(async (item) => {
+    unique_search_names.forEach(async (item) => {
         const search_name = item.replace(/@|\s/g, '')
         console.log(search_name)
         await UserInfo.findOne({ user_name: search_name }, async (err, result) => {
