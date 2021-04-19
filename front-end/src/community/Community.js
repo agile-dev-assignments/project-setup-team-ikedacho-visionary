@@ -14,6 +14,7 @@ const Community = (props) => {
     // start a state variable with a blank array
     const [data, setData] = useState([])
     const [timer, setTimer] = useState(0)
+    const [search_name, setSearch_name] = useState([])
 
     // auto refresh chat room list every 3000 ms <-- 3 seconds
     setTimeout(function () {
@@ -82,6 +83,16 @@ const Community = (props) => {
     unsorted.push(...empty_chat)
 
     console.log(unsorted)
+    console.log("search_name: ", search_name)
+
+    let searched_chat_room
+    if (search_name != null && search_name != undefined && search_name != '' && search_name != []) {
+        searched_chat_room = unsorted.filter((element) => {
+            return element.chatroom_name.includes(search_name)
+        })
+    } else {
+        searched_chat_room = unsorted
+    }
 
     return (
         <div className='Community'>
@@ -106,12 +117,12 @@ const Community = (props) => {
             </div>
 
             <div>
-                <input id='search' placeholder='  Search here'></input>
+                <input type='search' placeholder='Search by group name' value={search_name} onInput={(e) => setSearch_name(e.target.value)} />
                 <Search id='search_icon' color='grey' size={17} />
             </div>
 
             <section className='message_list'>
-                {unsorted.map((item) => (
+                {searched_chat_room.map((item) => (
                     <Message_History key={item.id} details={item} />
                 ))}
             </section>
