@@ -160,7 +160,17 @@ const userInfo = new mongoose.Schema(
                 like_issued_time: Date,
             },
         ],
-        others_mentioned_history: [OthersMentionedHistorySchema],
+        others_mentioned_history: [
+            {
+                mentioner_avatar: String,
+                mentioner_username: String,
+                mentioned_date: Date,
+                post_image: String,
+                post_username: String,
+                post_avatar: String,
+                post_text: String
+            }
+        ],
         others_liked_history: [
             {
                 source: String,
