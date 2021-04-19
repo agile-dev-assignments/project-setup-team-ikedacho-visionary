@@ -1492,6 +1492,7 @@ app.get("/api_search_result", async(req, res) => {
 
     res.json(ret)
 })
+//test
 //Then instantiate a multer object "upload_post_picture" to be used in app.post("/post_Post_picture", upload.array("background_picture", 1), (req, res)...
 //and upload_post_picture multure object use the storage rule as defined in storage variable.
 /*const upload_post_picture = multer({ storage: storage })
