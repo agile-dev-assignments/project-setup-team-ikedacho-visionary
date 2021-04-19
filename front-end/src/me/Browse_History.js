@@ -29,10 +29,9 @@ const Browse_History = (props) => {
                 <h3>Browse History</h3>
                 <p></p>
             </header>
-
             <div className='Browse_List'>
                 {PostData.map(
-                    (item) => (console.log('rendering'), (<Browse viewdate={item.viewDate} UserName={item.UserName} userimg={item.userimg} content={item.content} contentimgs={item.contentimgs} />))
+                    (item) => (console.log('rendering'), (<Browse viewdate={item.viewdate.slice(0,10)} UserName={item.UserName} userimg={item.userimg} content={item.content} contentimgs={item.contentimgs} />))
                 )}
             </div>
         </div>
