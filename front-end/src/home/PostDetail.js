@@ -46,7 +46,6 @@ const PostDetail = (props) => {
         axios
         .post("/browsed",
         {
-            id : state.id,
             viewdate : date,
             UserName : state.UserName,
             userimg : state.userimg,
