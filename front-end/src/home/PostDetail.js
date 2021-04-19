@@ -19,7 +19,7 @@ const PostDetail = (props) => {
         history.goBack()
     }
 
-    const [PostData, setPostData] = useState([{ id: 1, source: '', UserName: '', user_photo: '', Content: '', contentimg: [], post_date: '' }])
+    const [PostData, setPostData] = useState([{ id: 1, source: '', UserName: '', user_photo: '', Content: '', contentimg: '', post_date: '' }])
 
     const [self_username, Set_self_username] = useState('')
 
@@ -42,17 +42,16 @@ const PostDetail = (props) => {
     console.log(state)
 
     useEffect(() => {
+
         axios
-        .post(
-        "/browsed",
+        .post("/browsed",
         {
-            // PostData,
-            id : PostData.id,
+            id : state.id,
             viewdate : date,
-            UserName : PostData.UserName,
-            userimg : PostData.userimg,
-            content : PostData.content,
-            contentimgs: PostData.contentimg
+            UserName : state.UserName,
+            userimg : state.userimg,
+            content : state.content,
+            contentimgs: state.contentimg
         })
         .then((response) => {
             if (response.data.status === 'created') {
@@ -66,7 +65,7 @@ const PostDetail = (props) => {
                 })
             }, [])
 
-    saveBrowseData()
+
     const [data, setData] = useState([
         {
             id: 1,
