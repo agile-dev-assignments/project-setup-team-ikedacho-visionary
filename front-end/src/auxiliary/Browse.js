@@ -24,12 +24,12 @@ const Browse = (props) => {
                     <p className='content'>{props.content}</p>
                 </div>
             </div>
-            <div className='imgs'>
+            {/* <div className='imgs'>
                 {props.contentimgs.map((item) => (
                     <img className='img' src={item} alt='' />
                 ))}
-            </div>
-            {/*<img className="" src={props.contentimg}/>*/}
+            </div> */}
+            <img className="" src={props.contentimg}/>
         </div>
     )
 }

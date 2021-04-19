@@ -126,8 +126,12 @@ app.post("/browsed", (req, res) => {
     const username = req.user.username;
     UserInfo.findOne({user_name: username}, (err, result) => {
         result.my_browse_history.push(browsed)
-        console.log(result)
         // save the update
+        result.save((err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
         res.send("Created")
     })
    
