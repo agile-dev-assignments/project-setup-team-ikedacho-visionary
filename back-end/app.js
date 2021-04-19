@@ -1774,114 +1774,33 @@ So, use backup data instead
 */
 app.get('/api_whatsnew', async (req, res, next) => {
     user_name_l = req.user.username
-    let post_data = []
 
-    await axios
-        .get(`${process.env.API_LOGIN_WHATSNEW}?key=${process.env.API_LOGIN_WHATSNEW_KEY}_`)
-        .then((apiResponse) => (post_data = apiResponse.data))
-        .catch((err) => {
-            //console.log(err)
-            const backupData = [
-                {
-                    source: 'O-Zone',
-                    userimg: 'https://robohash.org/etconsequaturenim.png?size=50x50\u0026set=set1',
-                    UserName: 'mslee0',
-                    content: 'In congue. Etiam justo. Etiam pretium iaculis justo.',
-                    Senttime: '10/23/2020',
-                    contentimg: 'http://dummyimage.com/164x193.png/5fa2dd/ffffff',
-                },
-                {
-                    source: 'Instagram',
-                    userimg: 'https://robohash.org/exercitationemculpalibero.png?size=50x50\u0026set=set1',
-                    UserName: 'ejacks1',
-                    content:
-                        'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.\n\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.',
-                    Senttime: '8/27/2020',
-                    contentimg: 'http://dummyimage.com/223x286.png/cc0000/ffffff',
-                },
-                {
-                    source: 'Twitter',
-                    userimg: 'https://robohash.org/rerumeumharum.png?size=50x50\u0026set=set1',
-                    UserName: 'cpeery2',
-                    content:
-                        'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.\n\nProin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',
-                    Senttime: '7/2/2020',
-                    contentimg: 'http://dummyimage.com/206x170.png/cc0000/ffffff',
-                },
-                {
-                    source: 'O-Zone',
-                    userimg: 'https://robohash.org/estmollitiaeum.png?size=50x50\u0026set=set1',
-                    UserName: 'klomax3',
-                    content: 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.',
-                    Senttime: '2/8/2021',
-                    contentimg: 'http://dummyimage.com/237x203.png/dddddd/000000',
-                },
-                {
-                    source: 'O-Zone',
-                    userimg: 'https://robohash.org/estquoquis.png?size=50x50\u0026set=set1',
-                    UserName: 'hbrazelton4',
-                    content:
-                        'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.\n\nPhasellus in felis. Donec semper sapien a libero. Nam dui.\n\nProin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.',
-                    Senttime: '11/28/2020',
-                    contentimg: 'http://dummyimage.com/145x171.png/ff4444/ffffff',
-                },
-                {
-                    source: 'Instagram',
-                    userimg: 'https://robohash.org/officiisaccusamusnulla.png?size=50x50\u0026set=set1',
-                    UserName: 'tsimak5',
-                    content:
-                        'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.\n\nNam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.\n\nCurabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.',
-                    Senttime: '2/2/2021',
-                    contentimg: 'http://dummyimage.com/229x279.png/5fa2dd/ffffff',
-                },
-                {
-                    source: 'Instagram',
-                    userimg: 'https://robohash.org/etautaliquid.png?size=50x50\u0026set=set1',
-                    UserName: 'bbarff6',
-                    content:
-                        'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.',
-                    Senttime: '3/9/2021',
-                    contentimg: 'http://dummyimage.com/144x292.png/dddddd/000000',
-                },
-                {
-                    source: 'Instagram',
-                    userimg: 'https://robohash.org/etomnisreiciendis.png?size=50x50\u0026set=set1',
-                    UserName: 'gsmees7',
-                    content: 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.',
-                    Senttime: '12/30/2020',
-                    contentimg: 'http://dummyimage.com/239x274.png/ff4444/ffffff',
-                },
-                {
-                    source: 'Twitter',
-                    userimg: 'https://robohash.org/nesciuntquiaut.png?size=50x50\u0026set=set1',
-                    UserName: 'mdodds8',
-                    content:
-                        'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.',
-                    Senttime: '10/27/2020',
-                    contentimg: 'http://dummyimage.com/197x285.png/cc0000/ffffff',
-                },
-                {
-                    source: 'Facebook',
-                    userimg: 'https://robohash.org/sitaccusantiummagnam.png?size=50x50\u0026set=set1',
-                    UserName: 'nmacadam9',
-                    content:
-                        'Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.\n\nInteger ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.',
-                    Senttime: '10/21/2020',
-                    contentimg: 'http://dummyimage.com/122x127.png/ff4444/ffffff',
-                },
-            ]
-            post_data = backupData
+    const userInfos = await UserInfo.find()
+    let postData = []
+    userInfos.forEach(userInfo => {
+        const info = userInfo.toObject()
+        const data = info.post_data.map(ele => {
+            ele.userimg= userInfo.user_photo
+            ele.UserName=userInfo.user_name 
+            return ele
         })
-    let filtered_post_data = post_data.slice()
+       // console.log(data)
+       postData = postData.concat(data)
+    })
 
-    //console.log("selected_social_media",selected_social_media)
-    filtered_post_data = post_data.filter((element) => {
+    postData.sort((prev,cur)=>{
+        return cur.senttime - prev.senttime
+    })
+
+    let filtered_post_data = postData.slice()
+
+    //console.log("selected_social_media", selected_social_media)
+
+    filtered_post_data = postData.filter(element => {
         if (selected_social_media.includes(element.source)) {
             return true
-        } //end of if
-    }) //end of filtered_post_data
-
-    // console.log("filtered_post_data", filtered_post_data)
+        }//end of if
+    })//end of filtered_post_data
 
     res.json(filtered_post_data)
 })
