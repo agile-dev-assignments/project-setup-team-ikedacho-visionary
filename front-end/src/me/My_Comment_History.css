@@ -1,20 +1,20 @@
-article.My_Comment_History *{
-    margin:0;
-    padding:0;
+article.My_Comment_History * {
+    margin: 0;
+    padding: 0;
 }
 
-.My_Comment_History{
+.My_Comment_History {
     border: 0px solid #e0dfdf;
-    padding:10px;
-    border-top: solid #B1B1B1 1px;
-    border-bottom:solid #B1B1B1 1px;
+    padding: 10px;
+    border-top: solid #b1b1b1 1px;
+    border-bottom: solid #b1b1b1 1px;
 }
 
 article.My_Comment_History .inline-block {
     display: inline-block;
 }
 
-article.My_Comment_History #username1{
+article.My_Comment_History #username1 {
     position: relative;
     top: -25px;
 }
@@ -24,51 +24,50 @@ article.My_Comment_History #avatar {
     border-radius: 50%;
     padding: 5px;
     width: 50px;
-    height:50px;
-  
+    height: 50px;
 }
 
 article.My_Comment_History #commented_date {
     position: absolute;
     right: 10px;
-    padding-top:10px ;
+    padding-top: 10px;
     font-size: 0.8em;
 }
 
-article.My_Comment_History h1{
+article.My_Comment_History h1 {
     position: relative;
     left: 5px;
     line-height: 1.5em;
 }
 
-article.My_Comment_History #post{
+article.My_Comment_History #post {
     line-height: 1em;
-    height:80px;
-    background-color:#f1efef ;
+    height: 80px;
+    background-color: #f1efef;
     line-height: 1em;
     font-size: 0.8em;
-    margin:0px;
+    margin: 0px;
 }
 
-article.My_Comment_History #post_image{
+article.My_Comment_History #post_image {
     float: left;
 }
 
-article.My_Comment_History #username{
-    font-size:1em;
-    padding-left:10px;
+article.My_Comment_History #username {
+    font-size: 1em;
+    padding-left: 10px;
 }
 
-article.My_Comment_History #post_text{
-    padding-left:10px;
-    padding-right:10px;
+article.My_Comment_History #post_text {
+    padding-left: 10px;
+    padding-right: 10px;
     overflow: hidden;
-    height:36.4px;
-    color:#747070;
+    height: 36.4px;
+    color: #747070;
 }
 
-article.My_Comment_History #comment{
-    padding-top:0px;
+article.My_Comment_History #comment {
+    padding-top: 0px;
     line-height: 1.1em;
-    margin-bottom:5px;
+    margin-bottom: 5px;
 }

@@ -3,43 +3,37 @@ import { Link } from 'react-router-dom'
 import './My_Comment_History.css'
 
 const My_Comment_History = (props) => {
-  // console.log(props);
+    // console.log(props);
 
-  return (
-    <article className="My_Comment_History">
-       
+    return (
+        <article className='My_Comment_History'>
             <div>
-              <Link to={`/my_profile`}>
-                <img class='inline-block' id="avatar" src="https://robohash.org/autplaceatatque.bmp?size=50x50" />
-                <h1 class='inline-block' id='username1' >Username</h1>
+                <Link to={`/my_profile`}>
+                    <img class='inline-block' id='avatar' src='https://robohash.org/autplaceatatque.bmp?size=50x50' />
+                    <h1 class='inline-block' id='username1'>
+                        Username
+                    </h1>
                 </Link>
-                <span id="commented_date">{props.details.commented_date}</span>
+                <span id='commented_date'>{props.details.commented_date}</span>
             </div>
-        
-        <p id='comment'>Commented @{props.details.post_created_by}: {props.details.commented_content}</p>
-       
-        
 
-        <Link to={`/detailpost`}>
-            
-                
-                <p id='post' >
+            <p id='comment'>
+                Commented @{props.details.post_created_by}: {props.details.commented_content}
+            </p>
 
-            
-                <img id="post_image" src={props.details.post_image} />
-               
-                <br></br>
-                <span id='username'>{props.details.post_created_by}</span>
-                <br></br>
-                <br></br>
-                <div id='post_text'>{props.details.post_text}</div>
+            <Link to={`/detailpost`}>
+                <p id='post'>
+                    <img id='post_image' src={props.details.post_image} />
+
+                    <br></br>
+                    <span id='username'>{props.details.post_created_by}</span>
+                    <br></br>
+                    <br></br>
+                    <div id='post_text'>{props.details.post_text}</div>
                 </p>
-                
-         
-        </Link>
-
-    </article>
-  )
+            </Link>
+        </article>
+    )
 }
 
 // make this function available to be imported into another module

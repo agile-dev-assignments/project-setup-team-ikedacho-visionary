@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './Mentions_List.css'
-import Mentions from "./Mentions";
+import Mentions from './Mentions'
 
 const Mentions_List = (props) => {
     const [data, setData] = useState([])
@@ -10,11 +10,11 @@ const Mentions_List = (props) => {
     // the following side-effect will be called once upon initial render
     useEffect(() => {
         axios
-            .get("/api_being_mentioned")
+            .get('/api_being_mentioned')
             .then((response) => {
                 // extract the data from the server response
                 setData(response.data)
-                console.log("data fetched from backend: ", data)
+                console.log('data fetched from backend: ', data)
             })
             .catch((err) => {
                 console.error(err)
@@ -22,18 +22,16 @@ const Mentions_List = (props) => {
     }, []) // only run it once!
 
     return (
-        <div className="Mentions_List">
+        <div className='Mentions_List'>
             <Link to={'/community'}>
-                <h1 id="back">Back</h1>
+                <h1 id='back'>Back</h1>
             </Link>
 
             <h1 id='title'>Mentions</h1>
 
-            <section className="Mentions_List">
+            <section className='Mentions_List'>
                 {data.map((item) => (
-                    <Mentions 
-                        key={item.id} 
-                        details={item}/>
+                    <Mentions key={item.id} details={item} />
                 ))}
             </section>
         </div>

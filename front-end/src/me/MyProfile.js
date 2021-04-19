@@ -150,7 +150,8 @@ const MyProfile = (props) => {
                     Edit picture
                 </button>
                 {state.showComment && <>{<Background_picture />}</>}
-                <img class='inline-block' id='background_picture' src={`${user_info.background_picture}`} /> {/* src is the url to request and find static file in public/ folder. don't use /static/url !!!!!!! it cause error*/}
+                <img class='inline-block' id='background_picture' src={`${user_info.background_picture}`} />{' '}
+                {/* src is the url to request and find static file in public/ folder. don't use /static/url !!!!!!! it cause error*/}
                 <div id='overview'>
                     <p id='message_text'>
                         <img class='inline-block' id='avatar' src={user_info.user_photo} />
@@ -227,7 +228,16 @@ const MyProfile = (props) => {
 
             <section className='main-content4'>
                 {post_data.map((item) => (
-                    <PostContent key={item.id} like_switch = {item.like_switch} source={item.source} userimg={user_info.user_photo} UserName={user_info.user_name} content={item.content} Senttime={item.senttime} contentimg={item.contentimg} />
+                    <PostContent
+                        key={item.id}
+                        like_switch={item.like_switch}
+                        source={item.source}
+                        userimg={user_info.user_photo}
+                        UserName={user_info.user_name}
+                        content={item.content}
+                        Senttime={item.senttime}
+                        contentimg={item.contentimg}
+                    />
                 ))}
             </section>
         </div>

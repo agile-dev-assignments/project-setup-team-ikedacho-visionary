@@ -25,7 +25,7 @@ div.ToTwitter #Twitter {
     color: white;
     font-weight: bold;
     background-repeat: no-repeat;
-    background-image: url("https://cdn.cms-twdigitalassets.com/content/dam/developer-twitter/auth-docs/sign-in-with-twitter-gray.png.twimg.2560.png")
+    background-image: url('https://cdn.cms-twdigitalassets.com/content/dam/developer-twitter/auth-docs/sign-in-with-twitter-gray.png.twimg.2560.png');
 }
 div.ToTwitter a {
     color: black;

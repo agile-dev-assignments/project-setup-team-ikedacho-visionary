@@ -14,11 +14,11 @@ div.Search {
     text-align: center;
     /* padding-top: 3px; */
 }
-.Search .main_content{
+.Search .main_content {
     display: block;
     text-align: center;
 }
-.Search .subtitle{
+.Search .subtitle {
     font-size: 15px;
     text-align: center;
     font-weight: 500;

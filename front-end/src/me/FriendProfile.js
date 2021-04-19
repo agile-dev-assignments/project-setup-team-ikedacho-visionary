@@ -227,7 +227,16 @@ const FriendProfile = (props) => {
             <section>
                 <section className='main-content4'>
                     {post_data.map((item) => (
-                        <PostContent key={item.id} like_switch = {item.like_switch} source={item.source} userimg={friend_info.user_photo} UserName={friend_info.user_name} content={item.content} Senttime={item.senttime} contentimg={item.contentimg} />
+                        <PostContent
+                            key={item.id}
+                            like_switch={item.like_switch}
+                            source={item.source}
+                            userimg={friend_info.user_photo}
+                            UserName={friend_info.user_name}
+                            content={item.content}
+                            Senttime={item.senttime}
+                            contentimg={item.contentimg}
+                        />
                     ))}
                 </section>
             </section>

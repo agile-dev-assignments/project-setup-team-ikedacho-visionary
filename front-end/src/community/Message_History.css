@@ -1,59 +1,51 @@
-
-
-article.Message_History{
-
-    border-bottom:solid 1px #ddd;
+article.Message_History {
+    border-bottom: solid 1px #ddd;
     padding-bottom: 15px;
 }
-article.Message_History #message{
-    margin-top:-10px;
-    padding:10px;
+article.Message_History #message {
+    margin-top: -10px;
+    padding: 10px;
 }
-
 
 article.Message_History #avatar {
     border: 1px solid #ddd;
     border-radius: 50%;
     padding: 5px;
     width: 50px;
-    height:50px;
-  
+    height: 50px;
 }
 
-article.Message_History #avatar{
+article.Message_History #avatar {
     float: left;
 }
 
-article.Message_History #newest_message{
-    padding-left:3vw;
-    padding-right:10vw;
+article.Message_History #newest_message {
+    padding-left: 3vw;
+    padding-right: 10vw;
     overflow: hidden;
     height: 6vw;
-    color:#747070;
+    color: #747070;
     position: relative;
     bottom: -10px;
 }
 
-article.Message_History #username{
-    font-size:1em;
-    padding-left:10px;
+article.Message_History #username {
+    font-size: 1em;
+    padding-left: 10px;
 }
 
-article.Message_History #newest_message_date{
-    position:absolute;
+article.Message_History #newest_message_date {
+    position: absolute;
     right: 10px;
-
-
-
 }
 
-article.Message_History #unread_message_number{
-    position:absolute;
+article.Message_History #unread_message_number {
+    position: absolute;
     right: 10px;
     background-color: rgb(241, 74, 74);
-    width:28px;
+    width: 28px;
     border-radius: 10px;
     text-align: center;
-    color:white;
-    margin-top:11px;
+    color: white;
+    margin-top: 11px;
 }

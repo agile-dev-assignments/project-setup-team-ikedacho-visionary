@@ -17,7 +17,7 @@ const Friend_Suggestion = (props) => {
         axios
             .get('/api_friend_suggestion', {
                 params: {
-                    search_name: search_name
+                    search_name: search_name,
                 },
             })
             .then((response) => {

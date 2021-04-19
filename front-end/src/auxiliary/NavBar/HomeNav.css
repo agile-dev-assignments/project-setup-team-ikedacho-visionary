@@ -1,87 +1,81 @@
 .homenav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  border-width: 1px 0 1px 0px; /* no border on left or right */
-  margin:0px;
-  position: fixed;
-  top: 0;
-  background-color: white;
-  width: 100%;
-  height:35px;
-  z-index: 1;
-  border-bottom: 2px solid #e7e7e7;
-
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-width: 1px 0 1px 0px; /* no border on left or right */
+    margin: 0px;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    width: 100%;
+    height: 35px;
+    z-index: 1;
+    border-bottom: 2px solid #e7e7e7;
 }
 
-.homenav .post{
-  position: relative;
+.homenav .post {
+    position: relative;
 }
 
-.homenav .post-checkbox{
-  position: absolute;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  color: black;
-  background-color: rgb(238, 238, 238);
-  z-index: 9;
+.homenav .post-checkbox {
+    position: absolute;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    background-color: rgb(238, 238, 238);
+    z-index: 9;
 }
 
-.homenav .post-checkbox label{
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid rgb(255, 255, 255);
+.homenav .post-checkbox label {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgb(255, 255, 255);
 }
-#homenav_button{
-  background:white;
-  border:none;
+#homenav_button {
+    background: white;
+    border: none;
 }
-.homenav .post-checkbox label p{
-  width: 80px;
-}
-
-.homenav .checkbox{
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
+.homenav .post-checkbox label p {
+    width: 80px;
 }
 
+.homenav .checkbox {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
 
-
-.homenav #homenav_button{
-  flex-grow:1;
-  width: auto!important;
-  text-decoration: none;
-  color: black;
-  text-align: center;
-  height:35px;
-  padding-top: 9px;
-  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 12px!important;
+.homenav #homenav_button {
+    flex-grow: 1;
+    width: auto !important;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    height: 35px;
+    padding-top: 9px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 12px !important;
 }
 
 #homenav_button:hover {
-  text-decoration: none;
-
+    text-decoration: none;
 }
 
 #homenav_button:focus {
-  text-decoration: underline;
-
+    text-decoration: underline;
 }
 
-
-#platform_label{
-  height: 40px;
+#platform_label {
+    height: 40px;
 }
 
-#submit_homenav{
-  width:120px;
-  background-color:#5c5555;
-  color:white;
-  height: 30px;
-  border:0px;
+#submit_homenav {
+    width: 120px;
+    background-color: #5c5555;
+    color: white;
+    height: 30px;
+    border: 0px;
 }

@@ -2,11 +2,11 @@ article.commented * {
     margin: 0;
     padding: 0;
 }
-.commented{
+.commented {
     border: 0px solid #e0dfdf;
-    padding:10px;
-    border-top: solid #B1B1B1 1px;
-    border-bottom:solid #B1B1B1 1px;
+    padding: 10px;
+    border-top: solid #b1b1b1 1px;
+    border-bottom: solid #b1b1b1 1px;
 }
 
 article.commented .inline-block {
@@ -16,50 +16,50 @@ article.commented .inline-block {
 article.commented #commented_date {
     position: absolute;
     right: 10px;
-    padding-top:10px ;
+    padding-top: 10px;
     font-size: 0.8em;
 }
 
-article.commented h1{
+article.commented h1 {
     position: relative;
     left: 5px;
     line-height: 1.5em;
 }
-article.commented #username1{
+article.commented #username1 {
     position: relative;
     top: -25px;
 }
 
-article.commented #post{
+article.commented #post {
     line-height: 1em;
-    height:80px;
-    background-color:#f1efef ;
+    height: 80px;
+    background-color: #f1efef;
     line-height: 1em;
     font-size: 0.8em;
-    margin:0px;
+    margin: 0px;
 }
 
-article.commented #post_image{
+article.commented #post_image {
     float: left;
 }
 
-article.commented #username{
-    font-size:1em;
-    padding-left:10px;
+article.commented #username {
+    font-size: 1em;
+    padding-left: 10px;
 }
 
-article.commented #post_text{
-    padding-left:10px;
-    padding-right:10px;
+article.commented #post_text {
+    padding-left: 10px;
+    padding-right: 10px;
     overflow: hidden;
-    height:36.4px;
-    color:#747070;
+    height: 36.4px;
+    color: #747070;
 }
 
-article.commented #comment{
-    padding-top:10px;
+article.commented #comment {
+    padding-top: 10px;
     line-height: 1.1em;
-    margin-bottom:5px;
+    margin-bottom: 5px;
 }
 
 article.commented #avatar {
@@ -67,6 +67,5 @@ article.commented #avatar {
     border-radius: 50%;
     padding: 5px;
     width: 50px;
-    height:50px;
-  
+    height: 50px;
 }

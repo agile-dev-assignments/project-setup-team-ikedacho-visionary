@@ -66,7 +66,7 @@ const Me = (props) => {
                 element.style.color = 'white'
                 element.addEventListener('click', () => {
                     window.location.href = '/to_twitter'
-                })                
+                })
             }
 
             if (element.id === 'Instagram') {
@@ -74,27 +74,27 @@ const Me = (props) => {
                 element.style.color = 'white'
                 element.addEventListener('click', () => {
                     window.location.href = '/to_instagram'
-                })              
-            
+                })
             }
-    }
+        }
     }
     const LoginStatus_fb = async () => {
         setUpFacebookSDK()
 
-    if (window.FB !== undefined) {
-        window.FB.getLoginStatus(function (response) {
-            console.log(response)
-            if (response.status === 'connected') {
-                console.log('User already logged in Facebook and autenticated')
-                SetClicked_unconnected_social_media('Facebook')
-            } else {
-                //console.log('user not logged in FB')
-                //SetClicked_linked_social_media('Facebook')
-            }
-        })}
+        if (window.FB !== undefined) {
+            window.FB.getLoginStatus(function (response) {
+                console.log(response)
+                if (response.status === 'connected') {
+                    console.log('User already logged in Facebook and autenticated')
+                    SetClicked_unconnected_social_media('Facebook')
+                } else {
+                    //console.log('user not logged in FB')
+                    //SetClicked_linked_social_media('Facebook')
+                }
+            })
+        }
     }
-    
+
     const fetchData = async () => {
         await axios('/get_me', {
             params: {

@@ -10,11 +10,11 @@
     font-size: 1em;
 }
 
-.searchResult .back_button{
+.searchResult .back_button {
     display: inline-block;
     text-decoration: none;
-    color:black;
+    color: black;
     position: absolute;
     left: 10px;
-    font-size:15px;
+    font-size: 15px;
 }

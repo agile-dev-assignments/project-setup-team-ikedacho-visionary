@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import './Community.css'
-import { Search } from 'react-bootstrap-icons';
-import { ChatLeftDotsFill } from 'react-bootstrap-icons';
-import { At } from 'react-bootstrap-icons';
-import { TextParagraph } from 'react-bootstrap-icons';
-import { HeartFill } from 'react-bootstrap-icons';
+import { Search } from 'react-bootstrap-icons'
+import { ChatLeftDotsFill } from 'react-bootstrap-icons'
+import { At } from 'react-bootstrap-icons'
+import { TextParagraph } from 'react-bootstrap-icons'
+import { HeartFill } from 'react-bootstrap-icons'
 import './Community.js'
 import Message_History from './Message_History'
-
-
 
 const Community = (props) => {
     // start a state variable with a blank array
@@ -18,28 +16,28 @@ const Community = (props) => {
     const [timer, setTimer] = useState(0)
 
     // auto refresh chat room list every 3000 ms <-- 3 seconds
-    setTimeout(function(){
+    setTimeout(function () {
         if (timer === 0) {
             setTimer(1)
         } else {
             setTimer(0)
         }
-    }, 3000);
+    }, 3000)
 
     // the following side-effect will be called once upon initial render
     useEffect(() => {
         // fetch some mock data about animals for sale
         console.log('fetching message history')
 
-        axios("/api_message")
-        .then(response => {
-            setData(response.data);
-        })
-        .catch((err) => {
-        console.log(`couldn't get user messages`)
-        console.error(err) // the server returned an error... probably too many requests... until we pay!
-        })
-    }, [timer]) 
+        axios('/api_message')
+            .then((response) => {
+                setData(response.data)
+            })
+            .catch((err) => {
+                console.log(`couldn't get user messages`)
+                console.error(err) // the server returned an error... probably too many requests... until we pay!
+            })
+    }, [timer])
 
     let unsorted = []
     let empty_chat = []
@@ -48,7 +46,7 @@ const Community = (props) => {
         1. empty
         . non-empty <- sort on this group only
     */
-    for (let i = 0; i < data.length; i ++) {
+    for (let i = 0; i < data.length; i++) {
         if (data[i].message_history.length === 0) {
             empty_chat.push(data[i])
         } else {
@@ -59,78 +57,66 @@ const Community = (props) => {
 
     // fascinating bubble sort, killer of time complexity
     function bubbleSort(array, property) {
-        let swapped;
+        let swapped
         do {
-            swapped = false;
+            swapped = false
             for (let i = 0; i < array.length - 1; i++) {
                 const date1 = new Date(array[i][property][array[i][property].length - 1].time).getTime()
                 const date2 = new Date(array[i + 1][property][array[i + 1][property].length - 1].time).getTime()
                 // console.log("------", date1)
                 // console.log("======", date2)
                 if (date1 < date2) {
-                    let temp = array[i];
-                    array[i] = array[i + 1];
-                    array[i + 1] = temp;
-                    swapped = true;
+                    let temp = array[i]
+                    array[i] = array[i + 1]
+                    array[i + 1] = temp
+                    swapped = true
                 }
             }
-        } while (swapped);
+        } while (swapped)
     }
 
-    bubbleSort(unsorted, "message_history")
+    bubbleSort(unsorted, 'message_history')
     // console.log("sorted!", unsorted)
 
     // append the empty_chat to the sorted `unsorted` array
-    unsorted.push(... empty_chat)
+    unsorted.push(...empty_chat)
 
     console.log(unsorted)
 
     return (
-        <div className = "Community">
+        <div className='Community'>
             <h1>Message</h1>
-            <Link to={'/create_new_chat'}> 
-                <ChatLeftDotsFill id="chat" size={17}/> 
-            
+            <Link to={'/create_new_chat'}>
+                <ChatLeftDotsFill id='chat' size={17} />
             </Link>
-            <div className = "main-content">
-                
-                <Link class='icon' to={'/mentions'}> 
-                <At id='mention-icon' size={30} color="white"/>
-                        <p id="mentions">
-                            Mentions
-                        </p>
+            <div className='main-content'>
+                <Link class='icon' to={'/mentions'}>
+                    <At id='mention-icon' size={30} color='white' />
+                    <p id='mentions'>Mentions</p>
                 </Link>
                 <Link class='icon' to={'/comments'}>
-                    <TextParagraph id='comment-icon' size={30} color="white"/>
-                        <p id="comments" >
-                            Comments
-                        </p>
+                    <TextParagraph id='comment-icon' size={30} color='white' />
+                    <p id='comments'>Comments</p>
                 </Link>
 
                 <Link class='icon' to={'/likes'}>
-                    <HeartFill id='like-icon' size={30} color="white"/>
-                        <p id="likes">
-                            Likes
-                        </p>
+                    <HeartFill id='like-icon' size={30} color='white' />
+                    <p id='likes'>Likes</p>
                 </Link>
             </div>
 
-            <div >
-                <input id="search" placeholder="  Search here">
-                </input>
-                <Search id='search_icon' color="grey" size={17} />
-                
+            <div>
+                <input id='search' placeholder='  Search here'></input>
+                <Search id='search_icon' color='grey' size={17} />
             </div>
 
-            <section className = "message_list">
+            <section className='message_list'>
                 {unsorted.map((item) => (
                     <Message_History key={item.id} details={item} />
                 ))}
             </section>
         </div>
-
-        
-    );
+    )
 }
 
-export default Community;
+export default Community

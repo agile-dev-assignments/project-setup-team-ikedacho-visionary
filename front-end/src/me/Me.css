@@ -1,34 +1,33 @@
-div.Me{
+div.Me {
     margin-bottom: 35px;
 }
 
-div.Me #main_container1{
-    padding-left:10px;
-    padding-right:10px;
-
+div.Me #main_container1 {
+    padding-left: 10px;
+    padding-right: 10px;
 }
-div.Me h1{
-    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
-    color:#353535;
+div.Me h1 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #353535;
     font-weight: bold;
     font-size: 1em;
-    text-align:center;
-    padding-top:3px;
+    text-align: center;
+    padding-top: 3px;
 }
-div.Me #addFriend{
+div.Me #addFriend {
     position: absolute;
     left: 10px;
     top: 15px;
     z-index: 1;
-    font-weight:600;
+    font-weight: 600;
     font-size: 0.9em;
 }
-div.Me #setting{
+div.Me #setting {
     position: absolute;
     right: 10px;
     top: 15px;
     z-index: 1;
-    font-weight:600;
+    font-weight: 600;
     font-size: 0.9em;
 }
 
@@ -37,29 +36,29 @@ div.Me #avatar {
     border-radius: 50%;
     padding: 5px;
     width: 50px;
-    height:50px;
+    height: 50px;
     float: left;
 }
-div.Me #username{
+div.Me #username {
     position: relative;
-    top:10px;
-    font-size:1em;
-    padding-left:10px;
+    top: 10px;
+    font-size: 1em;
+    padding-left: 10px;
 }
 
-div.Me #bio{
-    padding-left:10px;
-    padding-right:40px;
+div.Me #bio {
+    padding-left: 10px;
+    padding-right: 40px;
     overflow: hidden;
-    height:20px;
-    color:#747070;
+    height: 20px;
+    color: #747070;
     position: relative;
     bottom: -10px;
 }
 
-div.Me #post_follow{
+div.Me #post_follow {
     text-decoration: none;
-    font-size:13px;
+    font-size: 13px;
     padding-top: 8px;
     padding-bottom: 8px;
     display: flex;
@@ -67,24 +66,22 @@ div.Me #post_follow{
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid lightgrey;
-
 }
-div.Me #post_follow #button{
-    flex-grow:1;
+div.Me #post_follow #button {
+    flex-grow: 1;
     width: 25%;
     text-align: center;
 }
 
-div.Me a{
-    color:black;
+div.Me a {
+    color: black;
     text-decoration: none;
 }
 
-
-div.Me #main_container2{
+div.Me #main_container2 {
     margin-top: 0px;
     padding-top: 0px;
-    
+
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -93,117 +90,105 @@ div.Me #main_container2{
     border-top: 1px solid lightgrey;
 }
 
-div.Me #main_container2{
+div.Me #main_container2 {
     padding: 5px;
 }
-div.Me #main_container2 .icon{
+div.Me #main_container2 .icon {
     background-color: rgba(195, 166, 197, 0.767);
     margin-left: 6%;
     margin-right: 6%;
     margin-top: 30px;
     margin-bottom: 30px;
-    width:55px;
+    width: 55px;
     height: 55px;
     border-radius: 50%;
     margin-top: 10px;
-    
 }
-div.Me #browse_history,#commented, #liked{
-    position:relative;
-    top:10px;
+div.Me #browse_history,
+#commented,
+#liked {
+    position: relative;
+    top: 10px;
     font-size: 0.9em;
     color: rgb(54, 54, 54);
-    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-div.Me #commented{
-    left:-13px;
-   
+div.Me #commented {
+    left: -13px;
 }
-div.Me #liked{
+div.Me #liked {
     left: 8px;
 }
-div.Me #browse_history{
-    font-size: 0.8em;;
-    left:6px;
- 
-
+div.Me #browse_history {
+    font-size: 0.8em;
+    left: 6px;
 }
 
-div.Me #browse_history_icon,#commented-icon, #liked-icon{
-    position:relative;
-    left:13px;
-    top:15px;
+div.Me #browse_history_icon,
+#commented-icon,
+#liked-icon {
+    position: relative;
+    left: 13px;
+    top: 15px;
 }
 
-
-div.Me #browse_history_icon{
-    top:13px;
+div.Me #browse_history_icon {
+    top: 13px;
 }
 
-
-
-
-
-
-div.Me #main_container3{
-
+div.Me #main_container3 {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: left;
-    
-    
 }
 
-div.Me #main_container3{
+div.Me #main_container3 {
     padding: 5px;
     padding-bottom: 16px;
     border-bottom: 1px solid lightgrey;
-    
 }
 
-
-div.Me #main_container3 .icon{
+div.Me #main_container3 .icon {
     background-color: rgba(195, 166, 197, 0.767);
     padding: 0px;
-    margin-left:13%;
+    margin-left: 13%;
     margin-right: 8%;
     margin-top: 20px;
     margin-bottom: 20px;
-    width:40px;
+    width: 40px;
     height: 40px;
     border-radius: 50%;
-    
 }
 
-div.Me #O-Zone{
-   
+div.Me #O-Zone {
     position: relative;
-    left:0px;
-    top:0px;
-    padding:5px;
-
-} 
-
-div.Me #Facebook{
-    position: relative;
-    left:5px;
-    top:5px;
+    left: 0px;
+    top: 0px;
+    padding: 5px;
 }
-div.Me button#O-Zone, button#Facebook , button#Instagram, button#Twitter{
-    width:80px;
+
+div.Me #Facebook {
+    position: relative;
+    left: 5px;
+    top: 5px;
+}
+div.Me button#O-Zone,
+button#Facebook,
+button#Instagram,
+button#Twitter {
+    width: 80px;
     background-color: rgb(231, 219, 219);
-    border:1px solid white;
+    border: 1px solid white;
     text-align: center;
     position: relative;
-    left:-18px;
+    left: -18px;
     border-radius: 0;
 }
 
 div.Me button#Facebook {
-    
     position: relative;
-    left:-20px;
-    top:10px;
-    padding:5px;
+    left: -20px;
+    top: 10px;
+    padding: 5px;
 }
