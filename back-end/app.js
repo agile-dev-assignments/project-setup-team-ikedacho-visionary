@@ -1256,6 +1256,7 @@ app.get("/api_unlike_a_post", async (req, res) => {
             result.my_like_history = result.my_like_history.filter((record) => {
                 return (record.user_name === post_detail.UserName &&
                         record.source === post_detail.source && 
+                        record.post_issued_time === post_detail.Senttime &&
                         record.text_content === post_detail.content)
             })
 
@@ -1279,14 +1280,15 @@ app.get("/api_unlike_a_post", async (req, res) => {
                 result.others_liked_history = []
             } */
             // update by pushing the new post info to the list
-            const filtered_list = result.others_liked_history.filter((record) => {
+            let filtered_list = result.others_liked_history.filter((record) => {
                 return (record.user_name === post_detail.UserName &&
                         record.source === post_detail.source && 
                         record.text_content === post_detail.content && 
+                        record.post_issued_time === post_detail.Senttime &&
                         record.liked_by_user_name === self_username)
             })
 
-            console.log(filtered_list)
+            console.log("\nfiltered_list: ", filtered_list)
             // save the changes 
             UserInfo.updateOne({user_name: other_username}, {others_liked_history: filtered_list}, (err) => {
                 if (err) {
