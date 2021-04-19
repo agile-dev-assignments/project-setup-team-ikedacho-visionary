@@ -8,7 +8,7 @@ const ToComment = (props) => {
     let history = useHistory()
     const [show, setShow] = useState('true')
     const [currentTime, setCurrentTime] = useState('')
-
+    const [username, setUsername] = useState('')
     //represnet if the send button is clicked. false: not clicked. true: clicked
     const [send, setSend] = useState(false)
     let [comment_text, setComment_text] = useState('')
@@ -36,6 +36,7 @@ const ToComment = (props) => {
                 })
                 .then((response) => {
                     console.log(response.data)
+                    setUsername(response.data)
                 })
                 .catch((err) => {
                     console.error(err)
@@ -54,7 +55,7 @@ const ToComment = (props) => {
             <div id='mycomment' style={{ display: !show ? 'block' : 'none' }}>
                 <div style={{ display: !show ? 'block' : 'none' }}>
                     <Link onClick={() => (window.location.href = '/my_profile')} to={'/my_profile'}>
-                        Joe:
+                        {username}:
                     </Link>
                     {comment_text}
                 </div>

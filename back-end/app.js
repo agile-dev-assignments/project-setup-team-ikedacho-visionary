@@ -733,6 +733,7 @@ app.get('/get_send_comment', async (req, res) => {
             })
         }
     })
+    res.json(self_username)
     post_detail_for_comment = undefined
 })
 
