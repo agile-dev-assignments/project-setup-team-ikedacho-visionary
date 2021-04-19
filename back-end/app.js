@@ -447,14 +447,15 @@ app.get("/get_my_profile", async (req, res) => {
     }
 
     // lr = liked_record, fr = filtered_record
-    let lr, fr, filtered_by_liked = []
+    let lr, fr, matched, filtered_by_liked = []
     // if my_like_history is not empty, we need to know if post has been liked by the current user
     // forEach might be better
     if (my_like_history !== undefined && !isEmpty(my_like_history)) {
-        for (let i = 0; i < my_like_history.length; i ++) {
-            lr = my_like_history[i]
-            for (let j = 0; j < filtered_post_data.length; j ++) {
-                fr = filtered_post_data[j]
+        for (let i = 0; i < filtered_post_data.length; i ++) {
+            fr = filtered_post_data[i]
+            matched = false
+            for (let j = 0; j < my_like_history.length; j ++) {
+                lr = my_like_history[j]
                 // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
                 if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
                     // console.log("matched! ")
@@ -468,16 +469,19 @@ app.get("/get_my_profile", async (req, res) => {
                         repoted: fr.repoted, 
                         like_switch: true
                         })
-                } else {
-                    filtered_by_liked.push(fr)
+                    matched = true
+                    break
                 }
+            }
+            if (matched === false) {
+                filtered_by_liked.push(fr)
             }
         }
     } else {
         filtered_by_liked = filtered_post_data
     }
 
-    // console.log("filtered_by_liked: ", filtered_by_liked)
+    console.log("filtered_by_liked: ", filtered_by_liked)
 
     //send back response_data which consists of user_info and filtered_post_data as post_data
     const response_data={
@@ -657,6 +661,7 @@ app.get("/api_friend_profile", async (req, res) => {
     let friend_info=''
     const UserName = req.query.UserName
     let friend = false
+    let my_like_history
   
     await UserInfo.findOne({user_name: UserName},(err, UserInfos)=>{
         try {
@@ -674,6 +679,7 @@ app.get("/api_friend_profile", async (req, res) => {
             if (UserInfos.following.includes(UserName)){
                 friend=true
             }
+            my_like_history = UserInfos.my_like_history
         } catch(e){
             console.log(e)
         }
@@ -690,10 +696,45 @@ app.get("/api_friend_profile", async (req, res) => {
         })
     }
 
+    // lr = liked_record, fr = filtered_record
+    let lr, fr, matched, filtered_by_liked = []
+    // if my_like_history is not empty, we need to know if post has been liked by the current user
+    // forEach might be better
+    if (my_like_history !== undefined && !isEmpty(my_like_history)) {
+        for (let i = 0; i < filtered_post_data.length; i ++) {
+            fr = filtered_post_data[i]
+            matched = false
+            for (let j = 0; j < my_like_history.length; j ++) {
+                lr = my_like_history[j]
+                // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
+                if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
+                    // console.log("matched! ")
+                    filtered_by_liked.push({
+                        content: fr.content, 
+                        source: fr.source, 
+                        senttime: fr.senttime, 
+                        contentimg: fr.contentimg, 
+                        commented: fr.commented, 
+                        liked: fr.liked, 
+                        repoted: fr.repoted, 
+                        like_switch: true
+                        })
+                    matched = true
+                    break
+                }
+            }
+            if (matched === false) {
+                filtered_by_liked.push(fr)
+            }
+        }
+    } else {
+        filtered_by_liked = filtered_post_data
+    }
+
     //send back response_data which consists of user_info and filtered_post_data as post_data
     const response_data={
         "friend_info" : friend_info,
-        "post_data" : filtered_post_data, //return the filtered data based on platform selected
+        "post_data" : filtered_by_liked, //return the filtered data based on platform selected
         "linked_social_media": linked_social_media, //return linked_platform name
         friend: friend
     }
@@ -1200,6 +1241,7 @@ app.get("/api_unlike_a_post", async (req, res) => {
     const post_detail = JSON.parse(req.query.post_detail)
     
     console.log("post detail: ", post_detail)
+    console.log(post_detail.Senttime, post_detail.UserName)
 
     // find myself and update my liked history
     await UserInfo.findOne({user_name: self_username}, (err, result) => {
@@ -1212,11 +1254,9 @@ app.get("/api_unlike_a_post", async (req, res) => {
             } */
             // update by filtering out the new post info to the list
             result.my_like_history = result.my_like_history.filter((record) => {
-                return (record.user_name === post_detail.user_name &&
+                return (record.user_name === post_detail.UserName &&
                         record.source === post_detail.source && 
-                        record.post_issued_time === post_detail.post_issued_time &&
-                        record.text_content === post_detail.text_content && 
-                        record.like_issued_time === post_detail.like_issued_time)
+                        record.text_content === post_detail.content)
             })
 
             // save the changes <--- without error handling lol
@@ -1240,11 +1280,9 @@ app.get("/api_unlike_a_post", async (req, res) => {
             } */
             // update by pushing the new post info to the list
             const filtered_list = result.others_liked_history.filter((record) => {
-                return (record.user_name === post_detail.user_name &&
+                return (record.user_name === post_detail.UserName &&
                         record.source === post_detail.source && 
-                        record.post_issued_time === post_detail.post_issued_time &&
-                        record.text_content === post_detail.text_content && 
-                        record.like_issued_time === post_detail.like_issued_time && 
+                        record.text_content === post_detail.content && 
                         record.liked_by_user_name === self_username)
             })
 
