@@ -120,19 +120,23 @@ app.get('/api_get_user_info_by_name', (req, res) => {
     })
 })
 
-app.post('/browsed', (req, res, next) => {
-    console.log(req.body)
-    var my_query = { user_name: req.body.user_name }
-    var new_values = { $set: { my_history: { view_history: req.body.postId } } }
-    UserInfo.updateOne(my_query, new_values, function (err, res) {
-        if (err) throw err
-        console.log('UserInfo successfully updated')
+app.post("/browsed", (req, res) => {
+    console.log(req.body); 
+    const browsed = req.body;
+    const username = req.user.username;
+    UserInfo.findOne({user_name: username}, (err, result) => {
+        result.my_browse_history.push(browsed)
+        // save the update
+        result.save((err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
+        res.send("Created")
     })
-
-    res.send({
-        status: 'created',
-    })
+   
 })
+
 
 app.get('/api_browse', (req, res) => {
     let ret
@@ -589,7 +593,7 @@ app.get('/get_comments_in_post_content', async (req, res) => {
     var Content = req.query.content;
     let comments = [];
     let currentPost = [];
-    console.log("content:"+ Content)
+    // console.log("content:"+ Content)
     const userInfos = await UserInfo.findOne({ user_name: UserName })
     var postData = userInfos.post_data;
     postData.every(post => {

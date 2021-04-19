@@ -19,7 +19,7 @@ const PostDetail = (props) => {
         history.goBack()
     }
 
-    const [PostData, setPostData] = useState([{ id: 1, source: '', UserName: '', user_photo: '', Content: '', contentimg: [], post_date: '' }])
+    const [PostData, setPostData] = useState([{ id: 1, source: '', UserName: '', user_photo: '', Content: '', contentimg: '', post_date: '' }])
 
     const [self_username, Set_self_username] = useState('')
 
@@ -41,25 +41,31 @@ const PostDetail = (props) => {
     }, []) // only run it once!
     console.log(state)
 
-    const saveBrowseData = () => {
-        axios
-            .post('/browsed', {
-                user_name: self_username,
-                postId: '12345',
-            })
-            .then((response) => {
-                if (response.data.status === 'created') {
-                    console.log(response.data.status)
-                } else {
-                    console.log(response.data)
-                }
-            })
-            .catch((error) => {
-                console.log('unable to save browse history', error)
-            })
-    }
+    useEffect(() => {
 
-    saveBrowseData()
+        axios
+        .post("/browsed",
+        {
+            id : state.id,
+            viewdate : date,
+            UserName : state.UserName,
+            userimg : state.userimg,
+            content : state.content,
+            contentimgs: state.contentimg
+        })
+        .then((response) => {
+            if (response.data.status === 'created') {
+                console.log(response.data.status)
+            } else {
+                console.log(response.data)
+            }
+            })
+            .catch(error => {
+                console.log("unable to save browse history", error);
+                })
+            }, [])
+
+
     const [data, setData] = useState([
         {
             id: 1,
