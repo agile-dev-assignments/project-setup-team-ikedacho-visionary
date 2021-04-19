@@ -553,15 +553,26 @@ app.post('/post_background_picture', upload_background_picture.array('background
 app.get('/get_edit', async (req, res) => {
     const my_username = req.user.username
     const post_text = req.query.post_text
+    const current_date = new Date()
+    let my_user_photo
+
+    const regex = /@\S+\s/g
+    const search_for_mention = post_text.match(regex)
+    const unique_search_names = [...new Set(search_for_mention)];
+
+
     await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
         try {
             UserInfos.post_data.unshift({
                 content: post_text,
                 source: 'O-Zone',
-                senttime: new Date(),
+                senttime: current_date,
                 contentimg: ' ',
             })
             UserInfos.post_number++
+            
+            my_user_photo = UserInfos.user_photo
+
             await UserInfos.save(function (saveErr, saveUserInfos) {
                 if (err) {
                     console.log('error saving post')
@@ -570,6 +581,42 @@ app.get('/get_edit', async (req, res) => {
         } catch (e) {
             console.log(e)
         }
+    })
+
+    search_for_mention.forEach(async (item) => {
+        const search_name = item.replace(/@|\s/g, '')
+        console.log(search_name)
+        await UserInfo.findOne({ user_name: search_name }, async (err, result) => {
+            if (err) { 
+                console.error(err)
+            } else {
+                if (result) {
+                    // found! 
+                    result.others_mentioned_history = (result.others_mentioned_history.length) ? result.others_mentioned_history : []
+                    result.others_mentioned_history.push({
+                        mentioner_avatar: my_user_photo,
+                        mentioner_username: my_username,
+                        mentioned_date: current_date,
+                        post_image: ' ',
+                        post_username: my_username,
+                        post_avatar: my_user_photo, 
+                        post_text: post_text,
+                    })
+
+                    console.log(result.others_mentioned_history)
+
+                    // save changes
+                    await result.save((err) => {
+                        if (err) {
+                            console.error(err)
+                        }
+                    })
+
+                } else {
+                    // not found... -> do nothing! this is not a mention, or mentioning wrongly
+                }
+            }
+        })
     })
 })
 
@@ -1826,7 +1873,7 @@ app.get('/api_whatsnew', async (req, res, next) => {
 
     let filtered_post_data = postData.slice()
 
-    //console.log("selected_social_media", selected_social_media)
+    // console.log("selected_social_media", selected_social_media)
 
     filtered_post_data = postData.filter(element => {
         if (selected_social_media.includes(element.source)) {
@@ -1834,7 +1881,7 @@ app.get('/api_whatsnew', async (req, res, next) => {
         }//end of if
     })//end of filtered_post_data
 
-    console.log(filtered_post_data)
+    // console.log(filtered_post_data)
 
     /*
     filtering the post data by LIKE history
@@ -1879,7 +1926,7 @@ app.get('/api_whatsnew', async (req, res, next) => {
         filtered_by_liked = filtered_post_data
     }
 
-    console.log('filtered_by_liked: ', filtered_by_liked)
+    // console.log('filtered_by_liked: ', filtered_by_liked)
     res.json(filtered_by_liked)
 })
 
@@ -1903,7 +1950,7 @@ app.get('/api_recommended', async (req, res, next) => {
         }
 
        // console.log(data)
-       postData = postData.concat(data)
+       // postData = postData.concat(data)
     })
 
     postData.sort((prev,cur)=>{
@@ -1922,7 +1969,7 @@ app.get('/api_recommended', async (req, res, next) => {
         }//end of if
     })//end of filtered_post_data
 
-    console.log(filtered_post_data)
+    // console.log(filtered_post_data)
 
     /*
     filtering the post data by LIKE history
@@ -1967,7 +2014,7 @@ app.get('/api_recommended', async (req, res, next) => {
         filtered_by_liked = filtered_post_data
     }
 
-    console.log('filtered_by_liked: ', filtered_by_liked)
+    // console.log('filtered_by_liked: ', filtered_by_liked)
     res.json(filtered_by_liked)
 })
 
@@ -2006,7 +2053,7 @@ app.get('/api_recent', async (req, res, next) => {
         }//end of if
     })//end of filtered_post_data
 
-    console.log(filtered_post_data)
+    // console.log(filtered_post_data)
 
     /*
     filtering the post data by LIKE history
@@ -2051,7 +2098,7 @@ app.get('/api_recent', async (req, res, next) => {
         filtered_by_liked = filtered_post_data
     }
 
-    console.log('filtered_by_liked: ', filtered_by_liked)
+    // console.log('filtered_by_liked: ', filtered_by_liked)
     res.json(filtered_by_liked)
 })
 

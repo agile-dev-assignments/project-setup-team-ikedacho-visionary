@@ -23,7 +23,15 @@ const Mentions = (props) => {
                 <span id='mentioned_date'>{props.details.mentioned_date}</span>
             </div>
 
-            <Link to={`/detailpost`}>
+            <Link to={{
+                pathname: '/detailpost', 
+                state: {
+                    Username: props.details.post_username, 
+                    userimg: props.details.post_avatar, 
+                    content: props.details.post_text, 
+                    contentimgs: props.details.post_image
+                }
+                }}>
                 <p id='post'>
                     {/* so, we probably want the back-end/database to
               return the first image if the post contains multiple */}
