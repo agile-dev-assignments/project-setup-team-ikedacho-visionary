@@ -59,7 +59,7 @@ const Friend_Suggestion = (props) => {
             </section>
 
             <section className='main-content'>
-                <p className='desc'>{search_name == '' ? 'Friend' : 'Searched Result'}</p>
+                <p className='desc'>{search_name == '' ? 'Friend' : 'Friend'}</p>
                 <p>
                     {following_list.map((item) => (
                         <NameTag key={item._id} img={item.user_photo} UserName={item.user_name} bio={item.bio} action='Unfollow' />
