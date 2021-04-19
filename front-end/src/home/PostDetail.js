@@ -41,23 +41,30 @@ const PostDetail = (props) => {
     }, []) // only run it once!
     console.log(state)
 
-    const saveBrowseData = () => {
+    useEffect(() => {
         axios
-            .post('/browsed', {
-                user_name: self_username,
-                postId: '12345',
+        .post(
+        "/browsed",
+        {
+            // PostData,
+            id : PostData.id,
+            viewdate : date,
+            UserName : PostData.UserName,
+            userimg : PostData.userimg,
+            content : PostData.content,
+            contentimgs: PostData.contentimg
+        })
+        .then((response) => {
+            if (response.data.status === 'created') {
+                console.log(response.data.status)
+            } else {
+                console.log(response.data)
+            }
             })
-            .then((response) => {
-                if (response.data.status === 'created') {
-                    console.log(response.data.status)
-                } else {
-                    console.log(response.data)
-                }
-            })
-            .catch((error) => {
-                console.log('unable to save browse history', error)
-            })
-    }
+            .catch(error => {
+                console.log("unable to save browse history", error);
+                })
+            }, [])
 
     saveBrowseData()
     const [data, setData] = useState([
