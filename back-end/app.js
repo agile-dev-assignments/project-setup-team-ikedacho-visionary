@@ -680,6 +680,8 @@ app.get('/get_send_comment', async (req, res) => {
             if (result.my_comment_history === undefined) {
                 result.my_comment_history = []
             }
+            // also fetch the user_photo for later usage
+            self_userimg = result.user_photo
             result.my_comment_history.push({
                 source: message.source,
                 post_created_by_photo: message.userimg,
@@ -687,12 +689,12 @@ app.get('/get_send_comment', async (req, res) => {
                 post_text: message.content,
                 post_image: message.contentimg,
                 post_created_time: message.Senttime,
+                commented_by_username: self_username,
                 commented_date: current_date,
                 comment_text: comment_text,
+                commented_by_photo: self_userimg
             })
-            // also fetch the user_photo for later usage
-            self_userimg = result.user_photo
-
+            
             // save the changes
             await result.save((err) => {
                 if (err) {
@@ -739,236 +741,25 @@ app.get('/get_send_comment', async (req, res) => {
 
 app.get('/api_my_comment_history', async (req, res) => {
     let response_data = ''
-
-    //without async and await, axios block will execute after res.json(response_data) which will send incorrect data back to front-end. It is because I already declared and assigned value to the variable response_data above.
-    await axios
-        .get(`${process.env.API_MY_COMMENT_HISTOR}?key=${process.env.API_MY_COMMENT_HISTORY_KEY}`) //`Here, I intentionally misspell the variable to use backup data. Correct: ${process.env.API_MY_COMMENT_HISTORY}?key=${process.env.API_MY_COMMENT_HISTORY_KEY}`
-        .then((apiResponse) => {
-            response_data = apiResponse.data
-        }) //apiResponse.data
-        .catch((err) => {
-            //console.log("Error: cannot fetch data from mockaroo api. Use backup data")
-            //console.log(err)
-            //backup data
-            response_data = [
-                {
-                    id: 1,
-                    post_created_by: 'sgosart0',
-                    post_text: 'Nunc purus. Phasellus in felis. Donec semper sapien a libero.',
-                    post_image: 'http://dummyimage.com/80x80.png/5fa2dd/ffffff',
-                    commented_date: '12/23/2020',
-                    commented_content: 'In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum.',
-                },
-                {
-                    id: 2,
-                    post_created_by: 'dvellacott1',
-                    post_text: 'Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy.',
-                    post_image: 'http://dummyimage.com/80x80.png/ff4444/ffffff',
-                    commented_date: '2/14/2021',
-                    commented_content: 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.',
-                },
-                {
-                    id: 3,
-                    post_created_by: 'alowndsbrough2',
-                    post_text: 'Nam dui.',
-                    post_image: 'http://dummyimage.com/80x80.jpg/5fa2dd/ffffff',
-                    commented_date: '8/15/2020',
-                    commented_content: 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue.',
-                },
-                {
-                    id: 4,
-                    post_created_by: 'swoodstock3',
-                    post_text:
-                        'Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.',
-                    post_image: 'http://dummyimage.com/80x80.jpg/ff4444/ffffff',
-                    commented_date: '6/30/2020',
-                    commented_content: 'Phasellus in felis. Donec semper sapien a libero. Nam dui.',
-                },
-                {
-                    id: 5,
-                    post_created_by: 'riacopini4',
-                    post_text: 'In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc.',
-                    post_image: 'http://dummyimage.com/80x80.png/ff4444/ffffff',
-                    commented_date: '5/29/2020',
-                    commented_content:
-                        'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum.',
-                },
-                {
-                    id: 6,
-                    post_created_by: 'kfraniak5',
-                    post_text: 'Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.',
-                    post_image: 'http://dummyimage.com/80x80.jpg/dddddd/000000',
-                    commented_date: '9/19/2020',
-                    commented_content:
-                        'Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.',
-                },
-                {
-                    id: 7,
-                    post_created_by: 'egyrgorcewicx6',
-                    post_text: 'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.',
-                    post_image: 'http://dummyimage.com/80x80.bmp/dddddd/000000',
-                    commented_date: '9/24/2020',
-                    commented_content:
-                        'Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.',
-                },
-                {
-                    id: 8,
-                    post_created_by: 'pvinick7',
-                    post_text: 'In hac habitasse platea dictumst.',
-                    post_image: 'http://dummyimage.com/80x80.jpg/ff4444/ffffff',
-                    commented_date: '9/22/2020',
-                    commented_content: 'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus.',
-                },
-                {
-                    id: 9,
-                    post_created_by: 'abillion8',
-                    post_text: 'Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.',
-                    post_image: 'http://dummyimage.com/80x80.jpg/5fa2dd/ffffff',
-                    commented_date: '5/6/2020',
-                    commented_content: 'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio.',
-                },
-                {
-                    id: 10,
-                    post_created_by: 'lmackellar9',
-                    post_text: 'Quisque ut erat.',
-                    post_image: 'http://dummyimage.com/80x80.png/dddddd/000000',
-                    commented_date: '1/12/2021',
-                    commented_content:
-                        'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.',
-                },
-            ]
-            //console.log('backup data:',response_data)
-        }) //end of catch,axios
-
-    //without async and await, the following code be executed before the axios block. So the response_data will be '' as I assign to it at the beginning. So the client will not receive the correct data, but only "".
-    //to avoid this problem, use async and await so that the following code will wait until axios block finish its work in which we get correct data and assign to response_data.
-    //console.log('response_data_end:',response_data )
+    await UserInfo.findOne({ user_name: req.user.username }, (err, UserInfos) => {
+        try {
+            response_data = UserInfos.my_comment_history
+        } catch (e) {
+            console.log(e)
+        }
+    })
     res.json(response_data)
 })
 
 app.get('/api_commented_history', async (req, res) => {
     let response_data = ''
-
-    //without async and await, axios block will execute after res.json(response_data) which will send incorrect data back to front-end. It is because I already declared and assigned value to the variable response_data above.
-    await axios
-        .get(`${process.env.API_COMMENTS}?key=${process.env.API_COMMENTS_KEY}`) //` Correct: `${process.env.API_COMMENTS}?key=${process.env.API_COMMENTS_KEY}`
-        .then((apiResponse) => {
-            response_data = apiResponse.data
-        }) //apiResponse.data
-        .catch((err) => {
-            //console.log("Error: cannot fetch data from mockaroo api. Use backup data")
-            //console.log(err)
-            //backup data
-            response_data = [
-                {
-                    id: 1,
-                    post_text:
-                        'Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.',
-                    post_image: 'http://dummyimage.com/80x80.bmp/dddddd/000000',
-                    post_date: '1/27/2020',
-                    commented_by_username: 'ningrem0',
-                    commented_by_profile_image: 'https://robohash.org/nisivitaefuga.png?size=50x50\u0026set=set1',
-                    commented_date: '6/13/2020',
-                    commented_content: 'Sed ante. Vivamus tortor.',
-                },
-                {
-                    id: 2,
-                    post_text: 'Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.',
-                    post_image: 'http://dummyimage.com/80x80.jpg/ff4444/ffffff',
-                    post_date: '3/25/2020',
-                    commented_by_username: 'ekernan1',
-                    commented_by_profile_image: 'https://robohash.org/providentanimiquibusdam.jpg?size=50x50\u0026set=set1',
-                    commented_date: '4/27/2020',
-                    commented_content: 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim.',
-                },
-                {
-                    id: 3,
-                    post_text: 'Morbi non quam nec dui luctus rutrum. Nulla tellus.',
-                    post_image: 'http://dummyimage.com/80x80.jpg/cc0000/ffffff',
-                    post_date: '1/21/2020',
-                    commented_by_username: 'blindegard2',
-                    commented_by_profile_image: 'https://robohash.org/quoautemneque.png?size=50x50\u0026set=set1',
-                    commented_date: '1/20/2021',
-                    commented_content: 'In quis justo. Maecenas rhoncus aliquam lacus.',
-                },
-                {
-                    id: 4,
-                    post_text: 'Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet.',
-                    post_image: 'http://dummyimage.com/80x80.png/5fa2dd/ffffff',
-                    post_date: '10/23/2020',
-                    commented_by_username: 'ayuryatin3',
-                    commented_by_profile_image: 'https://robohash.org/quibusdamnonqui.bmp?size=50x50\u0026set=set1',
-                    commented_date: '3/1/2021',
-                    commented_content: 'Nullam varius.',
-                },
-                {
-                    id: 5,
-                    post_text: 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia.',
-                    post_image: 'http://dummyimage.com/80x80.png/dddddd/000000',
-                    post_date: '1/2/2021',
-                    commented_by_username: 'slarmet4',
-                    commented_by_profile_image: 'https://robohash.org/dolorculpaad.png?size=50x50\u0026set=set1',
-                    commented_date: '8/24/2020',
-                    commented_content: 'Maecenas pulvinar lobortis est. Phasellus sit amet erat.',
-                },
-                {
-                    id: 6,
-                    post_text: 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.',
-                    post_image: 'http://dummyimage.com/80x80.png/dddddd/000000',
-                    post_date: '3/31/2020',
-                    commented_by_username: 'bmatyatin5',
-                    commented_by_profile_image: 'https://robohash.org/maximenequesimilique.jpg?size=50x50\u0026set=set1',
-                    commented_date: '6/10/2020',
-                    commented_content: 'Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.',
-                },
-                {
-                    id: 7,
-                    post_text: 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.',
-                    post_image: 'http://dummyimage.com/80x80.bmp/dddddd/000000',
-                    post_date: '1/14/2020',
-                    commented_by_username: 'gheath6',
-                    commented_by_profile_image: 'https://robohash.org/eaquiadolorem.bmp?size=50x50\u0026set=set1',
-                    commented_date: '7/2/2020',
-                    commented_content: 'Pellentesque eget nunc.',
-                },
-                {
-                    id: 8,
-                    post_text: 'Integer ac neque. Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl.',
-                    post_image: 'http://dummyimage.com/80x80.jpg/dddddd/000000',
-                    post_date: '12/22/2020',
-                    commented_by_username: 'dorae7',
-                    commented_by_profile_image: 'https://robohash.org/ducimusnatusdolor.jpg?size=50x50\u0026set=set1',
-                    commented_date: '10/3/2020',
-                    commented_content: 'Cras non velit nec nisi vulputate nonummy.',
-                },
-                {
-                    id: 9,
-                    post_text:
-                        'Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.',
-                    post_image: 'http://dummyimage.com/80x80.png/dddddd/000000',
-                    post_date: '10/22/2020',
-                    commented_by_username: 'sshill8',
-                    commented_by_profile_image: 'https://robohash.org/vitaeautitaque.png?size=50x50\u0026set=set1',
-                    commented_date: '5/18/2020',
-                    commented_content: 'Nunc purus.',
-                },
-                {
-                    id: 10,
-                    post_text: 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus.',
-                    post_image: 'http://dummyimage.com/80x80.bmp/cc0000/ffffff',
-                    post_date: '8/2/2020',
-                    commented_by_username: 'awooffitt9',
-                    commented_by_profile_image: 'https://robohash.org/undeutdelectus.bmp?size=50x50\u0026set=set1',
-                    commented_date: '9/16/2020',
-                    commented_content: 'Praesent blandit.',
-                },
-            ]
-            //console.log('backup data:',response_data)
-        }) //end of catch,axios
-
-    //without async and await, the following code be executed before the axios block. So the response_data will be '' as I assign to it at the beginning. So the client will not receive the correct data, but only "".
-    //to avoid this problem, use async and await so that the following code will wait until axios block finish its work in which we get correct data and assign to response_data.
-    //console.log('response_data_end:',response_data )
+    await UserInfo.findOne({ user_name: req.user.username }, (err, UserInfos) => {
+        try {
+            response_data = UserInfos.others_commented_history
+        } catch (e) {
+            console.log(e)
+        }
+    })
     res.json(response_data)
 })
 

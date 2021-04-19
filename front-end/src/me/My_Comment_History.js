@@ -9,16 +9,16 @@ const My_Comment_History = (props) => {
         <article className='My_Comment_History'>
             <div>
                 <Link to={`/my_profile`}>
-                    <img class='inline-block' id='avatar' src='https://robohash.org/autplaceatatque.bmp?size=50x50' />
+                    <img class='inline-block' id='avatar' src={props.details.commented_by_photo} />
                     <h1 class='inline-block' id='username1'>
-                        Username
+                        {props.details.commented_by_username}
                     </h1>
                 </Link>
                 <span id='commented_date'>{props.details.commented_date}</span>
             </div>
 
             <p id='comment'>
-                Commented @{props.details.post_created_by}: {props.details.commented_content}
+                Commented @{props.details.post_created_by}: {props.details.comment_text}
             </p>
 
             <Link to={`/detailpost`}>

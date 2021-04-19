@@ -24,13 +24,13 @@ const Commented = (props) => {
                 <span id='commented_date'>{props.details.commented_date}</span>
             </div>
 
-            <p id='comment'>Commented @Username: {props.details.commented_content}</p>
+            <p id='comment'>Commented: {props.details.comment_text}</p>
 
             <Link to={`/detailpost`}>
                 <p id='post'>
                     <img id='post_image' src={props.details.post_image} />
                     <br></br>
-                    <span id='username'>@Username</span>
+                    <span id='username'>@{props.details.post_created_by}</span>
                     <br></br>
                     <br></br>
                     <div id='post_text'>{props.details.post_text}</div>

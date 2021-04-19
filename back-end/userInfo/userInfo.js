@@ -73,8 +73,10 @@ const MyCommentHistorySchema = new mongoose.Schema(
         post_text: String,
         post_image: String,
         post_created_time: Date,
+        commented_by_username: String,
         commented_date: Date,
         comment_text: String,
+        commented_by_photo: String,
     },
     { _id: true }
 )
