@@ -1,35 +1,30 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:300');
 
 .section sign-in {
-  box-sizing: border-box;  
-  font-family: inherit;
-text-align: center;
+    box-sizing: border-box;
+    font-family: inherit;
+    text-align: center;
 }
 
-  
-
 .sign-in form {
-  margin: 0 auto;
-  max-width: 17rem;
-  overflow: auto;
+    margin: 0 auto;
+    max-width: 17rem;
+    overflow: auto;
+}
   
- }
-  
- .sign-in input {
+.sign-in input {
     border: 0;
-    border-bottom: 1px solid rgb(70,70,70) ;
+    border-bottom: 1px solid rgb(70, 70, 70);
     border-radius: 0;
     width: 100%;
     height: 2rem;
     padding: 0 0 0.25rem 0;
     font-size: 1rem;
-    color: rgb(70,70,70)e;
+    color: rgb(70, 70, 70) e;
     background: white;
-   }
+}
 
- 
-
-   .sign-in button {
+.sign-in button {
     margin-top: 2rem;
     border: 0;
     border-radius: 200px;
@@ -38,19 +33,18 @@ text-align: center;
     font-size: 1rem;
     color: white;
     background: blue;
-   }
-  
-   .sign-in p {
-    text-align: center;
-    color: rgb(70,70,70); 
-  }
+}
 
+.sign-in p {
+    text-align: center;
+    color: rgb(70, 70, 70);
+}
 
 .sign-up {
-  display: none;
+    display: none;
 }
 
 .opposite-btn1,
 .opposite-btn2 {
-  cursor: pointer;
+    cursor: pointer;
 }

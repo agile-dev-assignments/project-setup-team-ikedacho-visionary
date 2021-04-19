@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './Followings.css'
-import { Link, useLocation, useHistory} from 'react-router-dom'
+import { Link, useLocation, useHistory } from 'react-router-dom'
 import NameTag from '../auxiliary/NameTag'
 
 const Followings = (props) => {
     const [data, setData] = useState([])
-    const {state} = useLocation()
+    const { state } = useLocation()
     const history = useHistory()
 
     // go back to the previous page
@@ -16,43 +16,37 @@ const Followings = (props) => {
 
     useEffect(() => {
         axios
-        .get('/api_followings', {
-            params: {
-                UserName: state.UserName
-            }
-        })
-        .then((response) => {
-            // extract the data from the server response
-            setData(response.data)
-        })
-        .catch((err) => {
-            console.error(err)
-        })
+            .get('/api_followings', {
+                params: {
+                    UserName: state.UserName,
+                },
+            })
+            .then((response) => {
+                // extract the data from the server response
+                setData(response.data)
+            })
+            .catch((err) => {
+                console.error(err)
+            })
     }, []) // only run it once!
 
     console.log(data)
 
-
     return (
-        <div className = "Followings">
+        <div className='Followings'>
             <h2>Followings Page here</h2>
-            <Link onClick = {goTOPreviousPath.bind()}>
+            <Link onClick={goTOPreviousPath.bind()}>
                 <button>back</button>
             </Link>
-            <section className = "main-content">
+            <section className='main-content'>
                 <p>
                     {data.map((item) => (
-                        <NameTag 
-                            key={item.id}
-                            img = {item.user_photo}
-                            UserName = {item.user_name}
-                            bio = {item.bio}
-                            action = {item.action} />
+                        <NameTag key={item.id} img={item.user_photo} UserName={item.user_name} bio={item.bio} action={item.action} />
                     ))}
                 </p>
             </section>
         </div>
-    );
+    )
 }
 
-export default Followings;
+export default Followings

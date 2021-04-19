@@ -4,12 +4,12 @@
     align-items: center;
 }
 
-.Trending section{
+.Trending section {
     width: 100%;
 }
 
-.Trending .trending_content{
-    border-bottom: 1px solid #F3F3F3;;
+.Trending .trending_content {
+    border-bottom: 1px solid #f3f3f3;
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 10px;
@@ -19,6 +19,6 @@
 
     justify-content: space-between;
 }
-.Trending .trending_content p{
+.Trending .trending_content p {
     margin: 0;
 }

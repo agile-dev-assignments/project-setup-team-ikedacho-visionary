@@ -14,7 +14,7 @@ header {
     position: relative;
 }
 
-.input-wrap .input{
+.input-wrap .input {
     box-sizing: border-box;
     width: 95%;
     padding: 10px 30px 10px 10px;
@@ -23,12 +23,12 @@ header {
     border-radius: 10px;
     background-color: #eee;
 }
-.input-wrap .icon{
+.input-wrap .icon {
     position: absolute;
     top: 30px;
     right: 30px;
 }
 
-.desc{
+.desc {
     padding: 0 20px;
 }

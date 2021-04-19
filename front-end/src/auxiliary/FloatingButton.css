@@ -1,14 +1,13 @@
-.floatbutton{
-  /* display: flex;
+.floatbutton {
+    /* display: flex;
   flex-wrap: wrap;
   justify-content: center;
 
   font-family:serif; */
-  margin:0px;
-  position: fixed;
-  bottom: 40px;
-  z-index: 1;
-  align-items: center;
-  left: 35%;
-
+    margin: 0px;
+    position: fixed;
+    bottom: 40px;
+    z-index: 1;
+    align-items: center;
+    left: 35%;
 }

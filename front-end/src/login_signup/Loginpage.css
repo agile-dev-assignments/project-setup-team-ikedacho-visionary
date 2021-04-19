@@ -1,27 +1,26 @@
-.Loginpage{
-    padding-top:200px;
+.Loginpage {
+    padding-top: 200px;
     text-align: center;
 }
-.header__text h1{
-    text-align:center;
-}
-
-.Loginform{
-    padding-top:20px;
-}
-.header__text p{
-    padding-bottom:30px;
+.header__text h1 {
     text-align: center;
 }
 
-#signin{
+.Loginform {
+    padding-top: 20px;
+}
+.header__text p {
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+#signin {
     text-decoration: none;
-    color:rgb(70,70,70) ;
+    color: rgb(70, 70, 70);
     margin: 15px;
-    font-size:15px;
-  }
-
-.Loginpage button{
-    margin-bottom:30px;
+    font-size: 15px;
 }
 
+.Loginpage button {
+    margin-bottom: 30px;
+}

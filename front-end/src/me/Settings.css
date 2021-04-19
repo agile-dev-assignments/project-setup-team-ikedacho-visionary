@@ -4,7 +4,7 @@
     position: relative;
 }
 
-h2.Settings_page_title{
+h2.Settings_page_title {
     position: relative;
     text-align: center;
 }
@@ -15,7 +15,6 @@ h2.Settings_page_title{
     position: relative;
 }
 
-
 div.option_list {
     text-align: center;
     width: 70%;
@@ -23,7 +22,7 @@ div.option_list {
     position: relative;
 }
 
-p.option_list{
+p.option_list {
     border: 1px black dotted;
     padding: 3%;
 }

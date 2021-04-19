@@ -7,7 +7,6 @@ const Trending = (props) => {
 
     // the following side-effect will be called once upon initial render
     useEffect(() => {
-
         //https://my.api.mockaroo.com/trending.json?key=2d6d6d60
         axios('api_trending')
             .then((response) => {
@@ -17,22 +16,22 @@ const Trending = (props) => {
             .catch((err) => {
                 console.log(err)
             })
-        }, []) // only run it once!
+    }, []) // only run it once!
 
     return (
-        <div className = "Trending">
+        <div className='Trending'>
             <section>
                 {data.map((item) => (
-                     <div className="trending_content">
-                    <p  className="trending_p" onClick={() => window.location.href = '/searchResult'}>{item.topic}</p>
-                    <p>🔥</p>
-
+                    <div className='trending_content'>
+                        <p className='trending_p' onClick={() => (window.location.href = '/searchResult')}>
+                            {item.topic}
+                        </p>
+                        <p>🔥</p>
                     </div>
                 ))}
             </section>
-
         </div>
-    );
+    )
 }
 
-export default Trending;
+export default Trending

@@ -1,41 +1,40 @@
-div.edit h1{
-    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
-    color:#353535;
+div.edit h1 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #353535;
     font-weight: bold;
     font-size: 0.8em;
-    text-align:center;
-    padding-top:6px;
-    margin-bottom:0px;
-    padding-bottom:0px;
+    text-align: center;
+    padding-top: 6px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
 }
 
-div.edit #back{
+div.edit #back {
     position: absolute;
     left: 10px;
     top: 15px;
     z-index: 1;
-    font-weight:600;
+    font-weight: 600;
     font-size: 0.9em;
 }
-div.edit #send_button{
+div.edit #send_button {
     position: absolute;
     right: 10px;
     top: 13px;
-    padding:3px;
+    padding: 3px;
     z-index: 1;
-    font-weight:600;
+    font-weight: 600;
     font-size: 0.9em;
     border: 0px;
-
 }
 
-.edit-wrap{
+.edit-wrap {
     position: relative;
     width: 100%;
     height: 600px;
 }
 
-#myTextarea{
+#myTextarea {
     width: 100%;
     height: 150px;
     font-size: 13px;
@@ -47,18 +46,18 @@ div.edit #send_button{
     font-family: sans-serif;
 }
 
-.edit .post{
+.edit .post {
     position: absolute;
     top: 300px;
     right: 10px;
 }
 
-.edit .post span{
+.edit .post span {
     display: block;
     text-align: right;
 }
 
-.edit .post-checkbox{
+.edit .post-checkbox {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -66,18 +65,17 @@ div.edit #send_button{
     background-color: #494646;
 }
 
-.edit .post-checkbox label{
+.edit .post-checkbox label {
     font-size: 13px;
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    width:110px;
+    width: 110px;
     background-color: rgb(238, 238, 238);
     color: black;
 }
 
-.edit .checkbox{
+.edit .checkbox {
     position: absolute;
     right: 10px;
     bottom: 10px;
-   
 }
