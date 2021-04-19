@@ -585,8 +585,21 @@ app.post('/post_home', (req, res) => {
 })
 
 app.get('/get_comments_in_post_content', async (req, res) => {
-    const comment_text = req.query.comment_text
-    //console.log("comment_text:",comment_text)
+    var UserName = req.query.user_name;
+    var Content = req.query.content;
+    let comments = [];
+    let currentPost = [];
+    console.log("content:"+ Content)
+    const userInfos = await UserInfo.findOne({ user_name: UserName })
+    var postData = userInfos.post_data;
+    postData.every(post => {
+    if(post.content == Content){
+        comments = post.commented
+        currentPost = post
+        }
+    })
+    res.send(comments);
+
 })
 
 app.get('/api_my_comment_history', async (req, res) => {
