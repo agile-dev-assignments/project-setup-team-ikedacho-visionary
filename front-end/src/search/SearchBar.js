@@ -9,24 +9,22 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
     const history = useHistory()
 
     const onSubmit = (e) => {
-        history.push(`?s=${searchQuery}`)
         e.preventDefault()
+        history.push(`/searchResult?s=${searchQuery}`)
     }
 
     return (
-        /*
-        <form action = "/" method = "get">
-            <input
-                type = "text"
-                id = "header-search"
-                placeholder = "What do you want? "
-                name = "s" 
-            />
-
-            <button type = "submit"  onSubmit={onSubmit}>Search</button>
-        </form>
-        */
         <>
+            <form action = "/searchResult" method = "get">
+                <input
+                    type = "text"
+                    id = "header-search"
+                    placeholder = "What do you want? "
+                    name = "s" 
+                />
+
+                <button type = "submit"  onSubmit={onSubmit}>Search</button>
+            </form>
             <input className='Search_input_search' type='text' id='header-search' placeholder='Search here' name='s' />
             <Search id='search_icon_onepage' color='grey' size={17} />
         </>
