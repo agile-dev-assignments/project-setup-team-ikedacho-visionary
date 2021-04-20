@@ -636,21 +636,28 @@ app.post('/post_home', (req, res) => {
 })
 
 app.get('/get_comments_in_post_content', async (req, res) => {
-    var UserName = req.query.user_name;
-    var Content = req.query.content;
+    let UserName = req.query.user_name;
+    let Content = req.query.content;
     let comments = [];
     let currentPost = [];
     // console.log("content:"+ Content)
-    const userInfos = await UserInfo.findOne({ user_name: UserName })
-    var postData = userInfos.post_data;
-    postData.forEach(post => {
-    if(post.content == Content){
-        comments = post.commented
-        currentPost = post
+    await UserInfo.findOne({ user_name: UserName }, async (err, userInfos) => {
+        if (err) {
+            console.error(err)
+        } else {
+            console.log(userInfos)
+            if(userInfos!==null) {
+                let postData = userInfos.post_data.slice();
+                postData.forEach(post => {
+                if(post.content == Content) {
+                    comments = post.commented
+                    currentPost = post
+                    }
+                })
+            }
         }
     })
     res.send(comments);
-
 })
 
 let post_detail_for_comment = undefined
