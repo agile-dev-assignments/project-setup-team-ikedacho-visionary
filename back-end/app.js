@@ -138,21 +138,22 @@ app.post("/browsed", (req, res) => {
 })
 
 
-app.get('/api_browse', (req, res) => {
+app.get('/api_browse', async (req, res) => {
     let ret
     const username = req.user.username
 
     // retrieve data from database
-    UserInfo.findOne({ user_name: username }, (err, result) => {
+    await UserInfo.findOne({ user_name: username }, (err, result) => {
         if (err) {
             console.error(err)
         } else {
             // extract the brose history field
             ret = result.my_browse_history
-            console.log(ret)
-            res.json(ret)
         }
     })
+
+    console.log(ret)
+    res.json(ret)
 })
 
 app.get('/user', (req, res) => {
@@ -549,6 +550,7 @@ app.post('/post_background_picture', upload_background_picture.array('background
         res.redirect('/my_profile')
     }
 })
+
 let post_detail_for_repost = undefined
 app.use(async (req, res, next) => {
     if (req.query.post_detail_for_repost) {
@@ -557,6 +559,7 @@ app.use(async (req, res, next) => {
     }
     next()
 })
+
 app.get('/get_fast_repost', async (req, res) => {
     const my_username = req.user.username
     const post_text = `Repost from @${post_detail_for_repost.UserName}: ${post_detail_for_repost.content} `
@@ -605,15 +608,15 @@ app.get('/get_edit', async (req, res) => {
     const my_username = req.user.username
     const post_text = req.query.post_text
     const current_date = new Date()
-    let post_img = ''
-    if (req.query.old_post_img){
+    let post_img = ' '
+    if (req.query.old_post_img) {
         post_img = req.query.old_post_img
     }
     let my_user_photo
 
     const regex = /@\S+\s/g
     const search_for_mention = post_text.match(regex)
-    const unique_search_names = [...new Set(search_for_mention)];
+    const unique_search_names = [...new Set(search_for_mention)]
 
 
     await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
@@ -627,6 +630,7 @@ app.get('/get_edit', async (req, res) => {
             UserInfos.post_number++
 
             my_user_photo = UserInfos.user_photo
+            console.log(my_user_photo)
 
             await UserInfos.save(function (saveErr, saveUserInfos) {
                 if (err) {
