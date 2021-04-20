@@ -643,7 +643,7 @@ app.get('/get_comments_in_post_content', async (req, res) => {
     // console.log("content:"+ Content)
     const userInfos = await UserInfo.findOne({ user_name: UserName })
     var postData = userInfos.post_data;
-    postData.every(post => {
+    postData.forEach(post => {
     if(post.content == Content){
         comments = post.commented
         currentPost = post
@@ -740,6 +740,32 @@ app.get('/get_send_comment', async (req, res) => {
             })
         }
     })
+
+    await UserInfo.findOne({ user_name: other_username }, async (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            const a = {
+                UserName: self_username,
+                content: comment_text,
+                userimg: self_userimg,
+                Senttime: current_date,
+            }
+            let postData = result.post_data
+            postData.forEach((post) => {
+                if (post.content == message.content) {
+                    console.log(post.content)
+                    post.commented.push(a)
+                }
+            })
+            // save the update
+            await result.save((err) => {
+                if (err) {
+                    console.log(err)
+                }
+            })
+        }
+    })    
 
     // match for mentioning and update being-mentioned history
     unique_search_names.forEach(async (item) => {

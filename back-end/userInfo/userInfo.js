@@ -4,10 +4,10 @@ const mongoose = require('mongoose')
 const CommentedSchema = new mongoose.Schema(
     {
         id: Number,
-        commented_text: String,
-        commented_time: Date,
-        commented_by_username: String,
-        commented_by_profile_image: String,
+        content: String,//commented_text
+        Senttime: Date,//commented_time
+        UserName: String,//commented_by_username
+        userimg: String,//commented_by_profile_image
     },
     { _id: true }
 )
@@ -177,8 +177,6 @@ const userInfo = new mongoose.Schema(
                 post_username: String,
                 post_avatar: String,
                 post_text: String,
-                comment_text: String, 
-                repost_text: String
             },
         ],
         others_liked_history: [
