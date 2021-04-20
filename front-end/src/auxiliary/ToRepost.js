@@ -20,6 +20,23 @@ const Repost = (props) => {
         });
     };
 
+    const fastRepost = () => {
+        axios
+            .get('/get_fast_repost', {
+                params: {
+                   // post_text: post_text,
+                },
+            })
+            .then((response) => {
+                
+            })
+            .catch((err) => {
+                console.error(err)
+            })    
+        alert('new post is sent!')
+    }
+
+
     const _toRepost = () => {
         history.push('/repost')
     }
@@ -68,7 +85,7 @@ const Repost = (props) => {
     return (
         <div className="ToRepost">
 
-            <button className="Repost_fast">Fast Repost</button>
+            <button className="Repost_fast"  onClick={fastRepost}>Fast Repost</button>
             <button className="Repost_edit_button" onClick={() => window.location.href = '/repost'}>Repost</button>
             {/*<div className = "repost_edit_textarea">*/}
             {/*    {state.showRepostEdit &&  (*/}

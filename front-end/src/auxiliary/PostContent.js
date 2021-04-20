@@ -21,6 +21,20 @@ const PostContent = (props) => {
 
     const _showRepost = () => {
         let cur = state.showRepost
+        if (state.showRepost === false) {
+            axios
+                .get('/get_add_repost', {
+                    params: {
+                        post_detail_for_repost: props,
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+        }
         setState({
             showRepost: !cur,
         })

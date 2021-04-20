@@ -549,6 +549,45 @@ app.post('/post_background_picture', upload_background_picture.array('background
         res.redirect('/my_profile')
     }
 })
+let post_detail_for_repost = undefined
+app.use(async (req, res, next) => {
+    if (req.query.post_detail_for_repost) {
+        post_detail_for_repost = JSON.parse(req.query.post_detail_for_repost)
+        console.log('post detail: ', post_detail_for_repost)
+    }
+    next()
+})
+app.get('/get_fast_repost', async (req, res) => {
+    const my_username = req.user.username
+    const post_text = `Repost from @${post_detail_for_repost.UserName}: ${post_detail_for_repost.content} `
+    const current_date = new Date()
+    let my_user_photo
+
+    await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
+        try {
+            UserInfos.post_data.unshift({
+                content: post_text,
+                source: 'O-Zone',
+                senttime: current_date,
+                contentimg: ' ',
+            })
+            UserInfos.post_number++
+            
+            my_user_photo = UserInfos.user_photo
+
+            await UserInfos.save(function (saveErr, saveUserInfos) {
+                if (err) {
+                    console.log('error saving post')
+                }
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    })
+})
+
+
+
 
 app.get('/get_edit', async (req, res) => {
     const my_username = req.user.username
@@ -821,8 +860,8 @@ app.get('/get_repost', async (req, res) => {
         friend = [],
         follower = [],
         following = [],
-        linked_social_media = []
-
+        linked_social_media = [],
+        user_name = ''
     // retrieve follower and following lists of current user
     await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
         if (err) {
@@ -831,7 +870,7 @@ app.get('/get_repost', async (req, res) => {
             follower.push(result.follower)
             following.push(result.following)
             linked_social_media = result.linked_social_media
-            console.log(linked_social_media)
+            user_name = result.user_name
         }
     })
 
@@ -867,6 +906,7 @@ app.get('/get_repost', async (req, res) => {
     const response_data = {
         friend_list: ret,
         linked_social_media: linked_social_media,
+        user_name: user_name
     }
   
     res.json(response_data)
