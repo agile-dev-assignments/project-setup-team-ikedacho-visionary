@@ -5,8 +5,8 @@ import './ToRepost.css'
 import ToRepost_edit from './ToRepost_edit'
 
 const Repost = (props) => {
-    const [data, setData] = useState([])
-
+    const [friend, serFriend] = useState([])
+    const [platform, setPlatform] = useState([])
     const [state, setState] = useState({
         showRepostEdit: false,
     })
@@ -36,58 +36,29 @@ const Repost = (props) => {
         )
     }
 
+    const Platform = (props) => {
+        return (
+            <div className="repost_share_to_platforms">
+                <button onClick={() => {
+                    alert("A platform is clicked")
+                }}
+                        className="repost_share_to_platforms">{props.name}</button>
+            </div>
+        )
+    }
+
+
     // the following side-effect will be called once upon initial render
     useEffect(() => {
 
-        axios('https://my.api.mockaroo.com/repost_on_content.json?key=2d6d6d60')
+        axios('get_repost')
             .then((response) => {
                 // extract the data from the server response
-                setData(response.data)
+                serFriend(response.data.friend_list)
+                setPlatform(response.data.linked_social_media)
             })
             .catch((err) => {
-                const backupData = [{
-                    "friends_pic": "https://robohash.org/quiaofficiisdolorem.bmp?size=50x50\u0026set=set1",
-                    "friends_name": "cbearcroft0",
-                    "platforms": "Zamit"
-                }, {
-                    "friends_pic": "https://robohash.org/quosaliquamvoluptas.jpg?size=50x50\u0026set=set1",
-                    "friends_name": "dbowskill1",
-                    "platforms": "Holdlamis"
-                }, {
-                    "friends_pic": "https://robohash.org/suscipitestconsectetur.bmp?size=50x50\u0026set=set1",
-                    "friends_name": "bwhiten2",
-                    "platforms": "Flexidy"
-                }, {
-                    "friends_pic": "https://robohash.org/aliquametvoluptatum.jpg?size=50x50\u0026set=set1",
-                    "friends_name": "bminmagh3",
-                    "platforms": "Pannier"
-                }, {
-                    "friends_pic": "https://robohash.org/suscipitmodisunt.png?size=50x50\u0026set=set1",
-                    "friends_name": "criccardo4",
-                    "platforms": "Zoolab"
-                }, {
-                    "friends_pic": "https://robohash.org/isteinventoreenim.png?size=50x50\u0026set=set1",
-                    "friends_name": "ysilversmid5",
-                    "platforms": "Tin"
-                }, {
-                    "friends_pic": "https://robohash.org/deseruntquotenetur.jpg?size=50x50\u0026set=set1",
-                    "friends_name": "mheak6",
-                    "platforms": "Prodder"
-                }, {
-                    "friends_pic": "https://robohash.org/voluptateutest.png?size=50x50\u0026set=set1",
-                    "friends_name": "tstilwell7",
-                    "platforms": "Solarbreeze"
-                }, {
-                    "friends_pic": "https://robohash.org/iustonecessitatibuscumque.png?size=50x50\u0026set=set1",
-                    "friends_name": "amaceveley8",
-                    "platforms": "Viva"
-                }, {
-                    "friends_pic": "https://robohash.org/harumetconsectetur.png?size=50x50\u0026set=set1",
-                    "friends_name": "ksancto9",
-                    "platforms": "Konklux"
-                }
-                ]
-                setData(backupData)
+               
             })
     }, []) // only run it once!
 
@@ -111,19 +82,16 @@ const Repost = (props) => {
 
             <p>Share to friends</p>
             <section className="repost_share_to_friends_list">
-                {data.map(item => (
-                    <Friends name={item.friends_name}
-                             pic={item.friends_pic}/>
+                {friend.map(item => (
+                    <Friends name={item.user_name}
+                             pic={item.user_photo}/>
                 ))}
             </section>
 
             <p>Share to linked platform</p>
             <section className="repost_share_to_platforms">
-                {data.map(item => (
-                    <button onClick={() => {
-                        alert("a platform is clicked")
-                    }}
-                            className="repost_share_to_platforms">{item.platforms}</button>
+                {platform.map(item => (
+                    <Platform name={item} />
                 ))}
             </section>
 
