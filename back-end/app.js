@@ -1718,14 +1718,15 @@ app.get('/api_whatsnew', async (req, res, next) => {
         } else {
             if (result != null) {
                 followed_users = result.following
-                console.log('followed_users', followed_users)   
-
+                //console.log('followed_users', followed_users)   
                 my_like_history = result.my_like_history 
             } else {
                 followed_users = []
             }
         }
     })
+
+    followed_users.push(UserName)
 
     userInfos.forEach(userInfo => {
         const info = userInfo.toObject()
@@ -1998,6 +1999,24 @@ app.get('/api_search_recommended', async (req, res) => {
 
 app.get('/api_trending', async (req, res) => {
     let ret = []
+    let tag_list = []
+    const regex = /#\S+\s/g
+    const search_for_mention = comment_text.match(regex)
+
+    const userInfos = await UserInfo.find()
+    let postData = []
+
+    userInfos.forEach(userInfo => {
+        const info = userInfo.toObject()
+
+        for (let i = 0; i < info.post_data.length; i++)
+        {
+            if (info.post_data[i].content.match(regex)){
+                //console.log('info.post_data[i].content', info.post_data[i].content);
+                postData = postData.concat(data[i])
+            }
+        }
+    })
 
     await axios
         .get(`${process.env.API_TRENDING}?key=${process.env.API_TRENDING_KEY}`)
