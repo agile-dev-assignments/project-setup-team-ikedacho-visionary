@@ -933,6 +933,7 @@ app.get('/api_my_comment_history', async (req, res) => {
     await UserInfo.findOne({ user_name: req.user.username }, (err, UserInfos) => {
         try {
             response_data = UserInfos.my_comment_history
+            //console.log(response_data);
         } catch (e) {
             console.log(e)
         }
@@ -1720,7 +1721,6 @@ app.get('/api_whatsnew', async (req, res, next) => {
                 console.log('followed_users', followed_users)   
 
                 my_like_history = result.my_like_history 
-
             } else {
                 followed_users = []
             }
@@ -1823,7 +1823,7 @@ app.get('/api_recommended', async (req, res, next) => {
         }
 
        // console.log(data)
-       // postData = postData.concat(data)
+       postData = postData.concat(data)
     })
 
     postData.sort((prev,cur)=>{
@@ -1984,16 +1984,11 @@ app.get('/api_search_recommended', async (req, res) => {
         .catch((err) => {
             //console.log(err)
             const backupData = [
-                { topic: 'hot topic #6' },
-                { topic: 'hot topic #35' },
-                { topic: 'hot topic #33' },
-                { topic: 'hot topic #25' },
-                { topic: 'hot topic #876' },
-                { topic: 'hot topic #4' },
-                { topic: 'hot topic #72' },
-                { topic: 'hot topic #535' },
-                { topic: 'hot topic #153' },
-                { topic: 'hot topic #336' },
+                { topic: 'Recommended topic #1' },
+                { topic: 'Recommended topic #2' },
+                { topic: 'Recommended topic #3' },
+                { topic: 'Recommended topic #4' },
+                { topic: 'Recommended topic #5' },
             ]
             ret = backupData
         })
@@ -2028,104 +2023,88 @@ app.get('/api_trending', async (req, res) => {
 })
 
 app.get('/api_search_result', async (req, res) => {
-    let ret = {}
-    const tag_searched = req.query.tag_searched
+    //const search_key = req.query.searchQuery
+    const search_keyword = req.query.searchQuery
+    //console.log('search_keyword', search_key);
 
-    await axios
-        .get(`${process.env.API_SEARCH_RESULT}?key=${process.env.API_SEARCH_RESULT_KEY}`)
-        .then((apiResponse) => (ret = apiResponse.data))
-        .catch((err) => {
-            //console.log(err)
-            var backupData = [
-                {
-                    source: 'Konklux',
-                    userimg: 'https://robohash.org/laboriosamaliquamconsequuntur.jpg?size=50x50\u0026set=set1',
-                    UserName: 'mgalliard0',
-                    content: 'Aaaahhhhhh! I do not know what to say. ',
-                    Senttime: '10/18/2020',
-                    contentimg: 'http://dummyimage.com/112x136.jpg/cc0000/ffffff',
-                },
-                {
-                    source: 'Domainer',
-                    userimg: 'https://robohash.org/utculpaesse.png?size=50x50\u0026set=set1',
-                    UserName: 'hrevie1',
-                    content: 'Aaaahhhhhhhhhhh! I do not know what to say. ',
-                    Senttime: '4/15/2020',
-                    contentimg: 'http://dummyimage.com/228x124.bmp/cc0000/ffffff',
-                },
-                {
-                    source: 'Ventosanzap',
-                    userimg: 'https://robohash.org/etquosa.bmp?size=50x50\u0026set=set1',
-                    UserName: 'avedenisov2',
-                    content: 'Aaaahhhhh! I do not know what to say. ',
-                    Senttime: '2/5/2021',
-                    contentimg: 'http://dummyimage.com/107x217.jpg/5fa2dd/ffffff',
-                },
-                {
-                    source: 'Lotlux',
-                    userimg: 'https://robohash.org/inciduntatest.png?size=50x50\u0026set=set1',
-                    UserName: 'fhenniger3',
-                    content: 'Aaaahhhhhhhhhhhhh! I do not know what to say. ',
-                    Senttime: '3/1/2021',
-                    contentimg: 'http://dummyimage.com/219x227.jpg/5fa2dd/ffffff',
-                },
-                {
-                    source: 'Span',
-                    userimg: 'https://robohash.org/quidemquicupiditate.bmp?size=50x50\u0026set=set1',
-                    UserName: 'gmacqueen4',
-                    content: 'Aaaahhhhhhhhhhhhhh! I do not know what to say. ',
-                    Senttime: '5/21/2020',
-                    contentimg: 'http://dummyimage.com/185x108.bmp/dddddd/000000',
-                },
-                {
-                    source: 'Namfix',
-                    userimg: 'https://robohash.org/dolorcumqueeaque.png?size=50x50\u0026set=set1',
-                    UserName: 'gmorot5',
-                    content: 'Aaaahhhhhhhhhhhh! I do not know what to say. ',
-                    Senttime: '9/27/2020',
-                    contentimg: 'http://dummyimage.com/223x118.jpg/5fa2dd/ffffff',
-                },
-                {
-                    source: 'Overhold',
-                    userimg: 'https://robohash.org/oditdolorenesciunt.png?size=50x50\u0026set=set1',
-                    UserName: 'mmcileen6',
-                    content: 'Aaaahhhhhhhhhhhh! I do not know what to say. ',
-                    Senttime: '6/17/2020',
-                    contentimg: 'http://dummyimage.com/181x111.bmp/5fa2dd/ffffff',
-                },
-                {
-                    source: 'Pannier',
-                    userimg: 'https://robohash.org/etnobisest.jpg?size=50x50\u0026set=set1',
-                    UserName: 'gthrustle7',
-                    content: 'Aaaahhhhhhhhhhhhhhh! I do not know what to say. ',
-                    Senttime: '5/2/2020',
-                    contentimg: 'http://dummyimage.com/161x248.png/ff4444/ffffff',
-                },
-                {
-                    source: 'Overhold',
-                    userimg: 'https://robohash.org/oditautet.jpg?size=50x50\u0026set=set1',
-                    UserName: 'rlafond8',
-                    content: 'Aaaahhhhhh! I do not know what to say. ',
-                    Senttime: '3/21/2020',
-                    contentimg: 'http://dummyimage.com/123x113.png/5fa2dd/ffffff',
-                },
-                {
-                    source: 'Bamity',
-                    userimg: 'https://robohash.org/autdeleniticonsequuntur.bmp?size=50x50\u0026set=set1',
-                    UserName: 'ckarleman9',
-                    content: 'Aaaahhhhhh! I do not know what to say. ',
-                    Senttime: '11/14/2020',
-                    contentimg: 'http://dummyimage.com/234x151.jpg/cc0000/ffffff',
-                },
-            ]
-            var i
-            for (i = 0; i < backupData.length; i++) {
-                backupData[i].content = backupData[i].content.concat(' #HotTopic')
-            }
-            ret = backupData
+    user_name_l = req.user.username
+
+    const userInfos = await UserInfo.find()
+    let postData = [], 
+        my_like_history
+
+    userInfos.forEach(userInfo => {
+        const info = userInfo.toObject()
+        //console.log(info.content);
+
+        const data = info.post_data.map(ele => {
+            ele.userimg= userInfo.user_photo
+            ele.UserName=userInfo.user_name 
+            return ele
         })
 
-    res.json(ret)
+        for (let i = 0; i < info.post_data.length; i++)
+        {
+            if (info.post_data[i].content.indexOf(search_keyword) !== -1){
+                //console.log('info.post_data[i].content', info.post_data[i].content);
+                postData = postData.concat(data[i])
+            }
+        }
+
+        if (userInfo.user_name === req.user.username) {
+            my_like_history = userInfo.my_like_history
+        }
+
+       // console.log(data)
+       //postData = postData.concat(data)
+    })
+
+    postData.sort((prev,cur)=>{
+        return cur.senttime - prev.senttime
+    })
+
+    // lr = liked_record, fr = filtered_record
+    let lr,
+        fr,
+        matched,
+        filtered_by_liked = []
+    // if my_like_history is not empty, we need to know if post has been liked by the current user
+    // forEach might be better
+    if (my_like_history !== undefined && !isEmpty(my_like_history)) {
+        for (let i = 0; i < postData.length; i++) {
+            fr = postData[i]
+            matched = false
+            for (let j = 0; j < my_like_history.length; j++) {
+                lr = my_like_history[j]
+                // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
+                if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
+                    // console.log("matched! ")
+                    filtered_by_liked.push({
+                        content: fr.content,
+                        source: fr.source,
+                        senttime: fr.senttime,
+                        contentimg: fr.contentimg,
+                        commented: fr.commented,
+                        liked: fr.liked,
+                        repoted: fr.repoted,
+                        UserName: lr.user_name,
+                        userimg: lr.user_photo,                     
+                        like_switch: true,
+                    })
+                    matched = true
+                    break
+                }
+            }
+            if (matched === false) {
+                filtered_by_liked.push(fr)
+            }
+        }
+    } else {
+        filtered_by_liked = postData
+    }
+
+    // console.log('filtered_by_liked: ', filtered_by_liked)
+    res.json(filtered_by_liked)
 })
 //test
 //Then instantiate a multer object "upload_post_picture" to be used in app.post("/post_Post_picture", upload.array("background_picture", 1), (req, res)...

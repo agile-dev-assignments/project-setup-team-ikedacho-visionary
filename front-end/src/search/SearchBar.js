@@ -19,16 +19,17 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
                 <input
                     type = "text"
                     id = "header-search"
-                    placeholder = "What do you want? "
+                    placeholder = "Search here "
                     name = "s" 
                 />
 
                 <button type = "submit"  onSubmit={onSubmit}>Search</button>
             </form>
-            <input className='Search_input_search' type='text' id='header-search' placeholder='Search here' name='s' />
-            <Search id='search_icon_onepage' color='grey' size={17} />
+            
         </>
     )
+    // <input className='Search_input_search' type='text' id='header-search' placeholder='Search here' name='s' />
+    // <Search id='search_icon_onepage' color='grey' size={17} />
 }
 
 export default SearchBar
