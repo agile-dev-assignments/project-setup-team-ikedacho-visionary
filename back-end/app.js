@@ -586,8 +586,42 @@ app.get('/get_fast_repost', async (req, res) => {
     })
 })
 
+app.get('/get_repost_inner', async (req, res) => {
+    const my_username = req.user.username
+    const old_post_text = post_detail_for_repost.content
+    const old_post_by = post_detail_for_repost.UserName
+    const old_post_img = post_detail_for_repost.contentimg
+    const current_date = new Date()
+    let my_user_photo
+    /*
+    await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
+        try {
+            UserInfos.post_data.unshift({
+                content: old_post_text,
+                source: 'O-Zone',
+                senttime: current_date,
+                contentimg: ' ',
+            })
+            UserInfos.post_number++
+            
+            my_user_photo = UserInfos.user_photo
 
-
+            await UserInfos.save(function (saveErr, saveUserInfos) {
+                if (err) {
+                    console.log('error saving post')
+                }
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    })*/
+    const response_data = {
+        old_post_by: old_post_by,
+        old_post_text: old_post_text,  
+        old_post_img: old_post_img,   
+    }
+    res.json(response_data)
+})
 
 app.get('/get_edit', async (req, res) => {
     const my_username = req.user.username
