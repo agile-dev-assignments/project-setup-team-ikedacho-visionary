@@ -549,11 +549,66 @@ app.post('/post_background_picture', upload_background_picture.array('background
         res.redirect('/my_profile')
     }
 })
+let post_detail_for_repost = undefined
+app.use(async (req, res, next) => {
+    if (req.query.post_detail_for_repost) {
+        post_detail_for_repost = JSON.parse(req.query.post_detail_for_repost)
+        console.log('post detail: ', post_detail_for_repost)
+    }
+    next()
+})
+app.get('/get_fast_repost', async (req, res) => {
+    const my_username = req.user.username
+    const post_text = `Repost from @${post_detail_for_repost.UserName}: ${post_detail_for_repost.content} `
+    const current_date = new Date()
+    let my_user_photo
+
+    await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
+        try {
+            UserInfos.post_data.unshift({
+                content: post_text,
+                source: 'O-Zone',
+                senttime: current_date,
+                contentimg: ' ',
+            })
+            UserInfos.post_number++
+
+            my_user_photo = UserInfos.user_photo
+
+            await UserInfos.save(function (saveErr, saveUserInfos) {
+                if (err) {
+                    console.log('error saving post')
+                }
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    })
+})
+
+app.get('/get_repost_inner', async (req, res) => {
+    const my_username = req.user.username
+    const old_post_text = post_detail_for_repost.content
+    const old_post_by = post_detail_for_repost.UserName
+    const old_post_img = post_detail_for_repost.contentimg
+    const current_date = new Date()
+    let my_user_photo
+    const response_data = {
+        old_post_by: old_post_by,
+        old_post_text: old_post_text,
+        old_post_img: old_post_img,
+    }
+    res.json(response_data)
+})
 
 app.get('/get_edit', async (req, res) => {
     const my_username = req.user.username
     const post_text = req.query.post_text
     const current_date = new Date()
+    let post_img = ''
+    if (req.query.old_post_img){
+        post_img = req.query.old_post_img
+    }
     let my_user_photo
 
     const regex = /@\S+\s/g
@@ -567,10 +622,10 @@ app.get('/get_edit', async (req, res) => {
                 content: post_text,
                 source: 'O-Zone',
                 senttime: current_date,
-                contentimg: ' ',
+                contentimg: post_img,
             })
             UserInfos.post_number++
-            
+
             my_user_photo = UserInfos.user_photo
 
             await UserInfos.save(function (saveErr, saveUserInfos) {
@@ -636,21 +691,28 @@ app.post('/post_home', (req, res) => {
 })
 
 app.get('/get_comments_in_post_content', async (req, res) => {
-    var UserName = req.query.user_name;
-    var Content = req.query.content;
-    let comments = [];
-    let currentPost = [];
+    let UserName = req.query.user_name
+    let Content = req.query.content
+    let comments = []
+    let currentPost = []
     // console.log("content:"+ Content)
-    const userInfos = await UserInfo.findOne({ user_name: UserName })
-    var postData = userInfos.post_data;
-    postData.forEach(post => {
-    if(post.content == Content){
-        comments = post.commented
-        currentPost = post
+    await UserInfo.findOne({ user_name: UserName }, async (err, userInfos) => {
+        if (err) {
+            console.error(err)
+        } else {
+            console.log(userInfos)
+            if (userInfos !== null) {
+                let postData = userInfos.post_data.slice()
+                postData.forEach((post) => {
+                    if (post.content == Content) {
+                        comments = post.commented
+                        currentPost = post
+                    }
+                })
+            }
         }
     })
-    res.send(comments);
-
+    res.send(comments)
 })
 
 let post_detail_for_comment = undefined
@@ -697,9 +759,9 @@ app.get('/get_send_comment', async (req, res) => {
                 commented_by_username: self_username,
                 commented_date: current_date,
                 comment_text: comment_text,
-                commented_by_photo: self_userimg
+                commented_by_photo: self_userimg,
             })
-            
+
             // save the changes
             await result.save((err) => {
                 if (err) {
@@ -765,28 +827,28 @@ app.get('/get_send_comment', async (req, res) => {
                 }
             })
         }
-    })    
+    })
 
     // match for mentioning and update being-mentioned history
     unique_search_names.forEach(async (item) => {
         const search_name = item.replace(/@|\s/g, '')
         console.log(search_name)
         await UserInfo.findOne({ user_name: search_name }, async (err, result) => {
-            if (err) { 
+            if (err) {
                 console.error(err)
             } else {
                 if (result) {
-                    // found! 
-                    result.others_mentioned_history = (result.others_mentioned_history.length) ? result.others_mentioned_history : []
+                    // found!
+                    result.others_mentioned_history = result.others_mentioned_history.length ? result.others_mentioned_history : []
                     result.others_mentioned_history.push({
                         mentioner_avatar: self_userimg,
                         mentioner_username: self_username,
                         mentioned_date: current_date,
                         post_image: ' ',
                         post_username: message.UserName,
-                        post_avatar: message.userimg, 
+                        post_avatar: message.userimg,
                         post_text: message.content,
-                        comment_text: comment_text
+                        comment_text: comment_text,
                     })
 
                     console.log(result.others_mentioned_history)
@@ -807,6 +869,63 @@ app.get('/get_send_comment', async (req, res) => {
 
     res.json(self_username)
     post_detail_for_comment = undefined
+})
+
+app.get('/get_repost', async (req, res) => {
+    let ret = [],
+        friend = [],
+        follower = [],
+        following = [],
+        linked_social_media = [],
+        user_name = ''
+    // retrieve follower and following lists of current user
+    await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            follower.push(result.follower)
+            following.push(result.following)
+            linked_social_media = result.linked_social_media
+            user_name = result.user_name
+        }
+    })
+
+    console.log('follower: ', follower)
+    console.log('following: ', following)
+    console.log(!isEmpty(follower[0]) && !isEmpty(following[0]))
+    if (!isEmpty(follower[0]) && !isEmpty(following[0])) {
+        // lazy finding intersection
+        console.log('friend: ', friend)
+        for (let i = 0; i < follower[0].length; i++) {
+            if (following[0].includes(follower[0][i])) {
+                friend.push(follower[0][i])
+            }
+        }
+
+        console.log('friend after intersection: ', friend)
+
+        // retrieve extended user info from database
+        for (let i = 0; i < friend.length; i++) {
+            await UserInfo.findOne({ user_name: friend[i] }, (err, result) => {
+                if (err) {
+                    console.error(err)
+                } else {
+                    ret.push({
+                        user_name: result.user_name,
+                        user_photo: result.user_photo,
+                    })
+                }
+            })
+        }
+    }
+
+    const response_data = {
+        friend_list: ret,
+        linked_social_media: linked_social_media,
+        user_name: user_name,
+    }
+
+    res.json(response_data)
 })
 
 app.get('/api_my_comment_history', async (req, res) => {

@@ -27,7 +27,7 @@ const Mentions = (props) => {
             <Link to={{
                 pathname: '/detailpost', 
                 state: {
-                    Username: props.details.post_username, 
+                    UserName: props.details.post_username, 
                     userimg: props.details.post_avatar, 
                     content: props.details.post_text, 
                     contentimgs: props.details.post_image
