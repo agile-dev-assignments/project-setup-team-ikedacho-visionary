@@ -14,12 +14,38 @@ const Mentions_List = (props) => {
             .then((response) => {
                 // extract the data from the server response
                 setData(response.data)
-                console.log('data fetched from backend: ', data)
             })
             .catch((err) => {
                 console.error(err)
             })
     }, []) // only run it once!
+
+    console.log('data fetched from backend: ', data)
+
+    // fascinating bubble sort, killer of time complexity
+    function bubbleSort(array, property) {
+        let swapped
+        do {
+            swapped = false
+            for (let i = 0; i < array.length - 1; i++) {
+                const date1 = new Date(array[i][property]).getTime()
+                const date2 = new Date(array[i + 1][property]).getTime()
+                // console.log("------", date1)
+                // console.log("======", date2)
+                if (date1 < date2) {
+                    let temp = array[i]
+                    array[i] = array[i + 1]
+                    array[i + 1] = temp
+                    swapped = true
+                }
+            }
+        } while (swapped)
+    }
+
+    bubbleSort(data, 'mentioned_date')
+    // console.log("sorted!", unsorted)
+
+    console.log(data)
 
     return (
         <div className='Mentions_List'>
