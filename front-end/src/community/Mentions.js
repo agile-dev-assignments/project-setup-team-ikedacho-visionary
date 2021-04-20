@@ -21,6 +21,7 @@ const Mentions = (props) => {
                     </h1>
                 </Link>
                 <span id='mentioned_date'>{props.details.mentioned_date}</span>
+                <span id='mentioned_comment_text'>{props.details.comment_text}</span>
             </div>
 
             <Link to={{

@@ -670,8 +670,13 @@ app.get('/get_send_comment', async (req, res) => {
     const self_username = req.user.username
     let self_userimg
 
+    // setup for mentioning matching
+    const regex = /@\S+\s/g
+    const search_for_mention = comment_text.match(regex)
+    const unique_search_names = [...new Set(search_for_mention)];
     const current_date = new Date()
-    // find myself and update my liked history
+
+    // find myself and update my commented history
     await UserInfo.findOne({ user_name: self_username }, async (err, result) => {
         if (err) {
             console.error(err)
@@ -735,6 +740,45 @@ app.get('/get_send_comment', async (req, res) => {
             })
         }
     })
+
+    // match for mentioning and update being-mentioned history
+    unique_search_names.forEach(async (item) => {
+        const search_name = item.replace(/@|\s/g, '')
+        console.log(search_name)
+        await UserInfo.findOne({ user_name: search_name }, async (err, result) => {
+            if (err) { 
+                console.error(err)
+            } else {
+                if (result) {
+                    // found! 
+                    result.others_mentioned_history = (result.others_mentioned_history.length) ? result.others_mentioned_history : []
+                    result.others_mentioned_history.push({
+                        mentioner_avatar: self_userimg,
+                        mentioner_username: self_username,
+                        mentioned_date: current_date,
+                        post_image: ' ',
+                        post_username: message.UserName,
+                        post_avatar: message.userimg, 
+                        post_text: message.content,
+                        comment_text: comment_text
+                    })
+
+                    console.log(result.others_mentioned_history)
+
+                    // save changes
+                    await result.save((err) => {
+                        if (err) {
+                            console.error(err)
+                        }
+                    })
+
+                } else {
+                    // not found... -> do nothing! this is not a mention, or mentioning wrongly
+                }
+            }
+        })
+    })
+
     res.json(self_username)
     post_detail_for_comment = undefined
 })

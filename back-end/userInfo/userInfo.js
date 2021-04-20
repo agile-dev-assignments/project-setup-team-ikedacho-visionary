@@ -177,6 +177,8 @@ const userInfo = new mongoose.Schema(
                 post_username: String,
                 post_avatar: String,
                 post_text: String,
+                comment_text: String, 
+                repost_text: String
             },
         ],
         others_liked_history: [
