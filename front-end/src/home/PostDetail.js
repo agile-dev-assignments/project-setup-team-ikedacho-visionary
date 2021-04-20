@@ -65,26 +65,17 @@ const PostDetail = (props) => {
             }, [])
 
 
-    const [data, setData] = useState([
-        {
-            id: 1,
-            username: 'cgilligan0',
-            user_photo: 'https://robohash.org/doloremqueofficiaet.jpg?size=50x50\u0026set=set1',
-            Content:
-                'Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.',
-            contentimg: ['https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2019/07/Man-Silhouette.jpg'],
-            post_date: '4/19/2020',
-        }
-    ])
+    const [data, setData] = useState([])
+
     // the following side-effect will be called once upon initial render
     useEffect(() => {
        axios
             .get('/get_comments_in_post_content',
         {
             params: {
-            user_name :  state.UserName,
-            content : state.content
-        }
+                user_name :  state.UserName,
+                content : state.content
+            }
         })
             .then((response) => {
                 // extract the data from the server response
