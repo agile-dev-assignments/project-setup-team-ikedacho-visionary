@@ -627,6 +627,10 @@ app.get('/get_edit', async (req, res) => {
     const my_username = req.user.username
     const post_text = req.query.post_text
     const current_date = new Date()
+    let post_img = ''
+    if (req.query.old_post_img){
+        post_img = req.query.old_post_img
+    }
     let my_user_photo
 
     const regex = /@\S+\s/g
@@ -640,7 +644,7 @@ app.get('/get_edit', async (req, res) => {
                 content: post_text,
                 source: 'O-Zone',
                 senttime: current_date,
-                contentimg: ' ',
+                contentimg: post_img,
             })
             UserInfos.post_number++
             
