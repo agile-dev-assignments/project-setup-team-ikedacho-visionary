@@ -28,6 +28,20 @@ const PostContent = (props) => {
 
     const _showComment = () => {
         let cur = state.showComment
+        if (state.showComment === false) {
+            axios
+                .get('/get_add_comment', {
+                    params: {
+                        post_detail_for_comment: props,
+                    },
+                })
+                .then((response) => {
+                    console.log(response.data)
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+        }
         setState({
             showComment: !cur,
         })
