@@ -32,6 +32,9 @@ const Repost = (props) => {
                 console.error(err)
             })
         alert('new post is sent!')
+        setTimeout(() => {
+            window.location.href = window.location.href
+        }, 100)
     }
 
     const Repost = () => {
