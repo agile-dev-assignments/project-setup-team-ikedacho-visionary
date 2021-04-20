@@ -17,7 +17,6 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
         <>
             <form action = "/searchResult" method = "get">
                 <input className='Search_input_search' type='text' id='header-search' placeholder='Search here' name='s' />
-
                 <button id='search_icon_onepage' type="submit" onSubmit={onSubmit}>Search</button>
             </form>
 

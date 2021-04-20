@@ -1998,45 +1998,33 @@ app.get('/api_search_recommended', async (req, res) => {
 })
 
 app.get('/api_trending', async (req, res) => {
-    let ret = []
     let tag_list = []
+    let ret = []
+    
     const regex = /#\S+\s/g
-    const search_for_mention = comment_text.match(regex)
 
     const userInfos = await UserInfo.find()
-    let postData = []
+    //let postData = []
 
     userInfos.forEach(userInfo => {
         const info = userInfo.toObject()
 
         for (let i = 0; i < info.post_data.length; i++)
-        {
+        { 
             if (info.post_data[i].content.match(regex)){
-                //console.log('info.post_data[i].content', info.post_data[i].content);
-                postData = postData.concat(data[i])
+                let search_for_tag = info.post_data[i].content.match(regex)
+                
+                for(let i = 0; i < search_for_tag.length; i++){
+                    if(tag_list.includes(search_for_tag[i]) == false){
+                        ret.push({topic: search_for_tag[i]})
+                        console.log('tag', search_for_tag[i]);
+                    }
+                    tag_list.push(search_for_tag[i])
+                }
+                //postData = postData.concat(data[i])
             }
         }
     })
-
-    await axios
-        .get(`${process.env.API_TRENDING}?key=${process.env.API_TRENDING_KEY}`)
-        .then((apiResponse) => (ret = apiResponse.data))
-        .catch((err) => {
-            //console.log(err)
-            const backupData = [
-                { topic: 'hot topic #699' },
-                { topic: 'hot topic #0' },
-                { topic: 'hot topic #3' },
-                { topic: 'hot topic #422' },
-                { topic: 'hot topic #78' },
-                { topic: 'hot topic #34' },
-                { topic: 'hot topic #2' },
-                { topic: 'hot topic #435' },
-                { topic: 'hot topic #3' },
-                { topic: 'hot topic #94' },
-            ]
-            ret = backupData
-        })
 
     res.json(ret)
 })
