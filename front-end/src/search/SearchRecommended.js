@@ -27,8 +27,8 @@ const SearchRecommended = (props) => {
         <div className='SearchRecommended'>
             <section>
                 {data.map((item) => (
-                    <div className='search_recommend_content' onClick={() => (window.location.href = '/searchResult')}>
-                        <p className='search_recommend_p'>{item.topic}</p>
+                    <div className='search_recommend_content'>
+                        <Link className='trending_p' to={{pathname: '/searchResult',search:'?s='+item.topic}}>{item.topic}</Link>
                         <p>🎉</p>
                     </div>
                 ))}

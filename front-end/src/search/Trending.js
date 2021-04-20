@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import {BrowserRouter as Router,Link} from 'react-router-dom'
 import './Trending.css'
 
 const Trending = (props) => {
@@ -23,9 +24,7 @@ const Trending = (props) => {
             <section>
                 {data.map((item) => (
                     <div className='trending_content'>
-                        <p className='trending_p' onClick={() => (window.location.href = '/searchResult')}>
-                            {item.topic}
-                        </p>
+                        <Link className='trending_p' to={{pathname: '/searchResult',search:'?s='+item.topic}}>{item.topic}</Link>
                         <p>🔥</p>
                     </div>
                 ))}
