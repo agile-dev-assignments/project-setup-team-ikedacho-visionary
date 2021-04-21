@@ -62,6 +62,10 @@ const WhatsNew = (props) => {
                 console.log(`Sorry, buster.  No more requests allowed today!`)
                 console.error(err) // the server returned an error... probably too many requests... until we pay!
                 // make some backup fake data of commented_history
+                history.push('/prelogin')
+                setTimeout(() => {
+                    window.location.href = window.location.href
+                }, 100)
             })
     }, []) // only run it once!
 
