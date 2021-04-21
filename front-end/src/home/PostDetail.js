@@ -18,8 +18,8 @@ const PostDetail = (props) => {
     const goTOPreviousPath = () => {
         history.goBack()
     }
-
-    const [PostData, setPostData] = useState([{ id: 1, source: '', UserName: '', user_photo: '', Content: '', contentimg: '', post_date: '' }])
+    console.log(state)
+    const [PostData, setPostData] = useState([{ id: 1, source: '', like_switch : true,  UserName: '', user_photo: '', Content: '', contentimg: '', post_date: '' }])
 
     const [self_username, Set_self_username] = useState('')
 
@@ -38,8 +38,12 @@ const PostDetail = (props) => {
         if (state != undefined) {
             setPostData(state)
         }
+        if(state.like_switch == undefined){
+            PostData.like_switch = false
+        }
     }, []) // only run it once!
-    console.log(state)
+
+
 
     useEffect(() => {
 
@@ -47,6 +51,9 @@ const PostDetail = (props) => {
         .post("/browsed",
         {
             viewdate : date,
+            senttime : state.Senttime,
+            source : state.source,
+            like_switch : state.like_switch,
             UserName : state.UserName,
             userimg : state.userimg,
             content : state.content,

@@ -60,7 +60,6 @@ const PostContent = (props) => {
             showComment: !cur,
         })
     }
-
     const _setLike = () => {
         let cur = like.liked
         setLike({
@@ -144,7 +143,7 @@ const PostContent = (props) => {
                 </button>
                 {/* inline style to show red Liked button when like_switch default to be TRUE*/}
                 <button className='Likebutton' style={{ backgroundColor: like.liked ? '#e37568' : 'white' }} onClick={_setLike.bind()}>
-                    {like.liked ? 'Liked' : 'Like'}
+                    {props.like_switch ? 'Liked' : 'Like'}
                 </button>
                 <button className='Repostbutton' onClick={_showRepost.bind()}>
                     Repost
