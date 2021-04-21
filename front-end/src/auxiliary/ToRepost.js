@@ -5,7 +5,6 @@ import './ToRepost.css'
 import ToRepost_edit from './ToRepost_edit'
 
 const Repost = (props) => {
-    const [friend, serFriend] = useState([])
     const [platform, setPlatform] = useState([])
     const [state, setState] = useState({
         showRepostEdit: false,
@@ -77,7 +76,6 @@ const Repost = (props) => {
         axios('get_repost')
             .then((response) => {
                 // extract the data from the server response
-                serFriend(response.data.friend_list)
                 setPlatform(response.data.linked_social_media)
             })
             .catch((err) => {})
@@ -94,19 +92,6 @@ const Repost = (props) => {
                 Repost
             </button>
 
-            <p>Share to friends</p>
-            <section className='repost_share_to_friends_list'>
-                {friend.map((item) => (
-                    <Friends name={item.user_name} pic={item.user_photo} />
-                ))}
-            </section>
-
-            <p>Share to linked platform</p>
-            <section className='repost_share_to_platforms'>
-                {platform.map((item) => (
-                    <Platform name={item} />
-                ))}
-            </section>
         </div>
     )
 }
