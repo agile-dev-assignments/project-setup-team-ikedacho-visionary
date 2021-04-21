@@ -112,10 +112,6 @@ const Edit = (props) => {
                     </div>
                 </div>
 
-                <div className='checkbox'>
-                    <input type='checkbox' />
-                    <span>Post as Pravite</span>
-                </div>
             </section>
         </div>
     )

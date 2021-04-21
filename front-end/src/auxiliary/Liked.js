@@ -27,7 +27,7 @@ const Liked = (props) => {
                 </Link>
                 <span id='commented_date'>{props.details.liked_date}</span>
             </div>
-            <p id='like'>liked the post at {date.toString()}</p>
+            <p id='like'>liked the post at {date.toString().slice(3,24)}</p>
 
             <Link to={`/detailpost`}>
                 <p id='post'>

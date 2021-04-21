@@ -21,7 +21,7 @@ const Commented = (props) => {
                         {props.details.commented_by_username}
                     </h1>
                 </Link>
-                <span id='commented_date'>{props.details.commented_date}</span>
+                <span id='commented_date'>{props.details.commented_date.slice(0,10) + "  "+props.details.commented_date.slice(11,19) }</span>
             </div>
 
             <p id='comment'>Commented: {props.details.comment_text}</p>

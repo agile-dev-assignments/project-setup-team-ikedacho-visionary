@@ -168,11 +168,17 @@ app.get('/my_info', (req, res) => {
     })
 })
 
-app.use('/get_me', async (req, res, next) => {
+app.get('/get_me', async (req, res) => {
     const my_username = req.user.username
     user_name_l = req.user.username
-    await UserInfo.findOne({ user_name: my_username }, (err, UserInfos) => {
-        try {
+    let user_info = []
+    let linked_social_media = []
+    let unconnected_social_media = []
+    await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
+        if (err){
+            console.log("error", err)
+        }
+        else{
             user_info = UserInfos
             linked_social_media = UserInfos.linked_social_media
             unconnected_social_media = UserInfos.unconnected_social_media
@@ -183,83 +189,77 @@ app.use('/get_me', async (req, res, next) => {
             //console.log(user_info)
             //console.log("user_info.post_number",user_info.post_number)
             selected_social_media = ['O-Zone', 'Facebook', 'Twitter', 'Instagram']
-        } catch (e) {
-            console.log(e)
+
+            let clicked_linked_social_media = req.query.clicked_linked_social_media
+            let clicked_unconnected_social_media = req.query.clicked_unconnected_social_media
+
+            if (clicked_linked_social_media !== undefined) {
+                //update linked_social_media(delete)
+                linked_social_media = linked_social_media.filter((element) => {
+                    if (!element.includes(clicked_linked_social_media)) {
+                        return true
+                    }
+                })
+                //update linked_social_media to database
+                const filter1 = { user_name: my_username }
+                const update1 = { linked_social_media: linked_social_media }
+                await UserInfo.findOneAndUpdate(filter1, update1, {
+                    new: true,
+                })
+                //console.log('a',linked_social_media )
+
+                if (!unconnected_social_media.includes(clicked_linked_social_media)) {
+                    //update unconnected_social_media(add)
+                    unconnected_social_media.push(clicked_linked_social_media)
+                    //update unconnected_social_media to database
+                    const filter2 = { user_name: my_username }
+                    const update2 = { unconnected_social_media: unconnected_social_media }
+                    await UserInfo.findOneAndUpdate(filter2, update2, {
+                        new: true,
+                    })
+                    //console.log('b',unconnected_social_media )
+                }
+            } //end of if
+
+            if (clicked_unconnected_social_media !== undefined) {
+                //update unconnected_social_media(delete)
+                unconnected_social_media = unconnected_social_media.filter((element) => {
+                    if (!element.includes(clicked_unconnected_social_media)) {
+                        return true
+                    }
+                })
+                //update unconnected_social_media to database
+                const filter1 = { user_name: my_username }
+                const update1 = { unconnected_social_media: unconnected_social_media }
+                await UserInfo.findOneAndUpdate(filter1, update1, {
+                    new: true,
+                })
+                //console.log('c',unconnected_social_media )
+
+                if (!linked_social_media.includes(clicked_unconnected_social_media)) {
+                    //update linked_social_media(add)
+                    linked_social_media.push(clicked_unconnected_social_media)
+                    //update linked_social_media to database
+                    const filter2 = { user_name: my_username }
+                    const update2 = { linked_social_media: linked_social_media }
+                    await UserInfo.findOneAndUpdate(filter2, update2, {
+                        new: true,
+                    })
+                    //console.log('d',linked_social_media )
+                }
+            }
+            const response_data = {
+                user_info: user_info,
+                linked_social_media: linked_social_media, //return linked_platform name
+                unconnected_social_media: unconnected_social_media,
+            }
+            //console.log("in get_my_profile:", user_info)
+            console.log('linked_social_media:', linked_social_media)
+            console.log('unconnected_social_media:', unconnected_social_media)
+            //console.log("in me's post_data:",post_data)
+            res.json(response_data)
         }
     })
-    next()
-})
-
-app.get('/get_me', async (req, res) => {
-    const my_username = req.user.username
-    let clicked_linked_social_media = req.query.clicked_linked_social_media
-    let clicked_unconnected_social_media = req.query.clicked_unconnected_social_media
-
-    if (clicked_linked_social_media !== undefined) {
-        //update linked_social_media(delete)
-        linked_social_media = linked_social_media.filter((element) => {
-            if (!element.includes(clicked_linked_social_media)) {
-                return true
-            }
-        })
-        //update linked_social_media to database
-        const filter1 = { user_name: my_username }
-        const update1 = { linked_social_media: linked_social_media }
-        await UserInfo.findOneAndUpdate(filter1, update1, {
-            new: true,
-        })
-        //console.log('a',linked_social_media )
-
-        if (!unconnected_social_media.includes(clicked_linked_social_media)) {
-            //update unconnected_social_media(add)
-            unconnected_social_media.push(clicked_linked_social_media)
-            //update unconnected_social_media to database
-            const filter2 = { user_name: my_username }
-            const update2 = { unconnected_social_media: unconnected_social_media }
-            await UserInfo.findOneAndUpdate(filter2, update2, {
-                new: true,
-            })
-            //console.log('b',unconnected_social_media )
-        }
-    } //end of if
-
-    if (clicked_unconnected_social_media !== undefined) {
-        //update unconnected_social_media(delete)
-        unconnected_social_media = unconnected_social_media.filter((element) => {
-            if (!element.includes(clicked_unconnected_social_media)) {
-                return true
-            }
-        })
-        //update unconnected_social_media to database
-        const filter1 = { user_name: my_username }
-        const update1 = { unconnected_social_media: unconnected_social_media }
-        await UserInfo.findOneAndUpdate(filter1, update1, {
-            new: true,
-        })
-        //console.log('c',unconnected_social_media )
-
-        if (!linked_social_media.includes(clicked_unconnected_social_media)) {
-            //update linked_social_media(add)
-            linked_social_media.push(clicked_unconnected_social_media)
-            //update linked_social_media to database
-            const filter2 = { user_name: my_username }
-            const update2 = { linked_social_media: linked_social_media }
-            await UserInfo.findOneAndUpdate(filter2, update2, {
-                new: true,
-            })
-            //console.log('d',linked_social_media )
-        }
-    }
-    const response_data = {
-        user_info: user_info,
-        linked_social_media: linked_social_media, //return linked_platform name
-        unconnected_social_media: unconnected_social_media,
-    }
-    //console.log("in get_my_profile:", user_info)
-    console.log('linked_social_media:', linked_social_media)
-    console.log('unconnected_social_media:', unconnected_social_media)
-    //console.log("in me's post_data:",post_data)
-    res.json(response_data)
 })
 
 app.get('/get_facebook', async (req, res) => {
@@ -400,91 +400,88 @@ app.get('/get_twitter_request_token', async (req, res) => {
 app.get('/get_my_profile', async (req, res) => {
     const my_username = req.user.username
     let my_like_history
-    await UserInfo.findOne({ user_name: my_username }, (err, UserInfos) => {
-        try {
+    await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
+        if(err){
+            console.log('error', err)
+        }
+        else{
             user_info = UserInfos
             linked_social_media = UserInfos.linked_social_media
             unconnected_social_media = UserInfos.unconnected_social_media
             post_data = UserInfos.post_data
             my_like_history = UserInfos.my_like_history
-            //console.log("post_data",post_data)
-        } catch (e) {
-            console.log(e)
-        }
-    })
 
-    // console.log(post_data)
-
-    // console.log("my_like_history: ", my_like_history)
-    let filtered_post_data = post_data.slice()
-    //filter the post_data to only contain the linked_social_media
-    filtered_post_data = post_data.filter((element) => {
-        if (linked_social_media.includes(element.source)) {
-            return true
-        }
-    })
-
-    //filtered_post_data by selected platform_name by user
-    if (req.query.platform_name_array !== undefined) {
-        //console.log("111111")
-        filtered_post_data = post_data.filter((element) => {
-            if (req.query.platform_name_array.includes(element.source)) {
-                return true
-            }
-        }) //end of filtered_post_data by selected platform_name by user
-    }
-
-    // lr = liked_record, fr = filtered_record
-    let lr,
-        fr,
-        matched,
-        filtered_by_liked = []
-    // if my_like_history is not empty, we need to know if post has been liked by the current user
-    // forEach might be better
-    if (my_like_history !== undefined && !isEmpty(my_like_history)) {
-        for (let i = 0; i < filtered_post_data.length; i++) {
-            fr = filtered_post_data[i]
-            matched = false
-            for (let j = 0; j < my_like_history.length; j++) {
-                lr = my_like_history[j]
-                // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
-                if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
-                    // console.log("matched! ")
-                    filtered_by_liked.push({
-                        content: fr.content,
-                        source: fr.source,
-                        senttime: fr.senttime,
-                        contentimg: fr.contentimg,
-                        commented: fr.commented,
-                        liked: fr.liked,
-                        repoted: fr.repoted,
-                        like_switch: true,
-                    })
-                    matched = true
-                    break
+            let filtered_post_data = post_data.slice()
+            //filter the post_data to only contain the linked_social_media
+            filtered_post_data = post_data.filter((element) => {
+                if (linked_social_media.includes(element.source)) {
+                    return true
                 }
+            })
+
+            //filtered_post_data by selected platform_name by user
+            if (req.query.platform_name_array !== undefined) {
+                //console.log("111111")
+                filtered_post_data = post_data.filter((element) => {
+                    if (req.query.platform_name_array.includes(element.source)) {
+                        return true
+                    }
+                }) //end of filtered_post_data by selected platform_name by user
             }
-            if (matched === false) {
-                filtered_by_liked.push(fr)
+
+            // lr = liked_record, fr = filtered_record
+            let lr,
+                fr,
+                matched,
+                filtered_by_liked = []
+            // if my_like_history is not empty, we need to know if post has been liked by the current user
+            // forEach might be better
+            if (my_like_history !== undefined && !isEmpty(my_like_history)) {
+                for (let i = 0; i < filtered_post_data.length; i++) {
+                    fr = filtered_post_data[i]
+                    matched = false
+                    for (let j = 0; j < my_like_history.length; j++) {
+                        lr = my_like_history[j]
+                        // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
+                        if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
+                            // console.log("matched! ")
+                            filtered_by_liked.push({
+                                content: fr.content,
+                                source: fr.source,
+                                senttime: fr.senttime,
+                                contentimg: fr.contentimg,
+                                commented: fr.commented,
+                                liked: fr.liked,
+                                repoted: fr.repoted,
+                                like_switch: true,
+                            })
+                            matched = true
+                            break
+                        }
+                    }
+                    if (matched === false) {
+                        filtered_by_liked.push(fr)
+                    }
+                }
+            } else {
+                filtered_by_liked = filtered_post_data
             }
+
+            console.log('filtered_by_liked: ', filtered_by_liked)
+
+            //send back response_data which consists of user_info and filtered_post_data as post_data
+            const response_data = {
+                user_info: user_info,
+                post_data: filtered_by_liked, //return the filtered data based on platform selected
+                linked_social_media: linked_social_media, //return linked_platform name
+            }
+            //console.log("in get_my_profile:", user_info)
+            //console.log("linked_social_media:",linked_social_media)
+            //console.log("in my_profile's filtered post_data:",filtered_post_data)
+            //console.log("in my_profile's  post_data:",post_data)
+            res.json(response_data)
         }
-    } else {
-        filtered_by_liked = filtered_post_data
-    }
-
-    console.log('filtered_by_liked: ', filtered_by_liked)
-
-    //send back response_data which consists of user_info and filtered_post_data as post_data
-    const response_data = {
-        user_info: user_info,
-        post_data: filtered_by_liked, //return the filtered data based on platform selected
-        linked_social_media: linked_social_media, //return linked_platform name
-    }
-    //console.log("in get_my_profile:", user_info)
-    //console.log("linked_social_media:",linked_social_media)
-    //console.log("in my_profile's filtered post_data:",filtered_post_data)
-    //console.log("in my_profile's  post_data:",post_data)
-    res.json(response_data)
+    })
 })
 
 // it tell multer to save uploaded files to disk into a directory named public/uploads, with a filename based on the current time.
@@ -707,10 +704,10 @@ app.get('/get_comments_in_post_content', async (req, res) => {
                         currentPost = post
                     }
                 })
+                res.send(comments)
             }
         }
     })
-    res.send(comments)
 })
 
 let post_detail_for_comment = undefined
@@ -870,55 +867,19 @@ app.get('/get_send_comment', async (req, res) => {
 })
 
 app.get('/get_repost', async (req, res) => {
-    let ret = [],
-        friend = [],
-        follower = [],
-        following = [],
-        linked_social_media = [],
+    let linked_social_media = [],
         user_name = ''
     // retrieve follower and following lists of current user
     await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
         if (err) {
             console.error(err)
         } else {
-            follower.push(result.follower)
-            following.push(result.following)
             linked_social_media = result.linked_social_media
             user_name = result.user_name
         }
     })
-
-    console.log('follower: ', follower)
-    console.log('following: ', following)
-    console.log(!isEmpty(follower[0]) && !isEmpty(following[0]))
-    if (!isEmpty(follower[0]) && !isEmpty(following[0])) {
-        // lazy finding intersection
-        console.log('friend: ', friend)
-        for (let i = 0; i < follower[0].length; i++) {
-            if (following[0].includes(follower[0][i])) {
-                friend.push(follower[0][i])
-            }
-        }
-
-        console.log('friend after intersection: ', friend)
-
-        // retrieve extended user info from database
-        for (let i = 0; i < friend.length; i++) {
-            await UserInfo.findOne({ user_name: friend[i] }, (err, result) => {
-                if (err) {
-                    console.error(err)
-                } else {
-                    ret.push({
-                        user_name: result.user_name,
-                        user_photo: result.user_photo,
-                    })
-                }
-            })
-        }
-    }
-
+    
     const response_data = {
-        friend_list: ret,
         linked_social_media: linked_social_media,
         user_name: user_name,
     }
@@ -927,28 +888,30 @@ app.get('/get_repost', async (req, res) => {
 })
 
 app.get('/api_my_comment_history', async (req, res) => {
-    let response_data = ''
-    await UserInfo.findOne({ user_name: req.user.username }, (err, UserInfos) => {
-        try {
-            response_data = UserInfos.my_comment_history
-            //console.log(response_data);
-        } catch (e) {
-            console.log(e)
+    await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            // extract being liked history
+            ret = result.my_comment_history
+            res.json(ret)
+            console.log(ret)
         }
     })
-    res.json(response_data)
 })
 
+
 app.get('/api_commented_history', async (req, res) => {
-    let response_data = ''
-    await UserInfo.findOne({ user_name: req.user.username }, (err, UserInfos) => {
-        try {
-            response_data = UserInfos.others_commented_history
-        } catch (e) {
-            console.log(e)
+    await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            // extract being liked history
+            ret = result.others_commented_history
+            res.json(ret)
+            console.log(ret)
         }
     })
-    res.json(response_data)
 })
 
 app.get('/api_friend_profile', async (req, res) => {
@@ -1124,7 +1087,10 @@ app.get('/api_friend_suggestion', async (req, res) => {
     console.log('search_name: ', search_name, ' <---')
 
     await UserInfo.find((err, UserInfos) => {
-        try {
+        if (err){
+            console.log('error',err)
+        }
+        else{
             user_info = UserInfos
             unfollowed_list = user_info.filter((item) => {
                 if (!item.follower.includes(my_username)) {
@@ -1149,16 +1115,13 @@ app.get('/api_friend_suggestion', async (req, res) => {
                     return true
                 }
             })
-        } catch (e) {
-            console.log(e)
+             //console.log(unfollowed_list)
+            ret.unfollowed_list = unfollowed_list !== undefined ? unfollowed_list : []
+            ret.following_list = following_list !== undefined ? following_list : []
+
+            res.json(ret)
         }
     })
-
-    //console.log(unfollowed_list)
-    ret.unfollowed_list = unfollowed_list !== undefined ? unfollowed_list : []
-    ret.following_list = following_list !== undefined ? following_list : []
-
-    res.json(ret)
 })
 
 app.get('/get_add_friend', async (req, res) => {
