@@ -1087,7 +1087,10 @@ app.get('/api_friend_suggestion', async (req, res) => {
     console.log('search_name: ', search_name, ' <---')
 
     await UserInfo.find((err, UserInfos) => {
-        try {
+        if (err){
+            console.log('error',err)
+        }
+        else{
             user_info = UserInfos
             unfollowed_list = user_info.filter((item) => {
                 if (!item.follower.includes(my_username)) {
@@ -1112,16 +1115,13 @@ app.get('/api_friend_suggestion', async (req, res) => {
                     return true
                 }
             })
-        } catch (e) {
-            console.log(e)
+             //console.log(unfollowed_list)
+            ret.unfollowed_list = unfollowed_list !== undefined ? unfollowed_list : []
+            ret.following_list = following_list !== undefined ? following_list : []
+
+            res.json(ret)
         }
     })
-
-    //console.log(unfollowed_list)
-    ret.unfollowed_list = unfollowed_list !== undefined ? unfollowed_list : []
-    ret.following_list = following_list !== undefined ? following_list : []
-
-    res.json(ret)
 })
 
 app.get('/get_add_friend', async (req, res) => {
