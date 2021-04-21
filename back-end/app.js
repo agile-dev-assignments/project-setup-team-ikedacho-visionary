@@ -1658,111 +1658,113 @@ app.get('/api_getprelogin_recent', async (req, res, next) => {
 
 })
 
-/* 
-Please notice that the following three Mockaroo APIs are intentionally disabled because they are missing important field
-So, use backup data instead
-*/
 app.get('/api_whatsnew', async (req, res, next) => {
-    const UserName = req.user.username
-    const userInfos = await UserInfo.find()
-    let followed_users = []
-    let postData = []
-    let my_like_history
-    console.log('username', UserName)
-
-    //const userInfos = await UserInfo.find()
-
-    // find user object in database and extract its follower array
-    await UserInfo.findOne({ user_name: UserName }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            if (result != null) {
-                followed_users = result.following
-                //console.log('followed_users', followed_users)   
-                my_like_history = result.my_like_history 
+    if (req.user === undefined){
+        console.log(req.user)
+        res.status(500).send()
+    }
+    else{
+        const UserName = req.user.username
+        const userInfos = await UserInfo.find()
+        let followed_users = []
+        let postData = []
+        let my_like_history
+        console.log('username', UserName)
+    
+        //const userInfos = await UserInfo.find()
+    
+        // find user object in database and extract its follower array
+        await UserInfo.findOne({ user_name: UserName }, (err, result) => {
+            if (err) {
+                console.error(err)
             } else {
-                followed_users = []
-            }
-        }
-    })
-
-    followed_users.push(UserName)
-
-    userInfos.forEach(userInfo => {
-        const info = userInfo.toObject()
-        if (followed_users.includes(info.user_name)){
-            const data = info.post_data.map(ele => {
-                ele.userimg= userInfo.user_photo
-                ele.UserName=userInfo.user_name 
-                return ele
-            })
-            console.log(data)
-            postData = postData.concat(data)
-        }
-    })
-
-    postData.sort((prev,cur)=>{
-        return cur.senttime - prev.senttime
-    })
-
-    let filtered_post_data = postData.slice()
-
-    // console.log("selected_social_media", selected_social_media)
-
-    filtered_post_data = postData.filter(element => {
-        if (selected_social_media.includes(element.source)) {
-            return true
-        }//end of if
-    })//end of filtered_post_data
-
-    // console.log(filtered_post_data)
-
-    /*
-    filtering the post data by LIKE history
-    */
-    // lr = liked_record, fr = filtered_record
-    let lr,
-        fr,
-        matched,
-        filtered_by_liked = []
-    // if my_like_history is not empty, we need to know if post has been liked by the current user
-    // forEach might be better
-    if (my_like_history !== undefined && !isEmpty(my_like_history)) {
-        for (let i = 0; i < filtered_post_data.length; i++) {
-            fr = filtered_post_data[i]
-            matched = false
-            for (let j = 0; j < my_like_history.length; j++) {
-                lr = my_like_history[j]
-                // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
-                if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
-                    // console.log("matched! ")
-                    filtered_by_liked.push({
-                        content: fr.content,
-                        source: fr.source,
-                        senttime: fr.senttime,
-                        contentimg: fr.contentimg,
-                        commented: fr.commented,
-                        liked: fr.liked,
-                        repoted: fr.repoted,
-                        UserName: lr.user_name,
-                        userimg: lr.user_photo,                     
-                        like_switch: true,
-                    })
-                    matched = true
-                    break
+                if (result != null) {
+                    followed_users = result.following
+                    //console.log('followed_users', followed_users)   
+                    my_like_history = result.my_like_history 
+                } else {
+                    followed_users = []
                 }
             }
-            if (matched === false) {
-                filtered_by_liked.push(fr)
+        })
+    
+        followed_users.push(UserName)
+    
+        userInfos.forEach(userInfo => {
+            const info = userInfo.toObject()
+            if (followed_users.includes(info.user_name)){
+                const data = info.post_data.map(ele => {
+                    ele.userimg= userInfo.user_photo
+                    ele.UserName=userInfo.user_name 
+                    return ele
+                })
+                console.log(data)
+                postData = postData.concat(data)
             }
+        })
+    
+        postData.sort((prev,cur)=>{
+            return cur.senttime - prev.senttime
+        })
+    
+        let filtered_post_data = postData.slice()
+    
+        // console.log("selected_social_media", selected_social_media)
+    
+        filtered_post_data = postData.filter(element => {
+            if (selected_social_media.includes(element.source)) {
+                return true
+            }//end of if
+        })//end of filtered_post_data
+    
+        // console.log(filtered_post_data)
+    
+        /*
+        filtering the post data by LIKE history
+        */
+        // lr = liked_record, fr = filtered_record
+        let lr,
+            fr,
+            matched,
+            filtered_by_liked = []
+        // if my_like_history is not empty, we need to know if post has been liked by the current user
+        // forEach might be better
+        if (my_like_history !== undefined && !isEmpty(my_like_history)) {
+            for (let i = 0; i < filtered_post_data.length; i++) {
+                fr = filtered_post_data[i]
+                matched = false
+                for (let j = 0; j < my_like_history.length; j++) {
+                    lr = my_like_history[j]
+                    // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
+                    if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
+                        // console.log("matched! ")
+                        filtered_by_liked.push({
+                            content: fr.content,
+                            source: fr.source,
+                            senttime: fr.senttime,
+                            contentimg: fr.contentimg,
+                            commented: fr.commented,
+                            liked: fr.liked,
+                            repoted: fr.repoted,
+                            UserName: lr.user_name,
+                            userimg: lr.user_photo,                     
+                            like_switch: true,
+                        })
+                        matched = true
+                        break
+                    }
+                }
+                if (matched === false) {
+                    filtered_by_liked.push(fr)
+                }
+            }
+        } else {
+            filtered_by_liked = filtered_post_data
         }
-    } else {
-        filtered_by_liked = filtered_post_data
+    
+        // console.log('filtered_by_liked: ', filtered_by_liked)
+        res.json(filtered_by_liked)
     }
-
-    // console.log('filtered_by_liked: ', filtered_by_liked)
-    res.json(filtered_by_liked)
 })
 
 app.get('/api_recommended', async (req, res, next) => {
