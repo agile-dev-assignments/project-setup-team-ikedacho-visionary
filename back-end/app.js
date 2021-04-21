@@ -121,39 +121,36 @@ app.get('/api_get_user_info_by_name', (req, res) => {
 })
 
 app.post("/browsed", (req, res) => {
-    console.log(req.body); 
     const browsed = req.body;
     const username = req.user.username;
     UserInfo.findOne({user_name: username}, (err, result) => {
-        result.my_browse_history.push(browsed)
-        // save the update
-        result.save((err) => {
-            if (err) {
+                result.my_browse_history.push(browsed)
+                // save the update   
+                result.save((err) => {
+                    if (err) {
                 console.log(err)
             }
-        })
-        res.send("Created")
+        })            
     })
-   
 })
+   
 
 
-app.get('/api_browse', async (req, res) => {
+app.get('/api_browse', (req, res) => {
     let ret
     const username = req.user.username
 
     // retrieve data from database
-    await UserInfo.findOne({ user_name: username }, (err, result) => {
+    UserInfo.findOne({ user_name: username }, (err, result) => {
         if (err) {
             console.error(err)
         } else {
             // extract the brose history field
             ret = result.my_browse_history
+            console.log(ret)
+            res.json(ret)
         }
     })
-
-    console.log(ret)
-    res.json(ret)
 })
 
 app.get('/user', (req, res) => {
@@ -547,7 +544,6 @@ app.post('/post_background_picture', upload_background_picture.array('background
         res.redirect('/my_profile')
     }
 })
-
 let post_detail_for_repost = undefined
 app.use(async (req, res, next) => {
     if (req.query.post_detail_for_repost) {
@@ -556,7 +552,6 @@ app.use(async (req, res, next) => {
     }
     next()
 })
-
 app.get('/get_fast_repost', async (req, res) => {
     const my_username = req.user.username
     const post_text = `Repost from @${post_detail_for_repost.UserName}: ${post_detail_for_repost.content} `
@@ -605,15 +600,15 @@ app.get('/get_edit', async (req, res) => {
     const my_username = req.user.username
     const post_text = req.query.post_text
     const current_date = new Date()
-    let post_img = ' '
-    if (req.query.old_post_img) {
+    let post_img = ''
+    if (req.query.old_post_img){
         post_img = req.query.old_post_img
     }
     let my_user_photo
 
     const regex = /@\S+\s/g
     const search_for_mention = post_text.match(regex)
-    const unique_search_names = [...new Set(search_for_mention)]
+    const unique_search_names = [...new Set(search_for_mention)];
 
 
     await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
@@ -627,7 +622,6 @@ app.get('/get_edit', async (req, res) => {
             UserInfos.post_number++
 
             my_user_photo = UserInfos.user_photo
-            console.log(my_user_photo)
 
             await UserInfos.save(function (saveErr, saveUserInfos) {
                 if (err) {
@@ -720,16 +714,16 @@ let post_detail_for_comment = undefined
 app.use(async (req, res, next) => {
     if (req.query.post_detail_for_comment) {
         post_detail_for_comment = JSON.parse(req.query.post_detail_for_comment)
-        console.log('post detail: ', post_detail_for_comment)
+        // console.log('post detail: ', post_detail_for_comment)
     }
     next()
 })
 
 app.get('/get_send_comment', async (req, res) => {
     const comment_text = req.query.comment_text
-    console.log('comment_text: ', comment_text)
+    // console.log('comment_text: ', comment_text)
     const message = post_detail_for_comment
-    console.log('post detail2222: ', message)
+    // console.log('post detail2222: ', message)
     const self_username = req.user.username
     let self_userimg
 
@@ -1860,46 +1854,31 @@ app.get('/api_recommended', async (req, res, next) => {
 })
 
 app.get('/api_recent', async (req, res, next) => {
-
-    user_name_l = req.user.username
-
-    //currently showing all posts, need to be modified 
-    const userInfos = await UserInfo.find()
     let postData = [], 
-        my_like_history
-        
-    userInfos.forEach(userInfo => {
-        const info = userInfo.toObject()
-        const data = info.post_data.map(ele => {
-            ele.userimg= userInfo.user_photo
-            ele.UserName=userInfo.user_name 
-            return ele
+        my_like_history,
+        username = req.user.username
+    //currently showing all posts, need to be modified 
+    await UserInfo.findOne({ user_name: username }, (err, result) => {
+        result.my_browse_history.forEach(userInfo => {
+            const info = userInfo.toObject()
+    
+            if (userInfo.user_name === req.user.username) {
+                my_like_history = userInfo.my_like_history
+            }
+    
+           // console.log(data)
+           postData.push(info)
+           console.log('data',postData)
         })
-
-        if (userInfo.user_name === req.user.username) {
-            my_like_history = userInfo.my_like_history
-        }
-
-       // console.log(data)
-       postData = postData.concat(data)
     })
 
-    let filtered_post_data = postData.slice()
-
-    //console.log("selected_social_media", selected_social_media)
+     let filtered_post_data = postData.slice()
 
     filtered_post_data = postData.filter(element => {
         if (selected_social_media.includes(element.source)) {
             return true
         }//end of if
     })//end of filtered_post_data
-
-    // console.log(filtered_post_data)
-
-    /*
-    filtering the post data by LIKE history
-    */
-    // lr = liked_record, fr = filtered_record
     let lr,
         fr,
         matched,
@@ -1908,6 +1887,7 @@ app.get('/api_recent', async (req, res, next) => {
     // forEach might be better
     if (my_like_history !== undefined && !isEmpty(my_like_history)) {
         for (let i = 0; i < filtered_post_data.length; i++) {
+            console.log("filtered_post_data[i]"+fr)
             fr = filtered_post_data[i]
             matched = false
             for (let j = 0; j < my_like_history.length; j++) {
@@ -1939,7 +1919,6 @@ app.get('/api_recent', async (req, res, next) => {
         filtered_by_liked = filtered_post_data
     }
 
-    // console.log('filtered_by_liked: ', filtered_by_liked)
     res.json(filtered_by_liked)
 })
 
