@@ -1,56 +1,56 @@
 div.ToRepost {
-	width: 100%;
-	border: 1px solid #ccc;
+    width: 100%;
+    border: 1px solid #ccc;
 }
 
 button.repost_share_to_platforms {
-	padding: 5px;
-	margin-left: 5px;
-	margin-right: 5px;
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 img.repost_avatar {
-	border: 1px solid #ddd;
-	border-radius: 50%;
-	padding: 5px;
-	width: 50px;
-	height: 50px;
-	position: relative;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 5px;
+    width: 50px;
+    height: 50px;
+    position: relative;
 }
 
 section.repost_share_to_friends_list {
-	display: flex;
-	flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 section.repost_share_to_platforms {
-	position: relative;
+    position: relative;
 }
 
 button.repost_friends {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	display: block;
-	width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 100%;
 }
 
 div.repost_friends_component {
-	padding: 5px;
-	width: 50%;
-	text-align: center;
+    padding: 5px;
+    width: 50%;
+    text-align: center;
 }
 
 .Repost_fast {
-	height: 30px;
-	width: 50%;
-	background-color: white;
-	border: 1px solid rgb(230, 215, 215);
+    height: 30px;
+    width: 50%;
+    background-color: white;
+    border: 1px solid rgb(230, 215, 215);
 }
 
 .Repost_edit_button {
-	height: 30px;
-	width: 50%;
-	background-color: white;
-	border: 1px solid rgb(230, 215, 215);
+    height: 30px;
+    width: 50%;
+    background-color: white;
+    border: 1px solid rgb(230, 215, 215);
 }
