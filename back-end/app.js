@@ -69,7 +69,7 @@ app.post('/api_register', (req, res) => {
                 user_photo: `https://robohash.org/${req.body.username}.png?size=200x200`,
                 background_picture: 'https://resilientblog.co/wp-content/uploads/2019/07/sky-quotes.jpg',
                 post_number: 0,
-                bio: 'This person is too lazy to change this default',
+                bio: '🥤',
                 follower_number: 0,
                 follower: [],
                 following_number: 0,

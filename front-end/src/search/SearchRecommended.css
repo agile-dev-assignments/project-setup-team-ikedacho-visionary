@@ -12,3 +12,12 @@
 .SearchRecommended .search_recommend_content p {
     margin: 0;
 }
+.SearchRecommended .trending_p {
+    text-decoration: none;
+    color: black;
+}
+
+.SearchRecommended .trending_p:focus {
+    text-decoration: none;
+    color: black;
+}

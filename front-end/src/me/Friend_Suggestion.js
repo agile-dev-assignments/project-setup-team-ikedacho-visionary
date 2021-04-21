@@ -36,14 +36,11 @@ const Friend_Suggestion = (props) => {
 
     return (
         <div className='Friend_Suggestion'>
-            <header>
-                <Link to='/Me'>
-                    <button>back</button>
-                </Link>
-                <h2>Friend Suggestion</h2>
-                <p></p>
-            </header>
-
+            <Link to='/Me'>
+                <h1 id='back'>back</h1>
+            </Link>
+            <h1>Friend Suggestion</h1>
+            <hr></hr>
             <div className='input-wrap'>
                 <input className='input' type='search' placeholder='Search by user here' value={search_name} onInput={(e) => setSearch_name(e.target.value)} />
                 <Search id='search_icon' color='grey' size={15} />

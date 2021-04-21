@@ -68,20 +68,19 @@ const Edit = (props) => {
 
     return (
         <div className='repost'>
-            <header>
-                <Link onClick={goTOPreviousPath}>
-                    <button>back</button>
-                </Link>
-                <h2>New Repost</h2>
-                <button
-                    onClick={(e) => {
-                        goTOPreviousPath2(e)
-                    }}
-                    id='send_button'
-                >
-                    send
-                </button>
-            </header>
+            <h1 onClick={goTOPreviousPath}>
+                <h1 id='back'>back</h1>
+            </h1>
+            <h1>New Repost</h1>
+            <h1
+                onClick={(e) => {
+                    goTOPreviousPath2(e)
+                }}
+                id='send_button'
+            >
+                send
+            </h1>
+            <hr></hr>
 
             <section className='edit-wrap'>
                 <textarea id='myTextarea' placeholder="what's on your mind?" onInput={(e) => setPost_text(e.target.value)} />
@@ -89,8 +88,8 @@ const Edit = (props) => {
                 <div className='card'>
                     <img className='img' src={old_post_img} alt='' />
                     <div className='text'>
-                        <strong>@{old_post_by}</strong>
-                        <p>{old_post_text} </p>
+                        <strong id='old_post_by'>@{old_post_by}</strong>
+                        <p id='old_post_text'>{old_post_text.slice(0,64)} </p>
                     </div>
                 </div>
 
@@ -114,11 +113,6 @@ const Edit = (props) => {
                             Platform D
                         </label>
                     </div>
-                </div>
-
-                <div className='checkbox'>
-                    <input type='checkbox' />
-                    <span>Post as Public</span>
                 </div>
             </section>
         </div>
