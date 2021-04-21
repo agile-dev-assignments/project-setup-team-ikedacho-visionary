@@ -20,7 +20,7 @@ const Mentions = (props) => {
                         {props.details.mentioner_username}
                     </h1>
                 </Link>
-                <span id='mentioned_date'>{props.details.mentioned_date}</span>
+                <span id='mentioned_date'>{new Date(props.details.mentioned_date).toLocaleString()}</span>
                 <span id='mentioned_comment_text'>{props.details.comment_text}</span>
             </div>
 
