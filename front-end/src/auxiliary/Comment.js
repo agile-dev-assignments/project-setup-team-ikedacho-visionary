@@ -38,21 +38,8 @@ const Comment = (props) => {
                 <p class='content'>{props.content}</p>
                 <div class='Footer'>
                     <div id='datetime'>{props.Senttime}</div>
-                    <div class='actions'>
-                        <button class='Reply' onClick={_showReply.bind()}>
-                            {' '}
-                            Reply
-                        </button>
-                        <button class='Like' onClick={_setLike.bind()}>
-                            {like.liked ? 'Liked' : 'Like'}
-                        </button>
-                    </div>
                 </div>
-                {state.showReply && (
-                    <>
-                        <ToComment />
-                    </>
-                )}
+               
             </div>
         </div>
     )

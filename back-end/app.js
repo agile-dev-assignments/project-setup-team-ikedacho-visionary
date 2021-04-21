@@ -171,9 +171,12 @@ app.get('/my_info', (req, res) => {
     })
 })
 
-app.use('/get_me', async (req, res, next) => {
+app.get('/get_me', async (req, res) => {
     const my_username = req.user.username
     user_name_l = req.user.username
+    let user_info = []
+    let linked_social_media = []
+    let unconnected_social_media = []
     await UserInfo.findOne({ user_name: my_username }, (err, UserInfos) => {
         try {
             user_info = UserInfos
@@ -190,11 +193,6 @@ app.use('/get_me', async (req, res, next) => {
             console.log(e)
         }
     })
-    next()
-})
-
-app.get('/get_me', async (req, res) => {
-    const my_username = req.user.username
     let clicked_linked_social_media = req.query.clicked_linked_social_media
     let clicked_unconnected_social_media = req.query.clicked_unconnected_social_media
 
