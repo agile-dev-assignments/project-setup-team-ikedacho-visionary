@@ -86,10 +86,16 @@ const BrowseHistorySchema = new mongoose.Schema(
     {
         id: Number,
         viewdate: Date,
+        senttime: Date,
+        source: String,
         UserName: String,
         userimg: String,
         content: String,
         contentimgs: String,
+        like_switch : Boolean,
+        commented: [CommentedSchema],
+        liked: [LikedSchema],
+        repoted: [RepostedSchema]
     },
     { _id: true }
 )
