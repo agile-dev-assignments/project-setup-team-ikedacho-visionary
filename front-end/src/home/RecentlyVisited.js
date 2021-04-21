@@ -12,6 +12,7 @@ const RecentlyVisited = (props) => {
             .then((response) => {
                 // extract the data from the server response
                 setData(response.data)
+                console.log(response.data)
             })
             .catch((err) => {
                 // Mockaroo, which we're using for our Mock API, only allows 200 requests per day on the free plan
@@ -25,7 +26,7 @@ const RecentlyVisited = (props) => {
         <div className='Recently-Visited'>
             <section className='main-content'>
                 {data.map((item) => (
-                    <PostContent key={item.id} like_switch = {item.like_switch} source={item.source} userimg={item.userimg} UserName={item.UserName} content={item.content} Senttime={item.senttime} contentimg={item.contentimg} />
+                    <PostContent key={item._id} like_switch = {item.like_switch} source={item.source} userimg={item.userimg} UserName={item.UserName} content={item.content} Senttime={item.senttime} contentimg={item.contentimgs} />
                 ))}
             </section>
         </div>
