@@ -34,10 +34,11 @@ const Followings = (props) => {
 
     return (
         <div className='Followings'>
-            <h2>Followings Page here</h2>
+            <h1>Followings Page here</h1>
             <Link onClick={goTOPreviousPath.bind()}>
-                <button>back</button>
+                <h1 id='back'>back</h1>
             </Link>
+            <hr></hr>
             <section className='main-content'>
                 <p>
                     {data.map((item) => (

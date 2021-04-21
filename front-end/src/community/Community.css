@@ -100,3 +100,12 @@ div.Community #search_icon {
     right: 11%;
     top: 148px;
 }
+
+div.Community #searchbar{
+    width:80%;
+    margin-left: 10%;
+    margin-top: 5px;
+    height: 25px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+}

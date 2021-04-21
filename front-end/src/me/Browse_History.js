@@ -22,13 +22,13 @@ const Browse_History = (props) => {
 
     return (
         <div className='Browse_History'>
-            <header>
+           
                 <Link to='/Me'>
-                    <h3>back</h3>
+                    <h1 id='back'>back</h1>
                 </Link>
-                <h3>Browse History</h3>
-                <p></p>
-            </header>
+                <h1>Browse History</h1>
+                <hr></hr>
+          
             <div className='Browse_List'>
                 {PostData.map(
                     (item) => (console.log('rendering'), (<Browse viewdate={item.viewdate.slice(0,10)} UserName={item.UserName} userimg={item.userimg} content={item.content} contentimgs={item.contentimgs} />))

@@ -22,3 +22,13 @@
 .Trending .trending_content p {
     margin: 0;
 }
+
+.Trending .trending_p {
+    text-decoration: none;
+    color: black;
+}
+
+.Trending .trending_p:focus {
+    text-decoration: none;
+    color: black;
+}

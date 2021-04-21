@@ -106,7 +106,7 @@ const NewChat = (props) => {
                 <Link onClick={_handleCreate.bind()}>Create</Link>
             </div>
 
-            <h3 className='NewChat_title'>Create New Chat</h3>
+            <h1 className='NewChat_title'>Create New Chat</h1>
 
             <section className='NewChat'>
                 {data.map((item) => (

@@ -35,10 +35,11 @@ const Followers = (props) => {
 
     return (
         <div className='Followers'>
-            <h2>Followers Page here</h2>
+            <h1>Followers Page here</h1>
             <Link onClick={goTOPreviousPath.bind()}>
-                <button>back</button>
+                <h1 id='back'>back</h1>
             </Link>
+            <hr></hr>
             <section className='Followers_main-content'>
                 <p>
                     {data.map((item) => (
