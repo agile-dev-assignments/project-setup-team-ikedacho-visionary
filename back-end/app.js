@@ -704,10 +704,10 @@ app.get('/get_comments_in_post_content', async (req, res) => {
                         currentPost = post
                     }
                 })
+                res.send(comments)
             }
         }
     })
-    res.send(comments)
 })
 
 let post_detail_for_comment = undefined
