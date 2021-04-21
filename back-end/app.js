@@ -895,28 +895,30 @@ app.get('/get_repost', async (req, res) => {
 })
 
 app.get('/api_my_comment_history', async (req, res) => {
-    let response_data = ''
-    await UserInfo.findOne({ user_name: req.user.username }, (err, UserInfos) => {
-        try {
-            response_data = UserInfos.my_comment_history
-            //console.log(response_data);
-        } catch (e) {
-            console.log(e)
+    await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            // extract being liked history
+            ret = result.my_comment_history
+            res.json(ret)
+            console.log(ret)
         }
     })
-    res.json(response_data)
 })
 
+
 app.get('/api_commented_history', async (req, res) => {
-    let response_data = ''
-    await UserInfo.findOne({ user_name: req.user.username }, (err, UserInfos) => {
-        try {
-            response_data = UserInfos.others_commented_history
-        } catch (e) {
-            console.log(e)
+    await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            // extract being liked history
+            ret = result.others_commented_history
+            res.json(ret)
+            console.log(ret)
         }
     })
-    res.json(response_data)
 })
 
 app.get('/api_friend_profile', async (req, res) => {
