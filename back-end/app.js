@@ -12,14 +12,15 @@ const cookieParser = require('cookie-parser')
 const bcrypt = require('bcryptjs')
 const session = require('express-session')
 const bodyParser = require('body-parser')
-const User = require('./loginAuth/user')
-const UserInfo = require('./userInfo/userInfo')
-const Chatroom = require('./chatroom/chatroom')
+const User = require('./model/loginAuth/user')
+const UserInfo = require('./model/userInfo/userInfo')
+const Chatroom = require('./model/chatroom/chatroom')
 const db = require('./db')
 const request = require('request')
 const oauthSignature = require('oauth-signature')
 const authUser = require('./authIns')
 const fs = require('fs')
+
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
 
 app.use(morgan('dev')) // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -46,7 +47,7 @@ app.use(
 app.use(cookieParser('secretcode'))
 app.use(passport.initialize())
 app.use(passport.session())
-require('./loginAuth/passPortConfig.js')(passport)
+require('./model/loginAuth/passPortConfig.js')(passport)
 //----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
 let user_name_l = ''
 let selected_social_media = ['O-Zone', 'Facebook', 'Twitter', 'Instagram']
@@ -168,382 +169,45 @@ app.get('/my_info', (req, res) => {
     })
 })
 
-app.get('/get_me', async (req, res) => {
-    const my_username = req.user.username
-    user_name_l = req.user.username
-    let user_info = []
-    let linked_social_media = []
-    let unconnected_social_media = []
-    await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
-        if (err){
-            console.log("error", err)
-        }
-        else{
-            user_info = UserInfos
-            linked_social_media = UserInfos.linked_social_media
-            unconnected_social_media = UserInfos.unconnected_social_media
-            post_data = UserInfos.post_data
+//me page
+const meRouter = require('./router/me/me')
+app.use('/get_me', meRouter)
 
-            filtered_post_data_overall = post_data.filter((element) => linked_social_media.includes(element.source))
-            user_info.post_number = filtered_post_data_overall.length
-            //console.log(user_info)
-            //console.log("user_info.post_number",user_info.post_number)
-            selected_social_media = ['O-Zone', 'Facebook', 'Twitter', 'Instagram']
+const facebookRouter = require('./router/me/facebook')
+app.use('/get_facebook', facebookRouter)
 
-            let clicked_linked_social_media = req.query.clicked_linked_social_media
-            let clicked_unconnected_social_media = req.query.clicked_unconnected_social_media
+const twitterRouter = require('./router/me/twitter')
+app.use('/get_twitter_request_token', twitterRouter)
 
-            if (clicked_linked_social_media !== undefined) {
-                //update linked_social_media(delete)
-                linked_social_media = linked_social_media.filter((element) => {
-                    if (!element.includes(clicked_linked_social_media)) {
-                        return true
-                    }
-                })
-                //update linked_social_media to database
-                const filter1 = { user_name: my_username }
-                const update1 = { linked_social_media: linked_social_media }
-                await UserInfo.findOneAndUpdate(filter1, update1, {
-                    new: true,
-                })
-                //console.log('a',linked_social_media )
+const myProfileRouter = require('./router/me/my_profile')
+app.use('/get_my_profile', myProfileRouter)
 
-                if (!unconnected_social_media.includes(clicked_linked_social_media)) {
-                    //update unconnected_social_media(add)
-                    unconnected_social_media.push(clicked_linked_social_media)
-                    //update unconnected_social_media to database
-                    const filter2 = { user_name: my_username }
-                    const update2 = { unconnected_social_media: unconnected_social_media }
-                    await UserInfo.findOneAndUpdate(filter2, update2, {
-                        new: true,
-                    })
-                    //console.log('b',unconnected_social_media )
-                }
-            } //end of if
+const backgroundPictureRouter = require('./router/me/background_picture')
+app.use('/post_background_picture', backgroundPictureRouter)
 
-            if (clicked_unconnected_social_media !== undefined) {
-                //update unconnected_social_media(delete)
-                unconnected_social_media = unconnected_social_media.filter((element) => {
-                    if (!element.includes(clicked_unconnected_social_media)) {
-                        return true
-                    }
-                })
-                //update unconnected_social_media to database
-                const filter1 = { user_name: my_username }
-                const update1 = { unconnected_social_media: unconnected_social_media }
-                await UserInfo.findOneAndUpdate(filter1, update1, {
-                    new: true,
-                })
-                //console.log('c',unconnected_social_media )
+const friendProfileRouter = require('./router/me/friend_profile')
+app.use('/api_friend_profile', friendProfileRouter)
 
-                if (!linked_social_media.includes(clicked_unconnected_social_media)) {
-                    //update linked_social_media(add)
-                    linked_social_media.push(clicked_unconnected_social_media)
-                    //update linked_social_media to database
-                    const filter2 = { user_name: my_username }
-                    const update2 = { linked_social_media: linked_social_media }
-                    await UserInfo.findOneAndUpdate(filter2, update2, {
-                        new: true,
-                    })
-                    //console.log('d',linked_social_media )
-                }
-            }
-            const response_data = {
-                user_info: user_info,
-                linked_social_media: linked_social_media, //return linked_platform name
-                unconnected_social_media: unconnected_social_media,
-            }
-            //console.log("in get_my_profile:", user_info)
-            console.log('linked_social_media:', linked_social_media)
-            console.log('unconnected_social_media:', unconnected_social_media)
-            //console.log("in me's post_data:",post_data)
-            res.json(response_data)
-        }
-    })
-})
+const friendSuggestionRouter = require('./router/me/friend_suggestion')
+app.use('/api_friend_suggestion', friendSuggestionRouter)
 
-app.get('/get_facebook', async (req, res) => {
-    const accessToken = req.query.accessToken
-    console.log('accessToken:', accessToken)
-    let userID = ''
-    let long_lived_token = ''
-    let post_data = ''
-    const my_username = req.user.username
+const myLikeHistoryRouter = require('./router/me/my_like_history')
+app.use('/api_liked_history', myLikeHistoryRouter)
 
-    const save_posts = async () => {
-        console.log('start')
-        await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
-            try {
-                post_data.forEach((item) => {
-                    if ('message' in item) {
-                        console.log('post data for each', post_data)
-                        UserInfos.post_data.unshift({
-                            content: item.message,
-                            source: 'Facebook',
-                            senttime: item.created_time,
-                            contentimg: ' ',
-                        })
-                        UserInfos.post_number++
-                    }
-                })
-                await UserInfos.save(function (saveErr, saveUserInfos) {
-                    if (err) {
-                        console.log('error saving post')
-                    }
-                })
-            } catch (e) {
-                console.log(e)
-            }
-        })
-    }
+const myCommentHistoryRouter = require('./router/me/my_comment_history')
+app.use('/api_my_comment_history', myCommentHistoryRouter)
 
-    await request(
-        `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/oauth/access_token?grant_type=fb_exchange_token&client_id=${process.env.APP_ID}&client_secret=${process.env.APP_SECRET}&fb_exchange_token=${accessToken}`,
+const followersRouter = require('./router/me/followers')
+app.use('/api_followers', followersRouter)
 
-        async function (error, response, body) {
-            if (error) {
-                console.log('error')
-            } else {
-                const res = JSON.parse(body)
-                console.log('get long-lived-token(body)', JSON.parse(body))
-                long_lived_token = res.access_token
-                //get userid
-                await request(`https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/me?access_token=${long_lived_token}`, async function (error, response, body) {
-                    if (error) {
-                        console.log('error')
-                    } else {
-                        console.log('get id:', body)
-                        userID = JSON.parse(body).id
+const followingsRouter = require('./router/me/followings')
+app.use('/api_followings', followingsRouter)
 
-                        await request(`https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/${userID}/permissions?access_token=${long_lived_token}`, function (error, response, body) {
-                            if (error) {
-                                console.log('error')
-                            } else {
-                                console.log('get permissions lists allowed:', body)
-                            }
-                        })
 
-                        await request(
-                            `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}/${userID}/feed?fields=id,created_time,message,object_id,permalink_url&access_token=${long_lived_token}`,
-                            async function (error, response, body) {
-                                if (error) {
-                                    console.log('error')
-                                } else {
-                                    //console.log("get posts:",body)
-                                    const res2 = await JSON.parse(body)
-                                    post_data = res2.data
-                                    console.log('posts:', post_data)
-                                    if (res2.data) {
-                                        save_posts()
-                                    }
-                                }
-                            }
-                        )
-                    }
-                })
-            }
-        }
-    )
-})
 
-app.get('/get_twitter_request_token', async (req, res) => {
-    let ret = {}
 
-    // get timestamp in seconds
-    const date = Math.floor(Date.now() / 1000)
-    const username = req.user.username
-    const nonce = `${fast_hash(date + username)}`
-    console.log('Calculated: ', date, nonce)
 
-    // Alright, let me just manually generate an encoded signature!!!!!!!
-    const parameters = {
-        oauth_consumer_key: process.env.TWITTER_API_KEY,
-        oauth_token: process.env.TWITTER_ACCESS_TOKEN,
-        oauth_nonce: nonce,
-        oauth_timestamp: date,
-        oauth_signature_method: 'HMAC-SHA1',
-        oauth_version: '1.0',
-        oauth_callback: 'http://localhost:4000/me',
-    }
-    const request_url = 'https://api.twitter.com/oauth/request_token'
-    const consumerSecret = process.env.TWITTER_API_SECRET_KEY
-    const tokenSecret = process.env.TWITTER_ACCESS_TOKEN_SECRET
-    const signature = oauthSignature.generate('POST', request_url, parameters, consumerSecret, tokenSecret)
 
-    const AuthHeader = `OAuth oauth_consumer_key="${process.env.TWITTER_API_KEY}",oauth_token="${process.env.TWITTER_ACCESS_TOKEN}",oauth_signature_method="HMAC-SHA1",oauth_timestamp="${date}",oauth_nonce="${nonce}",oauth_version="1.0",oauth_callback="http%3A%2F%2Flocalhost%3A4000%2Fme",oauth_signature="${signature}"`
-
-    // HTTPS request
-    const options = {
-        method: 'POST',
-        url: request_url,
-        headers: {
-            Authorization: AuthHeader,
-        },
-    }
-
-    request(options, (error, result) => {
-        if (error) {
-            console.error(err)
-        } else {
-            // manually parse the returned string
-            let arr = result.body.split('&')
-            for (let i = 0; i < 3; i++) {
-                let temp = arr[i].split('=')
-                ret[temp[0]] = temp[1]
-            }
-            console.log(ret)
-            res.json(ret)
-        }
-    })
-})
-
-app.get('/get_my_profile', async (req, res) => {
-    const my_username = req.user.username
-    let my_like_history
-    await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
-        if(err){
-            console.log('error', err)
-        }
-        else{
-            user_info = UserInfos
-            linked_social_media = UserInfos.linked_social_media
-            unconnected_social_media = UserInfos.unconnected_social_media
-            post_data = UserInfos.post_data
-            my_like_history = UserInfos.my_like_history
-
-            let filtered_post_data = post_data.slice()
-            //filter the post_data to only contain the linked_social_media
-            filtered_post_data = post_data.filter((element) => {
-                if (linked_social_media.includes(element.source)) {
-                    return true
-                }
-            })
-
-            //filtered_post_data by selected platform_name by user
-            if (req.query.platform_name_array !== undefined) {
-                //console.log("111111")
-                filtered_post_data = post_data.filter((element) => {
-                    if (req.query.platform_name_array.includes(element.source)) {
-                        return true
-                    }
-                }) //end of filtered_post_data by selected platform_name by user
-            }
-
-            // lr = liked_record, fr = filtered_record
-            let lr,
-                fr,
-                matched,
-                filtered_by_liked = []
-            // if my_like_history is not empty, we need to know if post has been liked by the current user
-            // forEach might be better
-            if (my_like_history !== undefined && !isEmpty(my_like_history)) {
-                for (let i = 0; i < filtered_post_data.length; i++) {
-                    fr = filtered_post_data[i]
-                    matched = false
-                    for (let j = 0; j < my_like_history.length; j++) {
-                        lr = my_like_history[j]
-                        // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
-                        if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
-                            // console.log("matched! ")
-                            filtered_by_liked.push({
-                                content: fr.content,
-                                source: fr.source,
-                                senttime: fr.senttime,
-                                contentimg: fr.contentimg,
-                                commented: fr.commented,
-                                liked: fr.liked,
-                                repoted: fr.repoted,
-                                like_switch: true,
-                            })
-                            matched = true
-                            break
-                        }
-                    }
-                    if (matched === false) {
-                        filtered_by_liked.push(fr)
-                    }
-                }
-            } else {
-                filtered_by_liked = filtered_post_data
-            }
-
-            console.log('filtered_by_liked: ', filtered_by_liked)
-
-            //send back response_data which consists of user_info and filtered_post_data as post_data
-            const response_data = {
-                user_info: user_info,
-                post_data: filtered_by_liked, //return the filtered data based on platform selected
-                linked_social_media: linked_social_media, //return linked_platform name
-            }
-            //console.log("in get_my_profile:", user_info)
-            //console.log("linked_social_media:",linked_social_media)
-            //console.log("in my_profile's filtered post_data:",filtered_post_data)
-            //console.log("in my_profile's  post_data:",post_data)
-            res.json(response_data)
-        }
-    })
-})
-
-// it tell multer to save uploaded files to disk into a directory named public/uploads, with a filename based on the current time.
-// the file storage rule function referred by a variable called storage will be used later as parameter when we initiated a multer object.
-const storage_backgruond = multer.diskStorage({
-    // set file saved destination. Multer can save uploaded files to a number of different destinations.
-    destination: function (req, file, cb) {
-        if (!fs.existsSync(`../front-end/public/uploads`)) {
-            fs.mkdirSync(`../front-end/public/uploads`)
-        }
-        if (!fs.existsSync(`../front-end/public/uploads/background`)) {
-            fs.mkdirSync(`../front-end/public/uploads/background`)
-        }
-        let dir = `../front-end/public/uploads/background/${user_name_l}`
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir)
-        }
-        cb(null, `../front-end/public/uploads/background/${user_name_l}`)
-    },
-
-    // set filename rules
-    filename: function (req, file, cb) {
-        const ext = file.mimetype.split('/')[1]
-        cb(null, file.fieldname + '_' + Date.now() + `.${ext}`)
-    },
-})
-
-//Then instantiate a multer object "upload_background_picture" to be used in app.post("/my_profile", upload.array("background_picture", 1), (req, res)...
-//and upload_background_picture multure object use the storage rule as defined in storage variable.
-const upload_background_picture = multer({ storage: storage_backgruond })
-
-app.post('/post_background_picture', upload_background_picture.array('background_picture', 1), async (req, res) => {
-    // check whether anything was uploaded. If success, send a response back. I will re-render my_profile page with background picture added in this case.
-    if (req.files) {
-        // success! send data back to the client, e.g. some JSON data
-        const data = {
-            status: 'all good',
-            message: 'success, the files were uploaded!',
-            background_picture: req.files,
-        }
-        // then send a response to client with modification on data we receive from client. otherwise, it will occur 500 error.
-        // add the background image src to user_info data
-        const my_username = req.user.username
-        await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
-            try {
-                UserInfos.background_picture = `/uploads/background/${user_name_l}/${data.background_picture[0].filename}`
-                await UserInfos.save(function (saveErr, saveUserInfos) {
-                    if (err) {
-                        console.log('error saving post')
-                    }
-                })
-            } catch (e) {
-                console.log(e)
-            }
-        })
-        res.redirect('/my_profile') //redirect to my_proile page
-    } else {
-        //if no file is uploaded, the submit button cannot send request.
-        console.log('error! req.files')
-        res.redirect('/my_profile')
-    }
-})
 let post_detail_for_repost = undefined
 app.use(async (req, res, next) => {
     if (req.query.post_detail_for_repost) {
@@ -887,242 +551,21 @@ app.get('/get_repost', async (req, res) => {
     res.json(response_data)
 })
 
-app.get('/api_my_comment_history', async (req, res) => {
-    await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            // extract being liked history
-            ret = result.my_comment_history
-            res.json(ret)
-            console.log(ret)
-        }
-    })
-})
+
+//community page
+const commentedHistoryRouter = require('./router/community/commented_history')
+app.use('/api_commented_history', commentedHistoryRouter)
+
+const likedHistoryRouter = require('./router/community/liked_history')
+app.use('/api_being_liked', likedHistoryRouter)
+
+const mentionedHistoryRouter = require('./router/community/mentioned_history')
+app.use('/api_being_mentioned', mentionedHistoryRouter)
 
 
-app.get('/api_commented_history', async (req, res) => {
-    await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            // extract being liked history
-            ret = result.others_commented_history
-            res.json(ret)
-            console.log(ret)
-        }
-    })
-})
 
-app.get('/api_friend_profile', async (req, res) => {
-    const my_username = req.user.username
-    let post_data = ''
-    let friend_info = ''
-    const UserName = req.query.UserName
-    let friend = false
-    let my_like_history
 
-    await UserInfo.findOne({ user_name: UserName }, (err, UserInfos) => {
-        try {
-            friend_info = UserInfos
-            linked_social_media = UserInfos.linked_social_media
-            post_data = UserInfos.post_data
-            //console.log("post_data",post_data)
-        } catch (e) {
-            console.log(e)
-        }
-    })
 
-    await UserInfo.findOne({ user_name: my_username }, (err, UserInfos) => {
-        try {
-            if (UserInfos.following.includes(UserName)) {
-                friend = true
-            }
-            my_like_history = UserInfos.my_like_history
-        } catch (e) {
-            console.log(e)
-        }
-    })
-
-    //FILTER POST DATA to send back to client, based on platform user selected in frontend
-    //console.log("req.query.platform_name_array:", req.query.platform_name_array)
-    let filtered_post_data = post_data.slice()
-    if (req.query.platform_name_array !== undefined) {
-        filtered_post_data = post_data.filter((element) => {
-            if (req.query.platform_name_array.includes(element.source)) {
-                return true
-            }
-        })
-    }
-
-    // lr = liked_record, fr = filtered_record
-    let lr,
-        fr,
-        matched,
-        filtered_by_liked = []
-    // if my_like_history is not empty, we need to know if post has been liked by the current user
-    // forEach might be better
-    if (my_like_history !== undefined && !isEmpty(my_like_history)) {
-        for (let i = 0; i < filtered_post_data.length; i++) {
-            fr = filtered_post_data[i]
-            matched = false
-            for (let j = 0; j < my_like_history.length; j++) {
-                lr = my_like_history[j]
-                // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
-                if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
-                    // console.log("matched! ")
-                    filtered_by_liked.push({
-                        content: fr.content,
-                        source: fr.source,
-                        senttime: fr.senttime,
-                        contentimg: fr.contentimg,
-                        commented: fr.commented,
-                        liked: fr.liked,
-                        repoted: fr.repoted,
-                        like_switch: true,
-                    })
-                    matched = true
-                    break
-                }
-            }
-            if (matched === false) {
-                filtered_by_liked.push(fr)
-            }
-        }
-    } else {
-        filtered_by_liked = filtered_post_data
-    }
-
-    //send back response_data which consists of user_info and filtered_post_data as post_data
-    const response_data = {
-        friend_info: friend_info,
-        post_data: filtered_by_liked, //return the filtered data based on platform selected
-        linked_social_media: linked_social_media, //return linked_platform name
-        friend: friend,
-    }
-    //console.log("in get_my_profile:", user_info)
-    //console.log("linked_social_media:",linked_social_media)
-    res.json(response_data)
-})
-
-app.get('/api_followers', async (req, res) => {
-    let follower_list = [],
-        following_list = [],
-        ret = []
-    const UserName = req.query.UserName
-
-    // find user object in database and extract its follower array
-    await UserInfo.findOne({ user_name: UserName }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            follower_list = result.follower
-            following_list = result.following
-        }
-    })
-
-    // retrieve extended user info from database
-    for (let i = 0; i < follower_list.length; i++) {
-        await UserInfo.findOne({ user_name: follower_list[i] }, (err, result) => {
-            if (err) {
-                console.error(err)
-            } else {
-                ret.push({
-                    user_name: result.user_name,
-                    bio: result.bio,
-                    user_photo: result.user_photo,
-                    // dynamically decide the action based on the following status
-                    action: following_list.includes(result.user_name) ? 'Unfollow' : 'Follow',
-                })
-            }
-        })
-    }
-
-    console.log('Follower info\n: ', ret)
-    res.json(ret)
-})
-
-app.get('/api_followings', async (req, res) => {
-    let follower_list = [],
-        following_list = [],
-        ret = []
-    const UserName = req.query.UserName
-
-    // find user object in database and extract its follower array
-    await UserInfo.findOne({ user_name: UserName }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            follower_list = result.follower
-            following_list = result.following
-        }
-    })
-
-    // retrieve extended user info from database
-    for (let i = 0; i < following_list.length; i++) {
-        await UserInfo.findOne({ user_name: following_list[i] }, (err, result) => {
-            if (err) {
-                console.error(err)
-            } else {
-                ret.push({
-                    user_name: result.user_name,
-                    bio: result.bio,
-                    user_photo: result.user_photo,
-                    action: 'Unfollow',
-                })
-            }
-        })
-    }
-
-    console.log('Following info\n: ', ret)
-    res.json(ret)
-})
-
-app.get('/api_friend_suggestion', async (req, res) => {
-    let ret = {}
-    let unfollowed_list = [] //list of user who is not followed by me
-    let following_list
-    const my_username = req.user.username
-    const search_name = req.query.search_name
-    console.log('search_name: ', search_name, ' <---')
-
-    await UserInfo.find((err, UserInfos) => {
-        if (err){
-            console.log('error',err)
-        }
-        else{
-            user_info = UserInfos
-            unfollowed_list = user_info.filter((item) => {
-                if (!item.follower.includes(my_username)) {
-                    return true
-                }
-            })
-            unfollowed_list = unfollowed_list.filter((item) => {
-                if (item.user_name !== my_username) {
-                    return true
-                }
-            })
-
-            // if searching by name, one more filtering
-            if (search_name !== '' && search_name !== undefined) {
-                unfollowed_list = unfollowed_list.filter((item) => {
-                    return item.user_name === search_name
-                })
-            }
-
-            following_list = user_info.filter((item) => {
-                if (item.follower.includes(my_username)) {
-                    return true
-                }
-            })
-             //console.log(unfollowed_list)
-            ret.unfollowed_list = unfollowed_list !== undefined ? unfollowed_list : []
-            ret.following_list = following_list !== undefined ? following_list : []
-
-            res.json(ret)
-        }
-    })
-})
 
 app.get('/get_add_friend', async (req, res) => {
     const clicked_follow_username = req.query.clicked_follow_username
@@ -1223,53 +666,8 @@ app.get('/get_remove_friend', async (req, res) => {
     })
 })
 
-app.get('/api_being_liked', async (req, res) => {
-    let ret = {}
 
-    // retrieve user info from database
-    await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            // extract being liked history
-            ret = result.others_liked_history
-            res.json(ret)
-            console.log(ret)
-        }
-    })
-})
 
-app.get('/api_being_mentioned', async (req, res) => {
-    let ret = {}
-
-    // retrieve data from database
-    await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            // extract mentioned history
-            ret = result.others_mentioned_history
-            console.log(ret)
-            res.json(ret)
-        }
-    })
-})
-
-app.get('/api_liked_history', async (req, res) => {
-    let ret = {}
-    const username = req.user.username
-
-    // retrieve liked history from database and return to front-end
-    UserInfo.findOne({ user_name: username }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            ret = result.my_like_history
-            console.log('Me/Liked-History: ', ret)
-            res.json(ret)
-        }
-    })
-})
 
 app.get('/api_message', async (req, res) => {
     let ret
