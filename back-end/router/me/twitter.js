@@ -1,5 +1,6 @@
 const twitterRouter = require('express').Router()
 const request = require('request')
+const UserInfo = require('../../model/userInfo/userInfo')
 
 twitterRouter.get('/', async (req, res) => {
     let ret = {}

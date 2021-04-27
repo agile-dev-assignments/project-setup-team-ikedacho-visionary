@@ -53,41 +53,7 @@ let user_name_l = ''
 let selected_social_media = ['O-Zone', 'Facebook', 'Twitter', 'Instagram']
 
 //put routes here:
-app.post('/api_register', (req, res) => {
-    User.findOne({ username: req.body.username }, async (err, doc) => {
-        if (err) throw err
-        if (doc) res.send('User Already Exists')
-        if (!doc) {
-            const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
-            const newUser = new User({
-                username: req.body.username,
-                password: hashedPassword,
-            })
-
-            const newUserInfo = new UserInfo({
-                user_name: req.body.username,
-                user_photo: `https://robohash.org/${req.body.username}.png?size=200x200`,
-                background_picture: 'https://resilientblog.co/wp-content/uploads/2019/07/sky-quotes.jpg',
-                post_number: 0,
-                bio: '🥤',
-                follower_number: 0,
-                follower: [],
-                following_number: 0,
-                following: [],
-                linked_social_media: ['O-Zone'],
-                unconnected_social_media: ['Twitter', 'Instagram', 'Facebook'],
-            })
-
-            // naive way to store current user info in session
-            req.user = req.body.username
-
-            await newUser.save()
-            await newUserInfo.save()
-            res.send('User Created')
-        }
-    })
-})
 
 app.post('/login', (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
@@ -121,39 +87,6 @@ app.get('/api_get_user_info_by_name', (req, res) => {
     })
 })
 
-app.post("/browsed", (req, res) => {
-    const browsed = req.body;
-    const username = req.user.username;
-    UserInfo.findOne({user_name: username}, (err, result) => {
-                result.my_browse_history.push(browsed)
-                // save the update   
-                result.save((err) => {
-                    if (err) {
-                console.log(err)
-            }
-        })            
-    })
-})
-   
-
-
-app.get('/api_browse', (req, res) => {
-    let ret
-    const username = req.user.username
-
-    // retrieve data from database
-    UserInfo.findOne({ user_name: username }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            // extract the brose history field
-            ret = result.my_browse_history
-            console.log(ret)
-            res.json(ret)
-        }
-    })
-})
-
 app.get('/user', (req, res) => {
     res.send(req.user) // The req.user stores the entire user that has been authenticated inside of it.
 })
@@ -169,6 +102,17 @@ app.get('/my_info', (req, res) => {
     })
 })
 
+//prelogin page
+const preloginHomeRouter = require('./router/prelogin/prelogin_home')
+app.use('/', preloginHomeRouter)
+
+const registerRouter = require('./router/prelogin/register')
+app.use('/api_register', registerRouter)
+
+//home page
+const homeRouter = require('./router/home/home')
+app.use('/', homeRouter)
+ 
 //me page
 const meRouter = require('./router/me/me')
 app.use('/get_me', meRouter)
@@ -197,6 +141,9 @@ app.use('/api_liked_history', myLikeHistoryRouter)
 const myCommentHistoryRouter = require('./router/me/my_comment_history')
 app.use('/api_my_comment_history', myCommentHistoryRouter)
 
+const myBrowseHistoryRouter = require('./router/me/my_browse_history')
+app.use('/api_browse', myBrowseHistoryRouter)
+
 const followersRouter = require('./router/me/followers')
 app.use('/api_followers', followersRouter)
 
@@ -208,14 +155,6 @@ app.use('/get_add_friend', addFriendRouter)
 
 const removeFriendRouter = require('./router/me/remove_friend')
 app.use('/get_remove_friend', removeFriendRouter)
-
-//home page
-const homeRouter = require('./router/prelogin/prelogin_home')
-app.use('/', homeRouter)
- 
-//prelogin page
-const preloginHomeRouter = require('./router/home/home')
-app.use('/', preloginHomeRouter)
 
 //community page
 const commentedHistoryRouter = require('./router/community/commented_history')
@@ -237,7 +176,6 @@ app.use('/api_search_result', searchResultRouter)
 const trendingRouter = require('./router/search/trending')
 app.use('/api_trending', trendingRouter)
 
-
 //post content
 const likeAPostRouter = require('./router/post_content/like_a_post')
 app.use('/api_like_a_post', likeAPostRouter)
@@ -245,7 +183,10 @@ app.use('/api_like_a_post', likeAPostRouter)
 const unlikeAPostRouter = require('./router/post_content/unlike_a_post')
 app.use('/api_unlike_a_post', unlikeAPostRouter)
 
+const browsedRouter = require('./router/post_content/browse')
+app.use('/browsed', browsedRouter)
 
+//
 let post_detail_for_repost = undefined
 app.use(async (req, res, next) => {
     if (req.query.post_detail_for_repost) {

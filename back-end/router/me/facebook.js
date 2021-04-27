@@ -1,5 +1,6 @@
 const facebookRouter = require('express').Router()
 const request = require('request')
+const UserInfo = require('../../model/userInfo/userInfo')
 
 facebookRouter.get('/', async (req, res) => {
     const accessToken = req.query.accessToken
