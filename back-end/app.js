@@ -203,11 +203,47 @@ app.use('/api_followers', followersRouter)
 const followingsRouter = require('./router/me/followings')
 app.use('/api_followings', followingsRouter)
 
+const addFriendRouter = require('./router/me/add_friend')
+app.use('/get_add_friend', addFriendRouter)
+
+const removeFriendRouter = require('./router/me/remove_friend')
+app.use('/get_remove_friend', removeFriendRouter)
+
 //home page
-const homeRouter = require('./router/home/home')
+const homeRouter = require('./router/prelogin/prelogin_home')
 app.use('/', homeRouter)
+ 
+//prelogin page
+const preloginHomeRouter = require('./router/home/home')
+app.use('/', preloginHomeRouter)
+
+//community page
+const commentedHistoryRouter = require('./router/community/commented_history')
+app.use('/api_commented_history', commentedHistoryRouter)
+
+const likedHistoryRouter = require('./router/community/liked_history')
+app.use('/api_being_liked', likedHistoryRouter)
+
+const mentionedHistoryRouter = require('./router/community/mentioned_history')
+app.use('/api_being_mentioned', mentionedHistoryRouter)
+
+//search page
+const searchRecommendRouter = require('./router/search/search_recommend')
+app.use('/api_search_recommended', searchRecommendRouter)
+
+const searchResultRouter = require('./router/search/search_result')
+app.use('/api_search_result', searchResultRouter)
+
+const trendingRouter = require('./router/search/trending')
+app.use('/api_trending', trendingRouter)
 
 
+//post content
+const likeAPostRouter = require('./router/post_content/like_a_post')
+app.use('/api_like_a_post', likeAPostRouter)
+
+const unlikeAPostRouter = require('./router/post_content/unlike_a_post')
+app.use('/api_unlike_a_post', unlikeAPostRouter)
 
 
 let post_detail_for_repost = undefined
@@ -539,123 +575,6 @@ app.get('/get_repost', async (req, res) => {
 })
 
 
-//community page
-const commentedHistoryRouter = require('./router/community/commented_history')
-app.use('/api_commented_history', commentedHistoryRouter)
-
-const likedHistoryRouter = require('./router/community/liked_history')
-app.use('/api_being_liked', likedHistoryRouter)
-
-const mentionedHistoryRouter = require('./router/community/mentioned_history')
-app.use('/api_being_mentioned', mentionedHistoryRouter)
-
-
-
-
-
-
-app.get('/get_add_friend', async (req, res) => {
-    const clicked_follow_username = req.query.clicked_follow_username
-    console.log('clicked_follow_username', clicked_follow_username)
-    //when user click a people to follow in front-end. the
-    const my_username = req.user.username
-    await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
-        try {
-            user_info = UserInfos
-            following_list = user_info.following
-            if (!following_list.includes(clicked_follow_username)) {
-                following_list.push(clicked_follow_username)
-                user_info.following_number++
-            }
-            await UserInfos.save(function (saveErr, saveUserInfos) {
-                if (err) {
-                    console.log('error saving following')
-                }
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    })
-
-    await UserInfo.findOne({ user_name: clicked_follow_username }, async (err, UserInfos) => {
-        try {
-            user_info = UserInfos
-            follower_list = user_info.follower
-            if (!follower_list.includes(my_username)) {
-                follower_list.push(my_username)
-                user_info.follower_number++
-            }
-            await UserInfos.save(function (saveErr, saveUserInfos) {
-                if (err) {
-                    console.log('error saving adding a following')
-                }
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    })
-})
-
-app.get('/get_remove_friend', async (req, res) => {
-    const clicked_unfollow_username = req.query.clicked_unfollow_username
-    console.log('clicked_unfollow_username', clicked_unfollow_username)
-
-    const my_username = req.user.username
-    console.log(my_username)
-    await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
-        try {
-            console.log('here')
-            user_info = UserInfos
-            following_list = user_info.following.slice()
-            console.log('following_list', following_list)
-            if (following_list.includes(clicked_unfollow_username)) {
-                user_info.following = following_list.filter((item) => {
-                    if (item !== clicked_unfollow_username) {
-                        console.log('start', item)
-                        return true
-                    }
-                    user_info.following = following_list.slice()
-                    console.log(following_list)
-                    console.log(user_info.following)
-                })
-                user_info.following_number--
-            }
-            await UserInfos.save(function (saveErr, saveUserInfos) {
-                if (err) {
-                    console.log('error saving deleteing a following')
-                }
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    })
-    await UserInfo.findOne({ user_name: clicked_unfollow_username }, async (err, UserInfos) => {
-        try {
-            user_info = UserInfos
-            follower_list = user_info.follower.slice()
-            console.log(follower_list)
-            if (follower_list.includes(my_username)) {
-                user_info.follower = follower_list.filter((item) => {
-                    if (item !== my_username) {
-                        return true
-                    }
-                })
-                user_info.follower_number--
-            }
-            await UserInfos.save(function (saveErr, saveUserInfos) {
-                if (err) {
-                    console.log('error saving deleting a following')
-                }
-            })
-        } catch (e) {
-            console.log(e)
-        }
-    })
-})
-
-
-
-
 app.get('/api_message', async (req, res) => {
     let ret
 
@@ -819,369 +738,9 @@ app.get('/api_create_new_chat_roomID', async (req, res) => {
     })
 })
 
-app.get('/api_like_a_post', async (req, res) => {
-    const self_username = req.user.username
-    const post_detail = JSON.parse(req.query.post_detail)
-    const current_date = new Date()
-    let self_userimg
-
-    console.log('post detail: ', post_detail)
-
-    // find myself and update my liked history
-    await UserInfo.findOne({ user_name: self_username }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            // update by pushing the new post info to the list
-            if (result.my_like_history === undefined) {
-                result.my_like_history = []
-            }
-            result.my_like_history.push({
-                source: post_detail.source,
-                user_photo: post_detail.userimg,
-                user_name: post_detail.UserName,
-                text_content: post_detail.content,
-                img_content: post_detail.contentimg,
-                post_issued_time: post_detail.Senttime,
-                like_issued_time: current_date,
-            })
-            // also fetch the user_photo for later usage
-            self_userimg = result.user_photo
-
-            // save the changes
-            result.save((err) => {
-                if (err) {
-                    console.error(err)
-                }
-            })
-        }
-    })
-
-    const other_username = post_detail.UserName
-    // find the post author and update his being-liked history
-    await UserInfo.findOne({ user_name: other_username }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            // update by pushing the new post info to the list
-            if (result.others_liked_history === undefined) {
-                result.others_liked_history = []
-            }
-            result.others_liked_history.push({
-                source: post_detail.source,
-                user_photo: post_detail.userimg,
-                user_name: post_detail.UserName,
-                text_content: post_detail.content,
-                img_content: post_detail.contentimg,
-                post_issued_time: post_detail.Senttime,
-                like_issued_time: current_date,
-                liked_by_user_name: self_username,
-                liked_by_user_photo: self_userimg,
-            })
-
-            // save the changes
-            result.save((err) => {
-                if (err) {
-                    console.error(err)
-                }
-            })
-        }
-    })
-
-    res.send(`Liked on post: ${post_detail} by time ${current_date}`)
-})
-
-app.get('/api_unlike_a_post', async (req, res) => {
-    const self_username = req.user.username
-    const post_detail = JSON.parse(req.query.post_detail)
-
-    console.log('post detail: ', post_detail, typeof post_detail)
-    console.log(post_detail.Senttime, post_detail.UserName)
-
-    // find myself and update my liked history
-    await UserInfo.findOne({ user_name: self_username }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            /* to dislike a post, the my_like_history must not be empty
-            if (result.my_like_history === undefined){
-                result.my_like_history = []
-            } */
-            // update by filtering out the new post info to the list
-            result.my_like_history = result.my_like_history.filter((record) => {
-                const date = new Date(Date.parse(record.post_issued_time)).toString()
-                const date_post_detail = new Date(Date.parse(post_detail.Senttime)).toString()
-                console.log(date, typeof date)
-                console.log(date_post_detail, typeof date_post_detail)
-                console.log('===================')
-
-                return !(record.user_name === post_detail.UserName && record.source === post_detail.source && date === date_post_detail && record.text_content === post_detail.content)
-            })
-
-            console.log('\nresult.my_like_history:\n', result.my_like_history)
-            // save the changes <--- without error handling lol
-            result.save((err) => {
-                if (err) {
-                    console.error(err)
-                }
-            })
-        }
-    })
-
-    const other_username = post_detail.UserName
-    // find the post author and update his being-liked history
-    await UserInfo.findOne({ user_name: other_username }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            /* to dislike a post, the others_liked_history must not be empty
-            if (result.others_liked_history === undefined){
-                result.others_liked_history = []
-            } */
-            // update by pushing the new post info to the list
-            let filtered_list = result.others_liked_history.filter((record) => {
-                const date = new Date(Date.parse(record.post_issued_time)).toString()
-                const date_post_detail = new Date(Date.parse(post_detail.Senttime)).toString()
-                console.log(date, typeof date)
-                console.log(date_post_detail, typeof date_post_detail)
-                console.log('===================')
-
-                return !(
-                    record.user_name === post_detail.UserName &&
-                    record.source === post_detail.source &&
-                    record.text_content === post_detail.content &&
-                    date === date_post_detail &&
-                    record.liked_by_user_name === self_username
-                )
-            })
-
-            console.log('\nfiltered_list: ', filtered_list)
-            // save the changes
-            UserInfo.updateOne({ user_name: other_username }, { others_liked_history: filtered_list }, (err) => {
-                if (err) {
-                    console.error(err)
-                }
-            })
-        }
-    })
-
-    res.send(`Un-liked on post: ${post_detail} by time ${new Date()}`)
-})
-
-app.get('/api_getprelogin', async (req, res, next) => {
-    const userInfos = await UserInfo.aggregate(
-        [ { $sample: { size: 10 } } ]
-     )
-    let postData = []
-    userInfos.forEach(userInfo => {
-        console.log(userInfo.user_name)
-        const data = userInfo.post_data.map(ele => {
-            ele.userimg= userInfo.user_photo
-            ele.UserName=userInfo.user_name 
-            return ele
-        })
-       postData = postData.concat(data)
-    })
-
-    postData.sort((prev,cur)=>{
-        return cur.senttime - prev.senttime
-    })
-
-    let filtered_post_data = postData.slice()
-
-    res.json(filtered_post_data)
-
-})
-
-app.get('/api_getprelogin_recommended', async (req, res, next) => {
-    const userInfos = await UserInfo.aggregate(
-        [ { $sample: { size: 10 } } ]
-     )
-    let postData = []
-    userInfos.forEach(userInfo => {
-        console.log(userInfo.user_name)
-        const data = userInfo.post_data.map(ele => {
-            ele.userimg= userInfo.user_photo
-            ele.UserName=userInfo.user_name 
-            return ele
-        })
-       postData = postData.concat(data)
-    })
-
-    postData.sort((prev,cur)=>{
-        return cur.senttime - prev.senttime
-    })
-
-    let filtered_post_data = postData.slice()
-
-    res.json(filtered_post_data)
-
-})
-
-app.get('/api_getprelogin_recent', async (req, res, next) => {
-    const userInfos = await UserInfo.aggregate(
-        [ { $sample: { size: 10 } } ]
-     )
-    let postData = []
-    userInfos.forEach(userInfo => {
-        console.log(userInfo.user_name)
-        const data = userInfo.post_data.map(ele => {
-            ele.userimg= userInfo.user_photo
-            ele.UserName=userInfo.user_name 
-            return ele
-        })
-       postData = postData.concat(data)
-    })
-
-    postData.sort((prev,cur)=>{
-        return cur.senttime - prev.senttime
-    })
-
-    let filtered_post_data = postData.slice()
-
-    res.json(filtered_post_data)
-
-})
 
 
 
-app.get('/api_search_recommended', async (req, res) => {
-    let ret = []
-
-    await axios
-        .get(`${process.env.API_SEARCH_RECOMMENDED}?key=${process.env.API_SEARCH_RECOMMENDED_KEY}`)
-        .then((apiResponse) => (ret = apiResponse.data))
-        .catch((err) => {
-            //console.log(err)
-            const backupData = [
-                { topic: 'Recommended topic #1' },
-                { topic: 'Recommended topic #2' },
-                { topic: 'Recommended topic #3' },
-                { topic: 'Recommended topic #4' },
-                { topic: 'Recommended topic #5' },
-            ]
-            ret = backupData
-        })
-
-    res.json(ret)
-})
-
-app.get('/api_trending', async (req, res) => {
-    let tag_list = []
-    let ret = []
-    
-    const regex = /#\S+\s/g
-
-    const userInfos = await UserInfo.find()
-    //let postData = []
-
-    userInfos.forEach(userInfo => {
-        const info = userInfo.toObject()
-
-        for (let i = 0; i < info.post_data.length; i++)
-        { 
-            if (info.post_data[i].content.match(regex)){
-                let search_for_tag = info.post_data[i].content.match(regex)
-                
-                for(let i = 0; i < search_for_tag.length; i++){
-                    if(tag_list.includes(search_for_tag[i]) == false){
-                        ret.push({topic: search_for_tag[i]})
-                        console.log('tag', search_for_tag[i]);
-                    }
-                    tag_list.push(search_for_tag[i])
-                }
-                //postData = postData.concat(data[i])
-            }
-        }
-    })
-
-    res.json(ret)
-})
-
-app.get('/api_search_result', async (req, res) => {
-    //const search_key = req.query.searchQuery
-    const search_keyword = req.query.searchQuery
-    //console.log('search_keyword', search_key);
-
-    user_name_l = req.user.username
-
-    const userInfos = await UserInfo.find()
-    let postData = [], 
-        my_like_history
-
-    userInfos.forEach(userInfo => {
-        const info = userInfo.toObject()
-        //console.log(info.content);
-
-        const data = info.post_data.map(ele => {
-            ele.userimg= userInfo.user_photo
-            ele.UserName=userInfo.user_name 
-            return ele
-        })
-
-        for (let i = 0; i < info.post_data.length; i++)
-        {
-            if (info.post_data[i].content.indexOf(search_keyword) !== -1){
-                //console.log('info.post_data[i].content', info.post_data[i].content);
-                postData = postData.concat(data[i])
-            }
-        }
-
-        if (userInfo.user_name === req.user.username) {
-            my_like_history = userInfo.my_like_history
-        }
-
-       // console.log(data)
-       //postData = postData.concat(data)
-    })
-
-    postData.sort((prev,cur)=>{
-        return cur.senttime - prev.senttime
-    })
-
-    // lr = liked_record, fr = filtered_record
-    let lr,
-        fr,
-        matched,
-        filtered_by_liked = []
-    // if my_like_history is not empty, we need to know if post has been liked by the current user
-    // forEach might be better
-    if (my_like_history !== undefined && !isEmpty(my_like_history)) {
-        for (let i = 0; i < postData.length; i++) {
-            fr = postData[i]
-            matched = false
-            for (let j = 0; j < my_like_history.length; j++) {
-                lr = my_like_history[j]
-                // console.log("\nlr, fr: ", lr, "\n", fr, "\n")
-                if (lr.text_content == fr.content && lr.source == fr.source && lr.post_issued_time.getTime() == fr.senttime.getTime()) {
-                    // console.log("matched! ")
-                    filtered_by_liked.push({
-                        content: fr.content,
-                        source: fr.source,
-                        senttime: fr.senttime,
-                        contentimg: fr.contentimg,
-                        commented: fr.commented,
-                        liked: fr.liked,
-                        repoted: fr.repoted,
-                        UserName: lr.user_name,
-                        userimg: lr.user_photo,                     
-                        like_switch: true,
-                    })
-                    matched = true
-                    break
-                }
-            }
-            if (matched === false) {
-                filtered_by_liked.push(fr)
-            }
-        }
-    } else {
-        filtered_by_liked = postData
-    }
-
-    // console.log('filtered_by_liked: ', filtered_by_liked)
-    res.json(filtered_by_liked)
-})
 //test
 //Then instantiate a multer object "upload_post_picture" to be used in app.post("/post_Post_picture", upload.array("background_picture", 1), (req, res)...
 //and upload_post_picture multure object use the storage rule as defined in storage variable.
