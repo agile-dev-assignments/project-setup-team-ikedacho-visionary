@@ -1,23 +1,24 @@
 language: node_js
 node_js:
-  - node
-  - "12"
-addons:
-  ssh_known_hosts:167.172.155.162
+- node
+- '12'
+addons: ssh_known_hosts:167.172.155.162
 sudo: required
-script: "true"
-before_install:
-  - cd front-end/
-  - npm install
-  - cd ../back-end/
-  - npm install
 script:
-
-  - ssh Lin@167.172.155.162
-  - git clone https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.git
-  - cd project-setup-team-ikedacho-visionary
-  - pm2 start npm -- start
+- ssh Lin@167.172.155.162
+- git clone https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.git
+- cd project-setup-team-ikedacho-visionary
+- pm2 start npm -- start
+before_install:
+- openssl aes-256-cbc -K $encrypted_0ddd2445e49f_key -iv $encrypted_0ddd2445e49f_iv
+  -in travis_rsa.enc -out travis_rsa -d
+- chmod 600 travis_rsa
+- mv travis_rsa ~/.ssh/id_rsa
+- cd front-end/
+- npm install
+- cd ../back-end/
+- npm install
 after_success:
-  - npm run build
-  - cd ..
-  - bash ./deploy.sh
+- npm run build
+- cd ..
+- bash ./deploy.sh
