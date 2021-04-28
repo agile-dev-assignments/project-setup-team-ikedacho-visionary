@@ -1,4 +1,7 @@
 # Project Repository
+
+[![Build Status](https://www.travis-ci.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.svg?branch=master)](https://www.travis-ci.com/agile-dev-assignments/project-setup-team-ikedacho-visionary)
+
 *   ### Project Description, Product Vision Statement
     *   O-zone is a cross-platform social media browsing web application. It should support popular platforms including but not limited to Facebook, Instagram, Twitter, and TikTok. Our project makes it convenient to gather information from and push posts to multiple platforms at the same time. 
     *   ##### Minimum Viable Product:
