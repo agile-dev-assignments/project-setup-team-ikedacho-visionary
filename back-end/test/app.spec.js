@@ -1,5 +1,5 @@
 const request = require('supertest')
-const app = require('../../../back-end/app') // the express server
+const app = require('../app') // the express server
 const expect = require('chai').expect
 
 // Test for Follower and Following
