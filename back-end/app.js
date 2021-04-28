@@ -5,16 +5,10 @@ require('dotenv').config({ silent: true }) // load environmental variables from 
 const morgan = require('morgan') // middleware for nice logging of incoming HTTP requests
 const cors = require('cors')
 const passport = require('passport')
-const passportLocal = require('passport-local').Strategy
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const bodyParser = require('body-parser')
-const User = require('./model/loginAuth/user')
-const UserInfo = require('./model/userInfo/userInfo')
-const Chatroom = require('./model/chatroom/chatroom')
 const db = require('./db')
-const request = require('request')
-const oauthSignature = require('oauth-signature')
 const authUser = require('./authIns')
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
 
@@ -42,7 +36,7 @@ app.use(
 app.use(cookieParser('secretcode'))
 app.use(passport.initialize())
 app.use(passport.session())
-require('./model/loginAuth/passPortConfig.js')(passport)
+require('./loginAuth/passPortConfig.js')(passport)
 //----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
 
 
