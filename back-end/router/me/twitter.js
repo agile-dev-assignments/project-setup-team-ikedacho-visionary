@@ -1,6 +1,7 @@
 const twitterRouter = require('express').Router()
 const request = require('request')
 const UserInfo = require('../../model/userInfo/userInfo')
+const oauthSignature = require('oauth-signature')
 
 twitterRouter.get('/', async (req, res) => {
     let ret = {}

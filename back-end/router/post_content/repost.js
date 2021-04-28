@@ -2,6 +2,7 @@ const repostRouter = require('express').Router()
 const UserInfo = require('../../model/userInfo/userInfo')
 
 let post_detail_for_repost = undefined
+
 repostRouter.use(async (req, res, next) => {
     if (req.query.post_detail_for_repost) {
         post_detail_for_repost = JSON.parse(req.query.post_detail_for_repost)
@@ -9,6 +10,28 @@ repostRouter.use(async (req, res, next) => {
     }
     next()
 })
+
+repostRouter.get('/get_repost', async (req, res) => {
+    let linked_social_media = [],
+        user_name = ''
+
+    await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
+        if (err) {
+            console.error(err)
+        } else {
+            linked_social_media = result.linked_social_media
+            user_name = result.user_name
+        }
+    })
+
+    const response_data = {
+        linked_social_media: linked_social_media,
+        user_name: user_name,
+    }
+
+    res.json(response_data)
+})
+
 repostRouter.get('/get_fast_repost', async (req, res) => {
     const my_username = req.user.username
     const post_text = `Repost from @${post_detail_for_repost.UserName}: ${post_detail_for_repost.content} `
