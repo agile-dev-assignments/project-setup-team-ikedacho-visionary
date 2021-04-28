@@ -2,6 +2,8 @@ language: node_js
 node_js:
   - node
   - "12"
+addons:
+  ssh_known_hosts:167.172.155.162
 sudo: required
 script: "true"
 before_install:
@@ -9,3 +11,13 @@ before_install:
   - npm install
   - cd ../back-end/
   - npm install
+script:
+  - npm test
+  - ssh Lin@167.172.155.162
+  - git clone https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.git
+  - cd project-setup-team-ikedacho-visionary
+  - pm2 start npm -- start
+after_success:
+  - npm run build
+  - cd ..
+  - bash ./deploy.sh
