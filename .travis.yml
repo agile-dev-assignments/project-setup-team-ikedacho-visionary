@@ -12,7 +12,7 @@ before_install:
   - cd ../back-end/
   - npm install
 script:
-  - npm test
+
   - ssh Lin@167.172.155.162
   - git clone https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.git
   - cd project-setup-team-ikedacho-visionary
