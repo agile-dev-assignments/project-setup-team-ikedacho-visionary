@@ -4,11 +4,7 @@ node_js:
 - '12'
 addons: ssh_known_hosts:167.172.155.162
 sudo: required
-script:
-- ssh Lin@167.172.155.162
-- git clone https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.git
-- cd project-setup-team-ikedacho-visionary
-- pm2 start npm -- start
+
 before_install:
 - openssl aes-256-cbc -K $encrypted_0ddd2445e49f_key -iv $encrypted_0ddd2445e49f_iv
   -in travis_rsa.enc -out travis_rsa -d
