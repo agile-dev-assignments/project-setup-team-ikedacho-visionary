@@ -11,10 +11,10 @@ before_install:
 - chmod 600 travis_rsa
 - mv travis_rsa ~/.ssh/id_rsa
 - cd front-end/
-- npm install
-- cd ../back-end/
-- npm install
+install:
+  - npm install
 after_success:
-- npm run build
-- cd ..
-- bash ./deploy.sh
+ 
+  - npm run build
+  - cd ..
+  - bash ./deploy.sh
