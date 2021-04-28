@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const User = require('./loginAuth/user')
+const User = require('./model/loginAuth/user')
 require('dotenv').config({ silent: true })
 
 const uri = `${process.env.DB_URL}`
