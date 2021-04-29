@@ -1,16 +1,15 @@
 set -xe
 
-curl -sL https://rpm.nodesource.com/setup_12.x | bash -
-yum install -y nodejs
-node -v
-npm -v
-npm install -g pm2
-pm2 startup systemd
-
-
   eval "$(ssh-agent -s)"
-  echo "1."
   ssh-add ~/.ssh/id_rsa
+
+  echo "in centOS. Downloading ...."
+  curl -sL https://rpm.nodesource.com/setup_12.x | bash -
+  yum install -y nodejs
+  node -v
+  npm -v
+  npm install -g pm2
+  pm2 startup systemd
 
   cd ~
 
