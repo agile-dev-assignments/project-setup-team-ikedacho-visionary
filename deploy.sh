@@ -3,15 +3,6 @@ set -xe
   eval "$(ssh-agent -s)"
   ssh-add ~/.ssh/id_rsa
 
-  ssh Lin@167.172.155.162
-  echo "Login centOS. Downloading ...."
-  curl -sL https://rpm.nodesource.com/setup_12.x | bash -
-  yum install -y nodejs
-  node -v
-  npm -v
-  npm install -g pm2
-  pm2 startup systemd
-
   cd ~
 
   if [ -d "project-setup-team-ikedacho-visionary" ] ; then
