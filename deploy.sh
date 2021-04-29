@@ -1,7 +1,9 @@
 set -xe
-  
-  ssh Lin@167.172.155.162
 
+  spawn ssh root@167.172.155.162
+  expect "assword:"
+  send "123\r"
+  interact
   cd ~
 
   if [ -d "project-setup-team-ikedacho-visionary" ] ; then
@@ -20,6 +22,6 @@ set -xe
 
   cd ../back-end
   npm install
-  echo "in back-end. start pm2..."
-  pm2 start npm -- start
+  echo "in back-end. restart server.js"
+  pm2 start server.js --name "server"
   echo "3."
