@@ -3,7 +3,8 @@ set -xe
   eval "$(ssh-agent -s)"
   ssh-add ~/.ssh/id_rsa
 
-  echo "in centOS. Downloading ...."
+  ssh Lin@167.172.155.162
+  echo "Login centOS. Downloading ...."
   curl -sL https://rpm.nodesource.com/setup_12.x | bash -
   yum install -y nodejs
   node -v
