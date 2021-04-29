@@ -1,7 +1,6 @@
 set -xe
-
-  eval "$(ssh-agent -s)"
-  ssh-add ~/.ssh/id_rsa
+  
+  ssh Lin@167.172.155.162
 
   cd ~
 
