@@ -1,16 +1,35 @@
 set -xe
-if [ $TRAVIS_BRANCH == 'master' ] ; then
+
+curl -sL https://rpm.nodesource.com/setup_12.x | bash -
+yum install -y nodejs
+node -v
+npm -v
+npm install -g pm2
+pm2 startup systemd
+
+
   eval "$(ssh-agent -s)"
   echo "1."
   ssh-add ~/.ssh/id_rsa
 
   cd ~
-  git clone https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.git
-  cd project-setup-team-ikedacho-visionary
-else
-  echo "Not deploying, since the branch isn't master."
-fi
 
-echo "2."
-ssh Lin@167.172.155.162 'pm2 restart all'
-echo "3."
+  if [ -d "project-setup-team-ikedacho-visionary" ] ; then
+    echo "Directory project-setup-team-ikedacho-visionary exists."
+    cd project-setup-team-ikedacho-visionary
+    git pull https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.git
+  else
+    echo "Cloning project-setup-team-ikedacho-visionary....."
+    git clone https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.git
+    cd project-setup-team-ikedacho-visionary
+  fi
+  echo "the branch isn't master."
+
+  cd front-end
+  npm install
+
+  cd ../back-end
+  npm install
+  echo "in back-end. start pm2..."
+  pm2 start npm -- start
+  echo "3."
