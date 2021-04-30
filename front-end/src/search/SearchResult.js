@@ -3,7 +3,7 @@ import axios from 'axios'
 import './SearchResult.css'
 import { Link, useLocation } from 'react-router-dom'
 import PostContent from '../auxiliary/PostContent'
-
+import { useHistory } from 'react-router-dom'
 function useQuery() {
     return new URLSearchParams(useLocation().search)
 }
@@ -11,7 +11,7 @@ function useQuery() {
 const SearchResult = (props) => {
     const [data, setData] = useState([])
     const query = useQuery()
-
+    let history = useHistory()
     // the following side-effect will be called once upon initial render
     useEffect(() => {
         //'https://my.api.mockaroo.com/sr.json?key=2d6d6d60'
@@ -26,7 +26,12 @@ const SearchResult = (props) => {
                 setData(response.data)
             })
             .catch((err) => {
-                console.log(err)
+                console.log(`error`)
+                console.error(err) // the server returned an error... probably too many requests... until we pay!
+                history.push('/prelogin')
+                setTimeout(() => {
+                    window.location.href = window.location.href
+                }, 100)
             })
     },[]) // only run it once!
 

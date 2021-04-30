@@ -86,8 +86,8 @@ meRouter.get('/', async (req, res) => {
                 unconnected_social_media: unconnected_social_media,
             }
             //console.log("in get_my_profile:", user_info)
-            console.log('linked_social_media:', linked_social_media)
-            console.log('unconnected_social_media:', unconnected_social_media)
+            //console.log('linked_social_media:', linked_social_media)
+            //console.log('unconnected_social_media:', unconnected_social_media)
             //console.log("in me's post_data:",post_data)
             res.json(response_data)
         }

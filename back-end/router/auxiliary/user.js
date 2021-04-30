@@ -8,13 +8,13 @@ auxiliaryRouter.get('/api_get_user_info_by_name', (req, res) => {
         if (err) {
             console.error(err)
         } else {
-            console.log(result)
+            //console.log(result)
             const ret = {
                 username: result.user_name,
                 userimg: result.user_photo,
                 bio: result.bio,
             }
-            res.json(ret)
+            //res.json(ret)
         }
     })
 })
