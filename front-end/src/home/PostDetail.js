@@ -30,9 +30,9 @@ const PostDetail = (props) => {
         })
     }, [])
 
-    var today = new Date()
+    const date = new Date()
 
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+    // var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
 
     useEffect(() => {
         if (state != undefined) {

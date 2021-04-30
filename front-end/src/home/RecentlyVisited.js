@@ -8,19 +8,41 @@ const RecentlyVisited = (props) => {
 
     // the following side-effect will be called once upon initial render
     useEffect(() => {
-        axios('/api_recent')
-            .then((response) => {
-                // extract the data from the server response
-                setData(response.data)
-                console.log(response.data)
-            })
-            .catch((err) => {
-                // Mockaroo, which we're using for our Mock API, only allows 200 requests per day on the free plan
-                console.log(`Sorry, buster.  No more requests allowed today!`)
-                console.error(err) // the server returned an error... probably too many requests... until we pay!
-                // make some backup fake data of commented_history
-            })
+        axios
+        .get('/api_recent')
+        .then((response) => {
+            // extract the data from the server response
+            setData(response.data)
+        })
+        .catch((err) => {
+            console.log(err)
+            console.error(err) 
+        })
     }, []) // only run it once!
+
+    // fascinating bubble sort, killer of time complexity
+    function bubbleSort(array, property) {
+        let swapped
+        do {
+            swapped = false
+            for (let i = 0; i < array.length - 1; i++) {
+                const date1 = new Date(array[i][property]).getTime()
+                const date2 = new Date(array[i + 1][property]).getTime()
+                // console.log("------", date1)
+                // console.log("======", date2)
+                if (date1 < date2) {
+                    let temp = array[i]
+                    array[i] = array[i + 1]
+                    array[i + 1] = temp
+                    swapped = true
+                }
+            }
+        } while (swapped)
+    }
+
+    bubbleSort(data, 'viewdate')
+
+    console.log(data)
 
     return (
         <div className='Recently-Visited'>
