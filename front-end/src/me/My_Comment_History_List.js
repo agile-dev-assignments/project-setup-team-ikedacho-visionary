@@ -18,7 +18,6 @@ const My_Comment_History_List = (props) => {
             .then((response) => {
                 // extract the data from the server response
                 setData(response.data)
-                console.log('response_data:', data)
             })
             .catch((err) => {
                 // Mockaroo, which we're using for our Mock API, only allows 200 requests per day on the free plan

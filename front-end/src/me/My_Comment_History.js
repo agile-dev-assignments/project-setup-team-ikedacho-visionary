@@ -28,7 +28,7 @@ const My_Comment_History = (props) => {
                         UserName: props.details.post_created_by, //pass friend_info.user_name as UserName to /followers request
                         userimg: props.details.post_created_by_photo,
                         content: props.details.post_text,
-                        Senttime: props.details.post_date,
+                        Senttime: props.details.post_created_time,
                         source: props.details.source,
                     },
                 }}
