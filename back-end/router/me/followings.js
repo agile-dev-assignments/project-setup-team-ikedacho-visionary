@@ -8,32 +8,25 @@ followingsRouter.get('/', async (req, res) => {
     const UserName = req.query.UserName
 
     // find user object in database and extract its follower array
-    await UserInfo.findOne({ user_name: UserName }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            follower_list = result.follower
-            following_list = result.following
-        }
+    const result = await UserInfo.findOne({ user_name: UserName })
+    follower_list = result.follower
+    following_list = result.following
+
+    console.log(following_list.length)
+
+
+    // find user infos of the following list
+    const users = await UserInfo.find({ user_name: { $in: following_list } })
+    users.forEach((user) => {
+        ret.push({
+            user_name: user.user_name,
+            bio: user.bio,
+            user_photo: user.user_photo,
+            action: 'Unfollow'
+        })  
     })
 
-    // retrieve extended user info from database
-    for (let i = 0; i < following_list.length; i++) {
-        await UserInfo.findOne({ user_name: following_list[i] }, (err, result) => {
-            if (err) {
-                console.error(err)
-            } else {
-                ret.push({
-                    user_name: result.user_name,
-                    bio: result.bio,
-                    user_photo: result.user_photo,
-                    action: 'Unfollow',
-                })
-            }
-        })
-    }
-
-    console.log('Following info\n: ', ret)
+    console.log('Following info\n: ', ret.length)
     res.json(ret)
 })
 module.exports = followingsRouter

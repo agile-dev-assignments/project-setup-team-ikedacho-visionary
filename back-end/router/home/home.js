@@ -17,7 +17,7 @@ homeRouter.post('/post_home', (req, res) => {
     res.redirect('back')
 })
 
-homeRouter.get('/api_whatsnew', async (req, res, next) => {
+homeRouter.get('/api_whatsnew', async (req, res) => {
     if (req.user === undefined) {
         console.log(req.user)
         res.status(500).send()
@@ -30,23 +30,15 @@ homeRouter.get('/api_whatsnew', async (req, res, next) => {
         console.log('username', UserName)
 
         //const userInfos = await UserInfo.find()
+        console.log("userInfos", userInfos.length)
 
         // find user object in database and extract its follower array
-        await UserInfo.findOne({ user_name: UserName }, (err, result) => {
-            if (err) {
-                console.error(err)
-            } else {
-                if (result != null) {
-                    followed_users = result.following
-                    //console.log('followed_users', followed_users)
-                    my_like_history = result.my_like_history
-                } else {
-                    followed_users = []
-                }
-            }
-        })
+        let result = await UserInfo.findOne({ user_name: UserName })
+        followed_users = result.following
+        my_like_history = result.my_like_history
 
         followed_users.push(UserName)
+        console.log("followed_users", followed_users.length)
 
         userInfos.forEach((userInfo) => {
             const info = userInfo.toObject()
@@ -56,7 +48,7 @@ homeRouter.get('/api_whatsnew', async (req, res, next) => {
                     ele.UserName = userInfo.user_name
                     return ele
                 })
-                console.log(data)
+                // console.log(data)
                 postData = postData.concat(data)
             }
         })
@@ -217,20 +209,11 @@ homeRouter.get('/api_recent', async (req, res, next) => {
     let postData = [],
         my_like_history,
         username = req.user.username
-    //currently showing all posts, need to be modified
-    await UserInfo.findOne({ user_name: username }, (err, result) => {
-        result.my_browse_history.forEach((userInfo) => {
-            const info = userInfo.toObject()
 
-            if (userInfo.user_name === req.user.username) {
-                my_like_history = userInfo.my_like_history
-            }
-
-            // console.log(data)
-            postData.push(info)
-            console.log('data', postData)
-        })
-    })
+    // fetch like history and browse history from self user
+    let self = await UserInfo.findOne({ user_name: username })
+    my_like_history = self.my_like_history
+    postData = self.my_browse_history
 
     let filtered_post_data = postData.slice()
 
@@ -239,6 +222,7 @@ homeRouter.get('/api_recent', async (req, res, next) => {
             return true
         } //end of if
     }) //end of filtered_post_data
+
     let lr,
         fr,
         matched,
@@ -247,7 +231,7 @@ homeRouter.get('/api_recent', async (req, res, next) => {
     // forEach might be better
     if (my_like_history !== undefined && !isEmpty(my_like_history)) {
         for (let i = 0; i < filtered_post_data.length; i++) {
-            console.log('filtered_post_data[i]' + fr)
+            // console.log('filtered_post_data[i]' + fr)
             fr = filtered_post_data[i]
             matched = false
             for (let j = 0; j < my_like_history.length; j++) {
@@ -279,6 +263,7 @@ homeRouter.get('/api_recent', async (req, res, next) => {
         filtered_by_liked = filtered_post_data
     }
 
+    console.log("filtered_by_liked", filtered_by_liked.length)
     res.json(filtered_by_liked)
 })
 
