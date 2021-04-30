@@ -242,6 +242,7 @@ homeRouter.get('/api_recent', async (req, res, next) => {
                     filtered_by_liked.push({
                         content: fr.content,
                         source: fr.source,
+                        viewdate: fr.viewdate,
                         senttime: fr.senttime,
                         contentimg: fr.contentimg,
                         commented: fr.commented,

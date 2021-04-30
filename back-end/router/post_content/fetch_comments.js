@@ -11,7 +11,7 @@ fetchCommentsRouter.get('/', async (req, res) => {
         if (err) {
             console.error(err)
         } else {
-            console.log(userInfos)
+            // console.log(userInfos)
             if (userInfos !== null) {
                 let postData = userInfos.post_data.slice()
                 postData.forEach((post) => {
