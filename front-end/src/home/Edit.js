@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Edit.css'
 import { useHistory } from 'react-router-dom'
-import { useEffect } from 'react'
 import axios from 'axios'
 import Post_picture from '../me/Post_picture'
 import { ChevronLeft } from 'react-bootstrap-icons'
+
 const Edit = (props) => {
     const [state, setState] = useState({
         showComment: false,
@@ -26,7 +26,7 @@ const Edit = (props) => {
     let history = useHistory()
 
     const goTOPreviousPath = () => {
-        history.goBack()
+        window.history.go(-1)
     }
 
     const goTOPreviousPath2 = (e) => {
@@ -44,7 +44,7 @@ const Edit = (props) => {
                     post_text: post_text,
                 },
             })
-            history.goBack()
+            window.history.go(-1)
             setTimeout(() => {
                 window.location.href = window.location.href
             }, 100)
