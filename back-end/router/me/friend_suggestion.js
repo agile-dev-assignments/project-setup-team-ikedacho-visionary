@@ -7,7 +7,7 @@ friendSuggestionRouter.get('/', async (req, res) => {
     let following_list
     const my_username = req.user.username
     const search_name = req.query.search_name
-    //console.log('search_name: ', search_name, ' <---')
+    console.log('search_name: ', search_name, ' <---')
 
     await UserInfo.find((err, UserInfos) => {
         if (err){

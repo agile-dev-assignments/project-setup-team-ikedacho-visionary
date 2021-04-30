@@ -11,7 +11,7 @@ myLikeHistoryRouter.get('/', async (req, res) => {
             console.error(err)
         } else {
             ret = result.my_like_history
-            //console.log('Me/Liked-History: ', ret)
+            console.log('Me/Liked-History: ', ret)
             res.json(ret)
         }
     })

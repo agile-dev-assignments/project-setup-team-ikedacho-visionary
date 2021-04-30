@@ -7,7 +7,7 @@ likeAPostRouter.get('/', async (req, res) => {
     const current_date = new Date()
     let self_userimg
 
-    //console.log('post detail: ', post_detail)
+    console.log('post detail: ', post_detail)
 
     // find myself and update my liked history
     await UserInfo.findOne({ user_name: self_username }, (err, result) => {

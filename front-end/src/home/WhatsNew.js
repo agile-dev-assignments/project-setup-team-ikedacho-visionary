@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import PostContent from '../auxiliary/PostContent'
 import './WhatsNew.css'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 const WhatsNew = (props) => {
     const [post_data, setData] = useState([])
@@ -32,8 +32,10 @@ const WhatsNew = (props) => {
                 setData(response.data)
             })
             .catch((err) => {
-                console.log(`error`)
+                // Mockaroo, which we're using for our Mock API, only allows 200 requests per day on the free plan
+                console.log(`Sorry, buster.  No more requests allowed today!`)
                 console.error(err) // the server returned an error... probably too many requests... until we pay!
+                // make some backup fake data of commented_history
                 history.push('/prelogin')
                 setTimeout(() => {
                     window.location.href = window.location.href

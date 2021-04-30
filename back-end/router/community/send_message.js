@@ -6,13 +6,13 @@ sendMessageRouter.post('/', async (req, res) => {
     const newMessage = req.body.text
     const roomID = req.body.roomID
     const self_userimg = req.body.userimg
-    //console.log(newMessage, roomID)
+    console.log(newMessage, roomID)
 
     // generate a date string in pretty format
     const message_date =
         currentdate.getFullYear() + '/' + (currentdate.getMonth() + 1) + '/' + currentdate.getDate() + ' ' + currentdate.getHours() + ':' + currentdate.getMinutes() + ':' + currentdate.getSeconds()
 
-    //console.log(message_date)
+    console.log(message_date)
 
     // find the chat room, and then add the new message to message history
     Chatroom.findOne({ _id: roomID }, (err, result) => {
@@ -22,7 +22,7 @@ sendMessageRouter.post('/', async (req, res) => {
             time: message_date,
             content: newMessage,
         })
-        //console.log(result)
+        console.log(result)
         // save the update
         result.save((err) => {
             if (err) {

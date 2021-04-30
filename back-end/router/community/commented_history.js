@@ -9,7 +9,7 @@ commentedHistoryRouter.get('/', async (req, res) => {
             // extract being liked history
             ret = result.others_commented_history
             res.json(ret)
-            //console.log(ret)
+            console.log(ret)
         }
     })
 })

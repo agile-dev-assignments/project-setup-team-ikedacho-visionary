@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom'
 import NameTag from '../auxiliary/NameTag'
 import { Search } from 'react-bootstrap-icons'
 import './Friend_Suggestion.css'
-import { useHistory } from 'react-router-dom'
 
 const Friend_Suggestion = (props) => {
     const [data, setData] = useState([])
     const [search_name, setSearch_name] = useState([])
     const [unfollowed_list, setUnfollowed_list] = useState([])
     const [following_list, setFollowing_list] = useState([])
-    const history = useHistory()
+
     useEffect(() => {
         // previous developer used my mockaroo API...:
         // "https://my.api.mockaroo.com/followings.json?key=2d6d6d60"
@@ -27,12 +26,9 @@ const Friend_Suggestion = (props) => {
                 setFollowing_list(response.data.following_list)
             })
             .catch((err) => {
-                console.log(`error`)
-                console.error(err) // the server returned an error... probably too many requests... until we pay!
-                history.push('/prelogin')
-                setTimeout(() => {
-                    window.location.href = window.location.href
-                }, 100)
+                /*
+        const backupData = []
+        setData(backupData);*/
             })
     }, [search_name]) // only run it once!
 

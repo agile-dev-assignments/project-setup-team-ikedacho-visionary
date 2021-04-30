@@ -127,13 +127,9 @@ const MyProfile = (props) => {
                 }
             })
             .catch((err) => {
-                console.log(`error`)
-                console.error(err) // the server returned an error... probably too many requests... until we pay!
-                history.push('/prelogin')
-                setTimeout(() => {
-                    window.location.href = window.location.href
-                }, 100)
-            })
+                console.log('error: cannot fetch response from server')
+                console.log(err)
+            }) //end of catch,axios
     }, [platform_name_array]) // render everytime platform_name header changes.
 
     return (

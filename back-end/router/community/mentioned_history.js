@@ -11,7 +11,7 @@ mentionedHistoryRouter.get('/', async (req, res) => {
         } else {
             // extract mentioned history
             ret = result.others_mentioned_history
-            //console.log(ret)
+            console.log(ret)
             res.json(ret)
         }
     })
