@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Me.css'
 import { Link } from 'react-router-dom'
-import { PersonPlus } from 'react-bootstrap-icons'
+import { PersonPlus, WindowSidebar } from 'react-bootstrap-icons'
 import { Gear } from 'react-bootstrap-icons'
 import { ClockHistory } from 'react-bootstrap-icons'
 import { TextParagraph } from 'react-bootstrap-icons'
@@ -9,9 +9,8 @@ import { HeartFill } from 'react-bootstrap-icons'
 import axios from 'axios'
 import Linked_platform_connect from './Linked_platform_connect'
 import Unconnected_social_media from './Unconnected_social_media'
-import { useHistory } from 'react-router-dom'
+
 const Me = (props) => {
-    let history = useHistory()
     //set user_info
     const [user_info, setUser_info] = useState([])
     //set linked_social_media
@@ -113,12 +112,7 @@ const Me = (props) => {
                 handleClick_Unconnected(response)
             })
             .catch((err) => {
-                console.log(`error`)
-                console.error(err) // the server returned an error... probably too many requests... until we pay!
-                history.push('/prelogin')
-                setTimeout(() => {
-                    window.location.href = window.location.href
-                }, 100)
+                console.log('error:', err)
             })
     }
     useEffect(() => {

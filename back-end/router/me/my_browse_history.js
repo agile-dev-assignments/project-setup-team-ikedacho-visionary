@@ -12,7 +12,7 @@ browseHistoryRouter.get('/', (req, res) => {
         } else {
             // extract the brose history field
             ret = result.my_browse_history
-            //console.log(ret)
+            console.log(ret)
             res.json(ret)
         }
     })

@@ -3,11 +3,10 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import './Mentions_List.css'
 import Mentions from './Mentions'
-import { useHistory } from 'react-router-dom'
 
 const Mentions_List = (props) => {
     const [data, setData] = useState([])
-    let history = useHistory()
+
     // the following side-effect will be called once upon initial render
     useEffect(() => {
         axios
@@ -17,12 +16,7 @@ const Mentions_List = (props) => {
                 setData(response.data)
             })
             .catch((err) => {
-                console.log(`error`)
-                console.error(err) // the server returned an error... probably too many requests... until we pay!
-                history.push('/prelogin')
-                setTimeout(() => {
-                    window.location.href = window.location.href
-                }, 100)
+                console.error(err)
             })
     }, []) // only run it once!
 

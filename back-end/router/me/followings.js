@@ -12,7 +12,7 @@ followingsRouter.get('/', async (req, res) => {
     follower_list = result.follower
     following_list = result.following
 
-    //console.log(following_list.length)
+    console.log(following_list.length)
 
 
     // find user infos of the following list
@@ -26,7 +26,7 @@ followingsRouter.get('/', async (req, res) => {
         })  
     })
 
-    //console.log('Following info\n: ', ret.length)
+    console.log('Following info\n: ', ret.length)
     res.json(ret)
 })
 module.exports = followingsRouter

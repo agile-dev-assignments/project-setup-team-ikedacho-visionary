@@ -39,6 +39,7 @@ app.use(passport.session())
 require('./loginAuth/passPortConfig.js')(passport)
 //----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
 
+
 //-----------------------------------------------prelogin page-----------------------------------------------
 const preloginHomeRouter = require('./router/prelogin/prelogin_home')
 app.use('/', preloginHomeRouter)
@@ -48,23 +49,10 @@ app.use('/api_register', registerRouter)
 
 const loginRouter = require('./router/prelogin/login')
 app.use('/login', loginRouter)
-
-//-----------------------------------------------auxiliary-----------------------------------------------
-const auxiliaryRouter = require('./router/auxiliary/user')
-app.use('/', auxiliaryRouter)
-
-app.use(function (req, res, next) {
-    if (req.user === undefined) {
-        console.log(req.user)
-        res.status(500).send()
-    } else {
-        next()
-    }
-})
 //-----------------------------------------------home page-----------------------------------------------
 const homeRouter = require('./router/home/home')
 app.use('/', homeRouter)
-
+ 
 const editRouter = require('./router/home/edit')
 app.use('/get_edit', editRouter)
 
@@ -164,6 +152,10 @@ app.use('/browsed', browsedRouter)
 
 const fetchCommentsRouter = require('./router/post_content/fetch_comments')
 app.use('/get_comments_in_post_content', fetchCommentsRouter)
+
+//-----------------------------------------------auxiliary-----------------------------------------------
+const auxiliaryRouter = require('./router/auxiliary/user')
+app.use('/', auxiliaryRouter)
 
 //----------------------------------------- END OF ROUTES---------------------------------------------------
 

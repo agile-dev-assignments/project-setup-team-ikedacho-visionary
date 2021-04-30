@@ -3,7 +3,7 @@ const UserInfo = require('../../model/userInfo/userInfo')
 
 addFriendRouter.get('/', async (req, res) => {
     const clicked_follow_username = req.query.clicked_follow_username
-    //console.log('clicked_follow_username', clicked_follow_username)
+    console.log('clicked_follow_username', clicked_follow_username)
     //when user click a people to follow in front-end. the
     const my_username = req.user.username
     await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {

@@ -6,7 +6,7 @@ let post_detail_for_repost = undefined
 repostRouter.use(async (req, res, next) => {
     if (req.query.post_detail_for_repost) {
         post_detail_for_repost = JSON.parse(req.query.post_detail_for_repost)
-        //console.log('post detail: ', post_detail_for_repost)
+        console.log('post detail: ', post_detail_for_repost)
     }
     next()
 })

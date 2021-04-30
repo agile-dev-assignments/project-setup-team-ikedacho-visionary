@@ -125,12 +125,7 @@ const FriendProfile = (props) => {
                 element3.addEventListener('click', handleClick4)
             })
             .catch((err) => {
-                console.log(`error`)
-                console.error(err) // the server returned an error... probably too many requests... until we pay!
-                history.push('/prelogin')
-                setTimeout(() => {
-                    window.location.href = window.location.href
-                }, 100)
+                console.log('Error that should never happen!')
             })
     }, [platform_name_array])
     return (
