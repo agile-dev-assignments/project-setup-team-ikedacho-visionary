@@ -26,7 +26,12 @@ const Followings = (props) => {
                 setData(response.data)
             })
             .catch((err) => {
-                console.error(err)
+                console.log(`error`)
+                console.error(err) // the server returned an error... probably too many requests... until we pay!
+                history.push('/prelogin')
+                setTimeout(() => {
+                    window.location.href = window.location.href
+                }, 100)
             })
     }, []) // only run it once!
 

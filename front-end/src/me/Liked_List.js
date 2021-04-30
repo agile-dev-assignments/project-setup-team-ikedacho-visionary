@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Liked from './Liked'
+import { useHistory } from 'react-router-dom'
 
 const Liked_List = (props) => {
     // start a state variable with a blank array
     const [data, setData] = useState([])
-
+    let history = useHistory()
     useEffect(() => {
         axios
             .get('/api_liked_history', {
@@ -18,7 +19,12 @@ const Liked_List = (props) => {
                 setData(response.data)
             })
             .catch((err) => {
-                console.error(err)
+                console.log(`error`)
+                console.error(err) // the server returned an error... probably too many requests... until we pay!
+                history.push('/prelogin')
+                setTimeout(() => {
+                    window.location.href = window.location.href
+                }, 100)
             })
     }, [])
 

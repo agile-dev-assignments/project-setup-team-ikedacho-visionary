@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import PostContent from '../auxiliary/PostContent'
 import './RecentlyVisited.css'
+import { useHistory } from 'react-router-dom'
 
 const RecentlyVisited = (props) => {
     const [data, setData] = useState([])
-
+    let history = useHistory()
     // the following side-effect will be called once upon initial render
     useEffect(() => {
         axios('/api_recent')
@@ -15,10 +16,12 @@ const RecentlyVisited = (props) => {
                 console.log(response.data)
             })
             .catch((err) => {
-                // Mockaroo, which we're using for our Mock API, only allows 200 requests per day on the free plan
-                console.log(`Sorry, buster.  No more requests allowed today!`)
+                console.log(`error`)
                 console.error(err) // the server returned an error... probably too many requests... until we pay!
-                // make some backup fake data of commented_history
+                history.push('/prelogin')
+                setTimeout(() => {
+                    window.location.href = window.location.href
+                }, 100)
             })
     }, []) // only run it once!
 

@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom'
 import Browse from '../auxiliary/Browse'
 import './Browse_History.css'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+
 const Browse_History = (props) => {
     const [PostData, setPostData] = useState([])
-
+    let history = useHistory()
     useEffect(() => {
         axios
             .get('/api_browse')
@@ -14,7 +16,12 @@ const Browse_History = (props) => {
                 setPostData(response.data)
             })
             .catch((err) => {
-                console.error(err)
+                console.log(`error`)
+                console.error(err) // the server returned an error... probably too many requests... until we pay!
+                history.push('/prelogin')
+                setTimeout(() => {
+                    window.location.href = window.location.href
+                }, 100)
             })
     }, []) // only run it once!
 
