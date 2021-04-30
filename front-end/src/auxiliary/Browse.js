@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 const Browse = (props) => {
     return (
         <div className='Browse'>
-            <h1>----{props.viewdate}----</h1>
             <div className='block'>
                 <Link
                     to={{
@@ -21,6 +20,7 @@ const Browse = (props) => {
 
                 <div className='Text'>
                     <strong className='username'>{props.UserName}</strong>
+                    <p className='browse_date'> Viewed at {new Date(props.viewdate).toLocaleString()}</p>
                     <p className='content'>{props.content}</p>
                 </div>
             </div>

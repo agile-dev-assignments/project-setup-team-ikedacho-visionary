@@ -12,6 +12,10 @@
     padding-left: 70px;
 }
 
+.browse_date {
+    font-size: small;
+}
+
 .userimg {
     border: 1px solid #ddd;
     border-radius: 50%;
