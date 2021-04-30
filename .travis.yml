@@ -15,5 +15,10 @@ install:
 - npm install
 after_success:
 - npm run build
+
+- cd ../back-end
+- npm install
+# - npm test 
+
 - cd ..
 - bash ./deploy.sh
