@@ -18,6 +18,28 @@ const Browse_History = (props) => {
             })
     }, []) // only run it once!
 
+    // fascinating bubble sort, killer of time complexity
+    function bubbleSort(array, property) {
+        let swapped
+        do {
+            swapped = false
+            for (let i = 0; i < array.length - 1; i++) {
+                const date1 = new Date(array[i][property]).getTime()
+                const date2 = new Date(array[i + 1][property]).getTime()
+                // console.log("------", date1)
+                // console.log("======", date2)
+                if (date1 < date2) {
+                    let temp = array[i]
+                    array[i] = array[i + 1]
+                    array[i + 1] = temp
+                    swapped = true
+                }
+            }
+        } while (swapped)
+    }
+
+    bubbleSort(PostData, 'viewdate')
+
     console.log(PostData)
 
     return (
@@ -31,7 +53,7 @@ const Browse_History = (props) => {
           
             <div className='Browse_List'>
                 {PostData.map(
-                    (item) => (console.log('rendering'), (<Browse viewdate={item.viewdate.slice(0,10)} UserName={item.UserName} userimg={item.userimg} content={item.content} contentimgs={item.contentimgs} />))
+                    (item) => (console.log('rendering'), (<Browse viewdate={item.viewdate} UserName={item.UserName} userimg={item.userimg} content={item.content} contentimgs={item.contentimgs} />))
                 )}
             </div>
         </div>
