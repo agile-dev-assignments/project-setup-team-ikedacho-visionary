@@ -70,7 +70,7 @@ myProfileRouter.get('/', async (req, res) => {
                 filtered_by_liked = filtered_post_data
             }
 
-            console.log('filtered_by_liked: ', filtered_by_liked)
+            //console.log('filtered_by_liked: ', filtered_by_liked)
 
             //send back response_data which consists of user_info and filtered_post_data as post_data
             const response_data = {

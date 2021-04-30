@@ -13,19 +13,19 @@ createChatListRouter.get('/', async (req, res) => {
     follower = result.follower
     following = result.following
 
-    console.log('follower: ', follower)
-    console.log('following: ', following)
+    //console.log('follower: ', follower)
+    //console.log('following: ', following)
 
-    console.log(!isEmpty(follower) && !isEmpty(following))
+    //console.log(!isEmpty(follower) && !isEmpty(following))
     if (!isEmpty(follower) && !isEmpty(following)) {
         // lazy finding intersection
-        console.log('friend: ', friend)
+        //console.log('friend: ', friend)
         for (let i = 0; i < follower.length; i++) {
             if (following.includes(follower[i])) {
                 friend.push(follower[i])
             }
         }
-        console.log('friend after intersection: ', friend)
+        //console.log('friend after intersection: ', friend)
 
         const users = await UserInfo.find({ user_name: { $in: friend } })
         users.forEach((user) => {
@@ -36,7 +36,7 @@ createChatListRouter.get('/', async (req, res) => {
         })
     }
     
-    console.log(ret)
+    //console.log(ret)
     res.json(ret)
 })
 

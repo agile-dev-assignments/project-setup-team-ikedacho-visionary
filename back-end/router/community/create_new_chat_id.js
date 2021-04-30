@@ -11,7 +11,7 @@ createChatId.get('/', async (req, res) => {
     participantsList.user.forEach(function (item) {
         participantsName.unshift(item.username)
     })
-    console.log(participantsName)
+    //console.log(participantsName)
 
     UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
         if (err) {

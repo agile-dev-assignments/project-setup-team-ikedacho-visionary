@@ -12,7 +12,7 @@ chatMessageRouter.get('/', async (req, res) => {
             console.log(err)
         } else {
             ret = result[0]
-            console.log(ret)
+            //console.log(ret)
             res.json(ret)
         }
     })
