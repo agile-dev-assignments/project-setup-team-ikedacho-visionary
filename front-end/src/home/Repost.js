@@ -56,7 +56,7 @@ const Edit = (props) => {
                     old_post_img: old_post_img,
                 },
             })
-            history.goBack()
+            window.history.go(-1)
             setTimeout(() => {
                 window.location.href = window.location.href
             }, 100)
