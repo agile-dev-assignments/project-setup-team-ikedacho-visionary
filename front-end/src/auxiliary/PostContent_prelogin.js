@@ -13,21 +13,25 @@ const PostContent = (props) => {
 
         // if(state.login == true){
         //   console.log(state.login);
-        history.push('/signup')
+        history.push('/login')
     }
 
     return (
         <div className='PostContent'>
-            <strong className='PlatformSource'>{props.source}</strong>
-            <div className='block'>
+            <strong className='PlatformSource' onClick={_clicked.bind()}>
+                {props.source}
+            </strong>
+            <div className='block' onClick={_clicked.bind()}>
                 <img className='userimg' src={props.userimg} />
                 <div className='Text'>
                     <strong className='username'>{props.UserName}</strong>
-                    <p className='time'>{props.Senttime}</p>
+                    <p className='time'>{props.Senttime.slice(0, 10) + '   ' + props.Senttime.slice(11, 19)}</p>
                 </div>
             </div>
 
-            <p class='postcontent'>{props.content}</p>
+            <p class='postcontent' onClick={_clicked.bind()}>
+                {props.content}
+            </p>
             <img class='contentimg' src={props.contentimg} />
             <div class='footer'>
                 <button class='Commentbutton' onClick={_clicked.bind()}>
