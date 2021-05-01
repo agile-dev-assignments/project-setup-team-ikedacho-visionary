@@ -102,6 +102,7 @@ describe('login and signup', () => {
 })
 
 // Test for home page
+/*
 describe('accesshomepage', () => {
     describe('getdatahomepage', () => {
         it('getalldata', () => {
@@ -132,6 +133,7 @@ describe('accesspostdetialpage', () => {
         })
     })
 })
+*/
 
 // Test for Friend Profile
 describe('Friend Profile in front-end/src/me', () => {
@@ -414,9 +416,9 @@ describe('Chat in front-end/src/me', () => {
 describe('/get_my_profile api', () => {
     describe('res.status.', () => {
         it('res.status should be 200.', () => {
-            return request(app)
+            request(app)
                 .get('/get_my_profile')
-                .then((response) => {
+                .end((response) => {
                     expect(response.status).to.equal(200)
                 })
         })
@@ -436,9 +438,9 @@ describe('/get_my_profile api', () => {
 describe('/get_me api', () => {
     describe('200', () => {
         it('res.status should be 200.', () => {
-            return request(app)
+            request(app)
                 .get('/get_me')
-                .then((response) => {
+                .end((response) => {
                     expect(response.status).to.equal(200)
                 })
         })
@@ -457,9 +459,9 @@ describe('/get_me api', () => {
 describe('/api_my_comment_history api', () => {
     describe('res.status', () => {
         it('res.status should be 200.', () => {
-            return request(app)
+            request(app)
                 .get('/api_my_comment_history')
-                .then((response) => {
+                .end((response) => {
                     expect(response.status).to.equal(200)
                 })
         })
@@ -481,9 +483,9 @@ describe('/api_my_comment_history api', () => {
 describe(' /api_commented_history api', () => {
     describe(' res.status', () => {
         it('res.status should be 200.', () => {
-            return request(app)
+            request(app)
                 .get('/api_commented_history')
-                .then((response) => {
+                .end((response) => {
                     expect(response.status).to.equal(200)
                 })
         })

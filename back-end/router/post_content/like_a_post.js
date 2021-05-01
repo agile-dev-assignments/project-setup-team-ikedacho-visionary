@@ -18,7 +18,7 @@ likeAPostRouter.get('/', async (req, res) => {
             if (result.my_like_history === undefined) {
                 result.my_like_history = []
             }
-            result.my_like_history.push({
+            result.my_like_history.unshift({
                 source: post_detail.source,
                 user_photo: post_detail.userimg,
                 user_name: post_detail.UserName,
@@ -49,7 +49,7 @@ likeAPostRouter.get('/', async (req, res) => {
             if (result.others_liked_history === undefined) {
                 result.others_liked_history = []
             }
-            result.others_liked_history.push({
+            result.others_liked_history.unshift({
                 source: post_detail.source,
                 user_photo: post_detail.userimg,
                 user_name: post_detail.UserName,

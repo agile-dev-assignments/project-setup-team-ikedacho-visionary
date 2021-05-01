@@ -36,7 +36,7 @@ commentRouter.get('/get_send_comment', async (req, res) => {
             }
             // also fetch the user_photo for later usage
             self_userimg = result.user_photo
-            result.my_comment_history.push({
+            result.my_comment_history.unshift({
                 source: message.source,
                 post_created_by_photo: message.userimg,
                 post_created_by: message.UserName,
@@ -68,7 +68,7 @@ commentRouter.get('/get_send_comment', async (req, res) => {
             if (result.others_commented_history === undefined) {
                 result.others_commented_history = []
             }
-            result.others_commented_history.push({
+            result.others_commented_history.unshift({
                 source: message.source,
                 post_created_by_photo: message.userimg,
                 post_created_by: message.UserName,
