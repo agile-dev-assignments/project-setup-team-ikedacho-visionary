@@ -16,11 +16,6 @@ const Search = (props) => {
                 <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
             </search>
 
-            <recommend>
-                <p class='subtitle'>Recommended For You</p>
-                <SearchRecommended />
-            </recommend>
-
             <trending>
                 <p class='subtitle'>Trending</p>
                 <Trending />
