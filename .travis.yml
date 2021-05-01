@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - node
 - '12'
-addons: ssh_known_hosts:167.172.155.162
+addons: ssh_known_hosts:134.209.208.110 
 sudo: required
 script: 'true'
 before_install:
