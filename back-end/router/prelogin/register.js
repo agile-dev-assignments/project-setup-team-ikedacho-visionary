@@ -21,10 +21,10 @@ registerRouter.post('/', (req, res) => {
                 background_picture: 'https://resilientblog.co/wp-content/uploads/2019/07/sky-quotes.jpg',
                 post_number: 0,
                 bio: '🥤',
-                follower_number: 0,
-                follower: [],
-                following_number: 0,
-                following: [],
+                follower_number: 1,
+                follower: ['Ozone_official'],
+                following_number: 1,
+                following: ['Ozone_official'],
                 linked_social_media: ['O-Zone'],
                 unconnected_social_media: ['Twitter', 'Instagram', 'Facebook'],
             })
@@ -34,6 +34,31 @@ registerRouter.post('/', (req, res) => {
 
             await newUser.save()
             await newUserInfo.save()
+
+            await UserInfo.findOne({ user_name: 'Ozone_official' }, async (err, UserInfos) => {
+                try {
+                    user_info = UserInfos
+
+                    follower_list = user_info.follower
+                    if (!follower_list.includes(req.body.username)) {
+                        follower_list.push(req.body.username)
+                        user_info.follower_number++
+                    }
+                    following_list = user_info.following
+                    if (!following_list.includes(req.body.username)) {
+                        following_list.push(req.body.username)
+                        user_info.following_number++
+                    }
+                    await UserInfos.save(function (saveErr, saveUserInfos) {
+                        if (err) {
+                            console.log('error')
+                        }
+                    })
+                } catch (e) {
+                    console.log(e)
+                }
+            })
+
             res.send('User Created')
         }
     })
