@@ -1,16 +1,13 @@
-# Project Repository
+# O-Zone
 
 [![Build Status](https://www.travis-ci.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.svg?branch=master)](https://www.travis-ci.com/agile-dev-assignments/project-setup-team-ikedacho-visionary)
 
-## Our project host online [http://134.209.208.110:3000/](http://134.209.208.110:3000/)
+## Our project host online at [http://134.209.208.110:3000/](http://134.209.208.110:3000/)
 ## For test our project locally
 
-clone this repository
+Follow instructions in [README.md in back-end directory](https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary/blob/40b964fb2b65f1aff4a4a763b2ee3a30f56c8a47/back-end/README.md) to test outr project locally.
 
-    git clone https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.git
-
-See [README.md in back-end directory](https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary/blob/40b964fb2b65f1aff4a4a763b2ee3a30f56c8a47/back-end/README.md) for next steps for testing project locally.
-
+## Overview
 *   ### Project Description, Product Vision Statement
     *   O-zone is a cross-platform social media browsing web application. It should support popular platforms including but not limited to Facebook, Instagram, Twitter, and TikTok. Our project makes it convenient to gather information from and push posts to multiple platforms at the same time. 
     *   ##### Minimum Viable Product:

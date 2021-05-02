@@ -1,12 +1,24 @@
 # Getting Started with running server
 
-## The back-end of the project will live in `back-end` directory.
+In this project,
 
-## In the `back-end` directory, you can run:
+-   back-end is written in express.js and lives in `back-end` directory.
+-   front-end is written in react.js and lives in `front-end` directory.
 
-## When app in development mode
+clone this repository
 
-When `env.NODE_ENV` is not equal to `PRODUCTION` or if `env.NODE_ENV` does not exist: Server(express app) runs in port 3000. Client(react app) runs in port 4000.
+        git clone https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.git
+
+cd to cloned directory
+
+    cd project-setup-team-ikedacho-visionary
+
+## When app is in development mode
+
+When `env.NODE_ENV` is not equal to `PRODUCTION` or if `env.NODE_ENV` does not exist:
+
+-   Server(express app) runs in port 3000.
+-   Client(react app) runs in port 4000.
 
 ### start server written in express.js in back-end folder
 
@@ -24,7 +36,7 @@ start the server.
 
 ### Then start front-end react app in front-end folder:
 
-    open another terminal
+open another terminal
 
 In the new terminal, cd to `front-end` directory
 
@@ -44,11 +56,17 @@ If you are not login, it will redirect to [http://localhost:4000/prelogin](http:
 
 You must login first to use all functionality of our app.
 
-## When app in production mode
+## When app is in production mode
 
-When env.NODE_ENV is equal to PRODUCTION: server.js will server static files in `front-end/build`
+When env.NODE_ENV is equal to PRODUCTION:
 
-If you are not in `front-end` directory, cd to `front-end`
+-   server will server static files in `front-end/build`
+
+If you are not in `front-end` directory, cd to `front-end` directory
+
+install all the dependency in order to launch and run the server.
+
+    npm install
 
 build react app
 
@@ -66,8 +84,14 @@ start server
 
     npm start server
 
-Then you can open an browser and go to [http://localhost:3000](http://localhost:3000)
+Then open a browser and go to [http://localhost:3000](http://localhost:3000) to see our project locally.
+
+If you are not login, it will redirect to [http://localhost:3000/prelogin](http://localhost:3000/prelogin) page.
+
+You must login first to use all functionality of our app.
 
 ## For unit test, the test script is located in back-end/test firectory
 
-so you need to `cd back-end`, then run `npm test`.
+so you need to fo to `back-end` directory
+
+then run `npm test`.
