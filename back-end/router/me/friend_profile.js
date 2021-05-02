@@ -6,28 +6,25 @@ friendProfileRouter.get('/', async (req, res) => {
     let post_data = ''
     let friend_info = ''
     const UserName = req.query.UserName
-    let friend = false
+    let friend
     let my_like_history
 
     await UserInfo.findOne({ user_name: UserName }, (err, UserInfos) => {
-        try {
+        if (err) {
+            console.error(err)
+        } else {
             friend_info = UserInfos
             linked_social_media = UserInfos.linked_social_media
             post_data = UserInfos.post_data
-            //console.log("post_data",post_data)
-        } catch (e) {
-            console.log(e)
         }
     })
 
     await UserInfo.findOne({ user_name: my_username }, (err, UserInfos) => {
-        try {
-            if (UserInfos.following.includes(UserName)) {
-                friend = true
-            }
+        if (err) {
+            console.error(err)
+        } else {
+            friend = UserInfos.following.includes(UserName)
             my_like_history = UserInfos.my_like_history
-        } catch (e) {
-            console.log(e)
         }
     })
 
