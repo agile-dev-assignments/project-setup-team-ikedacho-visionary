@@ -117,7 +117,7 @@ const Community = (props) => {
             </div>
 
             <div>
-                <input type='search' placeholder='Search by group name' value={search_name} onInput={(e) => setSearch_name(e.target.value)} />
+                <input id='search' type='search' placeholder='Search by group name' value={search_name} onInput={(e) => setSearch_name(e.target.value)} />
                 <Search id='search_icon' color='grey' size={17} />
             </div>
 

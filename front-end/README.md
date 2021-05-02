@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## To run React App with back-end Express App
+
+Follow instructions in [README.md in back-end directory](https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary/blob/40b964fb2b65f1aff4a4a763b2ee3a30f56c8a47/back-end/README.md)
+
 ## Available Scripts
 
 In the project directory, you can run:

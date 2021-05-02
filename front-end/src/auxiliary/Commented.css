@@ -32,7 +32,6 @@ article.commented #username1 {
 
 article.commented #post {
     line-height: 1em;
-    height: 80px;
     background-color: #f1efef;
     line-height: 1em;
     font-size: 0.8em;
@@ -68,4 +67,21 @@ article.commented #avatar {
     padding: 5px;
     width: 50px;
     height: 50px;
+}
+
+article.commented #avatar2 {
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    left: 5px;
+    top: -6px;
+}
+article.commented #username2 {
+    font-size: 1em;
+    font-weight: bold;
+    padding-left: 10px;
+    position: relative;
+    bottom: 16px;
 }

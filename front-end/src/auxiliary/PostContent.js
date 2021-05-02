@@ -128,7 +128,7 @@ const PostContent = (props) => {
                     <strong className='username' onClick={_Friend_Profile_with_param.bind()}>
                         {props.UserName}
                     </strong>
-                    <p className='time'>{props.Senttime.slice(0, 10) + '   ' + props.Senttime.slice(11, 19)}</p>
+                    <p className='time'>{new Date(props.Senttime).toLocaleString()}</p>
                 </div>
             </div>
 

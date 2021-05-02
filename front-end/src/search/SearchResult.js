@@ -14,9 +14,8 @@ const SearchResult = (props) => {
 
     // the following side-effect will be called once upon initial render
     useEffect(() => {
-        //'https://my.api.mockaroo.com/sr.json?key=2d6d6d60'
         axios
-            .get('/api_search_result',{
+            .get('/api_search_result', {
                 params: {
                     searchQuery: query.get('s'),
                 },
@@ -28,7 +27,7 @@ const SearchResult = (props) => {
             .catch((err) => {
                 console.log(err)
             })
-    },[]) // only run it once!
+    }, []) // only run it once!
 
     return (
         <div className='searchResult'>

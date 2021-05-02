@@ -1,7 +1,6 @@
 import './Search.css'
 import React, { useState } from 'react'
 import SearchBar from './SearchBar'
-import SearchRecommended from './SearchRecommended'
 import Trending from './Trending'
 
 const Search = (props) => {
@@ -15,11 +14,6 @@ const Search = (props) => {
             <search className='main_content'>
                 <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
             </search>
-
-            <recommend>
-                <p class='subtitle'>Recommended For You</p>
-                <SearchRecommended />
-            </recommend>
 
             <trending>
                 <p class='subtitle'>Trending</p>

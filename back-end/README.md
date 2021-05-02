@@ -1,21 +1,97 @@
 # Getting Started with running server
 
-Server(express) runs in port 3000. Client(react) runs in port 4000.
+In this project,
 
-## The back-end of the project will live in `back-end` directory.
+-   back-end is written in express.js and lives in `back-end` directory.
+-   front-end is written in react.js and lives in `front-end` directory.
 
-## In the `back-end` directory, you can run:
+clone this repository
 
-1. `npm install`
+        git clone https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.git
 
-cd to `back-end` directory, run `npm install` to install all the dependency in order to launch and run the server.
+cd to cloned directory
 
-2. `node server` or `npx nodemon sever` 
+    cd project-setup-team-ikedacho-visionary
 
-It start the server. 
+## When app is in development mode
 
-You can also see how back-end server work with front-end react component if you open another terminal in which you can cd to `front-end` directory and run `npm install` and then run `npm start`. It will open [http://localhost:4000](http://localhost:4000) in your browser. If you are not login, it will redirect to [http://localhost:4000/prelogin](http://localhost:4000/prelogin) page. You must login first to use all functionality of our app.
+When `env.NODE_ENV` is not equal to `PRODUCTION` or if `env.NODE_ENV` does not exist:
+
+-   Server(express app) runs in port 3000.
+-   Client(react app) runs in port 4000.
+
+### start server written in express.js in back-end folder
+
+cd to `back-end` directory
+
+    cd back-end
+
+install all the dependency in order to launch and run the server.
+
+    npm install
+
+start the server.
+
+    node server or npx nodemon sever or npm start
+
+### Then start front-end react app in front-end folder:
+
+open another terminal
+
+In the new terminal, cd to `front-end` directory
+
+    cd ../front-end
+
+install all the dependency in order to launch and run the react app.
+
+    npm install
+
+start the react app.
+
+    npm start
+
+It will open [http://localhost:4000](http://localhost:4000) in your browser.
+
+If you are not login, it will redirect to [http://localhost:4000/prelogin](http://localhost:4000/prelogin) page.
+
+You must login first to use all functionality of our app.
+
+## When app is in production mode
+
+When env.NODE_ENV is equal to PRODUCTION:
+
+-   server will server static files in `front-end/build`
+
+If you are not in `front-end` directory, cd to `front-end` directory
+
+install all the dependency in order to launch and run the server.
+
+    npm install
+
+build react app
+
+    npm run build
+
+cd to `back-end'
+
+    cd ../back-end
+
+install all the dependency in order to launch and run the server.
+
+    npm install
+
+start server
+
+    npm start server
+
+Then open a browser and go to [http://localhost:3000](http://localhost:3000) to see our project locally.
+
+If you are not login, it will redirect to [http://localhost:3000/prelogin](http://localhost:3000/prelogin) page.
+
+You must login first to use all functionality of our app.
 
 ## For unit test, the test script is located in back-end/test firectory
 
-so you need to `cd back-end`, then run `npm test`.
+so you need to fo to `back-end` directory
+
+then run `npm test`.

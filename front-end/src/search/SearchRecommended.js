@@ -8,7 +8,6 @@ const SearchRecommended = (props) => {
 
     // the following side-effect will be called once upon initial render
     useEffect(() => {
-        //https://my.api.mockaroo.com/search_recommended.json?key=2d6d6d60
         console.log('fetching recommended topics for search page')
 
         axios('/api_search_recommended')
@@ -28,7 +27,9 @@ const SearchRecommended = (props) => {
             <section>
                 {data.map((item) => (
                     <div className='search_recommend_content'>
-                        <Link className='trending_p' to={{pathname: '/searchResult',search:'?s='+item.topic}}>{item.topic}</Link>
+                        <Link className='trending_p' to={{ pathname: '/searchResult', search: '?s=' + item.topic }}>
+                            {item.topic}
+                        </Link>
                         <p>🎉</p>
                     </div>
                 ))}

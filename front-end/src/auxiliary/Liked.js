@@ -3,11 +3,6 @@ import { Link } from 'react-router-dom'
 import './Liked.css'
 
 const Liked = (props) => {
-    // console.log(props);
-
-    const date = new Date(Date.parse(props.details.like_issued_time))
-    console.log(date.toString())
-
     return (
         <article className='liked'>
             <div>
@@ -27,16 +22,27 @@ const Liked = (props) => {
                 </Link>
                 <span id='commented_date'>{props.details.liked_date}</span>
             </div>
-            <p id='like'>liked the post at {date.toString().slice(3,24)}</p>
+            <p id='like'>liked the post at {new Date(props.details.like_issued_time).toLocaleString()}</p>
 
-            <Link to={`/detailpost`}>
+            <Link
+                to={{
+                    pathname: '/detailpost',
+                    state: {
+                        UserName: props.details.user_name, //pass friend_info.user_name as UserName to /followers request
+                        userimg: props.details.user_photo,
+                        content: props.details.text_content,
+                        Senttime: props.details.post_issued_time,
+                        source: props.details.source,
+                    },
+                }}
+            >
                 <p id='post'>
                     <img id='post_image' src={props.details.img_content} />
                     <br></br>
                     <img class='inline-block' id='avatar2' src={props.details.user_photo} />
-                    <span id='username'>{props.details.user_name}</span>
+                    <span id='username2'>{props.details.user_name}</span>
                     <br></br>
-                    <br></br>
+
                     <div id='post_text'>{props.details.text_content}</div>
                 </p>
             </Link>
