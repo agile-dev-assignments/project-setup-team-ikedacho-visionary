@@ -1,7 +1,6 @@
 import './Search.css'
 import React, { useState } from 'react'
 import SearchBar from './SearchBar'
-import SearchRecommended from './SearchRecommended'
 import Trending from './Trending'
 
 const Search = (props) => {

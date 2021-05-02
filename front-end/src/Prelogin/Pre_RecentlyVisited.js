@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-import PostContentPrelogin from '../auxiliary/PostContent_prelogin'
 import './Pre_RecentlyVisited.css'
 
 const Pre_RecentlyVisited = (props) => {

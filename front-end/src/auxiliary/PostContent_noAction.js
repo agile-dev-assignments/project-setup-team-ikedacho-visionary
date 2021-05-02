@@ -3,6 +3,7 @@ import PostContent_img_na from '../auxiliary/PostContent_img_na'
 const PostContent_noAction = (props) => {
     let contentimgs = []
     contentimgs = props.contentimg
+
     return (
         <div class='PostContent_noAction'>
             <strong class='PlatformSource_noAction'>{props.source}</strong>
@@ -10,7 +11,7 @@ const PostContent_noAction = (props) => {
                 <img class='userimg' src={props.userimg} />
                 <div class='Text'>
                     <strong class='username'>{props.UserName}</strong>
-                    <p>{props.Senttime}</p>
+                    <p>{new Date(props.Senttime).toLocaleString()}</p>
                 </div>
             </div>
 

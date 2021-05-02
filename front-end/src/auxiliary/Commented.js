@@ -21,7 +21,7 @@ const Commented = (props) => {
                         {props.details.commented_by_username}
                     </h1>
                 </Link>
-                <span id='commented_date'>{props.details.commented_date.slice(0,10) + "  "+props.details.commented_date.slice(11,19) }</span>
+                <span id='commented_date'>{new Date(props.details.commented_date).toLocaleString()}</span>
             </div>
 
             <p id='comment'>Commented: {props.details.comment_text}</p>
@@ -41,9 +41,10 @@ const Commented = (props) => {
                 <p id='post'>
                     <img id='post_image' src={props.details.post_image} />
                     <br></br>
-                    <span id='username'>@{props.details.post_created_by}</span>
+                    <img class='inline-block' id='avatar2' src={props.details.post_created_by_photo} />
+                    <span id='username2'>{props.details.post_created_by}</span>
                     <br></br>
-                    <br></br>
+
                     <div id='post_text'>{props.details.post_text}</div>
                 </p>
             </Link>
