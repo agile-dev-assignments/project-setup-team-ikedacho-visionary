@@ -1,16 +1,51 @@
 import './PostContent_noAction.css'
 import PostContent_img_na from '../auxiliary/PostContent_img_na'
+import React, { useState, useEffect } from 'react'
+import { createBrowserHistory } from 'history'
+import axios from 'axios'
+
+
 const PostContent_noAction = (props) => {
-    let contentimgs = []
-    contentimgs = props.contentimg
+    /* 
+    // currently no image in post
+    let content_imgs = []
+    content_imgs = props.contentimg
+    */
+
+    const history = createBrowserHistory({ forceRefresh: true })
+    let my_name
+
+    const _Friend_Profile_with_param = (event) => {
+        event.preventDefault()
+        const params = {
+            UserName: props.UserName,
+            userimg: props.userimg,
+        }
+
+        console.log(params)
+
+        history.push({
+            pathname: (params.UserName === self_username) ? '/my_profile' : '/friend_profile' ,
+            state: params,
+        })
+    }
+
+    const [self_username, Set_self_username] = useState('')
+
+    useEffect(() => {
+        axios('/user').then((response) => {
+            console.log(response.data)
+            Set_self_username(response.data.username)
+        })
+    }, [])
 
     return (
         <div class='PostContent_noAction'>
             <strong class='PlatformSource_noAction'>{props.source}</strong>
             <div class='block_noAction'>
-                <img class='userimg' src={props.userimg} />
+                <img class='userimg' src={props.userimg} onClick={_Friend_Profile_with_param.bind()}/>
                 <div class='Text'>
-                    <strong class='username'>{props.UserName}</strong>
+                    <strong class='username' onClick={_Friend_Profile_with_param.bind()}>{props.UserName}</strong>
                     <p>{new Date(props.Senttime).toLocaleString()}</p>
                 </div>
             </div>
@@ -19,7 +54,7 @@ const PostContent_noAction = (props) => {
 
             <img className='contentimg' src={props.contentimg} />
             {/* <div class="imageimport" >
-        {contentimgs.map((img)=>(
+                {content_imgs.map((img)=>(
                 <PostContent_img_na 
   
                 key ={img.id} 

@@ -125,9 +125,14 @@ const FriendProfile = (props) => {
                 element3.addEventListener('click', handleClick4)
             })
             .catch((err) => {
-                console.log('Error that should never happen!')
+                console.log('Error that should never happen..hmmm: \n', err)
             })
     }, [platform_name_array])
+
+    // debug purpose
+    console.log("friend: ", friend)
+
+    // render the page
     return (
         <div className='FriendProfile'>
             <section id='header'>
