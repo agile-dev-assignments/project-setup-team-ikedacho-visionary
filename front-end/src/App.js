@@ -36,6 +36,7 @@ import NewChat from './community/NewChat';
 import ToFacebook from './me/ToFacebook'
 import ToTwitter from './me/ToTwitter'
 import ToInstagram from './me/ToInstagram'
+import About from './me/about'
 
 function App() {
   return (
@@ -157,6 +158,10 @@ function App() {
 
             <Route path = "/repost">
               <Repost />
+            </Route>
+
+            <Route path = "/about">
+              <About />
             </Route>
 
             <Route path = "/prelogin">

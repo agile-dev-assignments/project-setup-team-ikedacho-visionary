@@ -1,9 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useHistory } from "react-router-dom"
 import './Settings.css'
 
 const Settings = (props) => {
-    // console.log(props);
+
+    const history = useHistory()
+    const toAbout = () => { 
+        let path = '/about' 
+        history.push(path)
+    }
 
     return (
         <div className='Settings'>
@@ -17,66 +23,8 @@ const Settings = (props) => {
             <div className='option_list'>
                 <p
                     className='option_list'
-                    id='accounts'
-                    onClick={() => {
-                        alert('Accounts')
-                    }}
-                >
-                    Accounts
-                </p>
-                <p
-                    className='option_list'
-                    id='account_security'
-                    onClick={() => {
-                        alert('Account Security')
-                    }}
-                >
-                    Account Security
-                </p>
-
-                <p
-                    className='option_list'
-                    id='privacy'
-                    onClick={() => {
-                        alert('Privacy')
-                    }}
-                >
-                    Privacy
-                </p>
-                <p
-                    className='option_list'
-                    id='notification_settings'
-                    onClick={() => {
-                        alert('Notification Settings')
-                    }}
-                >
-                    Notification Settings
-                </p>
-                <p
-                    className='option_list'
-                    id='clear_cache'
-                    onClick={() => {
-                        alert('Clear Cache')
-                    }}
-                >
-                    Clear Cache
-                </p>
-
-                <p
-                    className='option_list'
-                    id='customer_service_center'
-                    onClick={() => {
-                        alert('Customer Service Center')
-                    }}
-                >
-                    Customer Service Center
-                </p>
-                <p
-                    className='option_list'
                     id='about_ozone'
-                    onClick={() => {
-                        alert('About Us')
-                    }}
+                    onClick={toAbout.bind()}
                 >
                     About O-zone
                 </p>
