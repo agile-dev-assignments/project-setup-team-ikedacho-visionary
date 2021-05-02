@@ -2,10 +2,10 @@
 
 [![Build Status](https://www.travis-ci.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.svg?branch=master)](https://www.travis-ci.com/agile-dev-assignments/project-setup-team-ikedacho-visionary)
 
-## Our project host online at [http://134.209.208.110:3000/](http://134.209.208.110:3000/)
-## For test our project locally
+Our project host online at [http://134.209.208.110:3000/](http://134.209.208.110:3000/)
+## Instruction on Building and Testing Locally
 
-Follow instructions in [README.md in back-end directory](https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary/blob/30734e8a356a58795a5cdb1da7741f2fd91dbf1c/back-end/README.md) to test our project locally.
+Follow instructions in [README.md in back-end directory](https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary/blob/30734e8a356a58795a5cdb1da7741f2fd91dbf1c/back-end/README.md) to build and test our project locally.
 
 ## Overview
 *   ### Project Description, Product Vision Statement
@@ -51,10 +51,6 @@ Follow instructions in [README.md in back-end directory](https://github.com/agil
     *   04-20-2021: Database development: Data retrieval from MongoDB and basic functionality implementation. 
         <br> 
     *   Next on Schedule: Deployment and Integration. 
-*   ### Instruction on Building and Testing 
-    *   Complete function or module given assumed inputs and desired outputs. 
-    *   Unit test on function or module upon completion if possible. 
-    *   Run entire program if big change on structure or new major feature is completed. 
-    *   More testing measures to be updated in the future. 
+
 *   ### Relevant Link
     *   Project Proposal: [https://github.com/agile-dev-assignments/project-proposal-team1](https://github.com/agile-dev-assignments/project-proposal-team1)

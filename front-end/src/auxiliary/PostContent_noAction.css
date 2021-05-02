@@ -1,5 +1,5 @@
 .PostContent_noAction {
-    padding: 20px;
+    padding-top: 10px;
     background-color: white;
     border-bottom: 2px solid lightgray;
     border-top: 2px solid lightgray;
@@ -8,17 +8,19 @@
 }
 .block_noAction {
     display: flex;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .imageimport {
     display: flex;
-    padding-left: 60px;
+    padding-left: 30px;
 }
 
 .postcontent_noAction {
-    padding-left: 60px;
+    padding-left: 30px;
     font-size: 16px;
+    margin-top: 0px;
+    padding-right: 30px;
 }
 .userimg_noAction {
     border: 1px solid #ddd;
@@ -39,7 +41,7 @@
 
 .PlatformSource_noAction {
     position: absolute;
-    right: 50px;
+    right: 10px;
 }
 
 .footer_noAction {
