@@ -84,8 +84,8 @@ friendProfileRouter.get('/', async (req, res) => {
         linked_social_media: linked_social_media, //return linked_platform name
         friend: friend,
     }
-    //console.log("in get_my_profile:", user_info)
-    //console.log("linked_social_media:",linked_social_media)
+
+    console.log(response_data.friend)
     res.json(response_data)
 })
 
