@@ -64,7 +64,7 @@ When env.NODE_ENV is equal to PRODUCTION:
 
 If you are not in `front-end` directory, cd to `front-end` directory
 
-install all the dependency in order to launch and run the server.
+install all the dependency in front-end 
 
     npm install
 
@@ -92,6 +92,6 @@ You must login first to use all functionality of our app.
 
 ## For unit test, the test script is located in back-end/test firectory
 
-so you need to fo to `back-end` directory
+so you need to go to `back-end` directory
 
 then run `npm test`.
