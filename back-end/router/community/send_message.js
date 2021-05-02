@@ -2,7 +2,7 @@ const sendMessageRouter = require('express').Router()
 const Chatroom = require('../../model/chatroom/chatroom')
 
 sendMessageRouter.post('/', async (req, res) => {
-    let currentdate = new Date()
+    let current_date = new Date()
     const newMessage = req.body.text
     const roomID = req.body.roomID
     const self_userimg = req.body.userimg
@@ -10,7 +10,7 @@ sendMessageRouter.post('/', async (req, res) => {
 
     // generate a date string in pretty format
     const message_date =
-        currentdate.getFullYear() + '/' + (currentdate.getMonth() + 1) + '/' + currentdate.getDate() + ' ' + currentdate.getHours() + ':' + currentdate.getMinutes() + ':' + currentdate.getSeconds()
+    current_date.getFullYear() + '/' + (current_date.getMonth() + 1) + '/' + current_date.getDate() + ' ' + current_date.getHours() + ':' + current_date.getMinutes() + ':' + current_date.getSeconds()
 
     console.log(message_date)
 
