@@ -7,11 +7,10 @@ div.MyProfile #main_container1 {
     padding-left: 10px;
     padding-right: 10px;
     height: 160px;
-
     position: relative;
 }
 div.MyProfile #background_picture {
-    min-width: 400px;
+    width: 100%;
     height: 160px;
     position: absolute;
     top: 0px;
@@ -90,8 +89,8 @@ div.MyProfile #bio {
     height: 20px;
     color: #747070;
     position: relative;
-    bottom: 36px;
-    left: 50px;
+    bottom: 6px;
+    left: -4px;
 }
 div.MyProfile #message_text {
     height: 50px;
@@ -103,14 +102,14 @@ div.MyProfile #post_follow {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    position: relative;
+    position: absolute;
     bottom: 15px;
-    left: 40px;
+    right: 0px;
 }
 div.MyProfile #post_follow #button {
     text-align: center;
-    padding-left: 10px;
-    margin-right: 20px;
+    margin-left: 8px;
+    margin-right: 5px;
 }
 div.MyProfile a {
     color: black;

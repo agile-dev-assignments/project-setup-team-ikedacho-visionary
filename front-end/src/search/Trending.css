@@ -26,6 +26,7 @@
 .Trending .trending_p {
     text-decoration: none;
     color: black;
+    width: 100%;
 }
 
 .Trending .trending_p:focus {
