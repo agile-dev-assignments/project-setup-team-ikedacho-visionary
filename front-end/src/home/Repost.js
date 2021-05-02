@@ -94,23 +94,22 @@ const Edit = (props) => {
                 </div>
 
                 <div className='post'>
-                    <span onClick={_setShow}>Post to ▼ </span>
+                    <span onClick={_setShow}>Post to ▼️ </span>
                     <div className='post-checkbox' style={{ opacity: show ? 1 : 0 }}>
                         <label>
-                            <input name='post' type='checkbox' />
-                            Platform A{' '}
+                            <input name='post' type='checkbox' checked /> O-Zone
                         </label>
                         <label>
                             <input name='post' type='checkbox' />
-                            Platform B
+                            Facebook{' '}
                         </label>
                         <label>
                             <input name='post' type='checkbox' />
-                            Platform C
+                            Twitter
                         </label>
                         <label>
                             <input name='post' type='checkbox' />
-                            Platform D
+                            Instagram
                         </label>
                     </div>
                 </div>

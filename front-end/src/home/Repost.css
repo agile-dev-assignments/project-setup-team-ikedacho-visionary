@@ -55,8 +55,12 @@
 }
 
 .repost .post-checkbox label {
+    font-size: 13px;
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    width: 110px;
+    background-color: rgb(238, 238, 238);
+    color: black;
 }
 
 .repost .checkbox {
