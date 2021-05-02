@@ -7,7 +7,7 @@ In this project,
 
 clone this repository
 
-        git clone https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.git
+    git clone https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.git
 
 cd to cloned directory
 

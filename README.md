@@ -5,7 +5,7 @@
 ## Our project host online at [http://134.209.208.110:3000/](http://134.209.208.110:3000/)
 ## For test our project locally
 
-Follow instructions in [README.md in back-end directory](https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary/blob/40b964fb2b65f1aff4a4a763b2ee3a30f56c8a47/back-end/README.md) to test outr project locally.
+Follow instructions in [README.md in back-end directory](https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary/blob/111fccb172ad901ac9303f99ebc625e610a104f5/back-end/README.md) to test our project locally.
 
 ## Overview
 *   ### Project Description, Product Vision Statement
