@@ -1,6 +1,7 @@
 const registerRouter = require('express').Router()
 const User = require('../../model/loginAuth/user')
 const UserInfo = require('../../model/userInfo/userInfo')
+const Chatroom = require('../../model/chatroom/chatroom')
 const bcrypt = require('bcryptjs')
 
 registerRouter.post('/', (req, res) => {
@@ -34,6 +35,34 @@ registerRouter.post('/', (req, res) => {
 
             await newUser.save()
             await newUserInfo.save()
+
+            // create a default chatroom for new registered users
+            const current_date = new Date()
+            const message_date = current_date.getFullYear() + '/' + (current_date.getMonth() + 1) + '/' + current_date.getDate() + ' ' + 
+                                 current_date.getHours() + ':' + current_date.getMinutes() + ':' + current_date.getSeconds()
+            const newChatRoom = new Chatroom({
+                chatroom_name: [newUserInfo.user_name, 'Ozone_official'],
+                chatroom_avatar: [newUserInfo.user_photo, 'https://robohash.org/Ozone_official.png?size=200x200'], 
+                participants: [newUserInfo.user_name, 'Ozone_official'],
+                // send a naive greeting message to the new user
+                message_history: [
+                    {
+                        userimg: 'https://robohash.org/Ozone_official.png?size=200x200',
+                        username: 'Ozone_official',
+                        time: message_date,
+                        content: "Welcome to Ozone! Ozone supports a fundamental chat system for direct message and group message! " + 
+                                 "To create a new chatroom, you need to follow your friend and ask him/her to follow you as well, " + 
+                                 "and then you can create chat room with your friends by clicking on the button at top-right corner of Community page. " +
+                                 "You can also visit an user's profile page and click on the 'Chat' button to create a direct message with him/her. ",
+                    }
+                ]
+            })
+            // save the new Chatroom to database
+            newChatRoom.save((err) => {
+                if (err) {
+                    console.log(err)
+                }
+            })
 
             await UserInfo.findOne({ user_name: 'Ozone_official' }, async (err, UserInfos) => {
                 try {
