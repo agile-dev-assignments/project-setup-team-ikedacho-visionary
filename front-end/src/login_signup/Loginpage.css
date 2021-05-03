@@ -24,3 +24,13 @@
 .Loginpage button {
     margin-bottom: 30px;
 }
+
+
+div.Loginpage #back {
+    position: absolute;
+    left: 10px;
+    top: -1px;
+    z-index: 1;
+    font-weight: 600;
+    font-size: 0.9em;
+}
