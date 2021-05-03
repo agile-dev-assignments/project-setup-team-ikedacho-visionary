@@ -1,6 +1,6 @@
 import './PostContent.css'
 import Repost from './ToRepost'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ToComment from './ToComment'
 import axios from 'axios'
 import { createBrowserHistory } from 'history'
@@ -111,8 +111,11 @@ const PostContent = (props) => {
             UserName: props.UserName,
             userimg: props.userimg,
         }
+
+        console.log(params)
+
         history.push({
-            pathname: '/friend_profile',
+            pathname: (params.UserName === props.self_username) ? '/my_profile' : '/friend_profile' ,
             state: params,
         })
     }
