@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom'
 import Browse from '../auxiliary/Browse'
 import './Browse_History.css'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
+
 const Browse_History = (props) => {
     const [PostData, setPostData] = useState([])
 
+    let history = useHistory()
     useEffect(() => {
         axios
             .get('/api_browse')
@@ -13,8 +16,17 @@ const Browse_History = (props) => {
                 // extract the data from the server response
                 setPostData(response.data)
             })
-            .catch((err) => {
-                console.error(err)
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
             })
     }, []) // only run it once!
 
@@ -44,13 +56,12 @@ const Browse_History = (props) => {
 
     return (
         <div className='Browse_History'>
-           
-                <Link to='/Me'>
-                    <h1 id='back'>back</h1>
-                </Link>
-                <h1>Browse History</h1>
-                <hr></hr>
-          
+            <Link to='/Me'>
+                <h1 id='back'>back</h1>
+            </Link>
+            <h1>Browse History</h1>
+            <hr></hr>
+
             <div className='Browse_List'>
                 {PostData.map(
                     (item) => (console.log('rendering'), (<Browse viewdate={item.viewdate} UserName={item.UserName} userimg={item.userimg} content={item.content} contentimgs={item.contentimgs} />))

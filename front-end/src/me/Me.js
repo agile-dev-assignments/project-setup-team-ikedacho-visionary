@@ -9,8 +9,11 @@ import { HeartFill } from 'react-bootstrap-icons'
 import axios from 'axios'
 import Linked_platform_connect from './Linked_platform_connect'
 import Unconnected_social_media from './Unconnected_social_media'
+import { useHistory } from 'react-router-dom'
 
 const Me = (props) => {
+    let history = useHistory()
+
     //set user_info
     const [user_info, setUser_info] = useState([])
     //set linked_social_media
@@ -111,8 +114,17 @@ const Me = (props) => {
                 LoginStatus_fb()
                 handleClick_Unconnected(response)
             })
-            .catch((err) => {
-                console.log('error:', err)
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
             })
     }
     useEffect(() => {

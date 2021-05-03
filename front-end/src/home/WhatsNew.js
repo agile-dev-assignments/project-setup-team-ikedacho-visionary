@@ -8,19 +8,7 @@ const WhatsNew = (props) => {
     const [post_data, setData] = useState([])
     //const [userdata, setUserData] = useState([]);
 
-    //platform the is selected by user who browser the page
-    let [platform_name_array, setPlatform_name_array] = useState([])
-
     let history = useHistory()
-    // const {state} = useLocation();
-    //     props =
-    // (props.location && props.location.props) || {};
-
-    // setData(props.location.props);
-    // console.log(props.location.props);
-    const goTOPreviousPath = () => {
-        history.goBack()
-    }
 
     //console.log("logged in as: "+ UserData.username);
     // the following side-effect will be called once upon initial render
@@ -31,15 +19,17 @@ const WhatsNew = (props) => {
                 // extract the data from the server response
                 setData(response.data)
             })
-            .catch((err) => {
-                // Mockaroo, which we're using for our Mock API, only allows 200 requests per day on the free plan
-                console.log(`Sorry, buster.  No more requests allowed today!`)
-                console.error(err) // the server returned an error... probably too many requests... until we pay!
-                // make some backup fake data of commented_history
-                history.push('/prelogin')
-                setTimeout(() => {
-                    window.location.href = window.location.href
-                }, 100)
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
             })
     }, []) // only run it once!
 
@@ -47,7 +37,16 @@ const WhatsNew = (props) => {
         <div className='WhatsNew'>
             <section className='main-content'>
                 {post_data.map((item) => (
-                    <PostContent key={item.id} like_switch = {item.like_switch} source={item.source} userimg={item.userimg} UserName={item.UserName} content={item.content} Senttime={item.senttime} contentimg={item.contentimg} />
+                    <PostContent
+                        key={item.id}
+                        like_switch={item.like_switch}
+                        source={item.source}
+                        userimg={item.userimg}
+                        UserName={item.UserName}
+                        content={item.content}
+                        Senttime={item.senttime}
+                        contentimg={item.contentimg}
+                    />
                 ))}
             </section>
         </div>

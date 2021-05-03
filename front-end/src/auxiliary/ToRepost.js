@@ -26,11 +26,24 @@ const Repost = (props) => {
                     // post_text: post_text,
                 },
             })
-            .then((response) => {})
-            .catch((err) => {
-                console.error(err)
+            .then((response) => {
+                if (response.status === 200) {
+                    alert('new post is sent!')
+                }
             })
-        alert('new post is sent!')
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
+            })
+
         setTimeout(() => {
             window.location.href = window.location.href
         }, 100)
@@ -91,7 +104,6 @@ const Repost = (props) => {
             <button className='Repost_edit_button' onClick={Repost}>
                 Repost
             </button>
-
         </div>
     )
 }

@@ -29,14 +29,46 @@ const FriendProfile = (props) => {
                     clicked_follow_username: friend_info.user_name,
                 },
             })
-            window.location.href = '/friend_profile'
+                .then((response) => {
+                    if (response.status === 200) {
+                        window.location.href = '/friend_profile'
+                    }
+                })
+                .catch(function (error) {
+                    if (error.response) {
+                        if (error.response.status === 501) {
+                            console.log('Error 501: user is not login; req.user does not exist')
+                            alert('You are not logged in. Please log in and try again!')
+                            history.push('/prelogin')
+                            setTimeout(() => {
+                                window.location.href = window.location.href
+                            }, 100)
+                        }
+                    }
+                })
         } else {
             axios('/get_remove_friend', {
                 params: {
                     clicked_unfollow_username: friend_info.user_name,
                 },
             })
-            window.location.href = '/friend_profile'
+                .then((response) => {
+                    if (response.status === 200) {
+                        window.location.href = '/friend_profile'
+                    }
+                })
+                .catch(function (error) {
+                    if (error.response) {
+                        if (error.response.status === 501) {
+                            console.log('Error 501: req.user does not exist')
+                            alert('You are not logged in. Please log in and try again!')
+                            history.push('/prelogin')
+                            setTimeout(() => {
+                                window.location.href = window.location.href
+                            }, 100)
+                        }
+                    }
+                })
         }
     }
 
@@ -124,13 +156,21 @@ const FriendProfile = (props) => {
                 let element3 = document.getElementById('Instagram')
                 element3.addEventListener('click', handleClick4)
             })
-            .catch((err) => {
-                console.log('Error that should never happen..hmmm: \n', err)
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
             })
     }, [platform_name_array])
 
     // debug purpose
-    console.log("friend: ", friend)
+    console.log('friend: ', friend)
 
     // render the page
     return (

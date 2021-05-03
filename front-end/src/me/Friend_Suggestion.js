@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom'
 import NameTag from '../auxiliary/NameTag'
 import { Search } from 'react-bootstrap-icons'
 import './Friend_Suggestion.css'
+import { useHistory } from 'react-router-dom'
 
 const Friend_Suggestion = (props) => {
-    const [data, setData] = useState([])
+    let history = useHistory()
     const [search_name, setSearch_name] = useState([])
     const [unfollowed_list, setUnfollowed_list] = useState([])
     const [following_list, setFollowing_list] = useState([])
 
     useEffect(() => {
-        // previous developer used my mockaroo API...:
-        // "https://my.api.mockaroo.com/followings.json?key=2d6d6d60"
+       
         axios
             .get('/api_friend_suggestion', {
                 params: {
@@ -25,10 +25,17 @@ const Friend_Suggestion = (props) => {
                 setUnfollowed_list(response.data.unfollowed_list)
                 setFollowing_list(response.data.following_list)
             })
-            .catch((err) => {
-                /*
-        const backupData = []
-        setData(backupData);*/
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
             })
     }, [search_name]) // only run it once!
 
