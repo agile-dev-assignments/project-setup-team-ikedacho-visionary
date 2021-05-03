@@ -49,16 +49,6 @@ app.use('/api_register', registerRouter)
 const loginRouter = require('./router/prelogin/login')
 app.use('/login', loginRouter)
 
-//-----------------------------------------------req.user-----------------------------------------------
-//test if req.user exist before the following routes. If req.user does not exist, send 501 and redirect to prelogin page. The following routes will not be called.
-app.use((req, res, next) => {
-    if (req.user === undefined) {
-        res.status(501).send()
-    } else {
-        next()
-    }
-})
-
 //-----------------------------------------------home page-----------------------------------------------
 const homeRouter = require('./router/home/home')
 app.use('/', homeRouter)
