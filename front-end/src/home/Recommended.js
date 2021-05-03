@@ -7,6 +7,16 @@ import { useHistory } from 'react-router-dom'
 const Recommended = (props) => {
     const [data, setData] = useState([])
     let history = useHistory()
+
+    const [self_username, Set_self_username] = useState('')
+
+    useEffect(() => {
+        axios('/user').then((response) => {
+            console.log(response.data)
+            Set_self_username(response.data.username)
+        })
+    }, [])
+
     // the following side-effect will be called once upon initial render
     useEffect(() => {
         axios('/api_recommended')
@@ -32,8 +42,9 @@ const Recommended = (props) => {
         <div className='Recommended'>
             <section className='main-content'>
                 {data.map((item) => (
-                    <PostContent
+                    <PostContent 
                         key={item.id}
+                        self_username={self_username}
                         like_switch={item.like_switch}
                         source={item.source}
                         userimg={item.userimg}

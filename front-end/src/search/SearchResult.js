@@ -12,6 +12,15 @@ const SearchResult = (props) => {
     const [data, setData] = useState([])
     const query = useQuery()
 
+    const [self_username, Set_self_username] = useState('')
+
+    useEffect(() => {
+        axios('/user').then((response) => {
+            console.log(response.data)
+            Set_self_username(response.data.username)
+        })
+    }, [])
+
     // the following side-effect will be called once upon initial render
     useEffect(() => {
         axios
@@ -40,7 +49,7 @@ const SearchResult = (props) => {
             </div>
             <section>
                 {data.map((item) => (
-                    <PostContent key={item.id} source={item.source} userimg={item.userimg} UserName={item.UserName} content={item.content} Senttime={item.senttime} contentimg={item.contentimg} />
+                    <PostContent key={item.id} self_username={self_username} source={item.source} userimg={item.userimg} UserName={item.UserName} content={item.content} Senttime={item.senttime} contentimg={item.contentimg} />
                 ))}
             </section>
         </div>

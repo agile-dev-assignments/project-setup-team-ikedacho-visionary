@@ -13,7 +13,6 @@ const PostContent_noAction = (props) => {
     */
 
     const history = createBrowserHistory({ forceRefresh: true })
-    let my_name
 
     const _Friend_Profile_with_param = (event) => {
         event.preventDefault()
