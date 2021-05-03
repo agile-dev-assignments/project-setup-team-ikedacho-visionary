@@ -30,46 +30,46 @@ unlikeAPostRouter.get('/', async (req, res) => {
 
             console.log('\nresult.my_like_history:\n', result.my_like_history)
             // save the changes <--- without error handling lol
-            result.save((err) => {
+            result.save(async (err) => {
                 if (err) {
                     console.error(err)
-                }
-            })
-        }
-    })
-
-    const other_username = post_detail.UserName
-    // find the post author and update his being-liked history
-    await UserInfo.findOne({ user_name: other_username }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            /* to dislike a post, the others_liked_history must not be empty
+                } else {
+                    const other_username = post_detail.UserName
+                    // find the post author and update his being-liked history
+                    await UserInfo.findOne({ user_name: other_username }, (err, result) => {
+                        if (err) {
+                            console.error(err)
+                        } else {
+                            /* to dislike a post, the others_liked_history must not be empty
             if (result.others_liked_history === undefined){
                 result.others_liked_history = []
             } */
-            // update by pushing the new post info to the list
-            let filtered_list = result.others_liked_history.filter((record) => {
-                const date = new Date(Date.parse(record.post_issued_time)).toString()
-                const date_post_detail = new Date(Date.parse(post_detail.Senttime)).toString()
-                console.log(date, typeof date)
-                console.log(date_post_detail, typeof date_post_detail)
-                console.log('===================')
+                            // update by pushing the new post info to the list
+                            let filtered_list = result.others_liked_history.filter((record) => {
+                                const date = new Date(Date.parse(record.post_issued_time)).toString()
+                                const date_post_detail = new Date(Date.parse(post_detail.Senttime)).toString()
+                                console.log(date, typeof date)
+                                console.log(date_post_detail, typeof date_post_detail)
+                                console.log('===================')
 
-                return !(
-                    record.user_name === post_detail.UserName &&
-                    record.source === post_detail.source &&
-                    record.text_content === post_detail.content &&
-                    date === date_post_detail &&
-                    record.liked_by_user_name === self_username
-                )
-            })
+                                return !(
+                                    record.user_name === post_detail.UserName &&
+                                    record.source === post_detail.source &&
+                                    record.text_content === post_detail.content &&
+                                    date === date_post_detail &&
+                                    record.liked_by_user_name === self_username
+                                )
+                            })
 
-            console.log('\nfiltered_list: ', filtered_list)
-            // save the changes
-            UserInfo.updateOne({ user_name: other_username }, { others_liked_history: filtered_list }, (err) => {
-                if (err) {
-                    console.error(err)
+                            console.log('\nfiltered_list: ', filtered_list)
+                            // save the changes
+                            UserInfo.updateOne({ user_name: other_username }, { others_liked_history: filtered_list }, (err) => {
+                                if (err) {
+                                    console.error(err)
+                                }
+                            })
+                        }
+                    })
                 }
             })
         }

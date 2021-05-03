@@ -31,40 +31,40 @@ likeAPostRouter.get('/', async (req, res) => {
             self_userimg = result.user_photo
 
             // save the changes
-            result.save((err) => {
+            result.save(async (err) => {
                 if (err) {
                     console.error(err)
-                }
-            })
-        }
-    })
+                } else {
+                    const other_username = post_detail.UserName
+                    // find the post author and update his being-liked history
+                    await UserInfo.findOne({ user_name: other_username }, (err, result) => {
+                        if (err) {
+                            console.error(err)
+                        } else {
+                            // update by pushing the new post info to the list
+                            if (result.others_liked_history === undefined) {
+                                result.others_liked_history = []
+                            }
+                            result.others_liked_history.unshift({
+                                source: post_detail.source,
+                                user_photo: post_detail.userimg,
+                                user_name: post_detail.UserName,
+                                text_content: post_detail.content,
+                                img_content: post_detail.contentimg,
+                                post_issued_time: post_detail.Senttime,
+                                like_issued_time: current_date,
+                                liked_by_user_name: self_username,
+                                liked_by_user_photo: self_userimg,
+                            })
 
-    const other_username = post_detail.UserName
-    // find the post author and update his being-liked history
-    await UserInfo.findOne({ user_name: other_username }, (err, result) => {
-        if (err) {
-            console.error(err)
-        } else {
-            // update by pushing the new post info to the list
-            if (result.others_liked_history === undefined) {
-                result.others_liked_history = []
-            }
-            result.others_liked_history.unshift({
-                source: post_detail.source,
-                user_photo: post_detail.userimg,
-                user_name: post_detail.UserName,
-                text_content: post_detail.content,
-                img_content: post_detail.contentimg,
-                post_issued_time: post_detail.Senttime,
-                like_issued_time: current_date,
-                liked_by_user_name: self_username,
-                liked_by_user_photo: self_userimg,
-            })
-
-            // save the changes
-            result.save((err) => {
-                if (err) {
-                    console.error(err)
+                            // save the changes
+                            result.save((err) => {
+                                if (err) {
+                                    console.error(err)
+                                }
+                            })
+                        }
+                    })
                 }
             })
         }
