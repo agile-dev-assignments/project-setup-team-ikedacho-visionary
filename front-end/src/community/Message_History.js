@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Message_History.css'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 const Message_History = (props) => {
     // console.log(props);
     let newest_message_date, newest_message, chatroom_avatar, chatroom_name
     const [self_username, Set_self_username] = useState('')
     const messages = props.details.message_history
-
+    let history = useHistory()
     function isEmpty(obj) {
         return Object.keys(obj).length === 0
     }
@@ -21,10 +22,23 @@ const Message_History = (props) => {
 
     // retrieve current user info from backend
     useEffect(() => {
-        axios('/user').then((response) => {
-            console.log(response.data)
-            Set_self_username(response.data.username)
-        })
+        axios('/user')
+            .then((response) => {
+                console.log(response.data)
+                Set_self_username(response.data.username)
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
+            })
     }, [])
 
     const avatar_list = props.details.chatroom_avatar
