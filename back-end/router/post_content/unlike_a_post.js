@@ -30,7 +30,7 @@ unlikeAPostRouter.get('/', async (req, res) => {
 
             console.log('\nresult.my_like_history:\n', result.my_like_history)
             // save the changes <--- without error handling lol
-            result.save((err) => {
+            UserInfo.updateOne({ user_name: self_username }, { my_like_history: result.my_like_history }, (err) => {
                 if (err) {
                     console.error(err)
                 }

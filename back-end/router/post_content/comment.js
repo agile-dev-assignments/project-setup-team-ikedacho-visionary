@@ -50,7 +50,7 @@ commentRouter.get('/get_send_comment', async (req, res) => {
             })
 
             // save the changes
-            await result.save((err) => {
+            UserInfo.updateOne({ user_name: self_username }, { my_comment_history: result.my_comment_history }, (err) => {
                 if (err) {
                     console.error(err)
                 }
@@ -82,7 +82,7 @@ commentRouter.get('/get_send_comment', async (req, res) => {
             })
 
             // save the changes
-            await result.save((err) => {
+            UserInfo.updateOne({ user_name: other_username }, { others_commented_history: result.others_commented_history }, (err) => {
                 if (err) {
                     console.error(err)
                 }
@@ -107,10 +107,10 @@ commentRouter.get('/get_send_comment', async (req, res) => {
                     post.commented.push(a)
                 }
             })
-            // save the update
-            await result.save((err) => {
+            // save the changes
+            UserInfo.updateOne({ user_name: other_username }, { post_data: result.post_data }, (err) => {
                 if (err) {
-                    console.log(err)
+                    console.error(err)
                 }
             })
         }
@@ -140,12 +140,12 @@ commentRouter.get('/get_send_comment', async (req, res) => {
 
                     console.log(result.others_mentioned_history)
 
-                    // save changes
-                    await result.save((err) => {
-                        if (err) {
-                            console.error(err)
-                        }
-                    })
+                // save the changes
+                UserInfo.updateOne({ user_name: search_name }, { others_mentioned_history: result.others_mentioned_history }, (err) => {
+                    if (err) {
+                        console.error(err)
+                    }
+                })
 
                 } else {
                     // not found... -> do nothing! this is not a mention, or mentioning wrongly
