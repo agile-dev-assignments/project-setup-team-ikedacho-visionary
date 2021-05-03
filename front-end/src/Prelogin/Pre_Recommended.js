@@ -29,7 +29,7 @@ const Pre_Recommended = (props) => {
                         userimg={item.userimg}
                         UserName={item.UserName}
                         content={item.content}
-                        Senttime={item.Senttime}
+                        Senttime={item.senttime}
                         contentimg={item.contentimg}
                     />
                 ))}

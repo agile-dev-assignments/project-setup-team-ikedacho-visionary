@@ -62,9 +62,6 @@ const PostContent = (props) => {
     }
     const _setLike = () => {
         let cur = like.liked
-        setLike({
-            liked: !cur,
-        })
 
         // if the action is to like a post
         if (!like.liked) {
@@ -75,10 +72,24 @@ const PostContent = (props) => {
                     },
                 })
                 .then((response) => {
-                    console.log(response.data)
+                    if (response.status === 200) {
+                        console.log(response.data)
+                        setLike({
+                            liked: !cur,
+                        })
+                    }
                 })
-                .catch((err) => {
-                    console.error(err)
+                .catch(function (error) {
+                    if (error.response) {
+                        if (error.response.status === 501) {
+                            console.log('Error 501: user is not login; req.user does not exist')
+                            alert('You are not logged in. Please log in and try again!')
+                            history.push('/prelogin')
+                            setTimeout(() => {
+                                window.location.href = window.location.href
+                            }, 100)
+                        }
+                    }
                 })
         } else {
             // otherwise, unlike it
@@ -89,10 +100,24 @@ const PostContent = (props) => {
                     },
                 })
                 .then((response) => {
-                    console.log(response.data)
+                    if (response.status === 200) {
+                        console.log(response.data)
+                        setLike({
+                            liked: !cur,
+                        })
+                    }
                 })
-                .catch((err) => {
-                    console.error(err)
+                .catch(function (error) {
+                    if (error.response) {
+                        if (error.response.status === 501) {
+                            console.log('Error 501: user is not login; req.user does not exist')
+                            alert('You are not logged in. Please log in and try again!')
+                            history.push('/prelogin')
+                            setTimeout(() => {
+                                window.location.href = window.location.href
+                            }, 100)
+                        }
+                    }
                 })
         }
     }
