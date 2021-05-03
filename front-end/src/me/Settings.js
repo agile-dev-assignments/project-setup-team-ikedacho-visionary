@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom"
+import axios from 'axios'
 import './Settings.css'
 
 const Settings = (props) => {
@@ -10,6 +11,18 @@ const Settings = (props) => {
         let path = '/about' 
         history.push(path)
     }
+    const logout = () => {
+        axios
+            .get('/api_logout', {
+            })
+            .then((response) => {
+                if(response.data == "loggedout")
+                    history.push("/")
+            })
+            .catch((err) => {
+                console.error(err)
+            })
+}
 
     return (
         <div className='Settings'>
@@ -31,9 +44,7 @@ const Settings = (props) => {
                 <p
                     className='option_list'
                     id='log_out'
-                    onClick={() => {
-                        alert('Logged Out')
-                    }}
+                    onClick={logout.bind()}
                 >
                     Log Out Current Account
                 </p>

@@ -46,6 +46,9 @@ app.use('/', preloginHomeRouter)
 const registerRouter = require('./router/prelogin/register')
 app.use('/api_register', registerRouter)
 
+const logoutRouter = require('./router/prelogin/logout')
+app.use('/api_logout', logoutRouter)
+
 const loginRouter = require('./router/prelogin/login')
 app.use('/login', loginRouter)
 
