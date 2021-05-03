@@ -57,7 +57,7 @@ commentRouter.get('/get_send_comment', async (req, res) => {
             })
         }
     })
-    
+
     const other_username = message.UserName
     // find the post author and update his being-comment history
     await UserInfo.findOne({ user_name: other_username }, async (err, result) => {
