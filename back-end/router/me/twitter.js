@@ -5,7 +5,7 @@ const oauthSignature = require('oauth-signature')
 
 twitterRouter.get('/', async (req, res) => {
     let ret = {}
-
+    const my_username = req.user.username
     // get timestamp in seconds
     const date = Math.floor(Date.now() / 1000)
     const username = req.user.username
@@ -38,9 +38,39 @@ twitterRouter.get('/', async (req, res) => {
         },
     }
 
+    const save_posts = async () => {
+        console.log('start')
+        await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
+            try {
+                post_data.forEach((item) => {
+                    if ('message' in item) {
+                        console.log('post data for each', post_data)
+                        UserInfos.post_data.unshift({
+                            content: item.message,
+                            source: 'Facebook',
+                            senttime: item.created_time,
+                            contentimg: ' ',
+                        })
+                        UserInfos.post_number++
+                    }
+                })
+                await UserInfos.save(function (saveErr, saveUserInfos) {
+                    if (err) {
+                        console.log('error saving post')
+                        res.status(500).send()
+                    }
+                })
+            } catch (e) {
+                console.log(e)
+                res.status(500).send()
+            }
+        })
+    }
+    
     request(options, (error, result) => {
         if (error) {
             console.error(err)
+            res.status(500).send()
         } else {
             console.log(result.body)
             // manually parse the returned string

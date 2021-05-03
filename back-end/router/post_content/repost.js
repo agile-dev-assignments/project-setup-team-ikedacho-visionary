@@ -18,6 +18,7 @@ repostRouter.get('/get_repost', async (req, res) => {
     await UserInfo.findOne({ user_name: req.user.username }, (err, result) => {
         if (err) {
             console.error(err)
+            res.status(500).send()
         } else {
             linked_social_media = result.linked_social_media
             user_name = result.user_name
@@ -53,6 +54,7 @@ repostRouter.get('/get_fast_repost', async (req, res) => {
             await UserInfos.save(function (saveErr, saveUserInfos) {
                 if (err) {
                     console.log('error saving post')
+                    res.status(500).send()
                 }
             })
         } catch (e) {

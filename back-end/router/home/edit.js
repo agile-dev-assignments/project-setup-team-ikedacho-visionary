@@ -30,10 +30,12 @@ EditRouter.get('/', async (req, res) => {
             await UserInfos.save(function (saveErr, saveUserInfos) {
                 if (err) {
                     console.log('error saving post')
+                    res.status(500).send()
                 }
             })
         } catch (e) {
-            console.log(e)
+            console.error(e)
+            res.status(500).send()
         }
     })
 
@@ -43,6 +45,7 @@ EditRouter.get('/', async (req, res) => {
         await UserInfo.findOne({ user_name: search_name }, async (err, result) => {
             if (err) {
                 console.error(err)
+                res.status(500).send()
             } else {
                 if (result) {
                     // found!
@@ -63,6 +66,7 @@ EditRouter.get('/', async (req, res) => {
                     await result.save((err) => {
                         if (err) {
                             console.error(err)
+                            res.status(500).send()
                         }
                     })
                 } else {
@@ -71,6 +75,7 @@ EditRouter.get('/', async (req, res) => {
             }
         })
     })
+    res.status(200).send()
 })
 
 //Then instantiate a multer object "upload_post_picture" to be used in app.post("/post_Post_picture", upload.array("background_picture", 1), (req, res)...

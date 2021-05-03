@@ -9,6 +9,7 @@ browseHistoryRouter.get('/', (req, res) => {
     UserInfo.findOne({ user_name: username }, (err, result) => {
         if (err) {
             console.error(err)
+            res.status(500).send()
         } else {
             // extract the brose history field
             ret = result.my_browse_history

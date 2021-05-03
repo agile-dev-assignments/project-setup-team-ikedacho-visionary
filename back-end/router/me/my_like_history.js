@@ -9,6 +9,7 @@ myLikeHistoryRouter.get('/', async (req, res) => {
     UserInfo.findOne({ user_name: username }, (err, result) => {
         if (err) {
             console.error(err)
+            res.status(500).send()
         } else {
             ret = result.my_like_history
             console.log('Me/Liked-History: ', ret)

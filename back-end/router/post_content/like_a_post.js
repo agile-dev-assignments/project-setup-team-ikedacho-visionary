@@ -13,6 +13,7 @@ likeAPostRouter.get('/', async (req, res) => {
     await UserInfo.findOne({ user_name: self_username }, (err, result) => {
         if (err) {
             console.error(err)
+            res.status(500).send()
         } else {
             // update by pushing the new post info to the list
             if (result.my_like_history === undefined) {
@@ -34,6 +35,7 @@ likeAPostRouter.get('/', async (req, res) => {
             result.save((err) => {
                 if (err) {
                     console.error(err)
+                    res.status(500).send()
                 }
             })
         }
@@ -44,6 +46,7 @@ likeAPostRouter.get('/', async (req, res) => {
     await UserInfo.findOne({ user_name: other_username }, (err, result) => {
         if (err) {
             console.error(err)
+            res.status(500).send()
         } else {
             // update by pushing the new post info to the list
             if (result.others_liked_history === undefined) {
@@ -65,6 +68,7 @@ likeAPostRouter.get('/', async (req, res) => {
             result.save((err) => {
                 if (err) {
                     console.error(err)
+                    res.status(500).send()
                 }
             })
         }
