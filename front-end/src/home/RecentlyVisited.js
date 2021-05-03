@@ -8,6 +8,15 @@ const RecentlyVisited = (props) => {
     let history = useHistory()
     const [data, setData] = useState([])
 
+    const [self_username, Set_self_username] = useState('')
+
+    useEffect(() => {
+        axios('/user').then((response) => {
+            console.log(response.data)
+            Set_self_username(response.data.username)
+        })
+    }, [])
+
     // the following side-effect will be called once upon initial render
     useEffect(() => {
         axios
@@ -58,7 +67,7 @@ const RecentlyVisited = (props) => {
         <div className='Recently-Visited'>
             <section className='main-content'>
                 {data.map((item) => (
-                    <PostContent key={item._id} like_switch = {item.like_switch} source={item.source} userimg={item.userimg} UserName={item.UserName} content={item.content} Senttime={item.senttime} contentimg={item.contentimgs} />
+                    <PostContent key={item._id} self_username={self_username} like_switch = {item.like_switch} source={item.source} userimg={item.userimg} UserName={item.UserName} content={item.content} Senttime={item.senttime} contentimg={item.contentimgs} />
                 ))}
             </section>
         </div>
