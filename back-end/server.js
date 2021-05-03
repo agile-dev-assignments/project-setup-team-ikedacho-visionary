@@ -3,9 +3,9 @@ const express = require('express')
 const server = require('./app') // load up the web server
 const port = 3000 // the port to listen to for incoming requests
 // call express's listen function to start listening to the port
-
+const mode = `${process.env.NODE_ENV}`
 //checks if an environment variable named NODE_ENV is set to PRODUCTION
-if (process.env.NODE_ENV === 'PRODUCTION') {
+if (mode === 'PRODUCTION') {
     // if we're in PRODUCTION mode, server static files in front-end/build
     //only need to npx nodemon server in back-end. no need to npm start in front-end.
     console.log('in production mode. express run on port 3000.')
