@@ -7,6 +7,7 @@ const Browse = (props) => {
         <div className='Browse'>
             <div className='block'>
                 <Link
+                    id='link'
                     to={{
                         pathname: '/friend_profile',
                         state: {
@@ -29,7 +30,7 @@ const Browse = (props) => {
                     <img className='img' src={item} alt='' />
                 ))}
             </div> */}
-            <img className="" src={props.contentimg}/>
+            <img className='' src={props.contentimg} />
         </div>
     )
 }

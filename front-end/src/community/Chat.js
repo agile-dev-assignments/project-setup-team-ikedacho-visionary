@@ -37,8 +37,17 @@ const Chat = (props) => {
                 // extract the data from the server response
                 setUserData({ userimg: response.data.user_photo, username: response.data.user_name, content: newMessage })
             })
-            .catch((err) => {
-                console.log(`Can not get user info`)
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        //alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
             })
     }, []) // only run it once!
 
@@ -47,6 +56,18 @@ const Chat = (props) => {
         axios('/user').then((response) => {
             console.log(response.data)
             Set_self_username(response.data.username)
+        })
+        .catch(function (error) {
+            if (error.response) {
+                if (error.response.status === 501) {
+                    console.log('Error 501: user is not login; req.user does not exist')
+                    alert('You are not logged in. Please log in and try again!')
+                    history.push('/prelogin')
+                    setTimeout(() => {
+                        window.location.href = window.location.href
+                    }, 100)
+                }
+            }
         })
     }, [])
 
@@ -65,8 +86,17 @@ const Chat = (props) => {
                     console.log(response.data)
                 }
             })
-            .catch((err) => {
-                console.log(err)
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
             })
 
         e.preventDefault()
@@ -134,8 +164,17 @@ const Chat = (props) => {
                 setData(response.data.message_history)
                 console.log('data: ', data)
             })
-            .catch((err) => {
-                /*  */
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
             })
     }, [timer])
 

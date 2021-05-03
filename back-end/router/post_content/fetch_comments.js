@@ -10,6 +10,7 @@ fetchCommentsRouter.get('/', async (req, res) => {
     await UserInfo.findOne({ user_name: UserName }, async (err, userInfos) => {
         if (err) {
             console.error(err)
+            res.status(500).send()
         } else {
             // console.log(userInfos)
             if (userInfos !== null) {

@@ -44,10 +44,28 @@ const Edit = (props) => {
                     post_text: post_text,
                 },
             })
-            window.history.go(-1)
-            setTimeout(() => {
-                window.location.href = window.location.href
-            }, 100)
+            .then((response) => {
+                if(response.status === 200){
+                    console.log('200')
+                    window.history.go(-1)
+                    setTimeout(() => {
+                        window.location.href = window.location.href
+                    }, 100)
+                }
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }      
+            })
+            
         } else {
             alert('You need to write some text')
             e.preventDefault()

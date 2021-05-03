@@ -26,8 +26,17 @@ const Followers = (props) => {
                 // extract the data from the server response
                 setData(response.data)
             })
-            .catch((err) => {
-                console.error(err)
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
             })
     }, []) // only run it once!
 

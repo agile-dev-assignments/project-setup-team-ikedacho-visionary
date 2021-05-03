@@ -8,7 +8,6 @@ const Prelogin = (props) => {
 
     // the following side-effect will be called once upon initial render
     useEffect(() => {
-        // fetch some mock data about animals for sale
         axios('/api_getprelogin')
             .then((response) => {
                 setData(response.data)

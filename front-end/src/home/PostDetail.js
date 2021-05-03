@@ -19,7 +19,7 @@ const PostDetail = (props) => {
         history.goBack()
     }
     console.log(state)
-    const [PostData, setPostData] = useState([{ id: 1, source: '', like_switch : true,  UserName: '', user_photo: '', Content: '', contentimg: '', post_date: '' }])
+    const [PostData, setPostData] = useState([{ id: 1, source: '', like_switch: true, UserName: '', user_photo: '', Content: '', contentimg: '', post_date: '' }])
 
     const [self_username, Set_self_username] = useState('')
 
@@ -38,61 +38,72 @@ const PostDetail = (props) => {
         if (state != undefined) {
             setPostData(state)
         }
-        if(state.like_switch == undefined){
+        if (state.like_switch == undefined) {
             PostData.like_switch = false
         }
     }, []) // only run it once!
 
-
-
     useEffect(() => {
-
         axios
-        .post("/browsed",
-        {
-            viewdate : date,
-            senttime : state.Senttime,
-            source : state.source,
-            like_switch : state.like_switch,
-            UserName : state.UserName,
-            userimg : state.userimg,
-            content : state.content,
-            contentimgs: state.contentimg
-        })
-        .then((response) => {
-            if (response.data.status === 'created') {
-                console.log(response.data.status)
-            } else {
-                console.log(response.data)
-            }
+            .post('/browsed', {
+                viewdate: date,
+                senttime: state.Senttime,
+                source: state.source,
+                like_switch: state.like_switch,
+                UserName: state.UserName,
+                userimg: state.userimg,
+                content: state.content,
+                contentimgs: state.contentimg,
             })
-            .catch(error => {
-                console.log("unable to save browse history", error);
-                })
-            }, [])
-
+            .then((response) => {
+                if (response.data.status === 'created') {
+                    console.log(response.data.status)
+                } else {
+                    console.log(response.data)
+                }
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
+            })
+    }, [])
 
     const [data, setData] = useState([])
 
     // the following side-effect will be called once upon initial render
     useEffect(() => {
-       axios
-            .get('/get_comments_in_post_content',
-        {
-            params: {
-                user_name :  state.UserName,
-                content : state.content
-            }
-        })
+        axios
+            .get('/get_comments_in_post_content', {
+                params: {
+                    user_name: state.UserName,
+                    content: state.content,
+                },
+            })
             .then((response) => {
                 // extract the data from the server response
                 console.log(response.data)
                 setData(response.data)
             })
-            .catch((err) => {     
-                console.log(err)     
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
             })
-        }, [])
+    }, [])
 
     return (
         <div className='PostDetail'>

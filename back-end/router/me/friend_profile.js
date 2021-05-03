@@ -12,6 +12,7 @@ friendProfileRouter.get('/', async (req, res) => {
     await UserInfo.findOne({ user_name: UserName }, (err, UserInfos) => {
         if (err) {
             console.error(err)
+            res.status(500).send()
         } else {
             friend_info = UserInfos
             linked_social_media = UserInfos.linked_social_media
@@ -22,6 +23,7 @@ friendProfileRouter.get('/', async (req, res) => {
     await UserInfo.findOne({ user_name: my_username }, (err, UserInfos) => {
         if (err) {
             console.error(err)
+            res.status(500).send()
         } else {
             friend = UserInfos.following.includes(UserName)
             my_like_history = UserInfos.my_like_history

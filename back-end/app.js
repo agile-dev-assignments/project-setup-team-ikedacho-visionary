@@ -39,7 +39,6 @@ app.use(passport.session())
 require('./loginAuth/passPortConfig.js')(passport)
 //----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
 
-
 //-----------------------------------------------prelogin page-----------------------------------------------
 const preloginHomeRouter = require('./router/prelogin/prelogin_home')
 app.use('/', preloginHomeRouter)
@@ -49,10 +48,21 @@ app.use('/api_register', registerRouter)
 
 const loginRouter = require('./router/prelogin/login')
 app.use('/login', loginRouter)
+
+//-----------------------------------------------req.user-----------------------------------------------
+//test if req.user exist before the following routes. If req.user does not exist, send 501 and redirect to prelogin page. The following routes will not be called.
+app.use((req, res, next) => {
+    if (req.user === undefined) {
+        res.status(501).send()
+    } else {
+        next()
+    }
+})
+
 //-----------------------------------------------home page-----------------------------------------------
 const homeRouter = require('./router/home/home')
 app.use('/', homeRouter)
- 
+
 const editRouter = require('./router/home/edit')
 app.use('/get_edit', editRouter)
 
@@ -134,7 +144,7 @@ app.use('/api_search_result', searchResultRouter)
 const trendingRouter = require('./router/search/trending')
 app.use('/api_trending', trendingRouter)
 
-//post content
+//-----------------------------------------------post content-----------------------------------------------
 const likeAPostRouter = require('./router/post_content/like_a_post')
 app.use('/api_like_a_post', likeAPostRouter)
 
@@ -158,22 +168,5 @@ const auxiliaryRouter = require('./router/auxiliary/user')
 app.use('/', auxiliaryRouter)
 
 //----------------------------------------- END OF ROUTES---------------------------------------------------
-
-// helper function, can remove anytime
-function isEmpty(obj) {
-    return Object.keys(obj).length === 0
-}
-
-// helper function, can remove anytime
-// fast hash <-- but not secure at all
-function fast_hash(str) {
-    let hash = 0
-    for (let i = 0; i < str.length; i++) {
-        const char = str.charCodeAt(i)
-        hash = (hash << 5) - hash + char
-        hash &= hash
-    }
-    return hash
-}
 
 module.exports = app

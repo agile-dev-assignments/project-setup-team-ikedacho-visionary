@@ -26,7 +26,7 @@ browsedRouter.post("/", (req, res) => {
         // save the update   
         result.save((err) => {
             if (err) {
-                console.log(err)
+                res.status(500).send()
             }
         })            
     })

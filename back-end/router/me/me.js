@@ -10,6 +10,7 @@ meRouter.get('/', async (req, res) => {
     await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
         if (err) {
             console.log('error', err)
+            res.status(500).send()
         } else {
             user_info = UserInfos
             linked_social_media = UserInfos.linked_social_media

@@ -9,13 +9,14 @@ import { TextParagraph } from 'react-bootstrap-icons'
 import { HeartFill } from 'react-bootstrap-icons'
 import './Community.js'
 import Message_History from './Message_History'
+import { useHistory } from 'react-router-dom'
 
 const Community = (props) => {
     // start a state variable with a blank array
     const [data, setData] = useState([])
     const [timer, setTimer] = useState(0)
     const [search_name, setSearch_name] = useState([])
-
+    let history = useHistory()
     // auto refresh chat room list every 3000 ms <-- 3 seconds
     setTimeout(function () {
         if (timer === 0) {
@@ -34,9 +35,17 @@ const Community = (props) => {
             .then((response) => {
                 setData(response.data)
             })
-            .catch((err) => {
-                console.log(`couldn't get user messages`)
-                console.error(err) // the server returned an error... probably too many requests... until we pay!
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
             })
     }, [timer])
 
@@ -83,7 +92,7 @@ const Community = (props) => {
     unsorted.push(...empty_chat)
 
     console.log(unsorted)
-    console.log("search_name: ", search_name)
+    console.log('search_name: ', search_name)
 
     let searched_chat_room
     if (search_name != null && search_name != undefined && search_name != '' && search_name != []) {

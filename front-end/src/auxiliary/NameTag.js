@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import './NameTag.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const NameTag = (props) => {
-    // replace by API to follow/unfollow
-
+    let history = useHistory()
     const setButton = async (e) => {
         if (e.className === 'Follow') {
             axios('/get_add_friend', {
@@ -13,18 +13,50 @@ const NameTag = (props) => {
                     clicked_follow_username: e.id,
                 },
             })
-            setTimeout(() => {
-                window.location.reload(false)
-            }, 500)
+                .then((response) => {
+                    if (response.status === 200) {
+                        setTimeout(() => {
+                            window.location.reload(false)
+                        }, 500)
+                    }
+                })
+                .catch(function (error) {
+                    if (error.response) {
+                        if (error.response.status === 501) {
+                            console.log('Error 501: user is not login; req.user does not exist')
+                            alert('You are not logged in. Please log in and try again!')
+                            history.push('/prelogin')
+                            setTimeout(() => {
+                                window.location.href = window.location.href
+                            }, 100)
+                        }
+                    }
+                })
         } else {
             axios('/get_remove_friend', {
                 params: {
                     clicked_unfollow_username: e.id,
                 },
             })
-            setTimeout(() => {
-                window.location.reload(false)
-            }, 500)
+                .then((response) => {
+                    if (response.status === 200) {
+                        setTimeout(() => {
+                            window.location.reload(false)
+                        }, 500)
+                    }
+                })
+                .catch(function (error) {
+                    if (error.response) {
+                        if (error.response.status === 501) {
+                            console.log('Error 501: user is not login; req.user does not exist')
+                            alert('You are not logged in. Please log in and try again!')
+                            history.push('/prelogin')
+                            setTimeout(() => {
+                                window.location.href = window.location.href
+                            }, 100)
+                        }
+                    }
+                })
         }
     }
 

@@ -28,10 +28,12 @@ removeFriendRouter.get('/', async (req, res) => {
             await UserInfos.save(function (saveErr, saveUserInfos) {
                 if (err) {
                     console.log('error saving deleteing a following')
+                    res.status(500).send()
                 }
             })
         } catch (e) {
             console.log(e)
+            res.status(500).send()
         }
     })
     await UserInfo.findOne({ user_name: clicked_unfollow_username }, async (err, UserInfos) => {
@@ -50,11 +52,15 @@ removeFriendRouter.get('/', async (req, res) => {
             await UserInfos.save(function (saveErr, saveUserInfos) {
                 if (err) {
                     console.log('error saving deleting a following')
+                    res.status(500).send()
                 }
             })
         } catch (e) {
             console.log(e)
+            res.status(500).send()
         }
     })
+
+    res.status(200).send()
 })
 module.exports = removeFriendRouter

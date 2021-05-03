@@ -126,10 +126,18 @@ const MyProfile = (props) => {
                     }
                 }
             })
-            .catch((err) => {
-                console.log('error: cannot fetch response from server')
-                console.log(err)
-            }) //end of catch,axios
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
+            })
     }, [platform_name_array]) // render everytime platform_name header changes.
 
     return (

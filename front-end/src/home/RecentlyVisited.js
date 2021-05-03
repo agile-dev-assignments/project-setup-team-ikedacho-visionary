@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import PostContent from '../auxiliary/PostContent'
 import './RecentlyVisited.css'
+import { useHistory } from 'react-router-dom'
 
 const RecentlyVisited = (props) => {
+    let history = useHistory()
     const [data, setData] = useState([])
 
     // the following side-effect will be called once upon initial render
@@ -14,9 +16,17 @@ const RecentlyVisited = (props) => {
             // extract the data from the server response
             setData(response.data)
         })
-        .catch((err) => {
-            console.log(err)
-            console.error(err) 
+        .catch(function (error) {
+            if (error.response) {
+                if (error.response.status === 501) {
+                    console.log('Error 501: user is not login; req.user does not exist')
+                    //alert('You are not logged in. Please log in and try again!')
+                    history.push('/prelogin')
+                    setTimeout(() => {
+                        window.location.href = window.location.href
+                    }, 100)
+                }
+            }
         })
     }, []) // only run it once!
 

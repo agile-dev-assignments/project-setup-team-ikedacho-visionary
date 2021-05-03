@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Liked from './Liked'
+import { useHistory } from 'react-router-dom'
 
 const Liked_List = (props) => {
     // start a state variable with a blank array
     const [data, setData] = useState([])
+    let history = useHistory()
 
     useEffect(() => {
         axios
@@ -17,8 +19,17 @@ const Liked_List = (props) => {
             .then((response) => {
                 setData(response.data)
             })
-            .catch((err) => {
-                console.error(err)
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
             })
     }, [])
 

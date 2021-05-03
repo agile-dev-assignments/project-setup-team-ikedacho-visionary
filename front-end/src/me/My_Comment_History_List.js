@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 // import logo from './logo.svg';
-
+import { useHistory } from 'react-router-dom'
 import './My_Comment_History_List.css'
 import My_Comment_History from './My_Comment_History'
 
 const My_Comment_History_List = (props) => {
     // start a state variable with a blank array
+
+    let history = useHistory()
     const [data, setData] = useState([])
 
     // the following side-effect will be called once upon initial render
@@ -19,11 +21,17 @@ const My_Comment_History_List = (props) => {
                 // extract the data from the server response
                 setData(response.data)
             })
-            .catch((err) => {
-                // Mockaroo, which we're using for our Mock API, only allows 200 requests per day on the free plan
-                console.log(`Sorry, buster.  No more requests allowed today!`)
-                console.error(err) // the server returned an error... probably too many requests... until we pay!
-                // make some backup fake data of commented_history
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
             })
     }, []) // only run it once!
 
