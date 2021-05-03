@@ -31,7 +31,7 @@ likeAPostRouter.get('/', async (req, res) => {
             self_userimg = result.user_photo
 
             // save the changes
-            result.save(async (err) => {
+            UserInfo.updateOne({ user_name: self_username }, { my_like_history: result.my_like_history }, async (err) => {
                 if (err) {
                     console.error(err)
                 } else {
@@ -58,7 +58,7 @@ likeAPostRouter.get('/', async (req, res) => {
                             })
 
                             // save the changes
-                            result.save((err) => {
+                            UserInfo.updateOne({ user_name: other_username }, { others_liked_history: result.others_liked_history }, (err) => {
                                 if (err) {
                                     console.error(err)
                                 }

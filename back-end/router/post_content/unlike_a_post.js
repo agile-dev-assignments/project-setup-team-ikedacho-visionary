@@ -30,7 +30,7 @@ unlikeAPostRouter.get('/', async (req, res) => {
 
             console.log('\nresult.my_like_history:\n', result.my_like_history)
             // save the changes <--- without error handling lol
-            result.save(async (err) => {
+            UserInfo.updateOne({ user_name: self_username }, { my_like_history: result.my_like_history }, (async (err) => {
                 if (err) {
                     console.error(err)
                 } else {
@@ -40,10 +40,6 @@ unlikeAPostRouter.get('/', async (req, res) => {
                         if (err) {
                             console.error(err)
                         } else {
-                            /* to dislike a post, the others_liked_history must not be empty
-            if (result.others_liked_history === undefined){
-                result.others_liked_history = []
-            } */
                             // update by pushing the new post info to the list
                             let filtered_list = result.others_liked_history.filter((record) => {
                                 const date = new Date(Date.parse(record.post_issued_time)).toString()
@@ -72,7 +68,7 @@ unlikeAPostRouter.get('/', async (req, res) => {
                     })
                 }
             })
-        }
+        )}
     })
 
     res.send(`Un-liked on post: ${post_detail} by time ${new Date()}`)
