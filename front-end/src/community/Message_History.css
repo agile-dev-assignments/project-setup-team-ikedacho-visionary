@@ -30,13 +30,14 @@ article.Message_History #newest_message {
 }
 
 article.Message_History #username {
-    font-size: 1em;
+    font-size: medium;
     padding-left: 10px;
 }
 
 article.Message_History #newest_message_date {
     position: absolute;
-    right: 10px;
+    font-size: smaller;
+    right: 5vw;
 }
 
 article.Message_History #unread_message_number {

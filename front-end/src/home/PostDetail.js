@@ -114,6 +114,7 @@ const PostDetail = (props) => {
             <div className='Postfield'>
                 <section className='main-content'>
                     <PostContent_noAction
+                        self_username={self_username}
                         source={PostData.source}
                         userimg={PostData.userimg}
                         UserName={PostData.UserName}
@@ -127,7 +128,7 @@ const PostDetail = (props) => {
             <div className='comments'>
                 <section className='comment_list'>
                     {data.map((item) => (
-                        <Comment key={item.id} img={item.userimg} UserName={item.UserName} content={item.content} datetime={item.Senttime} />
+                        <Comment key={item.id} self_username={self_username} img={item.userimg} UserName={item.UserName} content={item.content} datetime={item.Senttime} />
                     ))}
                 </section>
             </div>
