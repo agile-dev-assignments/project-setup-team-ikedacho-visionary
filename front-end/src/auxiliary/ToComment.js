@@ -24,8 +24,8 @@ const ToComment = (props) => {
         console.log(comment_text)
         console.log('clicked!')
         if (comment_text !== '') {
-            setShow(!show)
-            setCurrentTime(new Date())
+            //setShow(!show)
+            //setCurrentTime(new Date())
 
             console.log('send', send)
             axios
@@ -38,6 +38,8 @@ const ToComment = (props) => {
                     if (response.status === 200) {
                         console.log(response.data)
                         setUsername(response.data)
+                        setShow(!show)
+                        setCurrentTime(new Date())
                     }
                 })
                 .catch(function (error) {
