@@ -12,16 +12,14 @@ friendProfileRouter.get('/', async (req, res) => {
         let friend
         let my_like_history
 
-        await UserInfo.findOne({ user_name: UserName }, (err, UserInfos) => {
-            if (err) {
-                console.error(err)
-                res.status(500).send()
-            } else {
-                friend_info = UserInfos
-                linked_social_media = UserInfos.linked_social_media
-                post_data = UserInfos.post_data
-            }
-        })
+        const friend_user = await UserInfo.findOne({ user_name: UserName })
+        friend_info = friend_user
+        linked_social_media = friend_user.linked_social_media
+        post_data = friend_user.post_data
+
+        const myself_user = await UserInfo.findOne({ user_name: my_username })
+        friend = myself_user.following.includes(UserName)
+        my_like_history = myself_user.my_like_history
 
         await UserInfo.findOne({ user_name: my_username }, (err, UserInfos) => {
             if (err) {
@@ -90,7 +88,7 @@ friendProfileRouter.get('/', async (req, res) => {
             friend: friend,
         }
 
-        console.log(response_data.friend)
+        console.log('friend: ', response_data.friend)
         res.json(response_data)
     }
 })
