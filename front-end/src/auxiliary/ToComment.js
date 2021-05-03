@@ -24,10 +24,7 @@ const ToComment = (props) => {
         console.log(comment_text)
         console.log('clicked!')
         if (comment_text !== '') {
-            setShow(!show)
-            setCurrentTime(new Date())
-
-            console.log('send', send)
+           
             axios
                 .get('/get_send_comment', {
                     params: {
@@ -35,11 +32,25 @@ const ToComment = (props) => {
                     },
                 })
                 .then((response) => {
-                    console.log(response.data)
-                    setUsername(response.data)
+                    if (response.status === 200) {
+                        console.log(response.data)
+                        setUsername(response.data)
+                        setShow(!show)
+                        setCurrentTime(new Date())
+                        console.log('send', send)
+                    }
                 })
-                .catch((err) => {
-                    console.error(err)
+                .catch(function (error) {
+                    if (error.response) {
+                        if (error.response.status === 501) {
+                            console.log('Error 501: user is not login; req.user does not exist')
+                            alert('You are not logged in. Please log in and try again!')
+                            history.push('/prelogin')
+                            setTimeout(() => {
+                                window.location.href = window.location.href
+                            }, 100)
+                        }
+                    }
                 })
         }
     }
