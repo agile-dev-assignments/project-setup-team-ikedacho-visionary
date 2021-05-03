@@ -1,6 +1,6 @@
 import './PostContent_noAction.css'
 import PostContent_img_na from '../auxiliary/PostContent_img_na'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { createBrowserHistory } from 'history'
 import axios from 'axios'
 
@@ -24,19 +24,10 @@ const PostContent_noAction = (props) => {
         console.log(params)
 
         history.push({
-            pathname: (params.UserName === self_username) ? '/my_profile' : '/friend_profile' ,
+            pathname: (params.UserName === props.self_username) ? '/my_profile' : '/friend_profile' ,
             state: params,
         })
     }
-
-    const [self_username, Set_self_username] = useState('')
-
-    useEffect(() => {
-        axios('/user').then((response) => {
-            console.log(response.data)
-            Set_self_username(response.data.username)
-        })
-    }, [])
 
     return (
         <div class='PostContent_noAction'>

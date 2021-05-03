@@ -128,7 +128,7 @@ const Chat = (props) => {
                             <img className='Chat_avatar' src={props.userimg} />
                         </Link>
                         <p>{props.username}</p>
-                        <p>{props.time}</p>
+                        <p>{new Date(props.time).toLocaleString()}</p>
                         <p className='Chat_from_others'>{props.content}</p>
                     </div>
                 )}
@@ -142,7 +142,7 @@ const Chat = (props) => {
                         >
                             <img className='Chat_avatar' src={props.userimg} />
                         </Link>
-                        <p>{props.time}</p>
+                        <p>{new Date(props.time).toLocaleString()}</p>
                         <p className='Chat_from_self'>{props.content}</p>
                     </div>
                 )}

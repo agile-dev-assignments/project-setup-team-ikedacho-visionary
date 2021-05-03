@@ -16,7 +16,7 @@ const Message_History = (props) => {
 
     if (!isEmpty(messages)) {
         console.log('messages', messages[messages.length - 1])
-        newest_message_date = messages[messages.length - 1].time
+        newest_message_date = new Date(messages[messages.length - 1].time).toLocaleString()
         newest_message = messages[messages.length - 1].content
     }
 

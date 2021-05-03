@@ -2,6 +2,8 @@ import React from 'react'
 import './Comment.css'
 import { useState } from 'react'
 import ToComment from './ToComment'
+import { createBrowserHistory } from 'history'
+
 const Comment = (props) => {
     const [like, setLike] = useState({
         liked: false,
@@ -30,11 +32,28 @@ const Comment = (props) => {
         }
     }
 
+    const history = createBrowserHistory({ forceRefresh: true })
+
+    const _Friend_Profile_with_param = (event) => {
+        event.preventDefault()
+        const params = {
+            UserName: props.UserName,
+            userimg: props.userimg,
+        }
+
+        console.log(params)
+
+        history.push({
+            pathname: (params.UserName === props.self_username) ? '/my_profile' : '/friend_profile' ,
+            state: params,
+        })
+    }
+
     return (
         <div class='Comment'>
-            <img class='img' src={props.img} alt={props.UserName} />
+            <img class='img' src={props.img} alt={props.UserName} onClick={_Friend_Profile_with_param.bind()}/>
             <div class='Text'>
-                <strong class='username'>{props.UserName}</strong>
+                <strong class='username' onClick={_Friend_Profile_with_param.bind()}>{props.UserName}</strong>
                 <p class='content'>{props.content}</p>
                 <div class='Footer'>
                     <div id='datetime'>{props.Senttime}</div>
