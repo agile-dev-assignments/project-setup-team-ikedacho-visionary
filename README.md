@@ -2,7 +2,7 @@
 
 [![Build Status](https://www.travis-ci.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.svg?branch=master)](https://www.travis-ci.com/agile-dev-assignments/project-setup-team-ikedacho-visionary)
 
-Our project host online at [http://134.209.208.110:3000/](http://134.209.208.110:3000/)
+Our project host online at [http://157.230.229.147:3000/](http://157.230.229.147:3000/)
 ## Instruction on Building and Testing Locally
 
 Follow instructions in [README.md in back-end directory](https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary/blob/121bd042fc56a877568f33acd2928b3f521d41a5/back-end/README.md) to build and test our project locally.

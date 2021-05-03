@@ -4,7 +4,7 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 ssh-add -l
 
-#ssh travis@134.209.208.110  
+#ssh root@157.230.229.147
 #cd ~/demo
 
 #if [ -d "project-setup-team-ikedacho-visionary" ] ; then
