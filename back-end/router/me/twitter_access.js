@@ -46,8 +46,6 @@ twitterAccessRouter.get('/', async (req, res) => {
 
                     /*
                     NOTICE: 
-                        The following piece of code does not work, but does not crash the program either. 
-                        It should be in a somewhat correct structure (?) based on the manual..
                         Please refer to: 
                         https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens
                         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-home_timeline
