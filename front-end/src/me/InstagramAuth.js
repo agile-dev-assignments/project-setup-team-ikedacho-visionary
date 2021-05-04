@@ -7,9 +7,10 @@ const InstagramAuth = (props) => {
     let history = useHistory()
     // the following side-effect will be called once upon initial render
 
-    const url = window.location.href
-    const fetchData = async () => {
-        await axios('/auth_ins', {
+    useEffect(() => {
+        const url = window.location.href
+        console.log('url', url)
+        axios('/auth_ins', {
             params: {
                 url: url,
             },
@@ -29,10 +30,6 @@ const InstagramAuth = (props) => {
                     }
                 }
             })
-    }
-
-    useEffect(() => {
-        fetchData()
     }, [])
 
     return (

@@ -46,7 +46,7 @@ instagramRouter.get('/', async (req, res) => {
         let url = req.query.url
         console.log(url)
 
-       
+        /*
 
         //Exchange the Code for a Token
         var options = {
@@ -103,7 +103,7 @@ instagramRouter.get('/', async (req, res) => {
                     }
                 )
             }
-        })
+        })*/
     }
 })
 module.exports = instagramRouter
