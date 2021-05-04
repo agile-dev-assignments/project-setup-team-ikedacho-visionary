@@ -35,7 +35,7 @@ twitterRouter.get('/', async (req, res) => {
         // HTTPS request
         const options = {
             method: 'POST',
-            url: request_url,
+            url: request_url, 
             headers: {
                 Authorization: AuthHeader,
             },

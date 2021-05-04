@@ -41,7 +41,6 @@ twitterAccessRouter.get('/', async (req, res) => {
 
                     console.log("ret: ", ret)
 
-
                     /*
                     NOTICE: 
                         The following piece of code does not work, but does not crash the program either. 
@@ -49,9 +48,9 @@ twitterAccessRouter.get('/', async (req, res) => {
                         Please refer to: 
                         https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens
                         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-home_timeline
+                        https://developer.twitter.com/en/docs/authentication/oauth-1-0a/authorizing-a-request
                     */
                     // try fetch tweets! 
-                    console.log("ret.oauth_token: ", ret.oauth_token)
                     // get timestamp in seconds
                     const date = Math.floor(Date.now() / 1000)
                     const screen_name = ret.screen_name
@@ -69,7 +68,7 @@ twitterAccessRouter.get('/', async (req, res) => {
                     const request_url2 = `https://api.twitter.com/1.1/statuses/home_timeline.json`
                     const consumerSecret = process.env.TWITTER_API_SECRET_KEY
                     const tokenSecret = ret.oauth_token_secret
-                    const signature = oauthSignature.generate('POST', request_url2, parameters, consumerSecret, tokenSecret)
+                    const signature = oauthSignature.generate('GET', request_url2, parameters, consumerSecret, tokenSecret)
 
                     const AuthHeader = `OAuth oauth_consumer_key="${parameters.oauth_consumer_key}",oauth_token="${parameters.oauth_token}",oauth_signature_method="HMAC-SHA1",oauth_timestamp="${date}",oauth_nonce="${nonce}",oauth_version="1.0",oauth_signature="${signature}"`
 
