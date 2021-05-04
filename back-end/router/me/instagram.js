@@ -110,13 +110,13 @@ instagramRouter.get('/', async (req, res) => {
                                             const post_id = post_data_id[0].id
                                             console.log('post_id', post_id)
                                             request(
-                                                `https://graph.instagram.com/${post_id}&access_token=${short_lived_accessToken}`,
+                                                `https://graph.instagram.com/${post_id}?access_token=${short_lived_accessToken}`,
 
                                                 function (error, response, body) {
                                                     if (error) {
                                                         console.log('error')
                                                     } else {
-                                                        console.log(`https://graph.instagram.com/${post_id}&access_token=${short_lived_accessToken}`)
+                                                        console.log(`https://graph.instagram.com/${post_id}?access_token=${short_lived_accessToken}`)
                                                         const res = JSON.parse(body)
                                                         console.log('a post data:', res)
                                                     }
