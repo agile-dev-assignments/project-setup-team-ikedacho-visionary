@@ -8,8 +8,7 @@ const InstagramAuth = (props) => {
     // the following side-effect will be called once upon initial render
     const [url, setUrl] = useState([])
     useEffect(() => {
-        const url = window.location.href
-        setUrl(url)
+        setUrl(window.location.href)
         console.log('url', url)
 
         axios('/auth_ins', {
