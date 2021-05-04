@@ -34,14 +34,15 @@ instagramRouter.get('/', async (req, res) => {
     if (req.user === undefined) {
         res.status(501).send()
     } else {
-        let user_id = ''
+        const my_username = req.user.username
+        const client_id = `${process.env.CLIENT_ID}`
+        const client_secret = `${process.env.CLIENT_SERECT}`
+        const redirect_uri = 'https://ozonewebapp.com/instagram_auth/'
         let long_lived_token = ''
         let post_data = ''
         let short_lived_accessToken = ''
-        let client_id = '235520911696213'
-        let client_secret = '85832b0f1c6eac1c7471a657f365b1e3'
-        let redirect_uri = 'https://ozonewebapp.com/instagram_auth/'
-        const my_username = req.user.username
+        let user_id = ''
+
         if (req.query.url) {
             let url = req.query.url
             console.log('url', url)
@@ -82,7 +83,7 @@ instagramRouter.get('/', async (req, res) => {
 
                     //get userid
                     request(
-                        `https://graph.instagram.com/me?fields=id,username&access_token=${short_lived_accessToken}`,
+                        `https://graph.instagram.com/me/media?access_token=${short_lived_accessToken}`,
 
                         function (error, response, body) {
                             if (error) {
