@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const db = require('./db')
-const authUser = require('./authIns')
+//const authUser = require('./authIns')
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
 
 app.use(morgan('dev')) // morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -65,6 +65,9 @@ app.use('/get_me', meRouter)
 
 const facebookRouter = require('./router/me/facebook')
 app.use('/get_facebook', facebookRouter)
+
+const instagramRouter = require('./router/me/instagram')
+app.use('/auth_ins', instagramRouter)
 
 const twitterRouter = require('./router/me/twitter')
 app.use('/get_twitter_request_token', twitterRouter)
