@@ -106,7 +106,7 @@ div.MyProfile #post_follow {
     justify-content: center;
     position: absolute;
     bottom: 30px;
-    right: 0px;
+    right: 4px;
 }
 div.MyProfile #post_follow #button {
     text-align: center;

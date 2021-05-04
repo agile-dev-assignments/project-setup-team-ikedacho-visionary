@@ -66,6 +66,8 @@ div.FriendProfile #avatar {
     height: 50px;
     float: left;
     background-color: white;
+    position: relative;
+    bottom: -10px;
 }
 div.FriendProfile #username {
     position: relative;
@@ -82,7 +84,7 @@ div.FriendProfile #bio {
     height: 20px;
     color: #747070;
     position: relative;
-    bottom: 2px;
+    bottom: -25px;
     left: -3px;
 }
 div.FriendProfile #message_text {
@@ -95,9 +97,8 @@ div.FriendProfile #post_follow {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    position: relative;
-    bottom: 8px;
-    left: 110px;
+    position: absolute;
+    right: 0px;
     margin-right: 0px;
     padding-right: 0px;
     width: 200px;
