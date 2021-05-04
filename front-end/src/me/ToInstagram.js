@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 const ToInstagram = (props) => {
     const _handleOnClick = (e) => {
-        window.location.href = `https://api.instagram.com/oauth/authorize?client_id=235520911696213&redirect_uri=https://ozonewebapp.com/instagram_auth/&scope=user_profile,instagram_graph_user_media,user_media&response_type=code`
+        window.location.href = `https://api.instagram.com/oauth/authorize?client_id=235520911696213&redirect_uri=https://ozonewebapp.com/instagram_auth/&scope=user_profile,user_media&response_type=code`
     }
 
     return (
