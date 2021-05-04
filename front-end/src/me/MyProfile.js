@@ -154,11 +154,11 @@ const MyProfile = (props) => {
             </section>
 
             <section id='main_container1'>
-                <button className='Commentbutton' onClick={_showComment.bind()}>
-                    Edit picture
-                </button>
+                {/*  <button className='Commentbutton' onClick={_showComment.bind()}>
+                        Edit picture
+                    </button> 
                 {state.showComment && <>{<Background_picture />}</>}
-                <img class='inline-block' id='background_picture' src={`${user_info.background_picture}`} />{' '}
+                <img class='inline-block' id='background_picture' src={`${user_info.background_picture}`} />{' '}*/}
                 {/* src is the url to request and find static file in public/ folder. don't use /static/url !!!!!!! it cause error*/}
                 <div id='overview'>
                     <p id='message_text'>
