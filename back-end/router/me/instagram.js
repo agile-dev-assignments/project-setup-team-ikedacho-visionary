@@ -105,7 +105,10 @@ instagramRouter.get('/', async (req, res) => {
                                             const res = JSON.parse(body)
                                             console.log('get media node', res)
                                             const post_data_id = res.data
+                                            console.log('post_data_id', post_data_id)
+
                                             post_data_id.forEach((element) => {
+                                                console.log('element', element)
                                                 request(
                                                     `https://graph.instagram.com/${element}&access_token=${short_lived_accessToken}`,
 
@@ -115,7 +118,6 @@ instagramRouter.get('/', async (req, res) => {
                                                         } else {
                                                             const res = JSON.parse(body)
                                                             console.log('a post data:', res)
-                                                            
                                                         }
                                                     }
                                                 )
