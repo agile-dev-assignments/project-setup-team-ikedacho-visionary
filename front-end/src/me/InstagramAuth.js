@@ -7,7 +7,36 @@ const InstagramAuth = (props) => {
     let history = useHistory()
     // the following side-effect will be called once upon initial render
     const [url, setUrl] = useState([])
+
     useEffect(() => {
+        console.log('window.location.href', window.location.href)
+        setUrl(window.location.href)
+        console.log('url', url)
+
+        axios('/auth_ins', {
+            params: {
+                url: url,
+            },
+        })
+            .then((response) => {
+                console.log(response)
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    if (error.response.status === 501) {
+                        console.log('Error 501: user is not login; req.user does not exist')
+                        alert('You are not logged in. Please log in and try again!')
+                        history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                }
+            })
+    }, [])
+
+    useEffect(() => {
+        console.log('window.location.href', window.location.href)
         setUrl(window.location.href)
         console.log('url', url)
 
