@@ -36,7 +36,7 @@ app.use(
 app.use(cookieParser('secretcode'))
 app.use(passport.initialize())
 app.use(passport.session())
-require('./loginAuth/passPortConfig.js')(passport)
+//require('./loginAuth/passPortConfig.js')(passport)
 //----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
 
 //-----------------------------------------------prelogin page-----------------------------------------------
@@ -65,6 +65,9 @@ app.use('/get_me', meRouter)
 
 const facebookRouter = require('./router/me/facebook')
 app.use('/get_facebook', facebookRouter)
+
+const instagramRouter = require('./router/me/instagram')
+app.use('/auth_ins', instagramRouter)
 
 const twitterRouter = require('./router/me/twitter')
 app.use('/get_twitter_request_token', twitterRouter)

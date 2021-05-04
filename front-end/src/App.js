@@ -37,7 +37,7 @@ import ToFacebook from './me/ToFacebook'
 import ToTwitter from './me/ToTwitter'
 import ToInstagram from './me/ToInstagram'
 import About from './me/about'
-
+import InstagramAuth from './me/InstagramAuth'
 function App() {
   return (
     <>
@@ -45,6 +45,10 @@ function App() {
 
         <Router>
           <Switch>
+            <Route path = "/instagram_auth">
+              <InstagramAuth />
+            </Route>
+
           <Route path = "/login">
               <Loginpage />
             </Route>

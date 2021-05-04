@@ -4,14 +4,8 @@ import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 
 const ToInstagram = (props) => {
-    const [request_token, SetReqToken] = useState([])
-    const [request_token_secret, SetReqTokenSecret] = useState([])
-    var client_id = '483061323052381',
-        redirect_uri = 'https://localhost:3000/auth/instagram/callback',
-        auth_url = 'https://api.instagram.com/oauth/authorize/?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&scope=user_profile,user_media' + '&response_type=code'
-
     const _handleOnClick = (e) => {
-        window.location.href = auth_url
+        window.location.href = `https://api.instagram.com/oauth/authorize?client_id=235520911696213&redirect_uri=https://ozonewebapp.com/instagram_auth/&scope=user_profile,user_media&response_type=code`
     }
 
     return (
