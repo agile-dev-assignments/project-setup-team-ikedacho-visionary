@@ -43,11 +43,10 @@ instagramRouter.get('/', async (req, res) => {
         let redirect_uri = 'https://ozonewebapp.com/instagram_auth/'
         const my_username = req.user.username
 
-        let url = req.query
+        let url = req.query.url
         console.log(url)
 
-        const code = req.query.code
-        console.log('code:', code)
+       
 
         //Exchange the Code for a Token
         var options = {
