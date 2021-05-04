@@ -17,7 +17,9 @@ facebookRouter.get('/', async (req, res) => {
             console.log('start')
             await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
                 try {
-                    post_data.forEach((item) => {
+                    linked_social_media = UserInfos.linked_social_media
+                    unconnected_social_media = UserInfos.unconnected_social_media
+                    await post_data.forEach(async (item) => {
                         if ('message' in item) {
                             console.log('post data for each', post_data)
                             UserInfos.post_data.unshift({
@@ -29,10 +31,58 @@ facebookRouter.get('/', async (req, res) => {
                             UserInfos.post_number++
                         }
                     })
-                    await UserInfos.save(function (saveErr, saveUserInfos) {
+                    await UserInfos.save(async function (saveErr, saveUserInfos) {
                         if (err) {
                             console.log('error saving post')
                             res.status(500).send()
+                        } else {
+                            //update unconnected_social_media(delete)
+                            await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
+                                try {
+                                    console.log('before: unconnected_social_media', unconnected_social_media)
+                                    unconnected_social_media1 = unconnected_social_media.filter((element) => {
+                                        if (element !== 'Facebook') {
+                                            console.log('not !== facebook', element)
+                                            return true
+                                        }
+                                    })
+                                    console.log('after: unconnected_social_media1', unconnected_social_media1)
+                                    //update unconnected_social_media to database
+                                    const filter1 = { user_name: req.user.username }
+                                    const update1 = { unconnected_social_media: unconnected_social_media1 }
+                                    await UserInfo.findOneAndUpdate(filter1, update1, {
+                                        new: true,
+                                    })
+                                    console.log('c', unconnected_social_media1)
+                                    await UserInfos.save(function (saveErr, saveUserInfos) {
+                                        if (err) {
+                                            console.log('error saving post')
+                                            res.status(500).send()
+                                        }
+                                    })
+
+                                    if (!linked_social_media.includes('Facebook')) {
+                                        //update linked_social_media(add)
+                                        linked_social_media.push('Facebook')
+                                        //update linked_social_media to database
+                                        const filter2 = { user_name: req.user.username }
+                                        const update2 = { linked_social_media: linked_social_media }
+                                        await UserInfo.findOneAndUpdate(filter2, update2, {
+                                            new: true,
+                                        })
+                                        //console.log('d',linked_social_media )
+                                    }
+                                    await UserInfos.save(function (saveErr, saveUserInfos) {
+                                        if (err) {
+                                            console.log('error saving post')
+                                            res.status(500).send()
+                                        }
+                                    })
+                                } catch (e) {
+                                    console.log(e)
+                                    res.status(500).send()
+                                }
+                            })
                         }
                     })
                 } catch (e) {

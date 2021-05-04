@@ -16,37 +16,51 @@ const Me = (props) => {
 
     //set user_info
     const [user_info, setUser_info] = useState([])
+
     //set linked_social_media
     let [linked_social_media, setLinked_social_media] = useState([])
-    let [clicked_linked_social_media, SetClicked_linked_social_media] = useState([])
+    let [unconnected_social_media, SetUnconnected_social_media] = useState([])
 
-    let [unconnected_social_media, setUnconnected_social_media] = useState([])
-    let [clicked_unconnected_social_media, SetClicked_unconnected_social_media] = useState([])
+    const handle_Connected = (response) => {
+        let elements = document.getElementsByTagName('BUTTON')
+        //console.log('elements of BUTTON:', elements)
+        //console.log('elements.length:', elements.length)
 
-    const setUpFacebookSDK = async () => {
-        window.fbAsyncInit = function () {
-            window.FB.init({
-                appId: '901953390599794',
-                cookie: true,
-                xfbml: true,
-                version: 'v10.0',
-            })
-
-            window.FB.AppEvents.logPageView()
-        }
-        ;(function (d, s, id) {
-            var js,
-                fjs = d.getElementsByTagName(s)[0]
-            if (d.getElementById(id)) {
-                return
+        //deal with unconnected social media
+        for (let i = 0; i < response.data.linked_social_media.length; i++) {
+            let element = elements[i]
+            if (element.id === 'Facebook') {
+                element.style.background = '#4267B2'
+                element.style.color = 'white'
+                //element.style.backgroundRepeat = 'no-repeat'
+                //element.style.backgroundImage = "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMzAiIGhlaWdodD0iMzAiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6I2ZmZmZmZjsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PHBhdGggZD0iTTEyNS41OTU4Myw2NC41aC0yNS4yNjI1di0xNC4zMzMzM2MwLC03LjM5NiAwLjYwMiwtMTIuMDU0MzMgMTEuMjAxNSwtMTIuMDU0MzNoMTMuMzg3MzN2LTIyLjc5Yy02LjUxNDUsLTAuNjczNjcgLTEzLjA2NDgzLC0xLjAwMzMzIC0xOS42MjIzMywtMC45ODljLTE5LjQ0MzE3LDAgLTMzLjYzMzE3LDExLjg3NTE3IC0zMy42MzMxNywzMy42NzYxN3YxNi40OTA1aC0yMS41djI4LjY2NjY3bDIxLjUsLTAuMDA3MTd2NjQuNTA3MTdoMjguNjY2Njd2LTY0LjUyMTVsMjEuOTczLC0wLjAwNzE3eiI+PC9wYXRoPjwvZz48L2c+PC9zdmc+')"
+                element.addEventListener('click', () => {
+                    //window.location.href = '/to_facebook'
+                    //alert('fb update button clicked')
+                })
             }
-            js = d.createElement(s)
-            js.id = id
-            js.src = 'https://connect.facebook.net/en_US/sdk.js'
-            fjs.parentNode.insertBefore(js, fjs)
-        })(document, 'script', 'facebook-jssdk')
+
+            if (element.id === 'Twitter') {
+                element.style.background = '#1DA1F2'
+                element.style.color = 'white'
+                element.addEventListener('click', () => {
+                    //window.location.href = '/to_twitter'
+                    //alert('twitter update button clicked')
+                })
+            }
+
+            if (element.id === 'Instagram') {
+                element.style.background = 'linear-gradient(to right,#405DE6, #5851D8,#833AB4,#C13584,#E1306C,#FD1D1D,#F56040,#F77737,#FCAF45,#FFDC80)'
+                element.style.color = 'white'
+                element.addEventListener('click', () => {
+                    // window.location.href = '/to_instagram'
+                    //alert('ins update button clicked')
+                })
+            }
+        }
     }
-    const handleClick_Unconnected = (response) => {
+
+    const handle_Unconnected = (response) => {
         let elements = document.getElementsByTagName('BUTTON')
         //console.log('elements of BUTTON:', elements)
         //console.log('elements.length:', elements.length)
@@ -60,6 +74,7 @@ const Me = (props) => {
                 //element.style.backgroundRepeat = 'no-repeat'
                 //element.style.backgroundImage = "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMzAiIGhlaWdodD0iMzAiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6I2ZmZmZmZjsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iI2ZmZmZmZiI+PHBhdGggZD0iTTEyNS41OTU4Myw2NC41aC0yNS4yNjI1di0xNC4zMzMzM2MwLC03LjM5NiAwLjYwMiwtMTIuMDU0MzMgMTEuMjAxNSwtMTIuMDU0MzNoMTMuMzg3MzN2LTIyLjc5Yy02LjUxNDUsLTAuNjczNjcgLTEzLjA2NDgzLC0xLjAwMzMzIC0xOS42MjIzMywtMC45ODljLTE5LjQ0MzE3LDAgLTMzLjYzMzE3LDExLjg3NTE3IC0zMy42MzMxNywzMy42NzYxN3YxNi40OTA1aC0yMS41djI4LjY2NjY3bDIxLjUsLTAuMDA3MTd2NjQuNTA3MTdoMjguNjY2Njd2LTY0LjUyMTVsMjEuOTczLC0wLjAwNzE3eiI+PC9wYXRoPjwvZz48L2c+PC9zdmc+')"
                 element.addEventListener('click', () => {
+                    //alert('fb connnct button clicked')
                     window.location.href = '/to_facebook'
                 })
             }
@@ -68,6 +83,7 @@ const Me = (props) => {
                 element.style.background = '#1DA1F2'
                 element.style.color = 'white'
                 element.addEventListener('click', () => {
+                    //alert('twitter connnct button clicked')
                     window.location.href = '/to_twitter'
                 })
             }
@@ -76,43 +92,20 @@ const Me = (props) => {
                 element.style.background = 'linear-gradient(to right,#405DE6, #5851D8,#833AB4,#C13584,#E1306C,#FD1D1D,#F56040,#F77737,#FCAF45,#FFDC80)'
                 element.style.color = 'white'
                 element.addEventListener('click', () => {
+                    //alert('ins connnct button clicked')
                     window.location.href = '/to_instagram'
                 })
             }
         }
     }
-    const LoginStatus_fb = async () => {
-        setUpFacebookSDK()
-
-        if (window.FB !== undefined) {
-            window.FB.getLoginStatus(function (response) {
-                console.log(response)
-                if (response.status === 'connected') {
-                    console.log('User already logged in Facebook and autenticated')
-                    SetClicked_unconnected_social_media('Facebook')
-                } else {
-                    //console.log('user not logged in FB')
-                    //SetClicked_linked_social_media('Facebook')
-                }
-            })
-        }
-    }
-
     const fetchData = async () => {
-        await axios('/get_me', {
-            params: {
-                clicked_linked_social_media: clicked_linked_social_media,
-                clicked_unconnected_social_media: clicked_unconnected_social_media,
-            },
-        })
+        await axios('/get_me')
             .then((response) => {
                 setUser_info(response.data.user_info)
                 setLinked_social_media(response.data.linked_social_media)
-                console.log('linked', response.data.linked_social_media)
-                setUnconnected_social_media(response.data.unconnected_social_media)
-                console.log('unconnected', response.data.unconnected_social_media)
-                LoginStatus_fb()
-                handleClick_Unconnected(response)
+                SetUnconnected_social_media(response.data.unconnected_social_media)
+                handle_Unconnected(response)
+                handle_Connected(response)
             })
             .catch(function (error) {
                 if (error.response) {
@@ -127,13 +120,10 @@ const Me = (props) => {
                 }
             })
     }
+
     useEffect(() => {
-        setUpFacebookSDK()
-    })
-    useEffect(() => {
-        setUpFacebookSDK()
         fetchData()
-    }, [clicked_linked_social_media, clicked_unconnected_social_media])
+    }, [])
 
     return (
         <div className='Me'>

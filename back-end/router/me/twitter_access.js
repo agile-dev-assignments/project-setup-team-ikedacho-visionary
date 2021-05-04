@@ -10,6 +10,7 @@ twitterAccessRouter.get('/', async (req, res) => {
         res.status(501).send()
     } else {
         let post_data = ''
+        const my_username = req.user.username
 
         // only proceed when actual oauth_token/verifier is sent back
         if (req.query.url !== undefined) {
@@ -45,8 +46,6 @@ twitterAccessRouter.get('/', async (req, res) => {
 
                     /*
                     NOTICE: 
-                        The following piece of code does not work, but does not crash the program either. 
-                        It should be in a somewhat correct structure (?) based on the manual..
                         Please refer to: 
                         https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens
                         https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-home_timeline
@@ -92,53 +91,75 @@ twitterAccessRouter.get('/', async (req, res) => {
                             console.log('post_data------1', post_data)
                             if (post_data !== '') {
                                 //save_posts
-                                await UserInfo.findOne({ user_name: req.user.username }, async (err, UserInfos) => {
+                                console.log('start')
+                                await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
                                     try {
-                                        console.log('here', post_data)
                                         linked_social_media = UserInfos.linked_social_media
                                         unconnected_social_media = UserInfos.unconnected_social_media
-                                        post_data.forEach((item) => {
+                                        await post_data.forEach(async (item) => {
                                             if ('text' in item) {
                                                 console.log('post data for each', post_data)
                                                 UserInfos.post_data.unshift({
                                                     content: item.text,
                                                     source: 'Twitter',
-                                                    senttime: new Date(item.created_at),
+                                                    senttime: item.created_at,
                                                     contentimg: ' ',
                                                 })
                                                 UserInfos.post_number++
                                             }
                                         })
-                                        //update unconnected_social_media(delete)
-                                        unconnected_social_media = unconnected_social_media.filter((element) => {
-                                            if (!element.includes('Twitter')) {
-                                                return true
-                                            }
-                                        })
-                                        //update unconnected_social_media to database
-                                        const filter1 = { user_name: req.user.username }
-                                        const update1 = { unconnected_social_media: unconnected_social_media }
-                                        UserInfo.findOneAndUpdate(filter1, update1, {
-                                            new: true,
-                                        })
-                                        //console.log('c',unconnected_social_media )
-
-                                        if (!linked_social_media.includes('Twitter')) {
-                                            //update linked_social_media(add)
-                                            linked_social_media.push('Twitter')
-                                            //update linked_social_media to database
-                                            const filter2 = { user_name: req.user.username }
-                                            const update2 = { linked_social_media: linked_social_media }
-                                            UserInfo.findOneAndUpdate(filter2, update2, {
-                                                new: true,
-                                            })
-                                            //console.log('d',linked_social_media )
-                                        }
-
-                                        await UserInfos.save(function (saveErr, saveUserInfos) {
+                                        await UserInfos.save(async function (saveErr, saveUserInfos) {
                                             if (err) {
                                                 console.log('error saving post')
                                                 res.status(500).send()
+                                            } else {
+                                                //update unconnected_social_media(delete)
+                                                await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
+                                                    try {
+                                                        console.log('before: unconnected_social_media', unconnected_social_media)
+                                                        unconnected_social_media1 = unconnected_social_media.filter((element) => {
+                                                            if (element !== 'Twitter') {
+                                                                console.log('not !== facebook', element)
+                                                                return true
+                                                            }
+                                                        })
+                                                        console.log('after: unconnected_social_media1', unconnected_social_media1)
+                                                        //update unconnected_social_media to database
+                                                        const filter1 = { user_name: req.user.username }
+                                                        const update1 = { unconnected_social_media: unconnected_social_media1 }
+                                                        await UserInfo.findOneAndUpdate(filter1, update1, {
+                                                            new: true,
+                                                        })
+                                                        console.log('c', unconnected_social_media1)
+                                                        await UserInfos.save(function (saveErr, saveUserInfos) {
+                                                            if (err) {
+                                                                console.log('error saving post')
+                                                                res.status(500).send()
+                                                            }
+                                                        })
+
+                                                        if (!linked_social_media.includes('Twitter')) {
+                                                            //update linked_social_media(add)
+                                                            linked_social_media.push('Twitter')
+                                                            //update linked_social_media to database
+                                                            const filter2 = { user_name: req.user.username }
+                                                            const update2 = { linked_social_media: linked_social_media }
+                                                            await UserInfo.findOneAndUpdate(filter2, update2, {
+                                                                new: true,
+                                                            })
+                                                            //console.log('d',linked_social_media )
+                                                        }
+                                                        await UserInfos.save(function (saveErr, saveUserInfos) {
+                                                            if (err) {
+                                                                console.log('error saving post')
+                                                                res.status(500).send()
+                                                            }
+                                                        })
+                                                    } catch (e) {
+                                                        console.log(e)
+                                                        res.status(500).send()
+                                                    }
+                                                })
                                             }
                                         })
                                     } catch (e) {
@@ -146,7 +167,6 @@ twitterAccessRouter.get('/', async (req, res) => {
                                         res.status(500).send()
                                     }
                                 })
-                                //after success saving post, add twitter to linked_social_media list
                             }
                         }
                     })
