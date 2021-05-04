@@ -110,20 +110,22 @@ instagramRouter.get('/', async (req, res) => {
                                             post_data_id.forEach((e) => {
                                                 request(
                                                     `https://graph.instagram.com/${e.id}?fields=caption,timestamp&access_token=${short_lived_accessToken}`,
-    
+
                                                     function (error, response, body) {
                                                         if (error) {
                                                             console.log('error')
                                                         } else {
-                                                            console.log(`https://graph.instagram.com/${e.id}?fields=caption,timestamp&access_token=${short_lived_accessToken}`)
+                                                            //console.log(`https://graph.instagram.com/${e.id}?fields=caption,timestamp&access_token=${short_lived_accessToken}`)
                                                             const res = JSON.parse(body)
                                                             console.log('a post data:', res)
+
+                                                            //add to post_data array
+                                                            post_data.push(res)
                                                         }
                                                     }
                                                 )
                                             })
-
-                                            
+                                            console.log('post_data', post_data)
                                         }
                                     }
                                 )
