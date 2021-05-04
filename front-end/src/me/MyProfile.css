@@ -73,7 +73,7 @@ div.MyProfile #avatar {
     float: left;
     background-color: white;
     position: relative;
-    bottom: 0px;
+    bottom: -4px;
     z-index: 2; /* z-index only works on positioned elements*/
 }
 div.MyProfile #username {
@@ -91,7 +91,7 @@ div.MyProfile #bio {
     height: 20px;
     color: #747070;
     position: relative;
-    bottom: -25px;
+    bottom: -20px;
     left: -4px;
 }
 div.MyProfile #message_text {
