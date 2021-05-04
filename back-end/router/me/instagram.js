@@ -39,7 +39,7 @@ instagramRouter.get('/', async (req, res) => {
         const client_secret = `${process.env.CLIENT_SERECT}`
         const redirect_uri = 'https://ozonewebapp.com/instagram_auth/'
         let long_lived_token = ''
-        let post_data = ''
+        let post_data = []
         let short_lived_accessToken = ''
         let user_id = ''
         if (req.query.url) {
