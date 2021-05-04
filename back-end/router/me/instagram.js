@@ -109,6 +109,7 @@ instagramRouter.get('/', async (req, res) => {
 
                                             post_data_id.forEach((element) => {
                                                 console.log('element', element)
+                                                console.log('element.id', element.id)
                                                 request(
                                                     `https://graph.instagram.com/${element.id}&access_token=${short_lived_accessToken}`,
 
