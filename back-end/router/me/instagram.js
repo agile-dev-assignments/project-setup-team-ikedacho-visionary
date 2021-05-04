@@ -82,24 +82,26 @@ instagramRouter.get('/', async (req, res) => {
 
                     //get short lived access token
                     request(
-                        `https://graph.instagram.com/access_token=${short_lived_accessToken}`,
+                        `https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret={client_secret}&access_token={short_lived_accessToken}`,
 
                          function (error, response, body) {
                             if (error) {
                                 console.log('error')
                             } else {
+                                console.log(body)
                                 const res = JSON.parse(body)
                                 console.log('get long-lived-token(body)', JSON.parse(body))
                                 long_lived_token = res.access_token
 
                                 //get userid
                                 request(
-                                    `https://graph.instagram.com/me?fields=id,username&access_token=${short_lived_accessToken}`,
+                                    `https://graph.instagram.com/me?fields=id,username&access_token=${long_lived_token}`,
 
                                      function (error, response, body) {
                                         if (error) {
                                             console.log('error')
                                         } else {
+                                            console.log(body)
                                             const res = JSON.parse(body)
                                             console.log('get username', JSON.parse(body))
                                             const username = res.username
