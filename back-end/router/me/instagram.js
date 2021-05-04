@@ -42,7 +42,6 @@ instagramRouter.get('/', async (req, res) => {
         let post_data = ''
         let short_lived_accessToken = ''
         let user_id = ''
-
         if (req.query.url) {
             let url = req.query.url
             console.log('url', url)
@@ -80,21 +79,34 @@ instagramRouter.get('/', async (req, res) => {
                     short_lived_accessToken = res.access_token
                     //get userid
                     user_id = res.user_id
-
+                    console.log('user_id', user_id)
                     //get userid
                     request(
-                        `https://graph.instagram.com/${user_id}/media?access_token=${short_lived_accessToken}`,
+                        `https://graph.instagram.com/me?fields=id,username&access_token=${short_lived_accessToken}`,
 
                         function (error, response, body) {
                             if (error) {
                                 console.log('error')
                             } else {
+                                console.log(body)
                                 const res = JSON.parse(body)
-                                console.log('get media node', res)
-                                const username = res.data.username
+                                console.log('get user node', JSON.parse(body))
+                                const username = res.username
                                 console.log(username)
-                                const media_count = res.paging
-                                console.log(media_count)
+                                user_id = res.user_id
+                                console.log('user_id', user_id)
+                                request(
+                                    `https://graph.instagram.com/${user_id}/media?access_token=${short_lived_accessToken}`,
+
+                                    function (error, response, body) {
+                                        if (error) {
+                                            console.log('error')
+                                        } else {
+                                            const res = JSON.parse(body)
+                                            console.log('get media node', res)
+                                        }
+                                    }
+                                )
                             }
                         }
                     )
