@@ -115,7 +115,7 @@ instagramRouter.get('/', async (req, res) => {
                                                         if (error) {
                                                             console.log('error')
                                                         } else {
-                                                            console.log(`https://graph.instagram.com/${post_id}?fields=caption,timestamp&access_token=${short_lived_accessToken}`)
+                                                            console.log(`https://graph.instagram.com/${e.id}?fields=caption,timestamp&access_token=${short_lived_accessToken}`)
                                                             const res = JSON.parse(body)
                                                             console.log('a post data:', res)
                                                         }
