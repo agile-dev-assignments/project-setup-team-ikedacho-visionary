@@ -72,6 +72,7 @@ div.FriendProfile #username {
     top: 20px;
     font-size: 1em;
     padding-left: 10px;
+    font-weight: bold;
 }
 
 div.FriendProfile #bio {
