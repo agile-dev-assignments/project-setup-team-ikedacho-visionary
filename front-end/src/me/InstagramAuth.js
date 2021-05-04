@@ -31,7 +31,7 @@ const InstagramAuth = (props) => {
                     }
                 }
             })
-    }, [])
+    }, [url])
 
     return (
         <div className='InstagramAuth'>
