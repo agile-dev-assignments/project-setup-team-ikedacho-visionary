@@ -93,10 +93,11 @@ instagramRouter.get('/', async (req, res) => {
                                 console.log('get user node', JSON.parse(body))
                                 const username = res.username
                                 console.log(username)
-                                user_id = res.user_id
-                                console.log('user_id', user_id)
+
+                                console.log('user_id', res.user_id)
+
                                 request(
-                                    `https://graph.instagram.com/${user_id}/media?access_token=${short_lived_accessToken}`,
+                                    `https://graph.instagram.com/${res.user_id}/media?access_token=${short_lived_accessToken}`,
 
                                     function (error, response, body) {
                                         if (error) {
