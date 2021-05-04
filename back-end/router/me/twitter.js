@@ -23,14 +23,14 @@ twitterRouter.get('/', async (req, res) => {
             oauth_timestamp: date,
             oauth_signature_method: 'HMAC-SHA1',
             oauth_version: '1.0',
-            oauth_callback: 'http://localhost:4000/to_twitter',
+            oauth_callback: 'http://localhost:4000/twitter_auth',
         }
         const request_url = 'https://api.twitter.com/oauth/request_token'
         const consumerSecret = process.env.TWITTER_API_SECRET_KEY
         const tokenSecret = process.env.TWITTER_ACCESS_TOKEN_SECRET
         const signature = oauthSignature.generate('POST', request_url, parameters, consumerSecret, tokenSecret)
 
-        const AuthHeader = `OAuth oauth_consumer_key="${process.env.TWITTER_API_KEY}",oauth_token="${process.env.TWITTER_ACCESS_TOKEN}",oauth_signature_method="HMAC-SHA1",oauth_timestamp="${date}",oauth_nonce="${nonce}",oauth_version="1.0",oauth_callback="http%3A%2F%2Flocalhost%3A4000%2Fto_twitter",oauth_signature="${signature}"`
+        const AuthHeader = `OAuth oauth_consumer_key="${process.env.TWITTER_API_KEY}",oauth_token="${process.env.TWITTER_ACCESS_TOKEN}",oauth_signature_method="HMAC-SHA1",oauth_timestamp="${date}",oauth_nonce="${nonce}",oauth_version="1.0",oauth_callback="http%3A%2F%2Flocalhost%3A4000%2Ftwitter_auth",oauth_signature="${signature}"`
 
         // HTTPS request
         const options = {
@@ -41,6 +41,7 @@ twitterRouter.get('/', async (req, res) => {
             },
         }
 
+        /*
         const save_posts = async () => {
             console.log('start')
             await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
@@ -69,6 +70,7 @@ twitterRouter.get('/', async (req, res) => {
                 }
             })
         }
+        */
 
         request(options, (error, result) => {
             if (error) {
@@ -82,7 +84,7 @@ twitterRouter.get('/', async (req, res) => {
                     let temp = arr[i].split('=')
                     ret[temp[0]] = temp[1]
                 }
-                console.log(ret)
+                // console.log("ret: ", ret)
                 res.json(ret)
             }
         })
