@@ -44,9 +44,17 @@ instagramRouter.get('/', async (req, res) => {
         const my_username = req.user.username
 
         let url = req.query.url
-        console.log(url)
+        console.log('url', url)
 
-        /*
+        let code = url.split('=')[1]
+        console.log('code', code)
+        if (code.endsWith('_')) {
+            code = code.slice(0, -1)
+        }
+        if (code.endsWith('#')) {
+            code = code.slice(0, -1)
+            console.log('code', code)
+        }
 
         //Exchange the Code for a Token
         var options = {
@@ -57,7 +65,7 @@ instagramRouter.get('/', async (req, res) => {
                 client_secret: client_secret,
                 grant_type: 'authorization_code',
                 redirect_uri: redirect_uri,
-                code: req.query.code,
+                code: code,
             },
         }
 
@@ -103,7 +111,7 @@ instagramRouter.get('/', async (req, res) => {
                     }
                 )
             }
-        })*/
+        })
     }
 })
 module.exports = instagramRouter
