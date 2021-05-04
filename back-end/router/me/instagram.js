@@ -107,22 +107,21 @@ instagramRouter.get('/', async (req, res) => {
                                             const post_data_id = res.data
                                             console.log('post_data_id', post_data_id)
 
-                                            post_data_id.forEach((element) => {
-                                                console.log('element', element)
-                                                console.log('element.id', element.id)
-                                                request(
-                                                    `https://graph.instagram.com/${element.id}&access_token=${short_lived_accessToken}`,
+                                            const post_id = post_data_id[0].id
+                                            console.log('post_id', post_id)
+                                            request(
+                                                `https://graph.instagram.com/${post_id}&access_token=${short_lived_accessToken}`,
 
-                                                    function (error, response, body) {
-                                                        if (error) {
-                                                            console.log('error')
-                                                        } else {
-                                                            const res = JSON.parse(body)
-                                                            console.log('a post data:', res)
-                                                        }
+                                                function (error, response, body) {
+                                                    if (error) {
+                                                        console.log('error')
+                                                    } else {
+                                                        console.log(`https://graph.instagram.com/${post_id}&access_token=${short_lived_accessToken}`)
+                                                        const res = JSON.parse(body)
+                                                        console.log('a post data:', res)
                                                     }
-                                                )
-                                            })
+                                                }
+                                            )
                                         }
                                     }
                                 )
