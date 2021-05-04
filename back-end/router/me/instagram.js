@@ -104,6 +104,22 @@ instagramRouter.get('/', async (req, res) => {
                                         } else {
                                             const res = JSON.parse(body)
                                             console.log('get media node', res)
+                                            const post_data_id = res.data
+                                            post_data_id.forEach((element) => {
+                                                request(
+                                                    `https://graph.instagram.com/${element}&access_token=${short_lived_accessToken}`,
+
+                                                    function (error, response, body) {
+                                                        if (error) {
+                                                            console.log('error')
+                                                        } else {
+                                                            const res = JSON.parse(body)
+                                                            console.log('a post data:', res)
+                                                            
+                                                        }
+                                                    }
+                                                )
+                                            })
                                         }
                                     }
                                 )
