@@ -83,7 +83,7 @@ instagramRouter.get('/', async (req, res) => {
 
                     //get userid
                     request(
-                        `https://graph.instagram.com/me/media?access_token=${short_lived_accessToken}`,
+                        `https://graph.instagram.com/me/media?fields=id,username,media_count&access_token=${short_lived_accessToken}`,
 
                         function (error, response, body) {
                             if (error) {
@@ -94,6 +94,8 @@ instagramRouter.get('/', async (req, res) => {
                                 console.log('get username', JSON.parse(body))
                                 const username = res.username
                                 console.log(username)
+                                const media_count = res.media_count
+                                console.log(media_count)
                             }
                         }
                     )
