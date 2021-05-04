@@ -72,6 +72,9 @@ app.use('/auth_ins', instagramRouter)
 const twitterRouter = require('./router/me/twitter')
 app.use('/get_twitter_request_token', twitterRouter)
 
+const twitterAccessRouter = require('./router/me/twitter_access')
+app.use('/get_twitter_access_token', twitterAccessRouter)
+
 const myProfileRouter = require('./router/me/my_profile')
 app.use('/get_my_profile', myProfileRouter)
 

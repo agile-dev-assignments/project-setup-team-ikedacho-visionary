@@ -38,6 +38,9 @@ import ToTwitter from './me/ToTwitter'
 import ToInstagram from './me/ToInstagram'
 import About from './me/about'
 import InstagramAuth from './me/InstagramAuth'
+import TwitterAuth from './me/TwitterAuth'
+
+
 function App() {
   return (
     <>
@@ -49,7 +52,11 @@ function App() {
               <InstagramAuth />
             </Route>
 
-          <Route path = "/login">
+            <Route path = '/twitter_auth'>
+              <TwitterAuth />
+            </Route>
+
+            <Route path = "/login">
               <Loginpage />
             </Route>
 
