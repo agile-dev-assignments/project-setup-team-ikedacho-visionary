@@ -6,10 +6,12 @@ import { useHistory } from 'react-router-dom'
 const InstagramAuth = (props) => {
     let history = useHistory()
     // the following side-effect will be called once upon initial render
-
+    const [url, setUrl] = useState([])
     useEffect(() => {
         const url = window.location.href
+        setUrl(url)
         console.log('url', url)
+
         axios('/auth_ins', {
             params: {
                 url: url,
