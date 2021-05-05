@@ -139,6 +139,9 @@ facebookRouter.get('/', async (req, res) => {
                 }
             }
         )
+        res.json({
+            statusCode: 200
+        })
     }
 })
 module.exports = facebookRouter

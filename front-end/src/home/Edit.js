@@ -38,34 +38,34 @@ const Edit = (props) => {
         console.log(post_text)
 
         if (post_text !== '') {
-            axios.get('/get_edit', {
-                //send along the post_text user typed
-                params: {
-                    post_text: post_text,
-                },
-            })
-            .then((response) => {
-                if(response.status === 200){
-                    console.log('200')
-                    window.history.go(-1)
-                    setTimeout(() => {
-                        window.location.href = window.location.href
-                    }, 100)
-                }
-            })
-            .catch(function (error) {
-                if (error.response) {
-                    if (error.response.status === 501) {
-                        console.log('Error 501: user is not login; req.user does not exist')
-                        alert('You are not logged in. Please log in and try again!')
-                        history.push('/prelogin')
+            axios
+                .get('/get_edit', {
+                    //send along the post_text user typed
+                    params: {
+                        post_text: post_text,
+                    },
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        console.log('200')
+                        window.history.go(-1)
                         setTimeout(() => {
                             window.location.href = window.location.href
                         }, 100)
                     }
-                }      
-            })
-            
+                })
+                .catch(function (error) {
+                    if (error.response) {
+                        if (error.response.status === 501) {
+                            console.log('Error 501: user is not login; req.user does not exist')
+                            alert('You are not logged in. Please log in and try again!')
+                            history.push('/prelogin')
+                            setTimeout(() => {
+                                window.location.href = window.location.href
+                            }, 100)
+                        }
+                    }
+                })
         } else {
             alert('You need to write some text')
             e.preventDefault()
@@ -108,7 +108,7 @@ const Edit = (props) => {
 
                 {/*<button className = "Commentbutton" onClick = {_showComment.bind()}>Upload picture</button>*/}
                 {state.showComment && <>{<Post_picture />}</>}
-
+                {/*
                 <div className='post'>
                     <span onClick={_setShow}>Post to ▼️ </span>
                     <div className='post-checkbox' style={{ opacity: show ? 1 : 0 }}>
@@ -128,8 +128,7 @@ const Edit = (props) => {
                             Instagram
                         </label>
                     </div>
-                </div>
-
+                </div>*/}
             </section>
         </div>
     )
