@@ -45,6 +45,15 @@ const TwitterAuth = (props) => {
                             window.location.href = window.location.href
                         }, 100)
                     }
+
+                    if (error.response.status === 502) {
+                        console.log('Error 502: permission error')
+                        alert('Error. Please try again!')
+                        history.push('/me')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
                 }
             })
     }, [url])

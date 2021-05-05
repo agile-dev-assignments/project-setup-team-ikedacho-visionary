@@ -31,7 +31,7 @@ const ToTwitter = (props) => {
                             window.location.href = window.location.href
                         }, 100)
                     }
-                }
+                } 
             })
     }
 
