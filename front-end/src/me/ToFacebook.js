@@ -31,34 +31,21 @@ const ToFacebook = (props) => {
         })(document, 'script', 'facebook-jssdk')
     }
     const setButton = (e) => {
-        window.FB.getLoginStatus(function (response) {
-            console.log(response)
+        window.FB.login(
+            function (response) {
+                // handle the response
+                console.log(response)
 
-            if (response.status === 'unknown') {
-                // the user isn't logged in to Facebook.
+                let accessToken = response.authResponse.accessToken
+                console.log(accessToken)
+                setAccessToken(accessToken)
+                // modify the facebook element.
+                e.style.background = '#3b5998'
 
-                window.FB.login(
-                    function (response) {
-                        // handle the response
-                        console.log(response)
-                        if (response.status === 'connected') {
-                            console.log('Successed! User logged in and autenticated')
-                            let accessToken = response.authResponse.accessToken
-                            console.log(accessToken)
-                            setAccessToken(accessToken)
-                            // modify the facebook element.
-                            e.style.background = '#3b5998'
-                            e.innerText = 'Successfully connected!'
-                            e.style.color = 'white'
-                        } else {
-                            console.log('error')
-                            alert('Error. Please try again')
-                        }
-                    },
-                    { scope: 'user_posts', auth_type: 'rerequest' }
-                )
-            }
-        })
+                e.style.color = 'white'
+            },
+            { scope: 'user_posts', auth_type: 'rerequest' }
+        )
     }
     const fetchData = async () => {
         await axios('/get_facebook', {
@@ -68,6 +55,11 @@ const ToFacebook = (props) => {
         })
             .then((response) => {
                 console.log(response)
+                alert('Successfully connect to Facebook!')
+                history.push('/me')
+                setTimeout(() => {
+                    window.location.href = window.location.href
+                }, 100)
             })
             .catch(function (error) {
                 if (error.response) {
