@@ -55,6 +55,7 @@ const ToFacebook = (props) => {
         })
             .then((response) => {
                 console.log(response)
+                alert('Successfully connect to Facebook!')
                 history.push('/me')
                 setTimeout(() => {
                     window.location.href = window.location.href
