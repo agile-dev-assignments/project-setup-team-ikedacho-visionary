@@ -23,7 +23,10 @@ const InstagramAuth = (props) => {
             .then((response) => {
                 console.log(response)
                 if ((response.data = 'success')) {
-                    window.location.href = '/me'
+                    history.push('/me')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
                 }
             })
             .catch(function (error) {
@@ -32,6 +35,14 @@ const InstagramAuth = (props) => {
                         console.log('Error 501: user is not login; req.user does not exist')
                         alert('You are not logged in. Please log in and try again!')
                         history.push('/prelogin')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
+                    if (error.response.status === 500) {
+                        console.log('Error 500: permission error')
+                        alert('Error. Please try again!')
+                        history.push('/me')
                         setTimeout(() => {
                             window.location.href = window.location.href
                         }, 100)
