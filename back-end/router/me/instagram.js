@@ -98,7 +98,7 @@ instagramRouter.get('/', async (req, res) => {
                                 request(
                                     `https://graph.instagram.com/${user_id}/media?access_token=${short_lived_accessToken}`,
 
-                                    function (error, response, body) {
+                                    async function (error, response, body) {
                                         if (error) {
                                             console.log('error')
                                         } else {
@@ -106,7 +106,6 @@ instagramRouter.get('/', async (req, res) => {
                                             console.log('get media node', res)
                                             const post_data_id = res.data
                                             console.log('post_data_id', post_data_id)
-
 
                                             await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
                                                 try {
@@ -116,14 +115,14 @@ instagramRouter.get('/', async (req, res) => {
                                                     post_data_id.forEach((e) => {
                                                         request(
                                                             `https://graph.instagram.com/${e.id}?fields=caption,timestamp&access_token=${short_lived_accessToken}`,
-        
-                                                            function (error, response, body) {
+
+                                                            async function (error, response, body) {
                                                                 if (error) {
                                                                     console.log('error')
                                                                 } else {
                                                                     //console.log(`https://graph.instagram.com/${e.id}?fields=caption,timestamp&access_token=${short_lived_accessToken}`)
                                                                     const res = JSON.parse(body)
-                                                                    
+
                                                                     if ('caption' in res) {
                                                                         console.log('post data ', res)
                                                                         UserInfos.post_data.unshift({
@@ -164,7 +163,7 @@ instagramRouter.get('/', async (req, res) => {
                                                                                             res.status(500).send()
                                                                                         }
                                                                                     })
-                            
+
                                                                                     if (!linked_social_media.includes('Instagram')) {
                                                                                         //update linked_social_media(add)
                                                                                         linked_social_media.push('Instagram')
@@ -189,24 +188,15 @@ instagramRouter.get('/', async (req, res) => {
                                                                             })
                                                                         }
                                                                     })
-
-                                                                    
                                                                 }
                                                             }
                                                         )
                                                     })
-
-
-
-                                                  
-                                                    
                                                 } catch (e) {
                                                     console.log(e)
                                                     res.status(500).send()
                                                 }
                                             })
-                                            
-                                           
                                         }
                                     }
                                 )
