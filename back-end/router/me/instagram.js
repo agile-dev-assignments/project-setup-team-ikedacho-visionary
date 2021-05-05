@@ -12,7 +12,7 @@ instagramRouter.get('/', async (req, res) => {
                         console.log('post data for each', post_data)
                         UserInfos.post_data.unshift({
                             content: item.message,
-                            source: 'Facebook',
+                            source: 'Instagram',
                             senttime: item.created_time,
                             contentimg: ' ',
                         })
@@ -72,6 +72,7 @@ instagramRouter.get('/', async (req, res) => {
             request(options, function (error, response, body) {
                 if (error) {
                     console.log('error')
+                    res.status(502).send()
                 } else {
                     const res = JSON.parse(body)
                     console.log('get short-lived-token(body)', JSON.parse(body))

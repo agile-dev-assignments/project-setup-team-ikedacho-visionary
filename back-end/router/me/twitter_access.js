@@ -113,7 +113,7 @@ twitterAccessRouter.get('/', async (req, res) => {
                                                             console.log('before: unconnected_social_media', unconnected_social_media)
                                                             unconnected_social_media1 = unconnected_social_media.filter((element) => {
                                                                 if (element !== 'Twitter') {
-                                                                    console.log('not !== facebook', element)
+                                                                    console.log('not !== Twitter', element)
                                                                     return true
                                                                 }
                                                             })

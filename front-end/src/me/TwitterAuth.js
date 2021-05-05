@@ -47,7 +47,7 @@ const TwitterAuth = (props) => {
                     }
 
                     if (error.response.status === 502) {
-                        console.log('Error 502: permission error')
+                        console.log('Error 502: user canceled authorization')
                         alert('Error. Please try again!')
                         history.push('/me')
                         setTimeout(() => {
