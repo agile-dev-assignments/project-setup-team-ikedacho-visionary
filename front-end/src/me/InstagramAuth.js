@@ -3,6 +3,8 @@ import './ToInstagram.css'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
+import './InstagramAuth.css'
+
 const InstagramAuth = (props) => {
     let history = useHistory()
     // the following side-effect will be called once upon initial render
@@ -20,6 +22,9 @@ const InstagramAuth = (props) => {
         })
             .then((response) => {
                 console.log(response)
+                if ((response.data = 'success')) {
+                    window.location.href = '/me'
+                }
             })
             .catch(function (error) {
                 if (error.response) {

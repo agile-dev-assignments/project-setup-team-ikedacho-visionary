@@ -186,6 +186,7 @@ instagramRouter.get('/', async (req, res) => {
                                                                                     res.status(500).send()
                                                                                 }
                                                                             })
+                                                                            res.send('success')
                                                                         }
                                                                     })
                                                                 }

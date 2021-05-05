@@ -1,8 +1,9 @@
-import React, { useState, useEffect, cloneElement } from 'react'
+import React, { useState, useEffect } from 'react'
 import './ToInstagram.css'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
+import './TwitterAuth.css'
 
 const TwitterAuth = (props) => {
     let history = useHistory()
@@ -21,6 +22,9 @@ const TwitterAuth = (props) => {
         })
             .then((response) => {
                 console.log(response)
+                if ((response.data = 'success')) {
+                    window.location.href = '/me'
+                }
             })
             .catch(function (error) {
                 if (error.response) {
@@ -37,7 +41,7 @@ const TwitterAuth = (props) => {
     }, [url])
 
     return (
-        <div className='InstagramAuth'>
+        <div className='TwitterAuth'>
             <NavLink id='back' to='/me'>
                 Back
             </NavLink>
@@ -48,4 +52,3 @@ const TwitterAuth = (props) => {
 }
 
 export default TwitterAuth
- 
