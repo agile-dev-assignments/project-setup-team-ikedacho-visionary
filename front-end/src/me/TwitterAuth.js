@@ -38,7 +38,7 @@ const TwitterAuth = (props) => {
                     }, 100)
                 }
                 if (error.response.status === 500) {
-                    console.log('Error 500: database saving and fetching error')
+                    console.log('Error 500: permission error')
                     alert('Error. Please try again!')
                     history.push('/me')
                     setTimeout(() => {

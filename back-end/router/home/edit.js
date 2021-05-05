@@ -74,7 +74,6 @@ EditRouter.get('/', async (req, res) => {
                         })
                     } else {
                         // not found... -> do nothing! this is not a mention, or mentioning wrongly
-                        res.status(500).send()
                     }
                 }
             })
