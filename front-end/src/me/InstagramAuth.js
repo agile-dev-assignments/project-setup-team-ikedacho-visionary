@@ -21,8 +21,7 @@ const InstagramAuth = (props) => {
             },
         })
         .then((response) => {
-            console.log(response)
-
+            console.log(response.data)
             history.push('/me')
             setTimeout(() => {
                 window.location.href = window.location.href
