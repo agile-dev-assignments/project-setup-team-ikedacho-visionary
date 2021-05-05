@@ -22,12 +22,11 @@ const InstagramAuth = (props) => {
         })
             .then((response) => {
                 console.log(response)
-                if ((response.data = 'success')) {
-                    history.push('/me')
-                        setTimeout(() => {
-                            window.location.href = window.location.href
-                        }, 100)
-                }
+
+                history.push('/me')
+                setTimeout(() => {
+                    window.location.href = window.location.href
+                }, 100)
             })
             .catch(function (error) {
                 if (error.response) {
