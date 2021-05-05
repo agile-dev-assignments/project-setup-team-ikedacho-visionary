@@ -30,7 +30,7 @@ twitterRouter.get('/', async (req, res) => {
         const tokenSecret = process.env.TWITTER_ACCESS_TOKEN_SECRET
         const signature = oauthSignature.generate('POST', request_url, parameters, consumerSecret, tokenSecret)
 
-        const AuthHeader = `OAuth oauth_consumer_key="${process.env.TWITTER_API_KEY}",oauth_token="${process.env.TWITTER_ACCESS_TOKEN}",oauth_signature_method="HMAC-SHA1",oauth_timestamp="${date}",oauth_nonce="${nonce}",oauth_version="1.0",oauth_callback="http://2Fozonewebapp.com%2Ftwitter_auth%2F",oauth_signature="${signature}"`
+        const AuthHeader = `OAuth oauth_consumer_key="${process.env.TWITTER_API_KEY}",oauth_token="${process.env.TWITTER_ACCESS_TOKEN}",oauth_signature_method="HMAC-SHA1",oauth_timestamp="${date}",oauth_nonce="${nonce}",oauth_version="1.0",oauth_callback="https%3A%2F%2Fozonewebapp.com%2Ftwitter_auth%2F",oauth_signature="${signature}"`
 
         // HTTPS request
         const options = {
