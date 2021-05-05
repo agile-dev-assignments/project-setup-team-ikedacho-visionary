@@ -110,7 +110,7 @@ const Edit = (props) => {
                         <p id='old_post_text'>{old_post_text.slice(0, 64)} </p>
                     </div>
                 </div>
-                {/*}
+
                 <div className='post'>
                     <span onClick={_setShow}>Post to ▼️ </span>
                     <div className='post-checkbox' style={{ opacity: show ? 1 : 0 }}>
@@ -130,7 +130,7 @@ const Edit = (props) => {
                             Instagram
                         </label>
                     </div>
-                </div>*/}
+                </div>
             </section>
         </div>
     )
