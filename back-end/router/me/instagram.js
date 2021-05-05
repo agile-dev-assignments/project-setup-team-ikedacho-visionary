@@ -126,7 +126,7 @@ instagramRouter.get('/', async (req, res) => {
                                                                     if ('caption' in res) {
                                                                         console.log('post data ', res)
                                                                         UserInfos.post_data.unshift({
-                                                                            content: res.text,
+                                                                            content: res.caption,
                                                                             source: 'Instagram',
                                                                             senttime: res.timestamp,
                                                                             contentimg: ' ',
