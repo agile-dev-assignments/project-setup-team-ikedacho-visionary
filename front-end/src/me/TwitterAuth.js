@@ -1,8 +1,9 @@
-import React, { useState, useEffect, cloneElement } from 'react'
+import React, { useState, useEffect } from 'react'
 import './ToInstagram.css'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
+import './TwitterAuth.css'
 
 const TwitterAuth = (props) => {
     let history = useHistory()
@@ -21,6 +22,10 @@ const TwitterAuth = (props) => {
         })
             .then((response) => {
                 console.log(response)
+                history.push('/me')
+                setTimeout(() => {
+                    window.location.href = window.location.href
+                }, 100)
             })
             .catch(function (error) {
                 if (error.response) {
@@ -32,12 +37,20 @@ const TwitterAuth = (props) => {
                             window.location.href = window.location.href
                         }, 100)
                     }
+                    if (error.response.status === 500) {
+                        console.log('Error 500: permission error')
+                        alert('Error. Please try again!')
+                        history.push('/me')
+                        setTimeout(() => {
+                            window.location.href = window.location.href
+                        }, 100)
+                    }
                 }
             })
     }, [url])
 
     return (
-        <div className='InstagramAuth'>
+        <div className='TwitterAuth'>
             <NavLink id='back' to='/me'>
                 Back
             </NavLink>
@@ -48,4 +61,3 @@ const TwitterAuth = (props) => {
 }
 
 export default TwitterAuth
- 

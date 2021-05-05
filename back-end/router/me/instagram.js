@@ -45,7 +45,7 @@ instagramRouter.get('/', async (req, res) => {
         if (req.query.url) {
             let url = req.query.url
             console.log('url', url)
-
+            
             let code = url.split('=')[1]
             console.log('code', code)
             if (code.endsWith('_')) {
@@ -186,6 +186,7 @@ instagramRouter.get('/', async (req, res) => {
                                                                                     res.status(500).send()
                                                                                 }
                                                                             })
+                                                                            res.send('success')
                                                                         }
                                                                     })
                                                                 }

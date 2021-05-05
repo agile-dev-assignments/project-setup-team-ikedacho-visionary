@@ -32,7 +32,7 @@ const Linked_platform_connect = (props) => {
         {/*So I will use onError in this case with src='' */}
             <img  id={props.details} onError={e=>{setImg(e.target.id)}}  alt={props.details}   src=""/>
             
-            <button id={props.details} >Connected</button>
+            <button id={props.details} >Update</button>
         </div>
 
     )
