@@ -107,25 +107,106 @@ instagramRouter.get('/', async (req, res) => {
                                             const post_data_id = res.data
                                             console.log('post_data_id', post_data_id)
 
-                                            post_data_id.forEach((e) => {
-                                                request(
-                                                    `https://graph.instagram.com/${e.id}?fields=caption,timestamp&access_token=${short_lived_accessToken}`,
 
-                                                    function (error, response, body) {
-                                                        if (error) {
-                                                            console.log('error')
-                                                        } else {
-                                                            //console.log(`https://graph.instagram.com/${e.id}?fields=caption,timestamp&access_token=${short_lived_accessToken}`)
-                                                            const res = JSON.parse(body)
-                                                            console.log('a post data:', res)
+                                            await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
+                                                try {
+                                                    linked_social_media = UserInfos.linked_social_media
+                                                    unconnected_social_media = UserInfos.unconnected_social_media
 
-                                                            //add to post_data array
-                                                            post_data.push(res)
-                                                        }
-                                                    }
-                                                )
+                                                    post_data_id.forEach((e) => {
+                                                        request(
+                                                            `https://graph.instagram.com/${e.id}?fields=caption,timestamp&access_token=${short_lived_accessToken}`,
+        
+                                                            function (error, response, body) {
+                                                                if (error) {
+                                                                    console.log('error')
+                                                                } else {
+                                                                    //console.log(`https://graph.instagram.com/${e.id}?fields=caption,timestamp&access_token=${short_lived_accessToken}`)
+                                                                    const res = JSON.parse(body)
+                                                                    
+                                                                    if ('caption' in res) {
+                                                                        console.log('post data ', res)
+                                                                        UserInfos.post_data.unshift({
+                                                                            caption: res.text,
+                                                                            source: 'Instagram',
+                                                                            senttime: res.timestamp,
+                                                                            contentimg: ' ',
+                                                                        })
+                                                                        UserInfos.post_number++
+                                                                    }
+
+                                                                    await UserInfos.save(async function (saveErr, saveUserInfos) {
+                                                                        if (err) {
+                                                                            console.log('error saving post')
+                                                                            res.status(500).send()
+                                                                        } else {
+                                                                            //update unconnected_social_media(delete)
+                                                                            await UserInfo.findOne({ user_name: my_username }, async (err, UserInfos) => {
+                                                                                try {
+                                                                                    console.log('before: unconnected_social_media', unconnected_social_media)
+                                                                                    unconnected_social_media1 = unconnected_social_media.filter((element) => {
+                                                                                        if (element !== 'Instagram') {
+                                                                                            console.log('not !== instagram', element)
+                                                                                            return true
+                                                                                        }
+                                                                                    })
+                                                                                    console.log('after: unconnected_social_media1', unconnected_social_media1)
+                                                                                    //update unconnected_social_media to database
+                                                                                    const filter1 = { user_name: req.user.username }
+                                                                                    const update1 = { unconnected_social_media: unconnected_social_media1 }
+                                                                                    await UserInfo.findOneAndUpdate(filter1, update1, {
+                                                                                        new: true,
+                                                                                    })
+                                                                                    console.log('c', unconnected_social_media1)
+                                                                                    await UserInfos.save(function (saveErr, saveUserInfos) {
+                                                                                        if (err) {
+                                                                                            console.log('error update unconnected_social_media1')
+                                                                                            res.status(500).send()
+                                                                                        }
+                                                                                    })
+                            
+                                                                                    if (!linked_social_media.includes('Instagram')) {
+                                                                                        //update linked_social_media(add)
+                                                                                        linked_social_media.push('Instagram')
+                                                                                        //update linked_social_media to database
+                                                                                        const filter2 = { user_name: req.user.username }
+                                                                                        const update2 = { linked_social_media: linked_social_media }
+                                                                                        await UserInfo.findOneAndUpdate(filter2, update2, {
+                                                                                            new: true,
+                                                                                        })
+                                                                                        //console.log('d',linked_social_media )
+                                                                                    }
+                                                                                    await UserInfos.save(function (saveErr, saveUserInfos) {
+                                                                                        if (err) {
+                                                                                            console.log('error update linked_social_media')
+                                                                                            res.status(500).send()
+                                                                                        }
+                                                                                    })
+                                                                                } catch (e) {
+                                                                                    console.log(e)
+                                                                                    res.status(500).send()
+                                                                                }
+                                                                            })
+                                                                        }
+                                                                    })
+
+                                                                    
+                                                                }
+                                                            }
+                                                        )
+                                                    })
+
+
+
+                                                  
+                                                    
+                                                } catch (e) {
+                                                    console.log(e)
+                                                    res.status(500).send()
+                                                }
                                             })
-                                            console.log('post_data', post_data)
+                                            
+                                           
                                         }
                                     }
                                 )
