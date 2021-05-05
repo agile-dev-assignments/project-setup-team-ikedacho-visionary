@@ -71,7 +71,7 @@ instagramRouter.get('/', async (req, res) => {
 
             request(options, function (error, response, body) {
                 if (error) {
-                    console.log('error')
+                    console.error('error')
                     res.status(502).send()
                 } else {
                     const res = JSON.parse(body)
@@ -87,7 +87,7 @@ instagramRouter.get('/', async (req, res) => {
 
                         function (error, response, body) {
                             if (error) {
-                                console.log('error')
+                                console.error('error')
                             } else {
                                 console.log(body)
                                 const res = JSON.parse(body)
@@ -101,7 +101,7 @@ instagramRouter.get('/', async (req, res) => {
 
                                     async function (error, response, body) {
                                         if (error) {
-                                            console.log('error')
+                                            console.error('error')
                                         } else {
                                             const res = JSON.parse(body)
                                             console.log('get media node', res)
@@ -119,7 +119,7 @@ instagramRouter.get('/', async (req, res) => {
 
                                                             async function (error, response, body) {
                                                                 if (error) {
-                                                                    console.log('error')
+                                                                    console.error('error')
                                                                 } else {
                                                                     //console.log(`https://graph.instagram.com/${e.id}?fields=caption,timestamp&access_token=${short_lived_accessToken}`)
                                                                     const res = JSON.parse(body)
@@ -136,8 +136,8 @@ instagramRouter.get('/', async (req, res) => {
                                                                     }
 
                                                                     await UserInfos.save(async function (saveErr, saveUserInfos) {
-                                                                        if (err) {
-                                                                            console.log('error saving post')
+                                                                        if (saveErr) {
+                                                                            console.error('error saving post')
                                                                             res.status(500).send()
                                                                         } else {
                                                                             //update unconnected_social_media(delete)
@@ -159,8 +159,8 @@ instagramRouter.get('/', async (req, res) => {
                                                                                     })
                                                                                     console.log('c', unconnected_social_media1)
                                                                                     await UserInfos.save(function (saveErr, saveUserInfos) {
-                                                                                        if (err) {
-                                                                                            console.log('error update unconnected_social_media1')
+                                                                                        if (saveErr) {
+                                                                                            console.error('error update unconnected_social_media1')
                                                                                             res.status(500).send()
                                                                                         }
                                                                                     })
@@ -177,8 +177,8 @@ instagramRouter.get('/', async (req, res) => {
                                                                                         //console.log('d',linked_social_media )
                                                                                     }
                                                                                     await UserInfos.save(function (saveErr, saveUserInfos) {
-                                                                                        if (err) {
-                                                                                            console.log('error update linked_social_media')
+                                                                                        if (saveErr) {
+                                                                                            console.error('error update linked_social_media')
                                                                                             res.status(500).send()
                                                                                         }
                                                                                     })
@@ -208,6 +208,9 @@ instagramRouter.get('/', async (req, res) => {
                 }
             })
         }
+        res.json({
+            statusCode: 200
+        })
     }
 })
 module.exports = instagramRouter
