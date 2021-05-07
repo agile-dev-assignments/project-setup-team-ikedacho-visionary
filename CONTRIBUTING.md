@@ -16,7 +16,7 @@ O-Zone uses Instagram Basic Display API to fetch your post data from your Instag
 
 -   According to the policy of Instagram Basic Display API, before Instagram approves our [App Review request](https://developers.facebook.com/docs/app-review/introduction), only Instagram account that is added as Instagram Testers of our app can use Instagram API in our app.
 
-![instruction](./instruction.png)
+![instruction](back-end/instruction.png)
 
 So please give us your Instagram username in slack, and we will add you to Instagram Testers.
 
