@@ -377,53 +377,41 @@ describe('Chat in front-end/src/me', () => {
         })
     })
 
-    
     // async function calls keeps messing with mocha
     // current version: mocha hangs after all have been finished unless explicitly call with --exit
     describe('Chat New Chat -> return roomID', () => {
         it('Should return [roomID]', (done) => {
             request(app)
-            .get('/api_create_new_chat_roomID', {
-                params: {
-                    participantsList: {
-                        user: [
-                            {
-                                username: 'asd', 
-                                userimg: ''
-                            }, 
-                            {
-                                username: 'zxc', 
-                                userimg: ''
-                            }
-                        ]
-                    }
-                }
-            })
-            .then((response) => {
-                // automatic statusCode must be 200 <-- success
-                expect(response.statusCode).to.equal(200)
-                // parse returned JSON string
-                const parsed = JSON.parse(response.text)
-                // assertions
-                expect(parsed).to.be.a('String')
-            })
+                .get('/api_create_new_chat_roomID', {
+                    params: {
+                        participantsList: {
+                            user: [
+                                {
+                                    username: 'asd',
+                                    userimg: '',
+                                },
+                                {
+                                    username: 'zxc',
+                                    userimg: '',
+                                },
+                            ],
+                        },
+                    },
+                })
+                .then((response) => {
+                    // automatic statusCode must be 200 <-- success
+                    expect(response.statusCode).to.equal(200)
+                    // parse returned JSON string
+                    const parsed = JSON.parse(response.text)
+                    // assertions
+                    expect(parsed).to.be.a('String')
+                })
             done()
         })
     })
-    
 })
 
 describe('/get_my_profile api', () => {
-    describe('res.status.', () => {
-        it('res.status should be 200.', () => {
-            request(app)
-                .get('/get_my_profile')
-                .end((response) => {
-                    expect(response.status).to.equal(200)
-                })
-        })
-    })
-
     describe('check res.body', () => {
         it('res.body', () => {
             request(app)
@@ -436,15 +424,6 @@ describe('/get_my_profile api', () => {
 })
 
 describe('/get_me api', () => {
-    describe('200', () => {
-        it('res.status should be 200.', () => {
-            request(app)
-                .get('/get_me')
-                .end((response) => {
-                    expect(response.status).to.equal(200)
-                })
-        })
-    })
     describe('check res.body', () => {
         it('res.body', () => {
             request(app)
@@ -456,53 +435,9 @@ describe('/get_me api', () => {
     })
 })
 
-describe('/api_my_comment_history api', () => {
-    describe('res.status', () => {
-        it('res.status should be 200.', () => {
-            request(app)
-                .get('/api_my_comment_history')
-                .end((response) => {
-                    expect(response.status).to.equal(200)
-                })
-        })
-    })
-    describe('check res.body', () => {
-        it('res.body', () => {
-            request(app)
-                .get('/api_my_comment_history')
-                .end((err, res) => {
-                    expect(res.body)
-                        .to.be.an.instanceof(Array)
-                        .and.to.have.property(0)
-                        .that.includes.all.keys(['id', 'post_created_by', 'post_text', 'post_image', 'commented_date', 'commented_content'])
-                })
-        })
-    })
-})
+describe('/api_my_comment_history api', () => {})
 
-describe(' /api_commented_history api', () => {
-    describe(' res.status', () => {
-        it('res.status should be 200.', () => {
-            request(app)
-                .get('/api_commented_history')
-                .end((response) => {
-                    expect(response.status).to.equal(200)
-                })
-        })
-    })
-    describe('check res.body', () => {
-        it('res.body', () => {
-            request(app)
-                .get('/api_commented_history')
-                .end((err, res) => {
-                    expect(res.body)
-                        .to.be.an.instanceof(Array)
-                        .and.to.have.property(0)
-                        .that.includes.all.keys(['id', 'post_text', 'post_image', 'post_date', 'commented_by_username', 'commented_by_profile_image', 'commented_date', 'commented_content'])
-                })
-        })
-    })
-})
+describe(' /api_commented_history api', () => {})
 
 //Test for Trending
 describe('Trending: front-end/src/Search', () => {
@@ -554,48 +489,48 @@ describe('tests for router/auxiliary', () => {
     describe('GET /api_get_user_info_by_name', () => {
         it('Should return [username, userimg, bio]', () => {
             request(app)
-            .get('/api_get_user_info_by_name', {
-                params: {},
-            })
-            .then((response) => {
-                // automatic statusCode must be 200 <-- success
-                expect(response.statusCode).to.equal(200)
-                // parse returned JSON string
-                const parsed = JSON.parse(response.text)
-                // initialize property array
-                const expectedProperty = ['username', 'userimg', 'bio']
-                // assertions
-                expect(parsed).to.be.a('Array')
-                parsed.forEach((object) => {
-                    expectedProperty.forEach((element) => {
-                        expect(object).to.have.property(element)
+                .get('/api_get_user_info_by_name', {
+                    params: {},
+                })
+                .then((response) => {
+                    // automatic statusCode must be 200 <-- success
+                    expect(response.statusCode).to.equal(200)
+                    // parse returned JSON string
+                    const parsed = JSON.parse(response.text)
+                    // initialize property array
+                    const expectedProperty = ['username', 'userimg', 'bio']
+                    // assertions
+                    expect(parsed).to.be.a('Array')
+                    parsed.forEach((object) => {
+                        expectedProperty.forEach((element) => {
+                            expect(object).to.have.property(element)
+                        })
                     })
                 })
-            })
         })
     })
 
     describe('GET /user', () => {
         it('Should return an user object', () => {
             request(app)
-            .get('/user', {
-                params: {},
-            })
-            .then((response) => {
-                // automatic statusCode must be 200 <-- success
-                expect(response.statusCode).to.equal(200)
-                // parse returned JSON string
-                const parsed = JSON.parse(response.text)
-                // initialize property array
-                const expectedProperty = ['username']
-                // assertions
-                expect(parsed).to.be.a('Array')
-                parsed.forEach((object) => {
-                    expectedProperty.forEach((element) => {
-                        expect(object).to.have.property(element)
+                .get('/user', {
+                    params: {},
+                })
+                .then((response) => {
+                    // automatic statusCode must be 200 <-- success
+                    expect(response.statusCode).to.equal(200)
+                    // parse returned JSON string
+                    const parsed = JSON.parse(response.text)
+                    // initialize property array
+                    const expectedProperty = ['username']
+                    // assertions
+                    expect(parsed).to.be.a('Array')
+                    parsed.forEach((object) => {
+                        expectedProperty.forEach((element) => {
+                            expect(object).to.have.property(element)
+                        })
                     })
                 })
-            })
         })
     })
 })
@@ -605,27 +540,24 @@ describe('tests for router/community', () => {
     describe('GET /api_being_liked', () => {
         it('Should return an Array of liked history', () => {
             request(app)
-            .get('/api_being_liked', {
-                params: {},
-            })
-            .then((response) => {
-                // automatic statusCode must be 200 <-- success
-                expect(response.statusCode).to.equal(200)
-                // parse returned JSON string
-                const parsed = JSON.parse(response.text)
-                // initialize property array
-                const expectedProperty = [
-                    'source', 'user_photo', 'user_name', 'text_content', 'img_content', 'post_issued_time', 
-                    'like_issued_time', 'liked_by_user_name', 'liked_by_user_photo'
-                ]
-                // assertions
-                expect(parsed).to.be.a('Array')
-                parsed.forEach((object) => {
-                    expectedProperty.forEach((element) => {
-                        expect(object).to.have.property(element)
+                .get('/api_being_liked', {
+                    params: {},
+                })
+                .then((response) => {
+                    // automatic statusCode must be 200 <-- success
+                    expect(response.statusCode).to.equal(200)
+                    // parse returned JSON string
+                    const parsed = JSON.parse(response.text)
+                    // initialize property array
+                    const expectedProperty = ['source', 'user_photo', 'user_name', 'text_content', 'img_content', 'post_issued_time', 'like_issued_time', 'liked_by_user_name', 'liked_by_user_photo']
+                    // assertions
+                    expect(parsed).to.be.a('Array')
+                    parsed.forEach((object) => {
+                        expectedProperty.forEach((element) => {
+                            expect(object).to.have.property(element)
+                        })
                     })
                 })
-            })
         })
     })
 })
@@ -635,17 +567,17 @@ describe('tests for home/home', () => {
     describe('GET /api_recommended', () => {
         it('Should return an Array of liked history', () => {
             request(app)
-            .get('/api_recommended', {
-                params: {},
-            })
-            .then((response) => {
-                // automatic statusCode must be 200 <-- success
-                expect(response.statusCode).to.equal(200)
-                // parse returned JSON string
-                const parsed = JSON.parse(response.text)
-                // assertions
-                expect(parsed).to.be.a('Array')
-            })
+                .get('/api_recommended', {
+                    params: {},
+                })
+                .then((response) => {
+                    // automatic statusCode must be 200 <-- success
+                    expect(response.statusCode).to.equal(200)
+                    // parse returned JSON string
+                    const parsed = JSON.parse(response.text)
+                    // assertions
+                    expect(parsed).to.be.a('Array')
+                })
         })
     })
 })
