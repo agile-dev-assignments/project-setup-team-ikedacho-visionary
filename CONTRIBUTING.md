@@ -12,7 +12,7 @@ You need to add the .env file that we send to you in #team-ikedacho-visionary ch
 
 O-Zone uses Instagram Basic Display API to fetch your post data from your Instagram account.
 
--   You must test this feature in our website hosting online which is [https://ozonewebapp.com/](https://ozonewebapp.com/). You cannot test it locally on your machine with the server running on localhost.
+-   You must test this feature in our website hosting online of domain "ozonewebapp": [https://ozonewebapp.com/](https://ozonewebapp.com/). You cannot test it locally on your machine with the server running on localhost.
 
 -   According to the policy of Instagram Basic Display API, before Instagram approves our [App Review request](https://developers.facebook.com/docs/app-review/introduction), only Instagram account that is added as Instagram Testers of our app can use Instagram API in our app.
 

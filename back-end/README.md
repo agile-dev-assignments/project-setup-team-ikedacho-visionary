@@ -118,7 +118,7 @@ O-Zone uses Instagram Basic Display API to fetch your post data from your Instag
 
 #### 1. To Successfully Connect Your Instagram Account to O-Zone Account
 
--   You must test this feature in our website hosting online which is [https://ozonewebapp.com/](https://ozonewebapp.com/). You cannot test it locally on your machine with the server running on localhost.
+-   You must test this feature in our website hosting online of domain ozonewebapp: [https://ozonewebapp.com/](https://ozonewebapp.com/). You cannot test it locally on your machine with the server running on localhost.
 
 -   According to the policy of Instagram Basic Display API, before Instagram approves our [App Review request](https://developers.facebook.com/docs/app-review/introduction), only Instagram account that is added as Instagram Testers of our app can use Instagram API in our app.
 
