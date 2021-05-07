@@ -5,7 +5,7 @@
 Our project host online at [https://ozonewebapp.com/](https://ozonewebapp.com/)
 
 ## Everything You Need to Know in Order to Run Our App
-Follow instructions in [CONTRIBUTING.md]()
+Follow instructions in [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Instruction on Building and Testing Locally
 
