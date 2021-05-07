@@ -3,7 +3,32 @@ const UserInfo = require('../../model/userInfo/userInfo')
 
 myProfileRouter.get('/', async (req, res) => {
     if (req.user === undefined) {
-        res.status(501).send()
+        const response_data = {
+            user_info: {
+                _id: 'guest',
+                follower: ['Ozone_official'],
+                following: ['Ozone_official'],
+                unconnected_social_media: ['Twitter', 'Instagram', 'Facebook'],
+                linked_social_media: ['O-Zone'],
+                user_name: 'guest',
+                user_photo: 'https://robohash.org/guest.png?size=200x200',
+                background_picture: 'https://resilientblog.co/wp-content/uploads/2019/07/sky-quotes.jpg',
+                post_number: 0,
+                bio: '🥤',
+                follower_number: 0,
+                following_number: 0,
+                post_data: [],
+                my_comment_history: [],
+                my_browse_history: [],
+                my_like_history: [],
+                others_mentioned_history: [],
+                others_liked_history: [],
+                others_commented_history: [],
+            },
+            post_data: [], //return the filtered data based on platform selected
+            linked_social_media: ['O-Zone'],
+        }
+        res.json(response_data)
     } else {
         const my_username = req.user.username
         let my_like_history

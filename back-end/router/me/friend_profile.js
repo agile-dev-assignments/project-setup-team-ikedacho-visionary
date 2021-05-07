@@ -2,10 +2,13 @@ const friendProfileRouter = require('express').Router()
 const UserInfo = require('../../model/userInfo/userInfo')
 
 friendProfileRouter.get('/', async (req, res) => {
+    let my_username=''
     if (req.user === undefined) {
-        res.status(501).send()
+        my_username = 'guest'
     } else {
-        const my_username = req.user.username
+        my_username = req.user.username
+    } 
+        
         let post_data = ''
         let friend_info = ''
         const UserName = req.query.UserName
@@ -90,7 +93,7 @@ friendProfileRouter.get('/', async (req, res) => {
 
         console.log('friend: ', response_data.friend)
         res.json(response_data)
-    }
+    
 })
 
 function isEmpty(obj) {

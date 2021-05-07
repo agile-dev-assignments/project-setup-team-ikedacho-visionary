@@ -25,7 +25,6 @@
     margin-bottom: 30px;
 }
 
-
 div.Loginpage #back {
     position: absolute;
     left: 10px;
@@ -33,4 +32,5 @@ div.Loginpage #back {
     z-index: 1;
     font-weight: 600;
     font-size: 0.9em;
+    color: black;
 }

@@ -7,7 +7,7 @@ import './Pre_MainNav.css'
 const Pre_MainNav = (props) => {
     return (
         <nav className='premainnav' id='sticky'>
-            <NavLink id='mainnav_button' to='/login'>
+            <NavLink id='mainnav_button' to='/search'>
                 Search
             </NavLink>
             <NavLink id='mainnav_button' to='/'>
@@ -16,7 +16,7 @@ const Pre_MainNav = (props) => {
             <NavLink id='mainnav_button' to='/login'>
                 Community
             </NavLink>
-            <NavLink id='mainnav_button' to='/login'>
+            <NavLink id='mainnav_button' to='/me'>
                 Me
             </NavLink>
         </nav>

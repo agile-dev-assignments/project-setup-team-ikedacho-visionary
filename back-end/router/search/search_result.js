@@ -5,40 +5,42 @@ searchResultRouter.get('/', async (req, res) => {
     //const search_key = req.query.searchQuery
     const search_keyword = req.query.searchQuery
     //console.log('search_keyword', search_key);
-
-    user_name_l = req.user.username
-
+    let my_name = ''
+    if (req.user === undefined) {
+        my_name = 'test25'
+    } else {
+        my_name = req.user.user_name
+    }
     const userInfos = await UserInfo.find()
-    let postData = [], 
+    let postData = [],
         my_like_history
 
-    userInfos.forEach(userInfo => {
+    userInfos.forEach((userInfo) => {
         const info = userInfo.toObject()
         //console.log(info.content);
 
-        const data = info.post_data.map(ele => {
-            ele.userimg= userInfo.user_photo
-            ele.UserName=userInfo.user_name 
+        const data = info.post_data.map((ele) => {
+            ele.userimg = userInfo.user_photo
+            ele.UserName = userInfo.user_name
             return ele
         })
 
-        for (let i = 0; i < info.post_data.length; i++)
-        {
-            if (info.post_data[i].content.indexOf(search_keyword) !== -1){
+        for (let i = 0; i < info.post_data.length; i++) {
+            if (info.post_data[i].content.indexOf(search_keyword) !== -1) {
                 //console.log('info.post_data[i].content', info.post_data[i].content);
                 postData = postData.concat(data[i])
             }
         }
 
-        if (userInfo.user_name === req.user.username) {
+        if (userInfo.user_name === my_name) {
             my_like_history = userInfo.my_like_history
         }
 
-       // console.log(data)
-       //postData = postData.concat(data)
+        // console.log(data)
+        //postData = postData.concat(data)
     })
 
-    postData.sort((prev,cur)=>{
+    postData.sort((prev, cur) => {
         return cur.senttime - prev.senttime
     })
 
@@ -67,7 +69,7 @@ searchResultRouter.get('/', async (req, res) => {
                         liked: fr.liked,
                         repoted: fr.repoted,
                         UserName: lr.user_name,
-                        userimg: lr.user_photo,                     
+                        userimg: lr.user_photo,
                         like_switch: true,
                     })
                     matched = true

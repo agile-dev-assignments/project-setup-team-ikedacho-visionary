@@ -5,7 +5,7 @@ ssh-add ~/.ssh/id_rsa
 ssh-add -l
 
 #ssh root@157.230.229.147
-#cd ~/demo
+#cd ~/home/travis/demo
 
 #if [ -d "project-setup-team-ikedacho-visionary" ] ; then
 #    echo "Directory project-setup-team-ikedacho-visionary exists."
@@ -24,6 +24,6 @@ ssh-add -l
 #  cd ../back-end
 #  npm install
 #  echo "in back-end. start pm2..."
-#  pm2 start server.js --name "server"
+#  pm2 restart server.js --name "server --watch"
  
 echo "finish"

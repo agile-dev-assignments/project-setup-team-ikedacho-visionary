@@ -10,7 +10,15 @@
 
 *   ### Minimum Viable Product:
     *   Basic functionality
-        *   Access to user's registered social media accounts; 
-        *   Display contents of popular posts from multiple social media platforms on the home page; 
-        *   Allow users to send new posts to multiple social media platforms via O-zone;
-        *   Set up user accounts on the platform. 
+        *   Create an O-Zone account;
+        *   Link O-Zone account to other social media accounts and show all posts from the user's linked social media on user's O-Zone profile page; 
+        *   Display posts from multiple social media platforms on the home page; 
+        *   Search for posts and other O-Zone users;
+        *   Create posts in O-Zone;
+        *   Chat with other O-Zone users;
+        *   Comment/Like/Repost on posts;
+        *   Mention a user in comment/post;
+        *   Follow/Unfollow other O-Zone users;
+        *   See other O-Zone user's profile page; 
+        *   My Comment history, my Like history, my Browse History;
+        *   Mention message, comment message, like message;

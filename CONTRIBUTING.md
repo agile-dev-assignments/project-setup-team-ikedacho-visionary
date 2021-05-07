@@ -1,5 +1,53 @@
 # Guide to Contributing
 
+## Instruction on Building and Testing Locally
+
+- Follow instructions in [README.md in back-end directory](https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary/blob/121bd042fc56a877568f33acd2928b3f521d41a5/back-end/README.md) to build and test our project locally.
+### Instruction on Local Development Environment Setup
+
+You need to add the .env file that we send to you in #team-ikedacho-visionary channel in Slack to `back-end` directory to run our project. 
+
+## Instruction on Testing the Feature that Connecting Instagram/Twitter/Twitter Account to O-Zone Account
+#### 1. To Successfully Connect Your Instagram Account to O-Zone Account
+
+O-Zone uses Instagram Basic Display API to fetch your post data from your Instagram account.
+
+-   You must test this feature in our website hosting online of domain "ozonewebapp": [https://ozonewebapp.com/](https://ozonewebapp.com/). You cannot test it locally on your machine with the server running on localhost.
+
+-   According to the policy of Instagram Basic Display API, before Instagram approves our [App Review request](https://developers.facebook.com/docs/app-review/introduction), only Instagram account that is added as Instagram Testers of our app can use Instagram API in our app.
+
+![instruction](./instruction.png)
+
+So please give us your Instagram username in slack, and we will add you to Instagram Testers.
+
+After we add you to Instagram Testers, we will notify you and you can test our connecting to Instagram feature with the following steps:
+
+1. Go to the Me page.
+2. Click the `connect` to Instagram button.
+3. Click the `Instagram login` button
+4. Click 'Allow in Instagram authorization page to give permission to O-Zone so that O-Zone can access your Instagram post data. Then O-Zone will save your Instagram post data to the O-Zone database and will show them on your O-Zone profile page.
+
+#### 2. To Successfully Connect Your Facebook Account to O-Zone Account
+
+O-Zone uses Facebook Login and Facebook Graph API to fetch your post data from your Facebook account.
+
+-   You can both test this feature in our website hosting online which is [https://ozonewebapp.com/](https://ozonewebapp.com/). Or you can test it locally on your machine with server running on localhost.
+
+-   According to the policy of Facebook Login and Facebook Graph API, before Facebook approves our App Review request, only the Facebook account that is added as Administrators can use Facebook API in our app.
+
+So please give us your Facebook username in slack, and we will add you to Facebook Administrators.
+
+After you are added to Facebook Administrators, we will notify you and you can do test our connecting to Facebook feature.
+
+#### 3. To Successfully Connect Your Twitter Account to O-Zone Account
+
+O-Zone uses Twitter API to fetch your post data from your Twitter account.
+
+-   You must test this feature in our website hosting online which is [https://ozonewebapp.com/](https://ozonewebapp.com/). You cannot test it locally on your machine with the server running on localhost.
+
+-   According to the policy of Twitter API, no App Review is required so we can test this feature on our [website]((https://ozonewebapp.com/) now.
+
+## Overview
 *   ### Project's Values
     *   Project value: O-zone's value is to create an efficient social media management platform. Users could create, publish and analyze contents they and others post on various social media accounts. 
 *  ### Team Norms
@@ -36,11 +84,21 @@
 *   ### Disagreements or Conflicts Resolving
     *   If any major disagreement or conflict arises, a debate/discussion session will be held with the rest of the team members auditing. 
     *   If team still cannot reach an agreement, a vote will be held in team Slack channel for tracking purposes where the product manager in duty has 1.5x weighting. 
-*   ### Instruction on Local Development Environment Setup
-    *   This project will be developed in an UNIX-like operating system. 
-    *   More environment setups to be updated in the future if needed. 
-*   ### Instruction on Building and Testing 
-    *   Complete function or module given assumed inputs and desired outputs. 
-    *   Unit test on function or module upon completion if possible. 
-    *   Run entire program if big change on structure or new major feature is completed. 
-    *   More testing measures to be updated in the future if needed. 
+*   ##### Roles of team members:
+        *   ###### Product Manager: 
+            *   Before the sprint planning phase, PM finishes writing a list of user stories.
+            *   In the sprint planning phase, PM explains every user story to developers.
+            *   In the sprint planning phase, PM collaborates with the developers to determine the Acceptance Criteria of User Stories which represents the minimum requirements for User Stories to be considered done. 
+            *   In the sprint planning phase, PM collaborates with the developers to do the Estimation of Effort of each User Story to determine how much work the User Story will be. Planning Poker is used to determine the workload of the User Story.
+            *   In the sprint planning phase, based on the Estimation of Effort of each User Story, PM collaborates with the developers to divide each user story to tasks. Each task should be done by one developer in 2 days, before the next Scrum Meeting/Daily Standup. Each task is assigned to one developer. 
+            *   In the stakeholder demo phase, the PM collects stakeholder's suggestions, and adds new user stories to the list.
+        *   ###### Scrum Master:
+            *   Ensure the team is following the scrum framework in the agile way.
+            *   Remind members of what to do in the scrum meeting.
+            *   Remind members of their role and their tasks.
+        *   ###### Developers: 
+            *   In the sprint planning phase, after PM explains the user story, developers collaborate with the PM to determine the Acceptance Criteria of User Stories which represents the minimum requirements for User Stories to be considered done. 
+            *   In the sprint planning phase, developers collaborate with the PM to do the Estimation of Effort of each User Story to determine how much work the User Story will be. Planning Poker is used to determine the workload of the User Story.
+            *   In the sprint planning phase, based on the Estimation of Effort of each User Story, developers collaborate with the PM to divide each user story to tasks. Each task should be done by one developer in 2 days, before every Scrum Meeting/Daily Standup.
+            *   In the sprint planning phase, developers determine some spikes for the sprint, such as setting up the environment for the project to run and what to learn in order to finish the task.
+            *   Developers complete the task or the spike assigned to them in 2 days before the next scrum meeting.

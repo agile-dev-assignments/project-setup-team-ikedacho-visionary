@@ -30,8 +30,8 @@ const WhatsNew = (props) => {
                 if (error.response) {
                     if (error.response.status === 501) {
                         console.log('Error 501: user is not login; req.user does not exist')
-                        alert('You are not logged in. Please log in and try again!')
-                        history.push('/prelogin')
+
+                        history.push('/login')
                         setTimeout(() => {
                             window.location.href = window.location.href
                         }, 100)
@@ -44,7 +44,7 @@ const WhatsNew = (props) => {
         <div className='WhatsNew'>
             <section className='main-content'>
                 {post_data.map((item) => (
-                    <PostContent 
+                    <PostContent
                         key={item.id}
                         self_username={self_username}
                         like_switch={item.like_switch}
