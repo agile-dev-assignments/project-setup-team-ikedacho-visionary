@@ -33,4 +33,12 @@ auxiliaryRouter.get('/my_info', (req, res) => {
         }
     })
 })
+
+auxiliaryRouter.get('/user_ins', (req, res) => {
+    if (req.user === undefined) {
+        res.status(501).end()
+    } else {
+        res.send(req.user) // The req.user stores the entire user that has been authenticated inside of it.
+    }
+})
 module.exports = auxiliaryRouter

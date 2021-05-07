@@ -2,7 +2,7 @@
 
 [![Build Status](https://www.travis-ci.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.svg?branch=master)](https://www.travis-ci.com/agile-dev-assignments/project-setup-team-ikedacho-visionary)
 
-Our project host online at [https://ozonewebapp.com/](https://ozonewebapp.com/)
+Our project hosts online at [https://ozonewebapp.com/](https://ozonewebapp.com/)
 
 ## Everything You Need to Know in Order to Run Our App
 Follow instructions in [CONTRIBUTING.md](CONTRIBUTING.md)
