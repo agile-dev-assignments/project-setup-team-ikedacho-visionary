@@ -3,9 +3,18 @@
 [![Build Status](https://www.travis-ci.com/agile-dev-assignments/project-setup-team-ikedacho-visionary.svg?branch=master)](https://www.travis-ci.com/agile-dev-assignments/project-setup-team-ikedacho-visionary)
 
 Our project host online at [https://ozonewebapp.com/](https://ozonewebapp.com/)
+
+## Everything You Need to Know in Order to Run Our App
+Follow instructions in [CONTRIBUTING.md]()
+
 ## Instruction on Building and Testing Locally
 
 Follow instructions in [README.md in back-end directory](https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary/blob/121bd042fc56a877568f33acd2928b3f521d41a5/back-end/README.md) to build and test our project locally.
+
+## Demo Video
+
+Check our project demo video: [https://www.youtube.com/watch?v=q0Z9zFjH8RI](https://www.youtube.com/watch?v=q0Z9zFjH8RI)
+
 
 ## Overview
 *   ### Project Description, Product Vision Statement
