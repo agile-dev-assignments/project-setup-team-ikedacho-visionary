@@ -85,20 +85,20 @@ O-Zone uses Twitter API to fetch your post data from your Twitter account.
     *   If any major disagreement or conflict arises, a debate/discussion session will be held with the rest of the team members auditing. 
     *   If team still cannot reach an agreement, a vote will be held in team Slack channel for tracking purposes where the product manager in duty has 1.5x weighting. 
 *   ##### Roles of team members:
-        *   ###### Product Manager: 
-            *   Before the sprint planning phase, PM finishes writing a list of user stories.
-            *   In the sprint planning phase, PM explains every user story to developers.
-            *   In the sprint planning phase, PM collaborates with the developers to determine the Acceptance Criteria of User Stories which represents the minimum requirements for User Stories to be considered done. 
-            *   In the sprint planning phase, PM collaborates with the developers to do the Estimation of Effort of each User Story to determine how much work the User Story will be. Planning Poker is used to determine the workload of the User Story.
-            *   In the sprint planning phase, based on the Estimation of Effort of each User Story, PM collaborates with the developers to divide each user story to tasks. Each task should be done by one developer in 2 days, before the next Scrum Meeting/Daily Standup. Each task is assigned to one developer. 
-            *   In the stakeholder demo phase, the PM collects stakeholder's suggestions, and adds new user stories to the list.
-        *   ###### Scrum Master:
-            *   Ensure the team is following the scrum framework in the agile way.
-            *   Remind members of what to do in the scrum meeting.
-            *   Remind members of their role and their tasks.
-        *   ###### Developers: 
-            *   In the sprint planning phase, after PM explains the user story, developers collaborate with the PM to determine the Acceptance Criteria of User Stories which represents the minimum requirements for User Stories to be considered done. 
-            *   In the sprint planning phase, developers collaborate with the PM to do the Estimation of Effort of each User Story to determine how much work the User Story will be. Planning Poker is used to determine the workload of the User Story.
-            *   In the sprint planning phase, based on the Estimation of Effort of each User Story, developers collaborate with the PM to divide each user story to tasks. Each task should be done by one developer in 2 days, before every Scrum Meeting/Daily Standup.
-            *   In the sprint planning phase, developers determine some spikes for the sprint, such as setting up the environment for the project to run and what to learn in order to finish the task.
-            *   Developers complete the task or the spike assigned to them in 2 days before the next scrum meeting.
+    *   ###### Product Manager: 
+        *   Before the sprint planning phase, PM finishes writing a list of user stories.
+        *   In the sprint planning phase, PM explains every user story to developers.
+        *   In the sprint planning phase, PM collaborates with the developers to determine the Acceptance Criteria of User Stories which represents the minimum requirements for User Stories to be considered done. 
+        *   In the sprint planning phase, PM collaborates with the developers to do the Estimation of Effort of each User Story to determine how much work the User Story will be. Planning Poker is used to determine the workload of the User Story.
+        *   In the sprint planning phase, based on the Estimation of Effort of each User Story, PM collaborates with the developers to divide each user story to tasks. Each task should be done by one developer in 2 days, before the next Scrum Meeting/Daily Standup. Each task is assigned to one developer. 
+        *   In the stakeholder demo phase, the PM collects stakeholder's suggestions, and adds new user stories to the list.
+    *   ###### Scrum Master:
+        *   Ensure the team is following the scrum framework in the agile way.
+        *   Remind members of what to do in the scrum meeting.
+        *   Remind members of their role and their tasks.
+    *   ###### Developers: 
+        *   In the sprint planning phase, after PM explains the user story, developers collaborate with the PM to determine the Acceptance Criteria of User Stories which represents the minimum requirements for User Stories to be considered done. 
+        *   In the sprint planning phase, developers collaborate with the PM to do the Estimation of Effort of each User Story to determine how much work the User Story will be. Planning Poker is used to determine the workload of the User Story.
+        *   In the sprint planning phase, based on the Estimation of Effort of each User Story, developers collaborate with the PM to divide each user story to tasks. Each task should be done by one developer in 2 days, before every Scrum Meeting/Daily Standup.
+        *   In the sprint planning phase, developers determine some spikes for the sprint, such as setting up the environment for the project to run and what to learn in order to finish the task.
+        *   Developers complete the task or the spike assigned to them in 2 days before the next scrum meeting.
