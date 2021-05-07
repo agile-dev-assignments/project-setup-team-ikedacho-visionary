@@ -59,7 +59,7 @@ Check our project demo video: [https://www.youtube.com/watch?v=q0Z9zFjH8RI](http
     *   03-29-2021: Back-end development: own API. 
     *   04-20-2021: Database development: Data retrieval from MongoDB and basic functionality implementation. 
         <br> 
-    *   Next on Schedule: Deployment and Integration. 
+    *   05-05-2021: Deployment and Integration. 
 
 *   ### Relevant Link
     *   Project Proposal: [https://github.com/agile-dev-assignments/project-proposal-team1](https://github.com/agile-dev-assignments/project-proposal-team1)
