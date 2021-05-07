@@ -8,6 +8,8 @@
     position: fixed;
     bottom: 40px;
     z-index: 1;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    left: 35%;
+    width: 100%;
 }

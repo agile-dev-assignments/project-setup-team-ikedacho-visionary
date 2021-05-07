@@ -7,7 +7,7 @@
 
 You need to add the .env file that we send to you in #team-ikedacho-visionary channel in Slack to `back-end` directory to run our project. 
 
-## Instruction on Testing the Feature that Connecting Instagram/Twitter/Twitter Account to O-Zone Account
+## Instruction on Testing the Feature: Connecting Instagram/Twitter/Twitter Account to O-Zone Account
 #### 1. To Successfully Connect Your Instagram Account to O-Zone Account
 
 O-Zone uses Instagram Basic Display API to fetch your post data from your Instagram account.
