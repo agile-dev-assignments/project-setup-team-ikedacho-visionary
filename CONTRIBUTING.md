@@ -25,7 +25,7 @@ After we add you to Instagram Testers, we will notify you and you can test our c
 1. Go to the Me page.
 2. Click the `connect` to Instagram button.
 3. Click the `Instagram login` button
-4. Click 'Allow in Instagram authorization page to give permission to O-Zone so that O-Zone can access your Instagram post data. Then O-Zone will save your Instagram post data to the O-Zone database and will show them on your O-Zone profile page.
+4. Click 'Allow' in Instagram authorization page to give permission to O-Zone so that O-Zone can access your Instagram post data. Then O-Zone will save your Instagram post data to the O-Zone database and will show them on your O-Zone profile page.
 
 #### 2. To Successfully Connect Your Facebook Account to O-Zone Account
 
@@ -45,7 +45,7 @@ O-Zone uses Twitter API to fetch your post data from your Twitter account.
 
 -   You must test this feature in our website hosting online which is [https://ozonewebapp.com/](https://ozonewebapp.com/). You cannot test it locally on your machine with the server running on localhost.
 
--   According to the policy of Twitter API, no App Review is required so we can test this feature on our [website]((https://ozonewebapp.com/) now.
+-   According to the policy of Twitter API, no App Review is required so we can test this feature on our [website](https://ozonewebapp.com/) now.
 
 ## Overview
 *   ### Project's Values
