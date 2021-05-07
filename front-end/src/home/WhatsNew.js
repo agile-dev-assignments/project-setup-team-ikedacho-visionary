@@ -31,7 +31,7 @@ const WhatsNew = (props) => {
                     if (error.response.status === 501) {
                         console.log('Error 501: user is not login; req.user does not exist')
 
-                        history.push('/login')
+                        history.push('/prelogin')
                         setTimeout(() => {
                             window.location.href = window.location.href
                         }, 100)
