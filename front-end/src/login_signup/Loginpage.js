@@ -4,18 +4,17 @@ import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useHistory, useLocation } from 'react-router-dom'
 function Loginpage() {
-
     let history = useHistory()
 
     const goTOPreviousPath = () => {
-        history.goBack()
+        history.push('/prelogin')
     }
     return (
         <div className='Loginpage'>
             <section id='header'>
-            <Link onClick={goTOPreviousPath}>
-                <h1 id='back'>Back</h1>
-            </Link>
+                <Link onClick={goTOPreviousPath}>
+                    <h1 id='back'>Back</h1>
+                </Link>
             </section>
             <div class='header__text'>
                 <h1>O-Zone</h1>

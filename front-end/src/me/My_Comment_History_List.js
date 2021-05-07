@@ -26,7 +26,7 @@ const My_Comment_History_List = (props) => {
                     if (error.response.status === 501) {
                         console.log('Error 501: user is not login; req.user does not exist')
                         alert('You are not logged in. Please log in and try again!')
-                        history.push('/prelogin')
+                        history.push('/login')
                         setTimeout(() => {
                             window.location.href = window.location.href
                         }, 100)

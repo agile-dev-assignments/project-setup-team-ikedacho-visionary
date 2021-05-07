@@ -3,9 +3,9 @@ import './Loginform.css'
 import { Route } from 'react-router-dom'
 import axios from 'axios'
 import { createBrowserHistory } from 'history'
-
+import { useHistory } from 'react-router-dom'
 const Login = (props) => {
-    const history = createBrowserHistory({ forceRefresh: true })
+    let history = useHistory()
     const [loginUsername, setLoginUsername] = useState('')
     const [loginPassword, setLoginPassword] = useState('')
 
@@ -23,7 +23,7 @@ const Login = (props) => {
             .then((response) => {
                 if (response.data === 'Successfully Authenticated') {
                     console.log(response)
-                    history.push({
+                    history.goBack({
                         pathname: '/',
                         state: userdata,
                     })
