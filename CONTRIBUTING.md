@@ -84,7 +84,7 @@ O-Zone uses Twitter API to fetch your post data from your Twitter account.
 *   ### Disagreements or Conflicts Resolving
     *   If any major disagreement or conflict arises, a debate/discussion session will be held with the rest of the team members auditing. 
     *   If team still cannot reach an agreement, a vote will be held in team Slack channel for tracking purposes where the product manager in duty has 1.5x weighting. 
-*   ##### Roles of team members:
+*   ### Roles of team members:
     *   ###### Product Manager: 
         *   Before the sprint planning phase, PM finishes writing a list of user stories.
         *   In the sprint planning phase, PM explains every user story to developers.
