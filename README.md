@@ -9,7 +9,7 @@ Follow instructions in [CONTRIBUTING.md]()
 
 ## Instruction on Building and Testing Locally
 
-Follow instructions in [README.md in back-end directory](https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary/blob/121bd042fc56a877568f33acd2928b3f521d41a5/back-end/README.md) to build and test our project locally.
+Follow instructions in [README.md in back-end directory](back-end/README.md) to build and test our project locally.
 
 ## Demo Video
 

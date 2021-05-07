@@ -2,7 +2,7 @@
 
 ## Instruction on Building and Testing Locally
 
-- Follow instructions in [README.md in back-end directory](https://github.com/agile-dev-assignments/project-setup-team-ikedacho-visionary/blob/121bd042fc56a877568f33acd2928b3f521d41a5/back-end/README.md) to build and test our project locally.
+- Follow instructions in [README.md in back-end directory](back-end/README.md) to build and test our project locally.
 ### Instruction on Local Development Environment Setup
 
 You need to add the .env file that we send to you in #team-ikedacho-visionary channel in Slack to `back-end` directory to run our project. 
