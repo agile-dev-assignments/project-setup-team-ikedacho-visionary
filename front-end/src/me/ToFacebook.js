@@ -97,6 +97,8 @@ const ToFacebook = (props) => {
             >
                 Connect to Facebook
             </button>
+
+            <p>According to Facebook API policy, in this development phase, only Facebook account that is added as a tester/administrator to this app can use Facebook API to access your Facebook post data in this app. Please contact us to add you to tester of our app so that O-Zone can correctly connect to your Facebook account. You can send us your Facebook username in Slack or contact lh2510@nyu.edu. As soon as we add you to testers, we will notify you and then you can use this Facebook login button to give permission to O-Zone to access your Facebook post data.</p>
         </div>
     )
 }

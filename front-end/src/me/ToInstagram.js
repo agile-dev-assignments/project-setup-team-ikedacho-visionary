@@ -46,6 +46,8 @@ const ToInstagram = (props) => {
                     _handleOnClick(e.target)
                 }}
             ></button>
+            <p>According to Instagram API policy, in this development phase, only Instagram account that is added as tester to this app can use Instagram API in this app. Please contact us to add you to testers of our app so that O-Zone can correctly connect to your Instagram account. You can send us your Instagram username in Slack or contact lh2510@nyu.edu. As soon as we add you to testers, we will notify you and then you can use this Instagram login button to give permission to O-Zone to access your Instagram post data.</p>
+            <p>In addition, you must test this feature in our website of domain ozonewebapp.com. You cannot test it locally in localhost. </p>
         </div>
     )
 }
