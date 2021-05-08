@@ -31,7 +31,7 @@ const ToTwitter = (props) => {
                             window.location.href = window.location.href
                         }, 100)
                     }
-                } 
+                }
             })
     }
 
@@ -41,13 +41,17 @@ const ToTwitter = (props) => {
                 Back
             </NavLink>
             <h1>Connect to Twitter</h1>
+
             <hr></hr>
+
             <button
                 id='Twitter'
                 onClick={(e) => {
                     _handleOnClick(e.target)
                 }}
             ></button>
+
+            <p>You must test this feature in our website of domain ozonewebapp.com. You cannot test it locally in localhost. </p>
         </div>
     )
 }
